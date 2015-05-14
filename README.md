@@ -7,11 +7,27 @@ To Install:
 * go to [Helpdesk rebranding page](https://ioradapi.freshdesk.com/account/edit)
 * Click on **Customize Portal**
 * Click on the **Layout & pages** tab
-* Go to Pay layout editor
+* Go to Page layout editor
 * Copy and Paste freshplug source code behind 
 ```
     <div class="page">
 	    {{ header }}
+```
+
+## Freshplug for Freshdesk's new theme
+
+To Install:
+* go to [Helpdesk rebranding page](https://ioradapi.freshdesk.com/account/edit)
+* Click on **Customize Portal**
+* Click on the **Layout & pages** tab
+* Go to Page layout editor
+* Copy and Paste freshplug source code as instructed below. 
+```
+    <div class="c-wrapper">
+      <!-- Start of fresh plug -->
+      <!-- end of fresh plug -->
+      {{ content_for_layout }}
+    </div>
 ```
 
 ## Zendesk Help Center
