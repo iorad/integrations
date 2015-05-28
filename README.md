@@ -47,14 +47,11 @@ To Install: (Assume Help Center is enabled.)
    <!-- Copy Iorad code here...  -->
   ```
 * Click on the **JS** tab
-* Copy and Paste JavaScript code from script.js to the top of the editor.
-* Run the function in the existing Javascript.
+* Copy and Paste JavaScript code from script.js into the location mentioned below.
 ``` Javascript
 $(document).ready(function() {
   ... some existing code
   
-  // run iorad like this.
   // Iorad starts here.
-  ioradWidget();
 });
 ```

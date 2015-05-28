@@ -62,4 +62,6 @@ function ioradWidget() {
     });
   }
 }
+
+ioradWidget();
 // End of Iorad Widget.
