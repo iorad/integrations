@@ -36,15 +36,13 @@ To Install: (Assume Help Center is enabled.)
 * Go to **General Settings** and enable **Display unsafe content**
 * In Help Center, Click on **Customize Design**
 * Click on **Edit Theme** to go to Help Center's Theme Editor.
-* Click on the dropdown button and edit the Section page.
-* Copy and Paste code from widgetLayout.html into the editor, after 
+* Click on the dropdown button and edit the Home page.
+* Copy and Paste code from widgetLayout.html into the editor as shown below
   ``` 
-  <nav class="sub-nav">
-    {{breadcrumbs}}
-    {{subscribe}}
-  </nav>
-  
-   <!-- Copy Iorad code here...  -->
+  <div class="knowledge-base clearfix">
+     <!-- Copy Iorad code here...  -->
+     {{category_tree}}
+  </div>
   ```
 * Click on the **JS** tab
 * Copy and Paste JavaScript code from script.js into the location mentioned below.
