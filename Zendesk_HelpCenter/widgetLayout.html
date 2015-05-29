@@ -6,7 +6,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src='//test.iorad.com/server/assets/js/iorad.js'></script>
 <div class="iorad-widget">
-    <button id="newTutorialBtn" class="btn btn-iorad-widget">Create New Tutorial</button>
+    <div class="Widget-header"><h2 class="heading">Create a Solution</h2></div>
+    <div class="widget-location-selector"><div class="selector-label"><h4>Categories</h4></div><div><select id="categorySelector"></select></div></div>
+    <div class="widget-location-selector"><div class="selector-label"><h4>Sections</h4></div><div id='sectionsList'></div></div>
+    <div id="control">
+        <button id="newTutorialBtn" class="btn btn-iorad-widget">Create New Tutorial</button>    
+    </div>
 </div>
 
 <style>
@@ -17,5 +22,8 @@
 
     .btn-view-article {
         background-color: rgb(221, 221, 221);
+    }
+    .invisible-options{
+        display: none;
     }
 </style>
