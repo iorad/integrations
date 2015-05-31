@@ -6,11 +6,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.33/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src='//test.iorad.com/server/assets/js/iorad.js'></script>
 <div class="iorad-widget">
-    <div class="Widget-header"><h2 class="heading">Create a Solution</h2></div>
+    <div class="widget-header"><h2 class="heading">Create a Solution</h2></div>
     <div class="widget-location-selector"><div class="selector-label"><h4>Categories</h4></div><div><select id="categorySelector"></select></div></div>
     <div class="widget-location-selector"><div class="selector-label"><h4>Sections</h4></div><div id='sectionsList'></div></div>
     <div id="control">
-        <button id="newTutorialBtn" class="btn btn-iorad-widget">Create New Tutorial</button>    
+        <button id="newTutorialBtn" class="btn btn-iorad-widget">ADD</button>    
     </div>
 </div>
 
@@ -18,12 +18,38 @@
     /*hide role specific iorad-widget div html*/
     div.iorad-widget {
         display: none;
-    }
-
-    .btn-view-article {
-        background-color: rgb(221, 221, 221);
+        width: 98%;
     }
     .invisible-options{
         display: none;
     }
+    .iorad-widget div {
+        display: inline-block;
+    }
+    .widget-header {
+        padding-right: 2em;
+    }
+    .widget-location-selector {
+        padding-right: 2em;
+        height: 30px;
+    }
+    .widget-location-selector .selector-label {
+        padding-right: 1em;
+    }
+    .btn-iorad-widget {
+        color: #1a74b0;
+        border-color: #dddddd;
+        font-weight: bold;
+        background-color: white;
+        background-image: none;
+        text-shadow: none;
+        width: 112px;
+        line-height: 20px;
+        margin: 0 auto;
+        display: block;  
+    }
+    .btn-view-article {
+        background-color: rgb(221, 221, 221);
+    }
+    
 </style>
