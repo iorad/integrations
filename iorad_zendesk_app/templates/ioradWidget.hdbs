@@ -1,0 +1,13 @@
+<div>
+  <select class="categoryOptions">
+    {{#each categories}}
+    <option value="{{id}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <select class="sectionOptions">
+    {{#each sections}}
+    <option value="{{id}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <button id="newTutorial" class="btn btn-iorad-widget" title="open IORAD editor">ADD</button>
+</div>

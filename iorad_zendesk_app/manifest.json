@@ -1,0 +1,13 @@
+{
+  "name": "iorad_zendesk_app",
+  "author": {
+    "name": "Daniel Sun",
+    "email": "hjdaniel.sun@gmail.com",
+    "url": "https://www.iorad.com"
+  },
+  "defaultLocale": "en",
+  "private": true,
+  "location": "nav_bar",
+  "version": "1.0",
+  "frameworkVersion": "1.0"
+}
