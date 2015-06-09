@@ -1,0 +1,16 @@
+/*body.iorad-open {
+    overflow: hidden;
+}
+
+#iorad-editor-wrapper {
+
+}
+*/
+.iorad-editor {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

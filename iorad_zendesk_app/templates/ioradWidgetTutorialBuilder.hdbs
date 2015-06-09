@@ -1,0 +1,4 @@
+<div class="iorad-editor-wrapper">
+  <!--<iframe id="iorad-editor" src="{{newTutorialEditorUrl}}"></iframe>-->
+  {{iframe ""}}
+</div>

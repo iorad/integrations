@@ -1,7 +1,12 @@
 <div>
   <select class="categoryOptions">
     {{#each categories}}
-    <option value="{{id}}">{{name}}</option>
+    <option value="{{id}}"
+      {{#if selected}}
+        selected
+      {{/if}}  
+      >{{name}}</option>
+      }
     {{/each}}
   </select>
   <select class="sectionOptions">
