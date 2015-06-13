@@ -16,6 +16,7 @@
 
     events: {
       'app.activated'           : 'init',
+      'pane.activated'          : 'startFetchCategories',
       'fetchCategories.done'    : 'onFetchCategories',
       'fetchSections.done'      : 'onFetchSections',
       'createArticle.done'      : 'onCreateArticle',
@@ -32,9 +33,12 @@
       this.ajax('fetchLocales');
     },
 
+    startFetchCategories: function () {
+      this.ajax('fetchCategories');
+    },
+
     onLocaleLoaded: function (data) {
       this.myDefaultLocale = data.default_locale;
-      this.ajax('fetchCategories');
     },
 
     onModelHidden: function () {
@@ -66,6 +70,7 @@
       _.each(this.categoriesList, function (category) {
         category.selected = false;
       });
+
       this.initializeIoradControl();
     },
 
