@@ -1,11 +1,11 @@
 <div class="main">
   <div class="header">
-    <span class="title"><h2>Create a step-by-step knowledge base article</h2></span>
+    <span class="title"><h2>{{t "widgetControl.appTitle"}}</h2></span>
     <span class="logo"/>
   </div>
   <div class="body">
     <div class="inputControl">
-      <label for="selectCategory">Choose a Category</label>
+      <label for="selectCategory">{{t "widgetControl.categoryComboBoxLabel"}}</label>
       <select class="categoryOptions" id="selectCategory">
         {{#each categories}}
         <option value="{{id}}"
@@ -18,7 +18,7 @@
       </select>
     </div>
     <div class="inputControl">
-      <label for="selectSection">Choose a Section</label>
+      <label for="selectSection">{{t "widgetControl.sectionComboBoxLabel"}}</label>
       <select class="sectionOptions" id="selectSection">
         {{#each sections}}
         <option value="{{id}}">{{name}}</option>
@@ -26,11 +26,11 @@
       </select>
     </div>
     <div class="inputControl">
-      <label for="newTutorial">Add a Solution</label>
-      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="open IORAD editor">ADD</button>
+      <label for="newTutorial">{{t "widgetControl.buttonControlLabel"}}</label>
+      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="open IORAD editor">{{t "widgetControl.buttonControlText"}}</button>
     </div>
   </div>
   <div class="footer">
-    <span><a><h4>Learn more about the iorad zendesk app</h4></a></span>
+    <span><a><h4>{{t "widgetControl.footerHelpLinkText"}}</h4></a></span>
   </div>
 </div>

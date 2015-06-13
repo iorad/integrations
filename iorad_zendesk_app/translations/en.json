@@ -50,5 +50,65 @@
   "groups": {
     "value": "Groups",
     "title": "user groups"
+  },
+
+  "widgetControl": {
+    "appTitle": {
+      "value": "Create a step-by-step knowledge base article",
+      "title": "iorad zendesk app title"
+    },
+
+    "categoryComboBoxLabel": {
+      "value": "Choose a Category",
+      "title": "label appears on top of the category combobox"
+    },
+
+    "sectionComboBoxLabel": {
+      "value": "Choose a Section",
+      "title": "label appears on top of the section combobox"
+    },
+
+    "buttonControlLabel": {
+      "value": "Add a Solution",
+      "title": "label appears on top of the ADD button"
+    },
+
+    "buttonControlText": {
+      "value": "ADD",
+      "title": "text appears on the button control"
+    },
+
+    "footerHelpLinkText": {
+      "value": "Learn more about the iorad zendesk app",
+      "title": "text appears on the footer help link"
+    }
+  },
+
+  "modalTemplate": {
+    "modalTitle": {
+      "value": "New Article Created!",
+      "title": "title text displayed in modal header"
+    },
+
+    "modalBodyP1": {
+      "value": "The solution ",
+      "title": "first section of the paragraph in modal body."
+    },
+
+    "modalBodyP2": {
+      "value": " has been successfully created.",
+      "title": "second section of the paragraph in modal body"
+    },
+
+    "closeButton": {
+      "value": "CLOSE",
+      "title": "text displayed on the modal close button in footer"
+    },
+
+    "viewArticleButton": {
+      "value": "VIEW ARTICLE",
+      "title": "text displayed on the modal view article button in footer"
+    }
   }
+
 }
