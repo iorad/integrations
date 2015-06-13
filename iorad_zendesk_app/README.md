@@ -1,14 +1,5 @@
-# App name
+# Iorad App for Zendesk
 
-[brief description of the app]
+launch the app from nav bar in the zendesk agent view.
 
-### The following information is displayed:
-
-* info1
-* info2
-* info3
-
-Please submit bug reports to [Insert Link](). Pull requests are welcome.
-
-### Screenshot(s):
-[put your screenshots down here.]
+Create step-by-step tutorial and post straight to your selected Zendesk Help Center section.
