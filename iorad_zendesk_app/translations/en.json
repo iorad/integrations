@@ -108,6 +108,16 @@
     "viewArticleButton": {
       "value": "VIEW ARTICLE",
       "title": "text displayed on the modal view article button in footer"
+    },
+
+    "modalBodyError": {
+      "value": "Something went wrong when creating new article... Try to logout and log back in to Zendesk again.",
+      "title": "text displayed in error modal body"
+    },
+
+    "modalErrorTitle": {
+      "value": "Error!",
+      "title": "text displayed in modal header when there is an error"
     }
   }
 

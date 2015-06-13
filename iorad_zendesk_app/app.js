@@ -20,11 +20,13 @@
       'fetchCategories.done'    : 'onFetchCategories',
       'fetchSections.done'      : 'onFetchSections',
       'createArticle.done'      : 'onCreateArticle',
+      'createArticle.fail'      : 'onCreateArticleFailed',
       'fetchLocales.done'       : 'onLocaleLoaded',
       'click .btn-iorad-widget' : 'submitNewTutorial',
       'change .categoryOptions' : 'updateSectionOptions',
       'iframe.editor.close'     : 'onIoradClose',
-      'hidden #mySuccessModal'  : 'onModelHidden'
+      'hidden #mySuccessModal'  : 'onModalHidden',
+      'hidden #myErrorModal'    : 'onModalHidden'
     },
 
     requests: require('requests.js'),
@@ -41,7 +43,7 @@
       this.myDefaultLocale = data.default_locale;
     },
 
-    onModelHidden: function () {
+    onModalHidden: function () {
       this.initializeIoradControl();
     },
 
@@ -81,6 +83,14 @@
     onCreateArticle: function (data) {
       this.switchTo('tutorialCreatedModal', { msg: data.article.title, url: data.article.html_url });
       this.$("#mySuccessModal").modal({
+        backdrop: true,
+        keyboard: false
+      });
+    },
+
+    onCreateArticleFailed: function (data) {
+      this.switchTo('errorModal');
+      this.$("#myErrorModal").modal({
         backdrop: true,
         keyboard: false
       });
