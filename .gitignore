@@ -1,0 +1,11 @@
+node_modules
+bower_components
+*.bk
+*.zip
+vendor
+obj
+*.config
+*.cs
+*.csproj
+*sln
+.vs
