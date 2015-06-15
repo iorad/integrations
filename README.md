@@ -38,7 +38,14 @@ Currently, Iorad Web Widget only supports Fresh desk.
 In the future, we will replace the Zendesk Help Center Widget with Iorad Web Widget. We will also be looking at possibilities with desk.com.
 
 ### To Build and play with Iorad Web Widget source code:
-... coming soon.
+* install NPM - Package manager for Node.js
+* Install Grunt.js ```[sudo] npm install -g grunt-cli```
+* Install Bower ```[sudo] npm install -g bower```
+* Run ``` grunt install-bower-packages```
+* Run ``` grunt merge-js-files```
+* Run ``` grunt min-js-file``` Only run this if you really wants to read a uglified javascript file :) So don't...
+
+After you have successfully followed through the steps above, you will find IoradWebWidget.js in scripts/vendor/dist.
 
 ### To Install:
 * go to [Helpdesk rebranding page](https://ioradapi.freshdesk.com/account/edit)
