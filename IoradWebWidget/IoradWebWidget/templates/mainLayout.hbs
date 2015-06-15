@@ -1,0 +1,64 @@
+﻿<section id="ioradWidget" class="content rounded-6 iorad-widget hide-in-mobile" title="Iorad Tutorial Widget">
+    <div id="tutorialLocation" class="widget-layout">
+        <div class="widget-header"><h2 class="heading">Create a Solution</h2></div>
+        <div class="widget-location-selector"><div class="selector-label"><h4>Categories</h4></div><div><select id="categorySelector"></select></div></div>
+        <div class="widget-location-selector"><div class="selector-label"><h4>Solutions</h4></div><div id='foldersList'></div></div>
+        <div id="control">
+            <a id='newTutorialBtn' class='btn btn-iorad-widget' title='open IORAD editor' href='#'>ADD</a>
+        </div>
+    </div>
+</section>
+<style>
+    .invisible-options {
+        display: none;
+    }
+
+    .iorad-widget {
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+        .iorad-widget div {
+            display: inline-block;
+        }
+
+    #control {
+        float: right;
+        position: relative;
+    }
+
+    .widget-layout {
+        width: 98%;
+    }
+
+    .widget-header {
+        padding-right: 2em;
+    }
+
+    .widget-location-selector {
+        padding-right: 2em;
+        height: 30px;
+    }
+
+        .widget-location-selector .selector-label {
+            padding-right: 1em;
+        }
+
+    .btn-iorad-widget {
+        color: #006063;
+        border-color: #006063;
+        font-weight: bold;
+        background-color: white;
+        background-image: none;
+        text-shadow: none;
+        width: 112px;
+        line-height: 20px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .iorad-widget-modal {
+        width: 28%;
+        font-size: 16px;
+    }
+</style>
+<script type='text/javascript' src='//iorad.com/server/assets/js/iorad.js'></script>
