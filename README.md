@@ -30,6 +30,28 @@ To Install:
     </div>
 ```
 
+## Iorad Web Widget
+
+Iorad Web Widget is built based on all available features from **Freshplug for Freshdesk's new theme** and aims to replace it as it is much easier for Help Center managers to plug and play in their Help Center system.
+
+Currently, Iorad Web Widget only supports Fresh desk.
+In the future, we will replace the Zendesk Help Center Widget with Iorad Web Widget. We will also be looking at possibilities with desk.com.
+
+### To Build and play with Iorad Web Widget source code:
+... coming soon.
+
+### To Install:
+* go to [Helpdesk rebranding page](https://ioradapi.freshdesk.com/account/edit)
+* Click on **Customize Portal**
+* Click on the **Layout & pages** tab
+* Go to **Page layout** editor
+* Copy and Paste the source code below at the **end of the Page Layout file**.
+```
+{% if portal.user.is_agent %}
+	<script type="text/javascript" src="url_coming_soon"></script>
+{% endif %}
+```
+
 ## Zendesk Help Center
 
 To Install: (Assume Help Center is enabled.)
