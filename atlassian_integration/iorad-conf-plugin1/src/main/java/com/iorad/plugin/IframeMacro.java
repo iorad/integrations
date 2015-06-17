@@ -1,0 +1,116 @@
+package com.iorad.plugin;
+
+import java.util.Map;
+
+import com.atlassian.confluence.content.render.xhtml.ConversionContext;
+import com.atlassian.confluence.macro.DefaultImagePlaceholder;
+import com.atlassian.confluence.macro.EditorImagePlaceholder;
+import com.atlassian.confluence.macro.ImagePlaceholder;
+import com.atlassian.confluence.macro.Macro;
+import com.atlassian.confluence.macro.MacroExecutionException;
+import com.atlassian.confluence.pages.thumbnail.Dimensions;
+import com.atlassian.confluence.setup.BootstrapManager;
+import com.atlassian.confluence.spaces.SpaceManager;
+import com.atlassian.confluence.xhtml.api.XhtmlContent;
+import com.atlassian.renderer.RenderContext;
+import com.atlassian.renderer.v2.RenderMode;
+import com.atlassian.renderer.v2.macro.BaseMacro;
+import com.atlassian.renderer.v2.macro.MacroException;
+import com.atlassian.renderer.v2.macro.ResourceAware;
+import com.atlassian.spring.container.ContainerManager;
+import com.iorad.util.ImageUtil;
+
+
+public class IframeMacro extends BaseMacro implements Macro,
+EditorImagePlaceholder, ResourceAware {
+
+	private final XhtmlContent xhtmlUtils;
+	private static final String IMAGE_PATH = "/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/placeholdergraphic.jpg";
+	SpaceManager spaceManager;
+	public IframeMacro(XhtmlContent xhtmlUtils) {
+
+		this.xhtmlUtils = xhtmlUtils;
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public void setSpaceManager(SpaceManager spaceManager)
+	{
+	    this.spaceManager = spaceManager;
+	}
+	
+	@Override
+	public String execute(Map<String, String> parameters, String bodyContent,
+			ConversionContext conversionContext) throws MacroExecutionException {
+		//SpaceManager spaceManager = (SpaceManager) ContainerManager.getComponent("spaceManager");
+		return parameters.get("iframeURL");
+	}
+
+
+	@Override
+	public ImagePlaceholder getImagePlaceholder(
+			final Map<String, String> params, final ConversionContext ctx) {
+		return new DefaultImagePlaceholder(IMAGE_PATH,
+				new Dimensions(392, 110), false);
+	}
+	
+
+
+
+
+	@Override
+	public BodyType getBodyType() {
+		return BodyType.NONE;
+	}
+
+	@Override
+	public OutputType getOutputType() {
+		return OutputType.BLOCK;
+	}
+
+	@Override
+	public boolean isInline() {
+		return false;
+	}
+
+	@Override
+	public boolean hasBody() {
+		return false;
+	}
+
+	@Override
+	public RenderMode getBodyRenderMode() {
+		return RenderMode.ALL;
+	}
+
+	@Override
+	public boolean suppressMacroRenderingDuringWysiwyg() {
+		return true;
+	}
+
+	@Override
+	public boolean suppressSurroundingTagDuringWysiwygRendering() {
+		return false;
+	}
+
+	@Override
+	public String getResourcePath() {
+		return "";
+	}
+
+	@Override
+	public void setResourcePath(final String resourcePath) {
+	}
+
+	@Override
+	public String execute(Map parameters, String body,
+			RenderContext renderContext) throws MacroException {
+		// TODO Auto-generated method stub
+		return (String) parameters.get("iframeURL");
+	}
+
+
+
+
+
+}
