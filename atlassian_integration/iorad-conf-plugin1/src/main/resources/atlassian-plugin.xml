@@ -36,6 +36,7 @@
       icon="/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/logo.png"
       key="IoradMacro-xhtml">
       <description>This confluance plugin makes instant step-by-step knowledge base articles.</description>
+        <category name="confluence-content"/>  
         <parameters>
         	<parameter name="iframeURL" type="string">
 			</parameter>
