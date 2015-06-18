@@ -39,6 +39,7 @@
           'scripts/vendor/handlebars/*.js',
           'scripts/templates.js',
           'scripts/main.js',
+          'scripts/utils/*.js',
           'scripts/app.js'
         ],
         dest: 'dist/IoradWebWidget.js'

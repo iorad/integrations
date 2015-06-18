@@ -4,29 +4,13 @@
 
   var initializeWidget = function () {
     iorad = win.iorad || {};
-
-    var SOLUTION_CATEGORIES_API_URL = '/solution/categories.json';
-    var ARTICLE_API_URL = '/solution/categories/{category_id}/folders/{folder_id}/articles.json';
-    var freshdeskAjaxOption = function () {
-      return {
-        dataType: 'json',
-        contentType: 'application/json'
-      };
-    };
-
+    
     var listCategories = function () {
-      var ajaxOptions = freshdeskAjaxOption();
-      ajaxOptions.type = 'GET';
-      ajaxOptions.url = SOLUTION_CATEGORIES_API_URL;
-      return $.ajax(ajaxOptions);
+      return $.ajax(ioradWebWidget.freshdesk.listCategories());
     };
 
     var createArticle = function (categoryId, folderId, article) {
-      var ajaxOptions = freshdeskAjaxOption();
-      ajaxOptions.type = 'POST';
-      ajaxOptions.url = ARTICLE_API_URL.replace('{category_id}', categoryId.toString()).replace('{folder_id}', folderId.toString());
-      ajaxOptions.data = article;
-      return $.ajax(ajaxOptions);
+      return $.ajax(ioradWebWidget.freshdesk.createArticle(categoryId, folderId, article));
     };
 
     var categoryChangedHandler = function (e) {
@@ -38,21 +22,19 @@
     };
 
     var populateTutorialLocation = function (data) {
-      var options = '';
-      var foldersSelectors = '';
+      var categories = [];
       data.each(function (categoryObj) {
-        options += '<option value="' + categoryObj.category.id + '">' + categoryObj.category.name + '</option>';
-        var selector = '<select id="' + categoryObj.category.id + '"class="invisible-options">';
-        categoryObj.category.folders.each(function (folderObj) {
-          selector += '<option value="' + folderObj.id + '">' + folderObj.name + '</option>';
-        });
-        selector += '</select>';
-        foldersSelectors += selector;
+        categories.push(
+          {
+            id: categoryObj.category.id,
+            name: categoryObj.category.name,
+            folders: categoryObj.category.folders
+          });
       });
 
       var $categorySelector = $("#categorySelector");
-      $categorySelector.html(options);
-      $("#foldersList").html(foldersSelectors);
+      $categorySelector.html(ioradWebWidget.templates.categoryOptionTemplate(categories));
+      $("#foldersList").html(ioradWebWidget.templates.folderListTemplate(categories));
       $("#" + $categorySelector.val()).removeClass("invisible-options");
       $categorySelector.click(categoryChangedHandler);
     };
@@ -88,7 +70,6 @@
 
         var categoryId = $("#categorySelector").val(),
           folderId = $("#" + categoryId).val(),
-          ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}",
           article = {
             solution_article: {
               "title": tutorialParams.tutorialTitle,
@@ -100,21 +81,20 @@
         var articleJson = JSON.stringify(article);
 
         createArticle(categoryId, folderId, articleJson).then(function (data) {
-          var articleUrl = ARTICLE_URL.replace('{categoryId}', categoryId)
-                                      .replace('{folderId}', folderId)
-                                      .replace('{id}', data.article.id);
-
+          var articleMetaData = {
+            id: data.article.id,
+            categoryId: categoryId,
+            folderId: folderId
+          };
           // add a safe guard here.
           if ($("#successModal").length > 0) {
             $("#successModal").remove();
           }
 
-          //$('body').append(MODAL_TEMPLATE.replace('{url}', articleUrl));
-          $('body').append(ioradWebWidget.templates.freshDeskModal(articleUrl, tutorialParams.tutorialTitle));
+          $('body').append(ioradWebWidget.templates.freshDeskModal(articleMetaData, tutorialParams.tutorialTitle));
           $("#successModal").modal('show');
         }, function (err) { });
       });
-
     });
 
   };
