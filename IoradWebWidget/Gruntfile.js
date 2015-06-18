@@ -52,8 +52,8 @@
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'scripts/vendor/dist/IoradWebWidget.js',
-        dest: 'scripts/vendor/dist/IoradWebWidget.min-<%= pkg.version %>.js'
+        src: 'dist/IoradWebWidget.js',
+        dest: 'dist/IoradWebWidget.min-<%= pkg.version %>.js'
       }
     }
   });
