@@ -53,7 +53,7 @@
       },
       build: {
         src: 'dist/IoradWebWidget.js',
-        dest: 'dist/IoradWebWidget.min-<%= pkg.version %>.js'
+        dest: 'dist/IoradWebWidget.min.js'
       }
     }
   });
