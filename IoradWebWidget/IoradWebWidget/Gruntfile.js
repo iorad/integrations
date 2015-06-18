@@ -36,13 +36,12 @@
       },
       devSrc: {
         src: [
-          //'scripts/vendor/jquery/*.js',
           'scripts/vendor/handlebars/*.js',
           'scripts/templates.js',
           'scripts/main.js',
           'scripts/app.js'
         ],
-        dest: 'scripts/vendor/dist/IoradWebWidget.js'
+        dest: 'dist/IoradWebWidget.js'
       }
     },
 
