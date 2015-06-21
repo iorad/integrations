@@ -17,48 +17,66 @@
         border-bottom: 1px solid #e5e5e5;
     }
 
+    @media (max-width: 1201px) {
+        .btn-iorad-widget {
+            color: #006063;
+            border-color: #006063;
+            font-weight: bold;
+            background-color: white;
+            background-image: none;
+            text-shadow: none;
+            width: 112px;
+            line-height: 20px;
+            display: block;
+        }
+    }
+
+    @media (min-width: 1201px) {
         .iorad-widget div {
             display: inline-block;
         }
 
-    #control {
-        float: right;
-        position: relative;
-    }
-
-    .widget-layout {
-        width: 98%;
-    }
-
-    .widget-header {
-        padding-right: 2em;
-    }
-
-    .widget-location-selector {
-        padding-right: 2em;
-        height: 30px;
-    }
+        #control {
+            float: right;
+            position: relative;
+        }
 
         .widget-location-selector .selector-label {
             padding-right: 1em;
         }
 
-    .btn-iorad-widget {
-        color: #006063;
-        border-color: #006063;
-        font-weight: bold;
-        background-color: white;
-        background-image: none;
-        text-shadow: none;
-        width: 112px;
-        line-height: 20px;
-        margin: 0 auto;
-        display: block;
+        .widget-header {
+            padding-right: 2em;
+        }
+
+        .widget-location-selector {
+            padding-right: 2em;
+            height: 30px;
+        }
+
+        .btn-iorad-widget {
+            color: #006063;
+            border-color: #006063;
+            font-weight: bold;
+            background-color: white;
+            background-image: none;
+            text-shadow: none;
+            width: 112px;
+            line-height: 20px;
+            margin: 0 auto;
+            display: block;
+        }
     }
+
+    .widget-layout {
+        width: 98%;
+    }   
 
     .iorad-widget-modal {
         width: 28%;
         font-size: 16px;
     }
+
+    
 </style>
 <script type='text/javascript' src='//iorad.com/server/assets/js/iorad.js'></script>
