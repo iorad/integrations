@@ -1,4 +1,4 @@
-﻿ioradWebWidget.freshdesk = (function (module) {
+﻿ioradWebWidget.util.freshdesk = (function (module) {
   
   var SOLUTION_CATEGORIES_API_URL = '/solution/categories.json',
     ARTICLE_API_URL = '/solution/categories/{category_id}/folders/{folder_id}/articles.json',
@@ -22,4 +22,4 @@
 
   return module;
 
-})(ioradWebWidget.freshdesk || {});
+})(ioradWebWidget.util.freshdesk || {});

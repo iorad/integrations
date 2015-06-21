@@ -21,7 +21,7 @@
     handlebars: {
       all: {
         files: {
-          "scripts/templates.js": ["templates/**/*.hbs"]
+          "scripts/templates/handlebars/templates.js": ["templates/**/*.hbs"]
         }
       }
     },
@@ -37,9 +37,11 @@
       devSrc: {
         src: [
           'scripts/vendor/handlebars/*.js',
-          'scripts/templates.js',
+          'scripts/templates/handlebars/templates.js',
           'scripts/main.js',
           'scripts/utils/*.js',
+          'scripts/templates/*.js',
+          'scripts/main/**/*.js',
           'scripts/app.js'
         ],
         dest: 'dist/IoradWebWidget.js'
