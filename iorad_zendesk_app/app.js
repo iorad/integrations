@@ -52,13 +52,18 @@
         data.uid,
         data.tutorialId,
         data.tutorialTitle
-      );
+      ),
+        articleBody = helpers.fmt("<p>%@</p>", iframeHTML);
+
+      _.each(data.steps, function (step) {
+        articleBody += helpers.fmt("<p style='display: none;'>%@</p>", helpers.safeString(step.description).string);
+      });
 
       var articleJson = JSON.stringify({
         article: {
           "title": data.tutorialTitle,
           "locale": this.myDefaultLocale,
-          "body": "<p>" + iframeHTML + "</p>"
+          "body": articleBody
         }
       });
 
