@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.1 - 06-22-2015 *//*!
+/*! IoradWebWidget - v0.0.1 - 06-23-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4097,6 +4097,22 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;;this["JST"] = this["JST"] || {};
 
+this["JST"]["templates/freshdesk/freshdeskArticleTemplate.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return "    <p>"
+    + this.escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
+    + "</p>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "<div class=\"embeddedTutorial\"><iframe src=\""
+    + this.escapeExpression(((helper = (helper = helpers.iframeSrc || (depth0 != null ? depth0.iframeSrc : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"iframeSrc","hash":{},"data":data}) : helper)))
+    + "\" width=\"100%\" scrolling=\"no\" height=\"500px\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe></div>\n<div class=\"tutorialSteps\" style=\"display: none;\">\n"
+    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.steps : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + "</div>\n";
+},"useData":true});
+
 this["JST"]["templates/freshdesk/freshdeskCategoryList.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
@@ -4134,7 +4150,7 @@ this["JST"]["templates/freshdesk/freshdeskFolderList.hbs"] = Handlebars.template
 },"useData":true});
 
 this["JST"]["templates/freshdesk/mainLayout.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<section id=\"ioradWidget\" class=\"content rounded-6 iorad-widget hide-in-mobile\" title=\"Iorad Tutorial Widget\">\n    <div id=\"tutorialLocation\" class=\"widget-layout\">\n        <div class=\"widget-header\"><h2 class=\"heading\">Create a Solution</h2></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Categories</h4></div><div><select id=\"categorySelector\"></select></div></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Solutions</h4></div><div id='foldersList'></div></div>\n        <div id=\"control\">\n            <a id='newTutorialBtn' class='btn btn-iorad-widget' title='open IORAD editor' href='#'>ADD</a>\n        </div>\n    </div>\n</section>\n<style>\n    .invisible-options {\n        display: none;\n    }\n\n    .iorad-widget {\n        border-bottom: 1px solid #e5e5e5;\n    }\n\n    @media (max-width: 1201px) {\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            display: block;\n        }\n    }\n\n    @media (min-width: 1201px) {\n        .iorad-widget div {\n            display: inline-block;\n        }\n\n        #control {\n            float: right;\n            position: relative;\n        }\n\n        .widget-location-selector .selector-label {\n            padding-right: 1em;\n        }\n\n        .widget-header {\n            padding-right: 2em;\n        }\n\n        .widget-location-selector {\n            padding-right: 2em;\n            height: 30px;\n        }\n\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            margin: 0 auto;\n            display: block;\n        }\n    }\n\n    .widget-layout {\n        width: 98%;\n    }   \n\n    .iorad-widget-modal {\n        width: 28%;\n        font-size: 16px;\n    }\n\n    \n</style>\n<script type='text/javascript' src='//iorad.com/server/assets/js/iorad.js'></script>\n";
+    return "<section id=\"ioradWidget\" class=\"content rounded-6 iorad-widget hide-in-mobile\" title=\"Iorad Tutorial Widget\">\n    <div id=\"tutorialLocation\" class=\"widget-layout\">\n        <div class=\"widget-header\"><h2 class=\"heading\">Create a Solution</h2></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Categories</h4></div><div><select id=\"categorySelector\"></select></div></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Solutions</h4></div><div id='foldersList'></div></div>\n        <div id=\"control\">\n            <a id='newTutorialBtn' class='btn btn-iorad-widget' title='open IORAD editor' href='#'>ADD</a>\n        </div>\n    </div>\n</section>\n<style>\n    .invisible-options {\n        display: none;\n    }\n\n    .iorad-widget {\n        border-bottom: 1px solid #e5e5e5;\n    }\n\n    @media (max-width: 1201px) {\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            display: block;\n        }\n    }\n\n    @media (min-width: 1201px) {\n        .iorad-widget div {\n            display: inline-block;\n        }\n\n        #control {\n            float: right;\n            position: relative;\n        }\n\n        .widget-location-selector .selector-label {\n            padding-right: 1em;\n        }\n\n        .widget-header {\n            padding-right: 2em;\n        }\n\n        .widget-location-selector {\n            padding-right: 2em;\n            height: 30px;\n        }\n\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            margin: 0 auto;\n            display: block;\n        }\n    }\n\n    .widget-layout {\n        width: 98%;\n    }   \n\n    .iorad-widget-modal {\n        width: 28%;\n        font-size: 16px;\n    }\n\n    \n</style>\n<script type='text/javascript' src='//test.iorad.com/server/assets/js/iorad.js'></script>\n";
 },"useData":true});
 
 this["JST"]["templates/freshdesk/modalTemplate.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -4210,6 +4226,12 @@ var ioradWebWidget = (function (module, undefined) {
   folderListTemplate: function (categories) {
     var template = JST['templates/freshdesk/freshdeskFolderList.hbs'];
     return template({ categories: categories });
+  },
+
+  // This template displays an solution article to be created.
+  articleTemplate: function (tutorialIframe, steps) {
+    var template = JST['templates/freshdesk/freshdeskArticleTemplate.hbs'];
+    return template({iframeSrc: tutorialIframe, steps: steps});
   }
 };
 ;ioradWebWidget.freshdesk = (function (module) {
@@ -4257,7 +4279,7 @@ var ioradWebWidget = (function (module, undefined) {
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: 'live' }, function () {
+      iorad.init({ env: 'prod' }, function () {
         // iorad is ready now.
         var t = 0;
 
@@ -4281,16 +4303,14 @@ var ioradWebWidget = (function (module, undefined) {
             tutorialParams.tutorialId, tutorialParams.tutorialTitle);
 
           var $tutorialViewStepsIframe = $(iframeHTML);
-
-          $tutorialViewStepsIframe.attr("src", $tutorialViewStepsIframe.attr("src") + "#viewsteps");
-
+          
           var categoryId = $("#categorySelector").val(),
             folderId = $("#" + categoryId).val(),
             article = {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
-                "description": "<div>" + $tutorialViewStepsIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>"
+                "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'")
               }
             };
 
