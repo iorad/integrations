@@ -43,7 +43,7 @@
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: 'live' }, function () {
+      iorad.init({ env: 'prod' }, function () {
         // iorad is ready now.
         var t = 0;
 
@@ -67,16 +67,14 @@
             tutorialParams.tutorialId, tutorialParams.tutorialTitle);
 
           var $tutorialViewStepsIframe = $(iframeHTML);
-
-          $tutorialViewStepsIframe.attr("src", $tutorialViewStepsIframe.attr("src") + "#viewsteps");
-
+          
           var categoryId = $("#categorySelector").val(),
             folderId = $("#" + categoryId).val(),
             article = {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
-                "description": "<div>" + $tutorialViewStepsIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>"
+                "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'")
               }
             };
 
