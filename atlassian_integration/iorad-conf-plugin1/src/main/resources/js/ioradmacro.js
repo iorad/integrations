@@ -1,8 +1,7 @@
 AJS.bind("init.rte", function() { 
    
    
-    var macroName = 'CaptureSolution';
-
+   // var macroName = 'CaptureSolution';
 
     // 1. create dialog to add macro
     //var dialog = new AJS.Dialog(400, 320);
@@ -91,7 +90,6 @@ iorad.on('editor:close', function(tutorialParams) {
                             tutorialParams.tutorialId, tutorialParams.tutorialTitle);     
     
 
-
      // get current selection in editor
 
         var selection = AJS.Rte.getEditor().selection.getNode();
@@ -100,10 +98,12 @@ iorad.on('editor:close', function(tutorialParams) {
         var macro = {
                 name: macroName,
                 params: {
-                iframeURL: iframeHTML,
                 uid:tutorialParams.uid,
                 tutorId:tutorialParams.tutorialId, 
-                tutorTitle:tutorialParams.tutorialTitle
+                tutorTitle:tutorialParams.tutorialTitle,
+                iframeSrc:getAttrsFromIframe(iframeHTML,"src"),
+                iframeHeight:getAttrsFromIframe(iframeHTML,"height"),
+                iframeWidth:getAttrsFromIframe(iframeHTML,"width")
             }
         };
         
@@ -156,4 +156,14 @@ function getValueFromString(strsource, strSeek)
 indexOfStolb = strsource.indexOf("|");
 return indexOfStolb==-1?strsource:strsource.substring(0,indexOfStolb);
 
+
+}
+
+
+function getAttrsFromIframe(iframeStr,strSeek){
+pattern = strSeek+"=\"";
+indexOfSeek = iframeStr.indexOf(pattern);
+iframeStr = iframeStr.substring(indexOfSeek+pattern.length);
+indexOfStolb = iframeStr.indexOf("\"");
+return iframeStr.substring(0,indexOfStolb);
 }

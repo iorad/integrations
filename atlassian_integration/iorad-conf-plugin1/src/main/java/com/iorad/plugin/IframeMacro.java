@@ -20,32 +20,35 @@ import com.atlassian.renderer.v2.macro.ResourceAware;
 import com.atlassian.spring.container.ContainerManager;
 import com.iorad.util.ImageUtil;
 
-
 public class IframeMacro extends BaseMacro implements Macro,
-EditorImagePlaceholder, ResourceAware {
+		EditorImagePlaceholder, ResourceAware {
 
 	private final XhtmlContent xhtmlUtils;
 	private static final String IMAGE_PATH = "/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/placeholdergraphic.jpg";
 	SpaceManager spaceManager;
+
 	public IframeMacro(XhtmlContent xhtmlUtils) {
 
 		this.xhtmlUtils = xhtmlUtils;
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public void setSpaceManager(SpaceManager spaceManager)
-	{
-	    this.spaceManager = spaceManager;
+
+	public void setSpaceManager(SpaceManager spaceManager) {
+		this.spaceManager = spaceManager;
 	}
-	
+
 	@Override
 	public String execute(Map<String, String> parameters, String bodyContent,
 			ConversionContext conversionContext) throws MacroExecutionException {
-		//SpaceManager spaceManager = (SpaceManager) ContainerManager.getComponent("spaceManager");
-		return parameters.get("iframeURL");
-	}
+		// SpaceManager spaceManager = (SpaceManager)
+		// ContainerManager.getComponent("spaceManager");
+		String iframePattern = "<iframe src=\"[srcplaceholder]\" width=\"[widthplaceholder]\" scrolling=\"no\" height=\"[heightplaceholder]\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe>";
 
+		return iframePattern
+				.replace("[srcplaceholder]", parameters.get("iframeSrc"))
+				.replace("[widthplaceholder]", parameters.get("iframeWidth"))
+				.replace("[heightplaceholder]", parameters.get("iframeHeight"));
+	}
 
 	@Override
 	public ImagePlaceholder getImagePlaceholder(
@@ -53,10 +56,6 @@ EditorImagePlaceholder, ResourceAware {
 		return new DefaultImagePlaceholder(IMAGE_PATH,
 				new Dimensions(392, 110), false);
 	}
-	
-
-
-
 
 	@Override
 	public BodyType getBodyType() {
@@ -108,9 +107,5 @@ EditorImagePlaceholder, ResourceAware {
 		// TODO Auto-generated method stub
 		return (String) parameters.get("iframeURL");
 	}
-
-
-
-
 
 }

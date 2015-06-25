@@ -38,15 +38,35 @@
       <description>This confluance plugin makes instant step-by-step knowledge base articles.</description>
         <category name="confluence-content"/>  
         <parameters>
-        	<parameter name="iframeURL" type="string">
-			</parameter>
+			
 				<parameter name="uid" type="string">
 			</parameter>
+			
 				<parameter name="tutorId" type="string">
 			</parameter>
+			
 				<parameter name="tutorTitle" type="string">
 			</parameter>
+			
+			<parameter name="iframeWidth" type="string">
+			</parameter>
+			
+			<parameter name="iframeHeight" type="string">
+			</parameter>
+			
+			<parameter name="iframeSrc" type="string">
+			</parameter>
+			
 		</parameters>
+		
+		 <property-panel>
+            <button id="properties" label="Properties"/>
+        </property-panel>
+		
+		
+		
+		
+		
     </xhtml-macro>
     
     <macro name="CaptureSolution" class="com.iorad.plugin.IframeMacro" key="IoradMacro">
@@ -69,10 +89,13 @@
     <description>Macro related JS resources</description>
     <context>editor</context>
 
-   
+   <resource type="download" name="main_config.js" location="js/main_config.js" />
   		<resource type="download" name="ioradmacro.js" location="js/ioradmacro.js" />
 		<resource type="download" name="iorad.js" location="js/iorad.js" />
+		<resource type="download" name="propPanel.js" location="js/propPanel.js" />
 		<resource type="download" name="iorad-conf-plugin.css" location="css/iorad-conf-plugin.css" />
+		
+		<dependency>com.atlassian.confluence.tinymceplugin:editor-resources</dependency>
 	</web-resource>
 
     

@@ -38,6 +38,26 @@
   padding-bottom: 20px;
 }
 
+.btnIoradSave
+{
+
+  background: #00B975;
+  color: #fff !important;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  font-weight: 400;
+  font-size: 16pt;
+  line-height: 1;
+  text-align: center;
+  margin-top: 50px;
+  cursor: pointer;
+  width: 360px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 
 a#CaptureSolution span.icon {
   background: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/icon_16x16.png) no-repeat scroll left center transparent !important;
@@ -85,10 +105,49 @@ a#CaptureSolution span.icon {
     text-align: center;
 }
 
+.dialog-panel-body.SavePropPanel > div > label
+{
+  font-size: 14pt;
+  color: #2F344E;
+  width: 110px;
+  display: inline-block;
+  text-align: left;
+}
+
+
+.dialog-panel-body.SavePropPanel > div > input
+{
+  margin-left: 20px;
+}
+
+.dialog-panel-body.SavePropPanel > div > input
+{
+  height: 16px;
+}
+
+.dialog-panel-body.SavePropPanel > div
+{
+
+  padding-bottom: 15px;
+text-align: center;
+height: 18px;
+font-size: 16px;
+}
+
 
 .dialog-panel-body.singlePanel
 { 
 background-image: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/line.png);
+  background-repeat: no-repeat;
+  background-repeat-x: inherit;
+  background-position: bottom;
+}
+
+
+.dialog-panel-body.SavePropPanel 
+{
+
+ background-image: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/line.png);
   background-repeat: no-repeat;
   background-repeat-x: inherit;
   background-position: bottom;
