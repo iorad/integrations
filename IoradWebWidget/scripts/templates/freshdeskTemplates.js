@@ -2,6 +2,13 @@
   // main layout for iorad widget control. At the moment, this widget control works best with the new freshtheme.
   mainLayout: function () {
     var template = JST['templates/freshdesk/mainLayout.hbs'];
+    if (ioradWebWidget.config.ENV === 'test') {
+      return template({ ioradRootUrl: ioradWebWidget.config.TEST_ROOT_URL });
+    }
+    else if (ioradWebWidget.config.ENV === 'live') {
+      return template({ ioradRootUrl: ioradWebWidget.config.LIVE_ROOT_URL });
+    }
+
     return template();
   },
 

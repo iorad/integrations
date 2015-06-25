@@ -39,6 +39,7 @@
           'scripts/vendor/handlebars/*.js',
           'scripts/templates/handlebars/templates.js',
           'scripts/main.js',
+          'scripts/config.js',
           'scripts/utils/*.js',
           'scripts/templates/*.js',
           'scripts/main/**/*.js',
