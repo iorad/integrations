@@ -18,7 +18,7 @@ AJS.bind("init.rte", function() {
 
       // adds header for second page
       dialogNew.addHeader("Iorad Tutorials");
-      dialogNew.addPanel("SinglePanel", "<div id=\"ioRadnewDiv\" ><h2>Iorad article maker<\/h2><h3>Instant step-by-step knowledge base articles<\/h3><a class=\"btnIorad\" >New Tutorial<\/a><\/div>", "singlePanel");
+      dialogNew.addPanel("SinglePanel", "<div id=\"ioRadnewDiv\" ><h2>Iorad article maker<\/h2><h3>Instant step-by-step knowledge base articles<\/h3><a class=\"btnIorad\" >New Solution<\/a><\/div>", "singlePanel");
   
    var dialogEdit = new AJS.Dialog(400,400);
    
@@ -31,7 +31,7 @@ AJS.bind("init.rte", function() {
 
       // adds header for second page
       dialogEdit.addHeader("Iorad Tutorials");
-      dialogEdit.addPanel("SinglePanel", "<div id=\"ioRadEditDiv\" ><h2>Iorad article maker<\/h2><h3>Instant step-by-step knowledge base articles<\/h3><a class=\"btnIoradEdit\" >Edit Tutorial<\/a><\/div>", "singlePanel");
+      dialogEdit.addPanel("SinglePanel", "<div id=\"ioRadEditDiv\" ><h2>Iorad article maker<\/h2><h3>Instant step-by-step knowledge base articles<\/h3><a class=\"btnIoradEdit\" >Edit Solution<\/a><\/div>", "singlePanel");
   
 
    
