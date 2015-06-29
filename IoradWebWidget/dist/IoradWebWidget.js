@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.1 - 06-25-2015 *//*!
+/*! IoradWebWidget - v0.0.1 - 06-29-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4326,6 +4326,7 @@ var ioradWebWidget = (function (module, undefined) {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
+                // steps contains a list of the steps embedded in the iframe, this is used to provider rich web search in the knowledge base
                 "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'")
               }
             };
