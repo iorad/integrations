@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.1 - 06-23-2015 *//*!
+/*! IoradWebWidget - v0.0.1 - 06-29-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4150,7 +4150,11 @@ this["JST"]["templates/freshdesk/freshdeskFolderList.hbs"] = Handlebars.template
 },"useData":true});
 
 this["JST"]["templates/freshdesk/mainLayout.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<section id=\"ioradWidget\" class=\"content rounded-6 iorad-widget hide-in-mobile\" title=\"Iorad Tutorial Widget\">\n    <div id=\"tutorialLocation\" class=\"widget-layout\">\n        <div class=\"widget-header\"><h2 class=\"heading\">Create a Solution</h2></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Categories</h4></div><div><select id=\"categorySelector\"></select></div></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Solutions</h4></div><div id='foldersList'></div></div>\n        <div id=\"control\">\n            <a id='newTutorialBtn' class='btn btn-iorad-widget' title='open IORAD editor' href='#'>ADD</a>\n        </div>\n    </div>\n</section>\n<style>\n    .invisible-options {\n        display: none;\n    }\n\n    .iorad-widget {\n        border-bottom: 1px solid #e5e5e5;\n    }\n\n    @media (max-width: 1201px) {\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            display: block;\n        }\n    }\n\n    @media (min-width: 1201px) {\n        .iorad-widget div {\n            display: inline-block;\n        }\n\n        #control {\n            float: right;\n            position: relative;\n        }\n\n        .widget-location-selector .selector-label {\n            padding-right: 1em;\n        }\n\n        .widget-header {\n            padding-right: 2em;\n        }\n\n        .widget-location-selector {\n            padding-right: 2em;\n            height: 30px;\n        }\n\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            margin: 0 auto;\n            display: block;\n        }\n    }\n\n    .widget-layout {\n        width: 98%;\n    }   \n\n    .iorad-widget-modal {\n        width: 28%;\n        font-size: 16px;\n    }\n\n    \n</style>\n<script type='text/javascript' src='//test.iorad.com/server/assets/js/iorad.js'></script>\n";
+    var helper;
+
+  return "<section id=\"ioradWidget\" class=\"content rounded-6 iorad-widget hide-in-mobile\" title=\"Iorad Tutorial Widget\">\n    <div id=\"tutorialLocation\" class=\"widget-layout\">\n        <div class=\"widget-header\"><h2 class=\"heading\">Create a Solution</h2></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Categories</h4></div><div><select id=\"categorySelector\"></select></div></div>\n        <div class=\"widget-location-selector\"><div class=\"selector-label\"><h4>Solutions</h4></div><div id='foldersList'></div></div>\n        <div id=\"control\">\n            <a id='newTutorialBtn' class='btn btn-iorad-widget' title='open IORAD editor' href='#'>ADD</a>\n        </div>\n    </div>\n</section>\n<style>\n    .invisible-options {\n        display: none;\n    }\n\n    .iorad-widget {\n        border-bottom: 1px solid #e5e5e5;\n    }\n\n    @media (max-width: 1201px) {\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            display: block;\n        }\n    }\n\n    @media (min-width: 1201px) {\n        .iorad-widget div {\n            display: inline-block;\n        }\n\n        #control {\n            float: right;\n            position: relative;\n        }\n\n        .widget-location-selector .selector-label {\n            padding-right: 1em;\n        }\n\n        .widget-header {\n            padding-right: 2em;\n        }\n\n        .widget-location-selector {\n            padding-right: 2em;\n            height: 30px;\n        }\n\n        .btn-iorad-widget {\n            color: #006063;\n            border-color: #006063;\n            font-weight: bold;\n            background-color: white;\n            background-image: none;\n            text-shadow: none;\n            width: 112px;\n            line-height: 20px;\n            margin: 0 auto;\n            display: block;\n        }\n    }\n\n    .widget-layout {\n        width: 98%;\n    }   \n\n    .iorad-widget-modal {\n        width: 28%;\n        font-size: 16px;\n    }\n\n    \n</style>\n<script type='text/javascript' src='//"
+    + this.escapeExpression(((helper = (helper = helpers.ioradRootUrl || (depth0 != null ? depth0.ioradRootUrl : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"ioradRootUrl","hash":{},"data":data}) : helper)))
+    + "/server/assets/js/iorad.js'></script>\n";
 },"useData":true});
 
 this["JST"]["templates/freshdesk/modalTemplate.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -4178,6 +4182,11 @@ var ioradWebWidget = (function (module, undefined) {
 
   return module;
 })(ioradWebWidget || {});
+;ioradWebWidget.config = {
+  ENV: 'test', // test or live.
+  TEST_ROOT_URL: 'test.iorad.com',
+  LIVE_ROOT_URL: 'iorad.com'
+};
 ;ioradWebWidget.util.freshdesk = (function (module) {
   
   var SOLUTION_CATEGORIES_API_URL = '/solution/categories.json',
@@ -4207,6 +4216,13 @@ var ioradWebWidget = (function (module, undefined) {
   // main layout for iorad widget control. At the moment, this widget control works best with the new freshtheme.
   mainLayout: function () {
     var template = JST['templates/freshdesk/mainLayout.hbs'];
+    if (ioradWebWidget.config.ENV === 'test') {
+      return template({ ioradRootUrl: ioradWebWidget.config.TEST_ROOT_URL });
+    }
+    else if (ioradWebWidget.config.ENV === 'live') {
+      return template({ ioradRootUrl: ioradWebWidget.config.LIVE_ROOT_URL });
+    }
+
     return template();
   },
 
@@ -4310,6 +4326,7 @@ var ioradWebWidget = (function (module, undefined) {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
+                // steps contains a list of the steps embedded in the iframe, this is used to provider rich web search in the knowledge base
                 "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'")
               }
             };
