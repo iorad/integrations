@@ -1,0 +1,75 @@
+/*body.iorad-open {
+    overflow: hidden;
+}
+
+#iorad-editor-wrapper {
+
+}
+*/
+.iorad-editor {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+div.inputControl {
+  display: inline-block;
+  margin: 32px 24px;
+}
+
+.btn-iorad-widget {
+  width: 180px;
+}
+
+div.main {
+  border-style: solid;
+  border-color: #EFEFEF;
+  border-width: 1px;
+  border-radius: 4px;
+  margin-left: 8px;
+  margin-top: 16px;
+  width: 720px;
+}
+
+div.header {
+  border-style: solid;
+  border-color: #EFEFEF;
+  border-bottom-width: 1px;
+  height: 60px;
+}
+
+div.footer {
+  border-style: solid;
+  border-color: #EFEFEF;
+  border-top-width: 1px;
+  height: 40px;
+}
+
+label {
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.header > .title {
+  margin: 12px 24px;
+  float: left;
+}
+
+.header > .logo {
+  float: right;
+  margin: 20px 24px;
+  background-image: app-asset-url("logo_app.png");
+  height: 21px;
+  width: 45px;
+  background-size: 45px 21px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+
+.footer > span {
+  float: left;
+  margin: 12px 24px;
+}

@@ -1,0 +1,13 @@
+<div id="mySuccessModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="mySuccessModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="mySuccessModalLabel">{{t "modalTemplate.modalTitle"}}</h3>
+  </div>
+  <div class="modal-body">
+    <p>{{t "modalTemplate.modalBodyP1"}}<b>{{msg}}</b>{{t "modalTemplate.modalBodyP2"}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">{{t "modalTemplate.closeButton"}}</button>
+    <a class="btn btn-primary" role="button" href="{{url}}">{{t "modalTemplate.viewArticleButton"}}</a>
+  </div>
+</div>
