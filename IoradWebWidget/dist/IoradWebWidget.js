@@ -4183,7 +4183,7 @@ var ioradWebWidget = (function (module, undefined) {
   return module;
 })(ioradWebWidget || {});
 ;ioradWebWidget.config = {
-  ENV: 'test', // test or live.
+  ENV: "live", // test or live.
   TEST_ROOT_URL: 'test.iorad.com',
   LIVE_ROOT_URL: 'iorad.com'
 };
