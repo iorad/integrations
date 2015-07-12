@@ -1,8 +1,22 @@
 ﻿<section id="ioradWidget" class="content rounded-6 iorad-widget hide-in-mobile" title="Iorad Tutorial Widget">
     <div id="tutorialLocation" class="widget-layout">
         <div class="widget-header"><h2 class="heading">Create a Solution</h2></div>
-        <div class="widget-location-selector"><div class="selector-label"><h4>Categories</h4></div><div><select id="categorySelector"></select></div></div>
-        <div class="widget-location-selector"><div class="selector-label"><h4>Solutions</h4></div><div id='foldersList'></div></div>
+        <div class="widget-body">
+            <div class="widget-location-selector">
+                <label class="selector-label" for="categoryselector">
+                    <h4>Categories</h4>
+                </label>
+                <div><select id="categorySelector"></select></div>
+                <label class="selector-label" for="foldersList">
+                    <h4>Solutions</h4>
+                </label>
+                <div id='foldersList'></div>
+            </div>
+            <div class="widget-options">
+                <input id="markAsPublished" type="checkbox">
+                <span> Automatically mark new tutorial as published?</span>
+            </div>
+        </div>
         <div id="control">
             <a id='newTutorialBtn' class='btn btn-iorad-widget' title='open IORAD editor' href='#'>ADD</a>
         </div>
@@ -29,11 +43,19 @@
             line-height: 20px;
             display: block;
         }
+        
+        .widget-body, .widget-header {
+            padding-bottom: 10px;
+        }
     }
 
     @media (min-width: 1201px) {
         .iorad-widget div {
             display: inline-block;
+        }
+        
+        .widget-body {
+            width:67%;
         }
 
         #control {
@@ -43,15 +65,16 @@
 
         .widget-location-selector .selector-label {
             padding-right: 1em;
+            display: inline-block;
         }
 
         .widget-header {
             padding-right: 2em;
+            float: left;
         }
-
-        .widget-location-selector {
+        
+        .widget-location-selector div {
             padding-right: 2em;
-            height: 30px;
         }
 
         .btn-iorad-widget {
