@@ -70,13 +70,14 @@
           
           var categoryId = $("#categorySelector").val(),
             folderId = $("#" + categoryId).val(),
+            statusCode = $("#markAsPublished").is(":checked") ? 2 : 1,
             article = {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
                 // steps contains a list of the steps embedded in the iframe, this is used to provider rich web search in the knowledge base
                 "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'"),
-                "status": 2
+                "status": statusCode
               }
             };
 
