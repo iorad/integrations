@@ -11,11 +11,12 @@
   font-size: 16pt;
   line-height: 1;
   text-align: center;
-  margin-top: 35px;
+  margin-top: 45px;
   cursor: pointer;
   width: 360px;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .btnIoradEdit
@@ -31,11 +32,12 @@
   font-size: 16pt;
   line-height: 1;
   text-align: center;
-  margin-top: 35px;
+  margin-top: 60px;
   cursor: pointer;
   width: 360px;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .btnIoradSave
@@ -60,22 +62,29 @@
 
 
 a#CaptureSolution span.icon {
-  background: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/icon_16x16.png) no-repeat scroll left center transparent !important;
+  background: url(images/icon_16x16.png) no-repeat scroll left center transparent !important;
 }
 
 
 #ioRadnewDiv > h2
 {
   text-align: center;
-  margin-top: 50px;
-    font-size: 16pt;
+  margin-top: 40px;
+  font-size: 14pt;
+}
+
+#ioRadnewDiv > img
+{
+  content:url(images/logo.png);
+  width: 50px;
+  height: 25px;
 }
 
 
 #ioRadnewDiv > h3
 {
   text-align: center;
-    font-size: 14pt;
+    font-size: 12pt;
 }
 
 
@@ -88,10 +97,16 @@ a#CaptureSolution span.icon {
 #ioRadEditDiv > h2
 {
   text-align: center;
-  margin-top: 50px;
-    font-size: 16pt;
+  margin-top: 5px;
+  font-size: 14pt;
 }
-
+#ioRadEditDiv > img
+{
+  content:url(images/logo.png);
+  width: 50px;
+  height: 25px;
+  margin-bottom: 40px;
+}
 
 #ioRadEditDiv > h3
 {
@@ -105,6 +120,11 @@ a#CaptureSolution span.icon {
     text-align: center;
 }
 
+.dialog-panel-body.SavePropPanel  
+{
+  text-align: center;
+}
+
 .dialog-panel-body.SavePropPanel > div > label
 {
   font-size: 14pt;
@@ -112,6 +132,15 @@ a#CaptureSolution span.icon {
   width: 110px;
   display: inline-block;
   text-align: left;
+}
+
+.dialog-panel-body.SavePropPanel > img
+{
+  content:url(images/logo.png);
+  width: 50px;
+  height: 25px;
+margin-bottom: 20px;
+
 }
 
 
@@ -137,7 +166,7 @@ font-size: 16px;
 
 .dialog-panel-body.singlePanel
 { 
-background-image: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/line.png);
+background-image: url(images/line.png);
   background-repeat: no-repeat;
   background-repeat-x: inherit;
   background-position: bottom;
@@ -147,7 +176,7 @@ background-image: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:mac
 .dialog-panel-body.SavePropPanel 
 {
 
- background-image: url(/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/line.png);
+ background-image: url(images/line.png);
   background-repeat: no-repeat;
   background-repeat-x: inherit;
   background-position: bottom;

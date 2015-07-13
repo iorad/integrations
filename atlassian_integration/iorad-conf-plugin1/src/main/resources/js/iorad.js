@@ -11,7 +11,7 @@
  * ```
  * <script type="text/javascript" src="jquery.js"></script>
  *
- * <script type="text/javascript" src="//iorad.com/server/assets/js/iorad.js"></script>
+ * <script type="text/javascript" src="//www.iorad.com/server/assets/js/iorad.min.js"></script>
  * ```
  *
  * For cfdev, prod mode, use the right domain:
@@ -67,6 +67,7 @@
  * - uid
  * - tutorialId
  * - tutorialTitle
+ * - steps
  */
 
 var _ = _ || ({

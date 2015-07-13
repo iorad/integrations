@@ -1,13 +1,21 @@
 package com.iorad.plugin;
 
+import java.util.List;
 import java.util.Map;
 
+import com.atlassian.confluence.labels.Label;
 import com.atlassian.confluence.content.render.xhtml.ConversionContext;
+import com.atlassian.confluence.core.ContentEntityObject;
+import com.atlassian.confluence.core.ContentPropertyManager;
+import com.atlassian.confluence.labels.LabelManager;
+import com.atlassian.confluence.labels.Labelable;
 import com.atlassian.confluence.macro.DefaultImagePlaceholder;
 import com.atlassian.confluence.macro.EditorImagePlaceholder;
 import com.atlassian.confluence.macro.ImagePlaceholder;
 import com.atlassian.confluence.macro.Macro;
 import com.atlassian.confluence.macro.MacroExecutionException;
+import com.atlassian.confluence.pages.Page;
+import com.atlassian.confluence.pages.PageManager;
 import com.atlassian.confluence.pages.thumbnail.Dimensions;
 import com.atlassian.confluence.setup.BootstrapManager;
 import com.atlassian.confluence.spaces.SpaceManager;
@@ -24,12 +32,19 @@ public class IframeMacro extends BaseMacro implements Macro,
 		EditorImagePlaceholder, ResourceAware {
 
 	private final XhtmlContent xhtmlUtils;
+	private LabelManager labelManager;
+	private PageManager pageManager;
 	private static final String IMAGE_PATH = "/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/placeholdergraphic.jpg";
 	SpaceManager spaceManager;
+	private ContentPropertyManager contentPropertyManager;
 
-	public IframeMacro(XhtmlContent xhtmlUtils) {
-
+	public IframeMacro(XhtmlContent xhtmlUtils, LabelManager lbm,
+			PageManager pageManager,
+			ContentPropertyManager contentPropertyManager) {
+		this.labelManager = lbm;
 		this.xhtmlUtils = xhtmlUtils;
+		this.pageManager = pageManager;
+		this.contentPropertyManager = contentPropertyManager;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -42,12 +57,26 @@ public class IframeMacro extends BaseMacro implements Macro,
 			ConversionContext conversionContext) throws MacroExecutionException {
 		// SpaceManager spaceManager = (SpaceManager)
 		// ContainerManager.getComponent("spaceManager");
-		String iframePattern = "<iframe src=\"[srcplaceholder]\" width=\"[widthplaceholder]\" scrolling=\"no\" height=\"[heightplaceholder]\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe>";
+		ContentEntityObject contentObject = conversionContext.getEntity();
+		String descriptions = parameters.get("labelContent");
 
-		return iframePattern
-				.replace("[srcplaceholder]", parameters.get("iframeSrc"))
-				.replace("[widthplaceholder]", parameters.get("iframeWidth"))
-				.replace("[heightplaceholder]", parameters.get("iframeHeight"));
+		if (descriptions != null) {
+			contentPropertyManager.setStringProperty(contentObject,
+					"searchLabels", descriptions);
+
+		}
+
+		String iframePattern = "<iframe src=\"[srcplaceholder]\" width=\"[widthplaceholder]\" scrolling=\"no\" height=\"[heightplaceholder]\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe>";
+		if (parameters != null) {
+			return iframePattern
+					.replace("[srcplaceholder]", parameters.get("iframeSrc"))
+					.replace("[widthplaceholder]",
+							parameters.get("iframeWidth"))
+					.replace("[heightplaceholder]",
+							parameters.get("iframeHeight"));
+		}
+
+		return "";
 	}
 
 	@Override
