@@ -1,0 +1,18 @@
+  
+#if($ifparams.isHasURL()==true)  
+
+    <a class="editSolutionVelo" onclick='openPropertyPanelWithParams()'>Edit Steps</a>
+
+
+
+<div class="mod-content">
+<iframe src="$ifparams.getIframeURL()" width="$ifparams.getWidth()" scrolling="no" height="$ifparams.getHeight()" style="border:0px;min-width:100%;" allowfullscreen="true"></iframe>
+
+</div>
+
+    #else
+    <h3 style="text-align: center">No steps has yet been attached to this issue.</h3>
+    <a class="btnIoradNew" onclick="createNewSolution()">CAPTURE STEPS</a>
+    #end
+    
+  

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="${project.name}" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/icon_16x16.png</param>
+		<param name="plugin-logo">images/icon_64x64.png</param>
+	</plugin-info>
+	<!-- add our i18n resource -->
+	<resource type="i18n" name="i18n" location="iorad-tab" />
+	<!-- add our web resources -->
+	<web-resource key="iorad-tab-resources" name="iorad-tab Web Resources">
+		<dependency>com.atlassian.auiplugin:ajs</dependency>
+		<resource type="download" name="iorad-tab.css" location="/css/iorad-tab.css" />
+		<resource type="download" name="iorad-tab.js" location="/js/iorad-tab.js" />
+		<resource type="download" name="iorad.js" location="/js/iorad.js" />
+		<resource type="download" name="images/" location="/images" />
+		<context>atl.general</context>
+	</web-resource>
+	<!-- publish our component -->
+	<component key="myPluginComponent" class="com.iorad.jira.plugin.MyPluginComponentImpl"
+		public="true">
+		<interface>com.iorad.jira.plugin.MyPluginComponent</interface>
+	</component>
+	<!-- import from the product container -->
+	<component-import key="applicationProperties"
+		interface="com.atlassian.sal.api.ApplicationProperties" />
+	<component-import key="userManager"
+		interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory" />
+	<issue-tabpanel key="issue-iorad-panel" name="Issue Iorad Panel"
+		i18n-name-key="issue-iorad-panel.name" class="com.iorad.jira.plugin.jira.tabpanels.IssueIoradPanel">
+		<description key="issue-iorad-panel.description">The Issue Iorad Panel Plugin
+		</description>
+		<label key="issue-iorad-panel.label" />
+		<order>10</order>
+		<resource type="velocity" name="view"
+			location="templates/tabpanels/issue-iorad-panel.vm" />
+		<supports-ajax-load>true</supports-ajax-load>
+	</issue-tabpanel>
+	<web-item name="IoradAdd" i18n-name-key="iorad-edit.name" key="iorad-edit"
+		section="operations-top-level" weight="1000">
+		<description key="iorad-edit.description">The ioradEdit Plugin</description>
+		<label key="iorad-edit.label" />
+		<link linkId="iorad-edit-link" />
+		<styleClass>ioradinitmenu</styleClass>
+	</web-item>
+	<servlet name="Plugin Data Servlet" i18n-name-key="plugin-data-servlet.name"
+		key="plugin-data-servlet" class="com.iorad.jira.plugin.servlet.PluginDataServlet">
+		<description key="plugin-data-servlet.description">The Plugin Data Servlet Plugin
+		</description>
+		<url-pattern>/plugindataservlet</url-pattern>
+	</servlet>
+	<servlet name="Plugin Status Servlet" i18n-name-key="plugin-status-servlet.name"
+		key="plugin-status-servlet" class="com.iorad.jira.plugin.servlet.PluginStatusServlet">
+		<description key="plugin-status-servlet.description">The Plugin Status Servlet Plugin
+		</description>
+		<url-pattern>/pluginstatusservlet</url-pattern>
+	</servlet>
+</atlassian-plugin>
