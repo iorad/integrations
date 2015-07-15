@@ -99,23 +99,9 @@
           }, function (err) {});
         });
       });
-
     };
 
-    var ioradLoaded = function (callback) {
-      var interval = 10;
-      var tryLoad = function () {
-        if (win.iorad) {
-          callback();
-        } else {
-          win.setTimeout(tryLoad, interval);
-        }
-      };
-
-      win.setTimeout(tryLoad, interval);
-    };
-
-    ioradLoaded(initializeWidget);
+    ioradWebWidget.util.common.ioradLoaded(initializeWidget);
 
   };
 
