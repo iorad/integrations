@@ -86,37 +86,37 @@
 
   function issueStatusCheck() {
 
-          jQuery.ajax({
-              url: AJS.params.baseURL + "/plugins/servlet/pluginstatusservlet",
-              type: "GET",
-              data: {
-                  issue_id: issue_id
-              },
-              success: function(data) {
-                  if (data.result === "existing") {
-                      $("#iframeWidth").val(data.width);
-                      $("#iframeHeight").val(data.height);
-                      $("#iframeSrc").val(data.iframeURL);
-                      tutor_uid = data.uid;
-                      tutorialId = data.tutorialId;
-                      tutorialTitle = data.tutorialTitle;
-                      dialogProp.show();
+      jQuery.ajax({
+          url: AJS.params.baseURL + "/plugins/servlet/pluginstatusservlet",
+          type: "GET",
+          data: {
+              issue_id: issue_id
+          },
+          success: function(data) {
+              if (data.result === "existing") {
+                  $("#iframeWidth").val(data.width);
+                  $("#iframeHeight").val(data.height);
+                  $("#iframeSrc").val(data.iframeURL);
+                  tutor_uid = data.uid;
+                  tutorialId = data.tutorialId;
+                  tutorialTitle = data.tutorialTitle;
+                  dialogProp.show();
 
 
 
-                  } else if (data.result === "new") {
-                      dialogNew.show();
-                  }
-              },
-              error: function(data) {
-                  console.log("error" + data);
-                  alert("Something went wrong.");
+              } else if (data.result === "new") {
+                  dialogNew.show();
               }
+          },
+          error: function(data) {
+              console.log("error" + data);
+              alert("Something went wrong.");
+          }
 
-          });
+      });
 
-      }
-      //old signature function openPropertyPanelWithParams(iframURL, width, height, tutor_uid, tutorialId, tutorialTitle) 
+  }
+  //old signature function openPropertyPanelWithParams(iframURL, width, height, tutor_uid, tutorialId, tutorialTitle) 
   function openPropertyPanelWithParams() {
 
       issueStatusCheck();
@@ -201,8 +201,9 @@
           success: function(data) {
               if (data.result === "success") {
 
-                  //alert("Solution successfully attached to the issue.");
-                 //JIRA.trigger(JIRA.Events.REFRESH_ISSUE_PAGE, [JIRA.Issue.getIssueId()]);
+                  // alert("Solution successfully attached to the issue.");
+                  location.reload();
+                  //JIRA.trigger(JIRA.Events.REFRESH_ISSUE_PAGE, [JIRA.Issue.getIssueId()]);
 
               }
           },
@@ -214,3 +215,22 @@
       });
 
   }
+
+
+// jQuery(document).ready(function($) {
+
+
+//     JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function(e, context) {
+//         buildCreateIssueButton($(".aui .form-body .content"));
+
+//     });
+
+//     if (String(document.location.href).indexOf("CreateIssue.jspa") >= 0) {
+//         buildCreateIssueButton($(".aui .form-body"));
+//     }
+// });
+
+// function buildCreateIssueButton(nodeToAppend) {
+//     nodeToAppend.append('<a class="btnIoradNew" onclick="createNewSolution()">CAPTURE STEPS</a>');
+
+// }
