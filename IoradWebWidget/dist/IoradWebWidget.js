@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.1 - 07-12-2015 *//*!
+/*! IoradWebWidget - v0.0.1 - 07-16-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4183,7 +4183,7 @@ var ioradWebWidget = (function (module, undefined) {
   return module;
 })(ioradWebWidget || {});
 ;ioradWebWidget.config = {
-  ENV: "live", // test or live.
+  ENV: 'live', // test or live.
   TEST_ROOT_URL: 'test.iorad.com',
   LIVE_ROOT_URL: 'iorad.com'
 };
@@ -4295,7 +4295,7 @@ var ioradWebWidget = (function (module, undefined) {
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: 'prod' }, function () {
+      iorad.init({ env: 'live' }, function () {
         // iorad is ready now.
         var t = 0;
 
