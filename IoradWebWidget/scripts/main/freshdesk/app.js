@@ -43,7 +43,7 @@
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: 'prod' }, function () {
+      iorad.init({ env: ioradWebWidget.util.common.ioradEnv() }, function () {
         // iorad is ready now.
         var t = 0;
 
