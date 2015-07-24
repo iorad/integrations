@@ -1,11 +1,3 @@
-/*body.iorad-open {
-    overflow: hidden;
-}
-
-#iorad-editor-wrapper {
-
-}
-*/
 .iorad-editor {
     position: fixed;
     z-index: 999999;
