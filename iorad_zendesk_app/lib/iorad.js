@@ -1,4 +1,4 @@
-var env         = 'prod', // cfdev, prod or live; default: live.
+var env         = 'live', // cfdev, prod or live; default: live.
   customBaseUrl = ''; //baseUrl when this variable is set
 module.exports = {
   buildIframe: function (playerUrl) {
