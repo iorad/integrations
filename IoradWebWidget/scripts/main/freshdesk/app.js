@@ -43,7 +43,7 @@
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: 'prod' }, function () {
+      iorad.init({ env: ioradWebWidget.util.common.ioradEnv() }, function () {
         // iorad is ready now.
         var t = 0;
 
@@ -76,7 +76,7 @@
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
                 // steps contains a list of the steps embedded in the iframe, this is used to provider rich web search in the knowledge base
-                "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'"),
+                "description": ioradWebWidget.templates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'"),
                 "status": statusCode
               }
             };
@@ -99,23 +99,9 @@
           }, function (err) {});
         });
       });
-
     };
 
-    var ioradLoaded = function (callback) {
-      var interval = 10;
-      var tryLoad = function () {
-        if (win.iorad) {
-          callback();
-        } else {
-          win.setTimeout(tryLoad, interval);
-        }
-      };
-
-      win.setTimeout(tryLoad, interval);
-    };
-
-    ioradLoaded(initializeWidget);
+    ioradWebWidget.util.common.ioradLoaded(initializeWidget);
 
   };
 

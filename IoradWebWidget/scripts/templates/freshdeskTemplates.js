@@ -1,5 +1,5 @@
 ﻿ioradWebWidget.templates.freshdeskTemplates = {
-  // main layout for iorad widget control. At the moment, this widget control works best with the new freshtheme.
+  // main layout for iorad widget control for freshdesk
   mainLayout: function () {
     var template = JST['templates/freshdesk/mainLayout.hbs'];
     if (ioradWebWidget.config.ENV === 'test') {
@@ -28,11 +28,5 @@
   folderListTemplate: function (categories) {
     var template = JST['templates/freshdesk/freshdeskFolderList.hbs'];
     return template({ categories: categories });
-  },
-
-  // This template displays an solution article to be created.
-  articleTemplate: function (tutorialIframe, steps) {
-    var template = JST['templates/freshdesk/freshdeskArticleTemplate.hbs'];
-    return template({iframeSrc: tutorialIframe, steps: steps});
   }
 };
