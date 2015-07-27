@@ -8,9 +8,8 @@
   module.runApp = function ($, win) {
 
     //TODO: put desk mainLayout in the container.
-    var $container = $('.wrapper');
-    $container.html(ioradWebWidget.templates.deskTemplates.mainLayout() + $container.html());
-
+    var $container = $('#support-main');
+    $container.prepend(ioradWebWidget.templates.deskTemplates.mainLayout());
     var initializeWidget = function () {
 
     };
