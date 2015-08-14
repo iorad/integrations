@@ -5,6 +5,7 @@
     initAjaxOption = function () {
        return { dataType: 'json', contentType: 'application/json'}
     };
+
   module.listCategories = function () {
     var ajaxOptions = initAjaxOption();
     ajaxOptions.type = 'GET';
@@ -21,5 +22,4 @@
   };
 
   return module;
-
 })(ioradWebWidget.util.freshdesk || {});
