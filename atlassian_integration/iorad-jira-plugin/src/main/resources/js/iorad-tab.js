@@ -8,7 +8,6 @@
   $(document).ready(function() {
 
       issue_id = JIRA.Issue.getIssueId();
-      //    debugger;
       dialogProp = new AJS.Dialog(400, 400);
 
       dialogProp.addPage();

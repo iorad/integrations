@@ -1,19 +1,16 @@
 package com.iorad.jira.plugin.jira.tabpanels;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.atlassian.core.util.collection.EasyList;
 import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.plugin.issuetabpanel.AbstractIssueTabPanel;
-import com.atlassian.jira.plugin.issuetabpanel.IssueAction;
-import com.atlassian.jira.plugin.issuetabpanel.IssueTabPanel;
-import com.atlassian.jira.issue.tabpanels.GenericMessageAction;
 import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.plugin.issuetabpanel.AbstractIssueTabPanel;
+import com.atlassian.jira.plugin.issuetabpanel.IssueTabPanel;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-
-import java.util.Collections;
-import java.util.List;
 
 public class IssueIoradPanel extends AbstractIssueTabPanel implements IssueTabPanel
 {

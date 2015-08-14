@@ -1,10 +1,11 @@
 package ut.com.iorad.jira.plugin;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+
 import com.iorad.jira.plugin.MyPluginComponent;
 import com.iorad.jira.plugin.MyPluginComponentImpl;
-
-import static org.junit.Assert.assertEquals;
 
 public class MyComponentUnitTest
 {

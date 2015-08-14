@@ -3,7 +3,6 @@ package ut.com.iorad.jira.plugin.jira.tabpanels;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import com.iorad.jira.plugin.jira.tabpanels.IssueIoradPanel;
 
 //import static org.mockito.Mockito.*;
 

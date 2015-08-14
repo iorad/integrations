@@ -1,12 +1,13 @@
 package it.com.iorad.jira.plugin;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import com.atlassian.plugins.osgi.test.AtlassianPluginsTestRunner;
-import com.iorad.jira.plugin.MyPluginComponent;
-import com.atlassian.sal.api.ApplicationProperties;
 
-import static org.junit.Assert.assertEquals;
+import com.atlassian.plugins.osgi.test.AtlassianPluginsTestRunner;
+import com.atlassian.sal.api.ApplicationProperties;
+import com.iorad.jira.plugin.MyPluginComponent;
 
 @RunWith(AtlassianPluginsTestRunner.class)
 public class MyComponentWiredTest
