@@ -48,22 +48,6 @@ this["JST"]["templates/desk/topicsList.hbs"] = Handlebars.template({"1":function
   return ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.topics : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 
-this["JST"]["templates/freshdesk/freshdeskArticleTemplate.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-    var helper;
-
-  return "    <p>"
-    + this.escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"description","hash":{},"data":data}) : helper)))
-    + "</p>\r\n";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return "<div class=\"embeddedTutorial\"><iframe src=\""
-    + this.escapeExpression(((helper = (helper = helpers.iframeSrc || (depth0 != null ? depth0.iframeSrc : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"iframeSrc","hash":{},"data":data}) : helper)))
-    + "\" width=\"100%\" scrolling=\"no\" height=\"500px\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe></div>\r\n<div class=\"tutorialSteps\" style=\"display: none;\">\r\n"
-    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.steps : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
-    + "</div>\r\n";
-},"useData":true});
-
 this["JST"]["templates/freshdesk/freshdeskCategoryList.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
