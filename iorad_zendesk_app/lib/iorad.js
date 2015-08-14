@@ -34,10 +34,27 @@ module.exports = {
     return this.getBaseUrl() + '/server/?a=app.editor&data=0&module=' + tutorialParams.tutorialId + '&uid=' + tutorialParams.uid;
   },
 
+  /**
+   * 
+   * This method returns tutorial player url.
+   * 
+   * @param {string} uid            user id
+   * @param {string} tutorialId     tutorial id
+   * @param {string} tutorialTitle  tutorial title
+   */
   getPlayerUrl: function (uid, tutorialId, tutorialTitle) {
     return [this.getBaseUrl(), uid, tutorialId, tutorialTitle].join('/');
   },
 
+  /**
+   * 
+   * This method returns tutorial player url with viewsteps option turned on.
+   * Note: this method is obselete.
+   * 
+   * @param {string} uid            user id
+   * @param {string} tutorialId     tutorial id
+   * @param {string} tutorialTitle  tutorial title
+   */
   getPlayerUrlWithViewSteps: function (uid, tutorialId, tutorialTitle) {
     return this.getPlayerUrl(uid, tutorialId, tutorialTitle) + "#viewsteps";
   },
@@ -45,7 +62,7 @@ module.exports = {
   /**
    * Extracts tutorial params from provided player url.
    *
-   * @param playerUrl
+   * @param {string} playerUrl  player url
    *
    * @return object with base_url, uid, tutorialId, tutorialTitle
    */
@@ -63,10 +80,10 @@ module.exports = {
 
   /**
    * Gets embedded player url.
-   * @param  {string} uid           [description]
-   * @param  {string} tutorialId    [description]
-   * @param  {string} tutorialTitle [description]
-   * @return {string}               [description]
+   * @param  {string} uid           user id
+   * @param  {string} tutorialId    tutorial id
+   * @param  {string} tutorialTitle tutorial title
+   * @return {string}               iframe html
    */
   getEmbeddedPlayerUrl: function (uid, tutorialId, tutorialTitle) {
     var playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle);
@@ -74,11 +91,11 @@ module.exports = {
   },
 
   /**
-   * Gets embedded #viewsteps player url.
-   * @param  {string} uid           [description]
-   * @param  {string} tutorialId    [description]
-   * @param  {string} tutorialTitle [description]
-   * @return {string}               [description]
+   * Gets embedded #viewsteps player url. This method is obselete.
+   * @param  {string} uid           user id
+   * @param  {string} tutorialId    tutorial id
+   * @param  {string} tutorialTitle tutorial title
+   * @return {string}               iframe html
    */
   getEmbeddedPlayerWithViewStepsUrl: function (uid, tutorialId, tutorialTitle) {
     var playerUrl = this.getPlayerUrlWithViewSteps(uid, tutorialId, tutorialTitle);
