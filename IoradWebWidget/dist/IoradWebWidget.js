@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.1 - 07-12-2015 *//*!
+/*! IoradWebWidget - v0.0.1 - 08-14-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4097,7 +4097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;;this["JST"] = this["JST"] || {};
 
-this["JST"]["templates/freshdesk/freshdeskArticleTemplate.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+this["JST"]["templates/articleTemplate.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     var helper;
 
   return "    <p>"
@@ -4111,6 +4111,38 @@ this["JST"]["templates/freshdesk/freshdeskArticleTemplate.hbs"] = Handlebars.tem
     + "\" width=\"100%\" scrolling=\"no\" height=\"500px\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe></div>\n<div class=\"tutorialSteps\" style=\"display: none;\">\n"
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.steps : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
+},"useData":true});
+
+this["JST"]["templates/desk/mainLayout.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper;
+
+  return "<section id=\"ioradWidget\" class=\"content iorad-widget\" title=\"Iorad Tutorial Widget\">\n    <div id=\"tutorialLocation\" class=\"widget-layout\">\n        <div class=\"widget-header\"><h2 class=\"heading\">Create an Article</h2></div>\n        <div class=\"widget-location-selector\"><label for=\"topicsSelector\">Topics</label><select id=\"topicsSelector\"></select></div>\n        <div id=\"control\">\n            <a id=\"newTutorialBtn\" class=\"btn btn-iorad-widget\" title=\"open IORAD editor\" href=\"#\">ADD</a>\n        </div>\n    </div>\n</section>\n<style>\n</style>\n<script type='text/javascript' src='//"
+    + this.escapeExpression(((helper = (helper = helpers.ioradRootUrl || (depth0 != null ? depth0.ioradRootUrl : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"ioradRootUrl","hash":{},"data":data}) : helper)))
+    + "/server/assets/js/iorad.js'></script>";
+},"useData":true});
+
+this["JST"]["templates/desk/modalTemplate.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div class=\"modal hide fade iorad-widget-modal\" role=\"dialog\" id=\"successModal\" aria-hidden=\"true\" style=\"display:none;\">\n    <div class=\"modal-header\"></div>\n    <div class=\"modal-body\">\n        <div id=\"successMsg\">\n            The solution <b>"
+    + alias3(((helper = (helper = helpers.articleTitle || (depth0 != null ? depth0.articleTitle : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"articleTitle","hash":{},"data":data}) : helper)))
+    + "</b> has been successfully created.\n        </div>\n    </div><div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button><a class=\"btn btn-primary\" href=\""
+    + alias3(((helper = (helper = helpers.articleUrl || (depth0 != null ? depth0.articleUrl : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"articleUrl","hash":{},"data":data}) : helper)))
+    + "\">VIEW ARTICLE</a>\n    </div>\n</div>\n";
+},"useData":true});
+
+this["JST"]["templates/desk/topicsList.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<option value=\""
+    + alias3(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.topics : depth0),{"name":"each","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 
 this["JST"]["templates/freshdesk/freshdeskCategoryList.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
@@ -4183,10 +4215,57 @@ var ioradWebWidget = (function (module, undefined) {
   return module;
 })(ioradWebWidget || {});
 ;ioradWebWidget.config = {
-  ENV: 'test', // test or live.
+  ENV: 'live', // test or live.
   TEST_ROOT_URL: 'test.iorad.com',
   LIVE_ROOT_URL: 'iorad.com'
 };
+;ioradWebWidget.util.desk = (function (module) {
+
+  var initAjaxOption = function () {
+    return { dataType: 'json', contentType: 'application/json' }
+  };
+
+  module.listTopics = function () {
+    var ajaxOptions = initAjaxOption();
+    ajaxOptions.type = 'GET';
+    ajaxOptions.url = '/api/v2/topics?per_page=100'; // display maximum 100 topics, hopefully we could load all customers topics in one page...
+    return ajaxOptions;
+  }
+
+  /**
+   * generate ajax request options required for creating an article on desk.com.
+   * @param string article a article json string.
+   * @returns {} an ajax option object
+   */
+  module.createArticle = function (article) {
+    var ajaxOptions = initAjaxOption();
+    ajaxOptions.type = 'POST';
+    ajaxOptions.URL = '/api/v2/articles';
+    ajaxOptions.data = article;
+    return ajaxOptions;
+  };
+
+  /**
+   * generate an article json data used for the createArticle ajax request
+   * @param {} topicLink expect topic object {href: "href", class: "topic"}
+   * @param string articleBody article body string
+   * @param string articleTitle article title string
+   * @returns string json string. 
+   */
+  module.prepArticleJson = function (topicLink, articleBody, articleTitle)
+  {
+    var article = {};
+    article.subject = articleTitle;
+    article.body = articleBody;
+    article._links = {
+      topic: topicLink
+    }
+
+    return JSON.stringify(article);
+  }
+
+  return module;
+})(ioradWebWidget.util.desk || {});
 ;ioradWebWidget.util.freshdesk = (function (module) {
   
   var SOLUTION_CATEGORIES_API_URL = '/solution/categories.json',
@@ -4194,6 +4273,7 @@ var ioradWebWidget = (function (module, undefined) {
     initAjaxOption = function () {
        return { dataType: 'json', contentType: 'application/json'}
     };
+
   module.listCategories = function () {
     var ajaxOptions = initAjaxOption();
     ajaxOptions.type = 'GET';
@@ -4210,10 +4290,87 @@ var ioradWebWidget = (function (module, undefined) {
   };
 
   return module;
-
 })(ioradWebWidget.util.freshdesk || {});
+;ioradWebWidget.util.common = (function (module, win) {
+  /**
+   * wait for iorad.js to load. once loaded, execute callback()
+   * @param {} callback the callback function.
+   * @returns {} 
+   */
+  module.ioradLoaded = function (callback) {
+    var interval = 10;
+    var tryLoad = function () {
+      if (win.iorad) {
+        callback();
+      } else {
+        win.setTimeout(tryLoad, interval);
+      }
+    };
+
+    win.setTimeout(tryLoad, interval);
+  }
+
+  /**
+   * 
+   * @returns {} true if current hostname is blah.freshdesk.com
+   */
+  module.isFreshdeskKnowledgebase = function () {
+    return /^.*\.freshdesk\.com$/.test(win.location.host);
+  };
+
+  /**
+   * 
+   * @returns {} true if current hostname is blah.desk.com
+   */
+  module.isDeskKnowledgebase = function () {
+    return /^.*\.desk\.com$/.test(win.location.host);
+  };
+
+  /**
+   * get the environment setting for initiating iorad.js
+   * @returns {} 
+   */
+  module.ioradEnv = function () {
+    if (ioradWebWidget.config.ENV === 'test') {
+      return 'prod';
+    } else if (ioradWebWidget.config.ENV === 'live') {
+      return 'live';
+    }
+
+    return 'prod';
+  };
+
+  return module;
+})(ioradWebWidget.util.common || {}, window);
+;ioradWebWidget.templates.deskTemplates = {
+
+  // main layout for iorad web widget control for desk
+  mainLayout: function () {
+    var template = JST['templates/desk/mainLayout.hbs'];
+    if (ioradWebWidget.config.ENV === 'test') {
+      return template({ ioradRootUrl: ioradWebWidget.config.TEST_ROOT_URL });
+    }
+    else if (ioradWebWidget.config.ENV === 'live') {
+      return template({ ioradRootUrl: ioradWebWidget.config.LIVE_ROOT_URL });
+    }
+
+    return template();
+  },
+
+  // This modal shows up when there is a new desk article created successfully.
+  deskModal: function (articleUrl, title) {
+    var template = JST['templates/desk/modalTemplate.hbs'];
+    return template({articleUrl: articleUrl, articleTitle: title});
+  },
+
+  // This template displays all available topics as options.
+  topicsTemplate: function (topics) {
+    var template = JST['templates/desk/topicsList.hbs'];
+    return template({ topics: topics });
+  }
+};
 ;ioradWebWidget.templates.freshdeskTemplates = {
-  // main layout for iorad widget control. At the moment, this widget control works best with the new freshtheme.
+  // main layout for iorad widget control for freshdesk
   mainLayout: function () {
     var template = JST['templates/freshdesk/mainLayout.hbs'];
     if (ioradWebWidget.config.ENV === 'test') {
@@ -4242,15 +4399,35 @@ var ioradWebWidget = (function (module, undefined) {
   folderListTemplate: function (categories) {
     var template = JST['templates/freshdesk/freshdeskFolderList.hbs'];
     return template({ categories: categories });
-  },
-
-  // This template displays an solution article to be created.
-  articleTemplate: function (tutorialIframe, steps) {
-    var template = JST['templates/freshdesk/freshdeskArticleTemplate.hbs'];
-    return template({iframeSrc: tutorialIframe, steps: steps});
   }
 };
-;ioradWebWidget.freshdesk = (function (module) {
+;// This template displays an solution article to be created.
+ioradWebWidget.templates.articleTemplate = function (tutorialIframe, steps) {
+  var template = JST['templates/articleTemplate.hbs'];
+  return template({ iframeSrc: tutorialIframe, steps: steps });
+};
+;ioradWebWidget.desk = (function (module) {
+
+  /**
+   * 
+   * @param {} $ jQuery object
+   * @param {} win Window object
+   */
+  module.runApp = function ($, win) {
+
+    //TODO: put desk mainLayout in the container.
+    var $container = $('.wrapper');
+    $container.html(ioradWebWidget.templates.deskTemplates.mainLayout() + $container.html());
+
+    var initializeWidget = function () {
+
+    };
+
+    ioradWebWidget.util.common.ioradLoaded(initializeWidget);
+  };
+  
+  return module;
+})(ioradWebWidget.desk || {});;ioradWebWidget.freshdesk = (function (module) {
 
   module.runApp = function ($, win) {
     var $container = $('.c-wrapper');
@@ -4295,7 +4472,7 @@ var ioradWebWidget = (function (module, undefined) {
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: 'prod' }, function () {
+      iorad.init({ env: ioradWebWidget.util.common.ioradEnv() }, function () {
         // iorad is ready now.
         var t = 0;
 
@@ -4328,7 +4505,7 @@ var ioradWebWidget = (function (module, undefined) {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
                 // steps contains a list of the steps embedded in the iframe, this is used to provider rich web search in the knowledge base
-                "description": ioradWebWidget.templates.freshdeskTemplates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'"),
+                "description": ioradWebWidget.templates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'"),
                 "status": statusCode
               }
             };
@@ -4351,26 +4528,18 @@ var ioradWebWidget = (function (module, undefined) {
           }, function (err) {});
         });
       });
-
     };
 
-    var ioradLoaded = function (callback) {
-      var interval = 10;
-      var tryLoad = function () {
-        if (win.iorad) {
-          callback();
-        } else {
-          win.setTimeout(tryLoad, interval);
-        }
-      };
-
-      win.setTimeout(tryLoad, interval);
-    };
-
-    ioradLoaded(initializeWidget);
+    ioradWebWidget.util.common.ioradLoaded(initializeWidget);
 
   };
 
   return module;
 })(ioradWebWidget.freshdesk || {});
-;ioradWebWidget.freshdesk.runApp(jQuery, window);
+;if (ioradWebWidget.util.common.isFreshdeskKnowledgebase()) {
+  ioradWebWidget.freshdesk.runApp(jQuery, window);
+}
+
+if (ioradWebWidget.util.common.isDeskKnowledgebase()) {
+  ioradWebWidget.desk.runApp(jQuery, window);
+}
