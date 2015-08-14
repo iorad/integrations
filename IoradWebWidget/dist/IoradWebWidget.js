@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.1 - 08-14-2015 *//*!
+/*! IoradWebWidget - v0.0.2 - 08-14-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4495,9 +4495,8 @@ ioradWebWidget.templates.articleTemplate = function (tutorialIframe, steps) {
           var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
             tutorialParams.tutorialId, tutorialParams.tutorialTitle);
 
-          var $tutorialViewStepsIframe = $(iframeHTML);
-          
-          var categoryId = $("#categorySelector").val(),
+          var $tutorialIframe = $(iframeHTML),
+            categoryId = $("#categorySelector").val(),
             folderId = $("#" + categoryId).val(),
             statusCode = $("#markAsPublished").is(":checked") ? 2 : 1,
             article = {
@@ -4505,7 +4504,7 @@ ioradWebWidget.templates.articleTemplate = function (tutorialIframe, steps) {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
                 // steps contains a list of the steps embedded in the iframe, this is used to provider rich web search in the knowledge base
-                "description": ioradWebWidget.templates.articleTemplate($tutorialViewStepsIframe.attr("src") + "#viewsteps", tutorialParams.steps).replace(/\"/g, "'"),
+                "description": ioradWebWidget.templates.articleTemplate($tutorialIframe.attr("src"), tutorialParams.steps).replace(/\"/g, "'"),
                 "status": statusCode
               }
             };
