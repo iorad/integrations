@@ -3,13 +3,11 @@ package com.iorad.jira.plugin;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-
 import com.atlassian.event.api.EventListener;
 import com.atlassian.event.api.EventPublisher;
 import com.atlassian.jira.event.issue.IssueEvent;
@@ -41,8 +39,7 @@ public class EventHandler implements InitializingBean, DisposableBean {
 			Long issue_id = issue.getId();
 
 			HttpServletRequest request = context.getRequest();
-			// Cookie cookies[] = request.getCookies();
-			// SettingsUtil.getCookieByName(cookies, cookieName);
+
 			boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
 			if (isMultipart) {
