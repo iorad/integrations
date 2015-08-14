@@ -8,7 +8,7 @@
   $(document).ready(function() {
 
       issue_id = JIRA.Issue.getIssueId();
-
+      //    debugger;
       dialogProp = new AJS.Dialog(400, 400);
 
       dialogProp.addPage();
@@ -58,7 +58,7 @@
 
 
 
-          ioradInit(issue_id, true);
+          ioradInit(issue_id, true, false);
           dialogProp.hide();
 
 
@@ -79,8 +79,28 @@
   });
 
   function createNewSolution() {
-      ioradInit(issue_id, false);
+      ioradInit(issue_id, false, false);
       dialogNew.hide();
+
+  }
+
+
+
+  function createNewSolutionFromPopup() {
+      ioradInit(issue_id, false, true);
+      dialogNew.hide();
+
+  }
+
+
+  function addHiddenFieldstoNewIssueForm(iframeURl, width, height, tutorialId, tutorialTitle, uid) {
+
+      $(".aui .field-group").append('<input type="hidden" name="io_iframeURl" value="' + iframeURl + '">');
+      $(".aui .field-group").append('<input type="hidden" name="io_width" value="' + width + '">');
+      $(".aui .field-group").append('<input type="hidden" name="io_height" value="' + height + '">');
+      $(".aui .field-group").append('<input type="hidden" name="io_tutorialId" value="' + tutorialId + '">');
+      $(".aui .field-group").append('<input type="hidden" name="io_tutorialTitle" value="' + tutorialTitle + '">');
+      $(".aui .field-group").append('<input type="hidden" name="io_uid" value="' + uid + '">');
 
   }
 
@@ -124,7 +144,7 @@
 
 
 
-  function ioradInit(issue_id, isEdit) {
+  function ioradInit(issue_id, isEdit, isNewfromPopup) {
 
       iorad.init(function() {
 
@@ -153,10 +173,26 @@
               var width = getAttrsFromIframe(iframeHTML, "width");
               var height = getAttrsFromIframe(iframeHTML, "height");
 
+              if (isNewfromPopup) {
 
 
-              savePluginData(src, issue_id, width, height, tutorialParams);
 
+                  addHiddenFieldstoNewIssueForm(src, width, height, tutorialParams.tutorialId, tutorialParams.tutorialTitle, tutorialParams.uid);
+
+                  $(".aui .form-body .btnIoradNew").remove();
+                  $(".aui .form-body").append('<iframe src="' + src + '" width="' + width + '" scrolling="no" height="' + height + '" style="border:0px;min-width:100%;" allowfullscreen="true"></iframe>');
+
+
+                  // $.cookie("iframeURl", src);
+                  // $.cookie("width", width);
+                  // $.cookie("height", height);
+                  // $.cookie("tutorialId", tutorialParams.tutorialId);
+                  // $.cookie("tutorialTitle", tutorialParams.tutorialTitle);
+                  // $.cookie("uid", tutorialParams.uid);
+
+              } else {
+                  savePluginData(src, issue_id, width, height, tutorialParams);
+              }
 
               //location.reload();
 
@@ -179,12 +215,12 @@
   function savePluginData(iframURL, issue_id, width, height, tutorialParams)
 
   {
-
       if (tutorialParams) {
           tutor_uid = tutorialParams.uid;
           tutorialId = tutorialParams.tutorialId;
           tutorialTitle = tutorialParams.tutorialTitle;
       }
+
 
       jQuery.ajax({
           url: AJS.params.baseURL + "/plugins/servlet/plugindataservlet",
@@ -217,20 +253,20 @@
   }
 
 
-// jQuery(document).ready(function($) {
+  jQuery(document).ready(function($) {
 
 
-//     JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function(e, context) {
-//         buildCreateIssueButton($(".aui .form-body .content"));
+      JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function(e, context) {
+          buildCreateIssueButton($(".aui .form-body .content"));
 
-//     });
+      });
 
-//     if (String(document.location.href).indexOf("CreateIssue.jspa") >= 0) {
-//         buildCreateIssueButton($(".aui .form-body"));
-//     }
-// });
+      // if (String(document.location.href).indexOf("CreateIssue.jspa") >= 0 && $(".text.long-field").length) {
+      //     buildCreateIssueButton($(".aui .form-body"));
+      // }
+  });
 
-// function buildCreateIssueButton(nodeToAppend) {
-//     nodeToAppend.append('<a class="btnIoradNew" onclick="createNewSolution()">CAPTURE STEPS</a>');
+  function buildCreateIssueButton(nodeToAppend) {
+      nodeToAppend.append('<a class="btnIoradNew" onclick="createNewSolutionFromPopup()">CAPTURE STEPS</a>');
 
-// }
+  }

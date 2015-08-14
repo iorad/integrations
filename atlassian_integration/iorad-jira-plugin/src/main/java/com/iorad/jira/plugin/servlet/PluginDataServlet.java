@@ -7,6 +7,7 @@ import com.atlassian.sal.api.auth.LoginUriProvider;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.sal.api.user.UserManager;
+import com.iorad.jira.plugin.utils.SettingsUtil;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
@@ -30,22 +31,14 @@ public class PluginDataServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		PluginSettings settings = pluginSettingsFactory.createGlobalSettings();
-
-		settings.put(req.getParameter(Constants.ISSUE_ID)
-				+ Constants.IFRAME_URL, req.getParameter(Constants.IFRAME_URL));
-		settings.put(req.getParameter(Constants.ISSUE_ID) + Constants.WIDTH,
-				req.getParameter(Constants.WIDTH));
-		settings.put(req.getParameter(Constants.ISSUE_ID) + Constants.HEIGHT,
-				req.getParameter(Constants.HEIGHT));
-		settings.put(req.getParameter(Constants.ISSUE_ID) + Constants.TUTOR_ID,
-				req.getParameter(Constants.TUTOR_ID));
-		settings.put(req.getParameter(Constants.ISSUE_ID)
-				+ Constants.TUTOR_TITLE,
-				req.getParameter(Constants.TUTOR_TITLE));
-		settings.put(
-				req.getParameter(Constants.ISSUE_ID) + Constants.TUTOR_UID,
-				req.getParameter(Constants.TUTOR_UID));
+		SettingsUtil.SaveIoradInSettings(
+				req.getParameter(Constants.IFRAME_URL),
+				req.getParameter(Constants.WIDTH),
+				req.getParameter(Constants.HEIGHT),
+				req.getParameter(Constants.TUTOR_ID),
+				req.getParameter(Constants.TUTOR_TITLE),
+				req.getParameter(Constants.TUTOR_UID),
+				req.getParameter(Constants.ISSUE_ID), pluginSettingsFactory);
 
 		resp.setContentType("application/json");
 		resp.getWriter().write("{\"result\":\"success\"}");

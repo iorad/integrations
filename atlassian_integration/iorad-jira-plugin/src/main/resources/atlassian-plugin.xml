@@ -17,6 +17,7 @@
 		<resource type="download" name="iorad-tab.css" location="/css/iorad-tab.css" />
 		<resource type="download" name="iorad-tab.js" location="/js/iorad-tab.js" />
 		<resource type="download" name="iorad.js" location="/js/iorad.js" />
+		<resource type="download" name="jquery.cookie.js" location="/js/jquery.cookie.js" />
 		<resource type="download" name="images/" location="/images" />
 		<context>atl.general</context>
 	</web-resource>
@@ -25,6 +26,18 @@
 		public="true">
 		<interface>com.iorad.jira.plugin.MyPluginComponent</interface>
 	</component>
+
+	<component-import key="eventPublisher"
+		interface="com.atlassian.event.api.EventPublisher" />
+			<component-import key="httpContext"
+		interface="com.atlassian.sal.api.web.context.HttpContext" />
+	<component key="eventListener" class="com.iorad.jira.plugin.EventHandler">
+		<description>Class that processes the incoming JIRA issue events.
+		</description>
+	</component>
+
+
+
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
