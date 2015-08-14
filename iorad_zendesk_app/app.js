@@ -48,7 +48,7 @@
     },
 
     onIoradClose: function (data) {
-      var iframeHTML = iorad.getEmbeddedPlayerWithViewStepsUrl(
+      var iframeHTML = iorad.getEmbeddedPlayerUrl(
         data.uid,
         data.tutorialId,
         data.tutorialTitle
