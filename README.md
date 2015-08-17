@@ -19,7 +19,7 @@ In the future, we will replace the Zendesk Help Center Widget with Iorad Web Wid
 After you have successfully followed through the steps above, you will find IoradWebWidget.js in scripts/vendor/dist.
 
 ### To Install:
-* go to Helpdesk rebranding page - https://{your_domain}.freshdesk.com/account/edit
+* Go to Helpdesk rebranding page - https://{your_domain}.freshdesk.com/account/edit
 * Click on **Customize Portal**
 * Click on the **Layout & pages** tab
 * Go to **Page layout** editor
@@ -36,6 +36,18 @@ After you have successfully followed through the steps above, you will find Iora
 	<script type="text/javascript" src="https://iorad.com/server/assets/bower_components/integrations/IoradWebWidget/dist/IoradWebWidget.min-0.0.1.js"></script>
 {% endif %}
 ```
+
+## Iorad Web Widget FreshPlug
+
+This is a Freshplug that list all available categories and folders. When clicking on a create tutorial button, the Iorad page shows up. Upon closing the tutorial page, it is automatically added to a new article page in a selected folder.
+
+### To Install:
+* Go to Admin page - https://{your_domain}.freshdesk.com/admin/home
+* Click on **Integrations**
+* Click on the **FreshPlugs** tab
+* Click **New FreshPlug** to create.
+* Enter details such as **Name** and **Description**, copy and paste Iorad FreshPlug source code into Script field.
+* Check **Show the widget in ticket view page.** option and Click **Create and Enable** to complete the installation.
 
 ## Zendesk Help Center
 
