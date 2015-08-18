@@ -17,7 +17,6 @@
 		<resource type="download" name="iorad-tab.css" location="/css/iorad-tab.css" />
 		<resource type="download" name="iorad-tab.js" location="/js/iorad-tab.js" />
 		<resource type="download" name="iorad.js" location="/js/iorad.js" />
-		<resource type="download" name="jquery.cookie.js" location="/js/jquery.cookie.js" />
 		<resource type="download" name="images/" location="/images" />
 		<context>atl.general</context>
 	</web-resource>

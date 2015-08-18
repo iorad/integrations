@@ -50,20 +50,24 @@ public class EventHandler implements InitializingBean, DisposableBean {
 					DiskFileItemFactory factory = new DiskFileItemFactory();
 					ServletFileUpload upload = new ServletFileUpload(factory);
 					List<FileItem> items = upload.parseRequest(request);
-					SettingsUtil.SaveIoradInSettings(SettingsUtil
-							.getFieldFromMultypart(items, Constants.IFRAME_URL)
+					String iframeUrl = SettingsUtil.getFieldFromMultypart(
+							items, Constants.IFRAME_URL);
+					if (!(iframeUrl == null || iframeUrl.isEmpty()))
+						SettingsUtil.SaveIoradInSettings(SettingsUtil
+								.getFieldFromMultypart(items,
+										Constants.IFRAME_URL)
 
-					, SettingsUtil
-							.getFieldFromMultypart(items, Constants.WIDTH),
-							SettingsUtil.getFieldFromMultypart(items,
-									Constants.HEIGHT), SettingsUtil
-									.getFieldFromMultypart(items,
-											Constants.TUTOR_ID), SettingsUtil
-									.getFieldFromMultypart(items,
-											Constants.TUTOR_TITLE),
-							SettingsUtil.getFieldFromMultypart(items,
-									Constants.TUTOR_UID), "" + issue_id,
-							pluginSettingsFactory);
+						, SettingsUtil.getFieldFromMultypart(items,
+								Constants.WIDTH),
+								SettingsUtil.getFieldFromMultypart(items,
+										Constants.HEIGHT), SettingsUtil
+										.getFieldFromMultypart(items,
+												Constants.TUTOR_ID),
+								SettingsUtil.getFieldFromMultypart(items,
+										Constants.TUTOR_TITLE), SettingsUtil
+										.getFieldFromMultypart(items,
+												Constants.TUTOR_UID), ""
+										+ issue_id, pluginSettingsFactory);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -72,17 +76,22 @@ public class EventHandler implements InitializingBean, DisposableBean {
 
 			} else {
 
-				SettingsUtil.SaveIoradInSettings(SettingsUtil.getParamByName(
-						request, Constants.IFRAME_URL)
+				String iframeUrl = SettingsUtil.getParamByName(request,
+						Constants.IFRAME_URL);
+				if (!(iframeUrl == null || iframeUrl.isEmpty()))
+					SettingsUtil.SaveIoradInSettings(SettingsUtil
+							.getParamByName(request, Constants.IFRAME_URL)
 
-				, SettingsUtil.getParamByName(request, Constants.WIDTH),
-						SettingsUtil.getParamByName(request, Constants.HEIGHT),
-						SettingsUtil
-								.getParamByName(request, Constants.TUTOR_ID),
-						SettingsUtil.getParamByName(request,
-								Constants.TUTOR_TITLE), SettingsUtil
-								.getParamByName(request, Constants.TUTOR_UID),
-						"" + issue_id, pluginSettingsFactory);
+					, SettingsUtil.getParamByName(request, Constants.WIDTH),
+							SettingsUtil.getParamByName(request,
+									Constants.HEIGHT),
+							SettingsUtil.getParamByName(request,
+									Constants.TUTOR_ID), SettingsUtil
+									.getParamByName(request,
+											Constants.TUTOR_TITLE),
+							SettingsUtil.getParamByName(request,
+									Constants.TUTOR_UID), "" + issue_id,
+							pluginSettingsFactory);
 			}
 		}
 	}

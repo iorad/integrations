@@ -7,20 +7,20 @@
   var issue_id;
   $(document).ready(function() {
 
-      issue_id = JIRA.Issue.getIssueId();
-      dialogProp = new AJS.Dialog(400, 400);
 
-      dialogProp.addPage();
+      dialogProp = new AJS.Dialog(400, 400);
+      dialogProp.addHeader("Edit Properties");
+      // dialogProp.addPage();
 
       dialogProp.addCancel("Cancel", function() {
           dialogProp.hide();
       });
 
-      dialogProp.addPanel("SavePropPanel", "<img/><div>\r\n<label style=\"display:none\" >Width<\/label>\r\n<input style=\"display:none\" id=\"iframeWidth\" type=\"text\"\/>\r\n<\/div>\r\n<div>\r\n<label>Height<\/label>\r\n<input id=\"iframeHeight\" type=\"text\"\/>\r\n<\/div>\r\n\r\n<div>\r\n<label>Embed URL<\/label>\r\n<input id=\"iframeSrc\" type=\"text\"\/>\r\n<\/div>\r\n<a class=\"btnIoradSavePropPanel\" >Save Properties<\/a>   <a class=\"btnIoradEditPropPanel\" \">Edit Steps<\/a><a class=\"needHelpPropDial\" href=\"https://iorad.com/jira\" >Need Help?<\/a>", "SavePropPanel");
+      dialogProp.addPanel("SavePropPanel", "<img/><div>\r\n<label style=\"display:none\" >Width<\/label>\r\n<input style=\"display:none\" id=\"iframeWidth\" type=\"text\"\/>\r\n<\/div>\r\n<div>\r\n<label>Height<\/label>\r\n<input id=\"iframeHeight\" type=\"text\"\/>\r\n<\/div>\r\n\r\n<div>\r\n<label>Embed URL<\/label>\r\n<input id=\"iframeSrc\" type=\"text\"\/>\r\n<\/div>\r\n<a class=\"btnIoradSavePropPanel aui-button\" >Save Properties<\/a>   <a class=\"btnIoradEditPropPanel aui-button\" \">Edit Steps<\/a><a class=\"needHelpPropDial\" href=\"https://iorad.com/jira\" >Need Help?<\/a>", "SavePropPanel");
 
 
       $(".btnIoradSavePropPanel").bind("click", function() {
-
+          issue_id = JIRA.Issue.getIssueId();
           savePluginData($("#iframeSrc").val(), issue_id, $("#iframeWidth").val(), $("#iframeHeight").val());
           dialogProp.hide();
 
@@ -35,19 +35,19 @@
 
       });
 
-      dialogNew = new AJS.Dialog(400, 400);
+      // dialogNew = new AJS.Dialog(400, 400);
 
 
-      dialogNew.addPage();
+      // dialogNew.addPage();
 
-      dialogNew.addCancel("Cancel", function() {
-          dialogNew.hide();
-      });
+      // dialogNew.addCancel("Cancel", function() {
+      //     dialogNew.hide();
+      // });
 
 
-      // adds header for second page
-      // dialogNew.addHeader("Iorad Tutorials");
-      dialogNew.addPanel("NewSolutionPanel", "<div id=\"ioRadnewDiv\" ><img/><h2>DOCUMENT STEPS FOR YOUR ISSUE<\/h2><a class=\"btnIoradNew\" onclick=\"createNewSolution()\" >CAPTURE STEPS<\/a><a href=\"https://iorad.com/jira\" >Need Help?<\/a><\/div>", "NewSolutionPanel");
+      // // adds header for second page
+      // // dialogNew.addHeader("Iorad Tutorials");
+      // dialogNew.addPanel("NewSolutionPanel", "<div id=\"ioRadnewDiv\" ><img/><h2>DOCUMENT STEPS FOR YOUR ISSUE<\/h2><a class=\"btnIoradNew\" onclick=\"createNewSolution()\" >CAPTURE STEPS<\/a><a href=\"https://iorad.com/jira\" >Need Help?<\/a><\/div>", "NewSolutionPanel");
 
 
 
@@ -57,9 +57,7 @@
 
 
 
-          ioradInit(issue_id, true, false);
-          dialogProp.hide();
-
+          editSteps();
 
       });
 
@@ -70,24 +68,67 @@
           e.preventDefault();
 
 
-          issueStatusCheck();
+          issueStatusCheck(false);
 
 
       });
 
+      $(".ioradinitmenu").on("remove", function() {
+          registerMenuItemHandler();
+      })
+
+
   });
 
+  function registerMenuItemHandler() {
+
+      setTimeout(function() {
+
+
+
+          if ($(".ioradinitmenu").length > 0) {
+
+              $(".ioradinitmenu").click(function(e) {
+
+                  e.preventDefault();
+
+
+                  issueStatusCheck(false);
+
+
+              });
+          } else {
+              registerMenuItemHandler();
+
+          }
+
+
+      }, 300);
+
+
+  }
+
+
+  function editSteps() {
+      issue_id = JIRA.Issue.getIssueId();
+      ioradInit(issue_id, true, false);
+      dialogProp.hide();
+
+  }
+
   function createNewSolution() {
+      issue_id = JIRA.Issue.getIssueId();
       ioradInit(issue_id, false, false);
-      dialogNew.hide();
+      //  dialogNew.hide();
 
   }
 
 
 
   function createNewSolutionFromPopup() {
+      issue_id = JIRA.Issue.getIssueId();
       ioradInit(issue_id, false, true);
-      dialogNew.hide();
+      //  dialogNew.hide();
 
   }
 
@@ -103,8 +144,8 @@
 
   }
 
-  function issueStatusCheck() {
-
+  function issueStatusCheck(editImidiately) {
+      issue_id = JIRA.Issue.getIssueId();
       jQuery.ajax({
           url: AJS.params.baseURL + "/plugins/servlet/pluginstatusservlet",
           type: "GET",
@@ -119,12 +160,17 @@
                   tutor_uid = data.uid;
                   tutorialId = data.tutorialId;
                   tutorialTitle = data.tutorialTitle;
-                  dialogProp.show();
+                  if (editImidiately == true) {
+                      editSteps();
+                  } else
+                      dialogProp.show();
 
 
 
               } else if (data.result === "new") {
-                  dialogNew.show();
+                  // dialogNew.show();
+                  createNewSolution();
+
               }
           },
           error: function(data) {
@@ -138,7 +184,7 @@
   //old signature function openPropertyPanelWithParams(iframURL, width, height, tutor_uid, tutorialId, tutorialTitle) 
   function openPropertyPanelWithParams() {
 
-      issueStatusCheck();
+      issueStatusCheck(false);
   }
 
 
@@ -178,8 +224,8 @@
 
                   addHiddenFieldstoNewIssueForm(src, width, height, tutorialParams.tutorialId, tutorialParams.tutorialTitle, tutorialParams.uid);
 
-                  $(".aui .form-body .btnIoradNew").remove();
-                  $(".aui .form-body").append('<iframe src="' + src + '" width="' + width + '" scrolling="no" height="' + height + '" style="border:0px;min-width:100%;" allowfullscreen="true"></iframe>');
+                  $(".btnCreateTutorialContainerInGroup").remove();
+                  $(".field-group.newSolutionFromPopupButtonGroup").append('<iframe src="' + src + '" width="100%" scrolling="no" height="' + height + '" style="border:0px;min-width:100%;" allowfullscreen="true"></iframe>');
 
 
                   // $.cookie("iframeURl", src);
@@ -266,6 +312,6 @@
   });
 
   function buildCreateIssueButton(nodeToAppend) {
-      nodeToAppend.append('<a class="btnIoradNew" onclick="createNewSolutionFromPopup()">CAPTURE STEPS</a>');
+      nodeToAppend.append('<div class="field-group newSolutionFromPopupButtonGroup"> <label >Issue Steps</label><div class="btnCreateTutorialContainerInGroup"><a class="btnIoradNewFromPopup btnIoradNew aui-button" onclick="createNewSolutionFromPopup()">Capture Issue Steps</a></br><h3>After capturing you can go ahead and create your issue.</h3></div></div>');
 
   }

@@ -1,9 +1,9 @@
   
 #if($ifparams.isHasURL()==true)  
-
-    <a class="editSolutionVelo" onclick='openPropertyPanelWithParams()'>Edit Steps</a>
-
-
+<div class ="editanchorscontainer">
+    <a class="editPropLink" onclick='openPropertyPanelWithParams()'>Edit Properties</a>
+    <a class="edtiStepsLink" onclick="issueStatusCheck(true)">Edit Steps</a>
+</div>
 
 <div class="mod-content">
 <iframe src="$ifparams.getIframeURL()" width="$ifparams.getWidth()" scrolling="no" height="$ifparams.getHeight()" style="border:0px;min-width:100%;" allowfullscreen="true"></iframe>
@@ -11,8 +11,14 @@
 </div>
 
     #else
-    <h3 style="text-align: center">No steps has yet been attached to this issue.</h3>
-    <a class="btnIoradNew" onclick="createNewSolution()">CAPTURE STEPS</a>
+    <div class="newTutorialVromVM">
+    <span>
+    No steps has yet been attached to this issue.
+    </br>
+    Start capturing to give more details to this issue.
+    </span>
+    <a class="btnIoradNew aui-button" onclick="createNewSolution()">Capture Issue Steps</a>
+    </div>
     #end
     
   

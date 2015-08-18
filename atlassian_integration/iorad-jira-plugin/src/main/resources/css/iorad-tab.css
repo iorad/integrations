@@ -1,21 +1,21 @@
-.btnIoradNew {
-    background: #00B975;
-    color: #fff !important;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-    display: inline-block;
-    font-weight: 400;
-    font-size: 16pt;
-    line-height: 1;
-    text-align: center;
-    margin-top: 45px;
+.editanchorscontainer {
+    float: right;
+}
+
+.editanchorscontainer > a {
     cursor: pointer;
-    width: 360px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    width: 100%;
+}
+
+.editPropLink {
+    margin-right: 30px;
+}
+
+.btnIoradNew {
+    float: right;
+    margin-top: -10px !important;
+    color: #00BA73 !important;
+    width: 250px !important;
+    text-align: center !important;
 }
 
 .btnIoradSave {
@@ -38,41 +38,13 @@
 }
 
 .btnIoradEditPropPanel {
-    background: #00B975;
-    color: #fff !important;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-weight: 400;
-    font-size: 16pt;
-    line-height: 1;
-    text-align: center;
-    cursor: pointer;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: inline-block;
-    margin-top: 70px;
+    margin-top: 35px !important;
+    width: 130px !important;
 }
 
 .btnIoradSavePropPanel {
-    background: #00B975;
-    color: #fff !important;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-weight: 400;
-    font-size: 16pt;
-    line-height: 1;
-    text-align: center;
-    cursor: pointer;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: inline-block;
-    margin-top: 70px;
+    margin-top: 35px !important;
+    width: 130px !important;
 }
 
 .dialog-panel-body.SavePropPanel > div > input {
@@ -92,6 +64,7 @@
     background-repeat-x: inherit;
     background-position: bottom;
     text-align: center;
+    padding: 0px;
 }
 
 .dialog-panel-body.SavePropPanel > div > label {
@@ -132,5 +105,21 @@
 
 .needHelpPropDial {
     margin-top: 15px;
-    display: inline-block;
+    display: inherit;
+}
+
+.newTutorialVromVM {
+    padding-top: 35px;
+}
+
+.btnIoradNewFromPopup {
+    float: left;
+    width: 502px !important;
+    height: 40px !important;
+    font-size: 14pt !important;
+    margin-top: 0px !important;
+}
+
+.newSolutionFromPopupButtonGroup {
+    padding-top: 20px !important;
 }
