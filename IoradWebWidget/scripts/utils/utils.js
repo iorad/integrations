@@ -3,7 +3,7 @@
   /**
    * this field is used to populate the options field when initializing iorad.js.
    */
-  module.ioradPluginType = 'freshdeskWidget_tutorial_builder';
+  module.ioradPluginType = 'freshdeskweb_solutions';
 
   /**
    * wait for iorad.js to load. once loaded, execute callback()

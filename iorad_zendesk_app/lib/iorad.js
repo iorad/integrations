@@ -1,5 +1,5 @@
 var env         = 'live', // cfdev, prod or live; default: live.
-  pluginType    = 'zendeskapp_tutorial_builder', // this is a nav bar app that creates tutorials.
+  pluginType    = 'zendeskapp_solutions', // this is a nav bar app that creates tutorials.
   customBaseUrl = ''; //baseUrl when this variable is set
 module.exports = {
   buildIframe: function (playerUrl) {

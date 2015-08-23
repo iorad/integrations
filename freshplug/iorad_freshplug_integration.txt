@@ -157,7 +157,7 @@
 
             listCategories().then(populateTutorialLocation, function (err) { });
 
-            iorad.init({ env: 'live', pluginType: 'freshplug_tutorial_builder' }, function () {
+            iorad.init({ env: 'live', pluginType: 'freshplug_solutions' }, function () {
                 // iorad is ready now.
                 var t = 0;
 
