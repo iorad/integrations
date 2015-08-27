@@ -1,6 +1,7 @@
 <style>
 	.insert_iorad {
-		
+		background-image: url("//test.iorad.com/server/assets/img/icon_iorad_freshdesk.png") !important;
+		background-size: 100%;
 	}
 </style>
 <script type="text/javascript">
