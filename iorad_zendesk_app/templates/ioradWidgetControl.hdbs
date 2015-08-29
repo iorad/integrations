@@ -1,10 +1,10 @@
-<div class="main">
-  <div class="header">
-    <span class="title"><h2>{{t "widgetControl.appTitle"}}</h2></span>
+<div class="main-navbar">
+  <div class="header-navbar">
+    <span class="title"><h2>{{t "widgetControl.solutionAppTitle"}}</h2></span>
     <span class="logo"/>
   </div>
-  <div class="body">
-    <div class="inputControl">
+  <div class="body-navbar">
+    <div class="input-control">
       <label for="selectCategory">{{t "widgetControl.categoryComboBoxLabel"}}</label>
       <select class="categoryOptions" id="selectCategory">
         {{#each categories}}
@@ -17,7 +17,7 @@
         {{/each}}
       </select>
     </div>
-    <div class="inputControl">
+    <div class="input-control">
       <label for="selectSection">{{t "widgetControl.sectionComboBoxLabel"}}</label>
       <select class="sectionOptions" id="selectSection">
         {{#each sections}}
@@ -25,9 +25,9 @@
         {{/each}}
       </select>
     </div>
-    <div class="inputControl">
+    <div class="input-control">
       <label for="newTutorial">{{t "widgetControl.buttonControlLabel"}}</label>
-      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="open IORAD editor">{{t "widgetControl.buttonControlText"}}</button>
+      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="{{t "widgetControl.buttonControlLabel"}}">{{t "widgetControl.buttonControlText"}}</button>
     </div>
   </div>
   <div class="footer">

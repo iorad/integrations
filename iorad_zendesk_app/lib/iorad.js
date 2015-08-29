@@ -1,5 +1,4 @@
 var env         = 'live', // cfdev, prod or live; default: live.
-  pluginType    = 'zendeskapp_solutions', // this is a nav bar app that creates tutorials.
   customBaseUrl = ''; //baseUrl when this variable is set
 module.exports = {
   buildIframe: function (playerUrl) {
@@ -32,7 +31,7 @@ module.exports = {
    * @param  {string} href location of current app.
    * @return {string}      tutorial editor url.
    */
-  newTutorialEditorUrl: function (href) {
+  newTutorialEditorUrl: function (href, pluginType) {
     var referrer = href;
     return this.getBaseUrl() + '/server/?a=app.editor&data=0&src=iframe&referrer=' + referrer + '&plugin_type=' + pluginType;
   },

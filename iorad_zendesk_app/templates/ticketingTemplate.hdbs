@@ -1,0 +1,15 @@
+<div class="main-ticket-sidebar">
+  <div class="header-ticket-sidebar">
+    <span class="title"><h2>{{t "widgetControl.ticketingAppTitle"}}</h2></span>
+    <span class="logo"/>
+  </div>
+  <div class="body-ticket-sidebar">
+    <div class="input-control">
+      <label for="newTutorial">{{t "widgetControl.ioradTutorialButtonControlLabel"}}</label>
+      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="{{t "widgetControl.ioradTutorialButtonControlLabel"}}">{{t "widgetControl.ioradTutorialButtonControlText"}}</button>
+    </div>
+  </div>
+  <div class="footer">
+    <span><a href="//www.iorad.com/zenDesk"><h4>{{t "widgetControl.footerHelpLinkText"}}</h4></a></span>
+  </div>
+</div>

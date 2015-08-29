@@ -7,7 +7,7 @@
     height: 100%;
 }
 
-div.inputControl {
+div.input-control {
   display: inline-block;
   margin: 32px 24px;
 }
@@ -16,7 +16,7 @@ div.inputControl {
   width: 180px;
 }
 
-div.main {
+div.main-navbar {
   border-style: solid;
   border-color: #EFEFEF;
   border-width: 1px;
@@ -26,7 +26,7 @@ div.main {
   width: 720px;
 }
 
-div.header {
+div.header-navbar {
   border-style: solid;
   border-color: #EFEFEF;
   border-bottom-width: 1px;
@@ -37,7 +37,14 @@ div.footer {
   border-style: solid;
   border-color: #EFEFEF;
   border-top-width: 1px;
+}
+
+.main-navbar > .footer {
   height: 40px;
+}
+
+.main-ticket-sidebar > .footer {
+  height: 52px;
 }
 
 label {
@@ -45,12 +52,12 @@ label {
   font-weight: bold;
 }
 
-.header > .title {
+.header-navbar > .title {
   margin: 12px 24px;
   float: left;
 }
 
-.header > .logo {
+.header-navbar > .logo {
   float: right;
   margin: 20px 24px;
   background-image: app-asset-url("logo_app.png");
@@ -64,4 +71,15 @@ label {
 .footer > span {
   float: left;
   margin: 12px 24px;
+}
+
+.header-ticket-sidebar {
+  border-style: solid;
+  border-color: #EFEFEF;
+  border-bottom-width: 1px;
+  height: 72px;
+}
+
+.main-ticket-sidebar {
+  border-width: 1px;
 }

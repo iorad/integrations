@@ -53,9 +53,14 @@
   },
 
   "widgetControl": {
-    "appTitle": {
+    "solutionAppTitle": {
       "value": "Create a step-by-step knowledge base article",
-      "title": "iorad zendesk app title"
+      "title": "iorad solution zendesk app title"
+    },
+
+    "ticketingAppTitle": {
+      "value": "Reply this ticket with an iorad tutorial",
+      "title": "iorad ticketing zendesk app title"
     },
 
     "categoryComboBoxLabel": {
@@ -65,17 +70,27 @@
 
     "sectionComboBoxLabel": {
       "value": "Choose a Section",
-      "title": "label appears on top of the section combobox"
+      "title": "label appears above the section combobox"
     },
 
     "buttonControlLabel": {
       "value": "Add a Solution",
-      "title": "label appears on top of the ADD button"
+      "title": "label appears above the ADD button"
     },
 
     "buttonControlText": {
       "value": "ADD",
       "title": "text appears on the button control"
+    },
+
+    "ioradTutorialButtonControlLabel": {
+      "value": "Open Iorad Editor",
+      "title": "text appears above the ticketing app button"
+    },
+
+    "ioradTutorialButtonControlText": {
+      "value": "Open",
+      "title": "text appears on the ticketing app button"
     },
 
     "footerHelpLinkText": {

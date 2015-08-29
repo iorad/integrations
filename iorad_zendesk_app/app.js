@@ -14,9 +14,22 @@
 
     myDefaultLocale: '',
 
+    SOLUTION_APP_LOCATION: 'nav_bar',
+
+    TICKETING_APP_LOCATION_PATTERN: /ticket_sidebar$/,
+
+    currentPluginType: '',
+
+    pluginTypes: {
+      SOLUTION: 'zendeskapp_solutions', // this is a nav bar app that creates tutorials.
+      TICKETING: 'zendeskapp_ticketing' // this is a ticket sidebar app that creates tutorials for existing and new tickets.
+    },
+
+    TICKET_COMMENT_MARKDOWN_FORMAT: '[%@](https:%@)',
+
     events: {
       'app.activated'           : 'init',
-      'pane.activated'          : 'startFetchCategories',
+      'pane.activated'          : 'runSolutionApp',
       'fetchCategories.done'    : 'onFetchCategories',
       'fetchSections.done'      : 'onFetchSections',
       'createArticle.done'      : 'onCreateArticle',
@@ -33,6 +46,26 @@
 
     init: function () {
       this.ajax('fetchLocales');
+      this.runTicketingApp();
+    },
+
+    // conditionally run app based on app current location
+    runSolutionApp: function () {
+      if (this.currentLocation() === this.SOLUTION_APP_LOCATION) {
+
+        // load post to solutions app.
+        this.currentPluginType = this.pluginTypes.SOLUTION;
+        this.startFetchCategories();
+      }
+    },
+
+    runTicketingApp: function () {
+      if (this.TICKETING_APP_LOCATION_PATTERN.test(this.currentLocation())) {
+
+        // load ticketing app.
+        this.currentPluginType = this.pluginTypes.TICKETING;
+        this.switchTo('ticketingTemplate');
+      }
     },
 
     startFetchCategories: function () {
@@ -44,32 +77,15 @@
     },
 
     onModalHidden: function () {
-      this.initializeIoradControl();
+      this.initializeSolutionAppControl();
     },
 
     onIoradClose: function (data) {
-      var iframeHTML = iorad.getEmbeddedPlayerUrl(
-        data.uid,
-        data.tutorialId,
-        data.tutorialTitle
-      ),
-        articleBody = helpers.fmt("<p>%@</p>", iframeHTML);
-
-      _.each(data.steps, function (step) {
-        articleBody += helpers.fmt("<p style='display: none;'>%@</p>", helpers.safeString(step.description).string);
-      });
-
-      var articleJson = JSON.stringify({
-        article: {
-          "title": data.tutorialTitle,
-          "locale": this.myDefaultLocale,
-          "body": articleBody
-        }
-      });
-
-      // this could be replaced with a loading marque.
-      this.$('.iorad-editor-wrapper').html();
-      this.ajax('createArticle', this.lastSectionId, articleJson);
+      if (this.currentPluginType === this.pluginTypes.SOLUTION) {
+        this.createArticle(data);
+      } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
+        this.addToNewTicketComment(data);
+      }
     },
 
     onFetchCategories: function (data) {
@@ -78,7 +94,7 @@
         category.selected = false;
       });
 
-      this.initializeIoradControl();
+      this.initializeSolutionAppControl();
     },
 
     onFetchSections: function (data) {
@@ -109,7 +125,7 @@
       var $ioradEditorIframe = this.$(".iorad-editor-wrapper iframe");
       $ioradEditorIframe.addClass("iorad-editor");
       var zendeskAppsParams = $ioradEditorIframe.attr("src").replace("?", "&");
-      $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(event.view.location.href) + zendeskAppsParams);
+      $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(event.view.location.href, this.currentPluginType) + zendeskAppsParams);
     },
 
     updateSectionOptions: function (event) {
@@ -126,10 +142,43 @@
       this.ajax('fetchSections', selectedCategoryId);
     },
 
-    initializeIoradControl: function () {
+    initializeSolutionAppControl: function () {
       this.switchTo('ioradWidgetControl', { categories: this.categoriesList });
       var selectedCategoryId = parseInt(this.$('.categoryOptions').val(), 10);
       this.ajax('fetchSections', selectedCategoryId);
+    },
+
+    createArticle: function (data) {
+      var iframeHTML = iorad.getEmbeddedPlayerUrl(
+        data.uid,
+        data.tutorialId,
+        data.tutorialTitle
+      ),
+        articleBody = helpers.fmt("<p>%@</p>", iframeHTML);
+
+      _.each(data.steps, function (step) {
+        articleBody += helpers.fmt("<p style='display: none;'>%@</p>", helpers.safeString(step.description).string);
+      });
+
+      var articleJson = JSON.stringify({
+        article: {
+          "title": data.tutorialTitle,
+          "locale": this.myDefaultLocale,
+          "body": articleBody
+        }
+      });
+
+      // this could be replaced with a loading marque.
+      this.$('.iorad-editor-wrapper').html();
+      this.ajax('createArticle', this.lastSectionId, articleJson);
+    },
+
+    addToNewTicketComment: function (data) {
+      this.switchTo('ticketingTemplate');
+      var url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle),
+        comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, data.tutorialTitle, url);
+
+      this.comment().text(this.comment().text() + comment);
     }
   };
 
