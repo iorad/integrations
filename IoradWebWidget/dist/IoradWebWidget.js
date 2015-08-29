@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.2 - 08-14-2015 *//*!
+/*! IoradWebWidget - v0.0.2 - 08-29-2015 *//*!
 
  handlebars v3.0.3
 
@@ -4292,6 +4292,12 @@ var ioradWebWidget = (function (module, undefined) {
   return module;
 })(ioradWebWidget.util.freshdesk || {});
 ;ioradWebWidget.util.common = (function (module, win) {
+
+  /**
+   * this field is used to populate the options field when initializing iorad.js.
+   */
+  module.ioradPluginType = 'freshdeskweb_solutions';
+
   /**
    * wait for iorad.js to load. once loaded, execute callback()
    * @param {} callback the callback function.
@@ -4308,7 +4314,7 @@ var ioradWebWidget = (function (module, undefined) {
     };
 
     win.setTimeout(tryLoad, interval);
-  }
+  };
 
   /**
    * 
@@ -4472,7 +4478,7 @@ ioradWebWidget.templates.articleTemplate = function (tutorialIframe, steps) {
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: ioradWebWidget.util.common.ioradEnv() }, function () {
+      iorad.init({ env: ioradWebWidget.util.common.ioradEnv(), pluginType: ioradWebWidget.util.common.ioradPluginType }, function () {
         // iorad is ready now.
         var t = 0;
 
@@ -4535,10 +4541,8 @@ ioradWebWidget.templates.articleTemplate = function (tutorialIframe, steps) {
 
   return module;
 })(ioradWebWidget.freshdesk || {});
-;if (ioradWebWidget.util.common.isFreshdeskKnowledgebase()) {
-  ioradWebWidget.freshdesk.runApp(jQuery, window);
-}
+;//if (ioradWebWidget.util.common.isFreshdeskKnowledgebase()) {
+//  ioradWebWidget.freshdesk.runApp(jQuery, window);
+//}
 
-if (ioradWebWidget.util.common.isDeskKnowledgebase()) {
-  ioradWebWidget.desk.runApp(jQuery, window);
-}
+ioradWebWidget.freshdesk.runApp(jQuery, window);
