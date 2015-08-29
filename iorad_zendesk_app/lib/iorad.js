@@ -27,8 +27,13 @@ module.exports = {
     return baseUrl;
   },
 
-  newTutorialEditorUrl: function () {
-    var referrer = location.href;
+  /**
+   * 
+   * @param  {string} href location of current app.
+   * @return {string}      tutorial editor url.
+   */
+  newTutorialEditorUrl: function (href) {
+    var referrer = href;
     return this.getBaseUrl() + '/server/?a=app.editor&data=0&src=iframe&referrer=' + referrer + '&plugin_type=' + pluginType;
   },
 
