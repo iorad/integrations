@@ -5,11 +5,11 @@
   </div>
   <div class="body-ticket-sidebar">
     <div class="input-control-ticket-sidebar">
-      <input type="checkbox" id="addToKnowledgebaseToggle" {{#if addToKnowledgebase}}checked{{/if}}> {{t "widgetControl.addToKnowledgebaseToggleText"}}
+      <input type="checkbox" id="addToHelpCenterToggle" {{#if addToHelpCenter}}checked{{/if}}> {{t "widgetControl.addToKnowledgebaseToggleText"}}
     </div>
     <div class="loading hide">{{spinner "dotted"}}</div>
 
-    {{#if addToKnowledgebase}}
+    {{#if addToHelpCenter}}
     <div class="input-control-ticket-sidebar">
       <label for="selectCategory">{{t "widgetControl.categoryComboBoxLabel"}}</label>
       <select class="categoryOptions" id="selectCategory">

@@ -22,7 +22,7 @@
 
     currentPluginType: '',
 
-    addToKnowledgebase: false,
+    addToHelpCenter: false,
 
     pluginTypes: {
       SOLUTION: 'zendeskapp_solutions', // this is a nav bar app that creates tutorials.
@@ -40,11 +40,12 @@
       'createArticle.fail'              : 'onCreateArticleFailed',
       'fetchLocales.done'               : 'onLocaleLoaded',
       'click .btn-iorad-widget'         : 'submitNewTutorial',
+      'click #addToHelpCenterToggle'    : 'onAddToHelpCenterToggleClicked',
       'change .categoryOptions'         : 'updateSectionOptions',
       'iframe.editor.close'             : 'onIoradClose',
       'hidden #mySuccessModal'          : 'onModalHidden',
       'hidden #myErrorModal'            : 'onModalHidden',
-      'click #addToKnowledgebaseToggle' : 'onAddToKnowledgebaseToggleClicked'
+      'hidden #mylinkCreatedModal'      : 'onModalHidden'
     },
 
     requests: require('requests.js'),
@@ -69,7 +70,7 @@
 
         // load ticketing app.
         this.currentPluginType = this.pluginTypes.TICKETING;
-        this.switchTo('ticketingTemplate');
+        this.showTicketingView();
       }
     },
 
@@ -82,11 +83,15 @@
     },
 
     onModalHidden: function () {
-      this.initializeSolutionAppControl();
+      if (this.currentPluginType === this.pluginTypes.SOLUTION) {
+        this.initializeSolutionAppControl();
+      } else {
+        this.showTicketingView();
+      }
     },
 
     onIoradClose: function (data) {
-      if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToKnowledgebase) {
+      if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToHelpCenter) {
         this.createArticle(data);
       } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
         this.addIoradPlayerUrlToNewTicketComment(data);
@@ -113,12 +118,12 @@
       if (this.currentPluginType === this.pluginTypes.SOLUTION) {
         this.switchTo('ioradWidgetControl', { categories: this.categoriesList, sections: this.lastSectionsList });
       } else {
-        this.switchTo('ticketingTemplate', { categories: this.categoriesList, sections: this.lastSectionsList, addToKnowledgebase: this.addToKnowledgebase });
+        this.showTicketingView();
       }
     },
 
     onCreateArticle: function (data) {
-      if (this.addToKnowledgebase && this.currentPluginType === this.pluginTypes.TICKETING) {
+      if (this.addToHelpCenter && this.currentPluginType === this.pluginTypes.TICKETING) {
         this.addSolutionUrlToNewTicketComment({ title: data.article.title, url: data.article.html_url });
       } else {
         this.switchTo('tutorialCreatedModal', { msg: data.article.title, url: data.article.html_url });
@@ -137,13 +142,13 @@
       });
     },
 
-    onAddToKnowledgebaseToggleClicked: function (event) {
-      this.addToKnowledgebase = event.target.checked;
-      if (this.addToKnowledgebase) {
+    onAddToHelpCenterToggleClicked: function (event) {
+      this.addToHelpCenter = event.target.checked;
+      if (this.addToHelpCenter) {
         this.$(".loading").removeClass("hide");
         this.startFetchCategories();
       } else {
-        this.switchTo('ticketingTemplate');
+        this.showTicketingView();
       }
     },
 
@@ -212,13 +217,29 @@
         comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, data.tutorialTitle, url);
 
       this.comment().text(this.comment().text() + comment);
-      this.switchTo('ticketingTemplate');
+      this.showLinkCreatedModal();
     },
 
     addSolutionUrlToNewTicketComment: function (article) {
       var comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, article.title, article.url);
       this.comment().text(this.comment().text() + comment);
-      this.switchTo('ticketingTemplate', { categories: this.categoriesList, sections: this.lastSectionsList, addToKnowledgebase: this.addToKnowledgebase });
+      this.showLinkCreatedModal();
+    },
+
+    showLinkCreatedModal: function () {
+      this.switchTo('linkCreatedModal', { addToHelpCenter: this.addToHelpCenter });
+      this.$("#mylinkCreatedModal").modal({
+        backdrop: true,
+        keyboard: false
+      });
+    },
+
+    showTicketingView: function () {
+      if (this.addToHelpCenter) {
+        this.switchTo('ticketingTemplate', { categories: this.categoriesList, sections: this.lastSectionsList, addToHelpCenter: this.addToHelpCenter });
+      } else {
+        this.switchTo('ticketingTemplate');
+      }
     }
   };
 }());

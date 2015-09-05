@@ -2,7 +2,7 @@
   "app": {
     "package": "app_name",
     "description": {
-      "value": "builds knowledge base articles instantly",
+      "value": "builds Help Center articles instantly",
       "title": "app description"
     },
     "name": {
@@ -54,7 +54,7 @@
 
   "widgetControl": {
     "solutionAppTitle": {
-      "value": "Create a step-by-step knowledge base article",
+      "value": "Create a step-by-step Help Center article",
       "title": "iorad solution zendesk app title"
     },
 
@@ -94,13 +94,13 @@
     },
 
     "addToKnowledgebaseToggleText": {
-      "value": "Auto-add Solution to Knowledge Base",
+      "value": "Auto-add Solution to Help Center",
       "title": "text appears next to the checkbox in ticket sidebar"
     }
   },
 
   "modalTemplate": {
-    "modalTitle": {
+    "solutionViewModalTitle": {
       "value": "New Article Created!",
       "title": "title text displayed in modal header"
     },
@@ -118,6 +118,21 @@
     "closeButton": {
       "value": "CLOSE",
       "title": "text displayed on the modal close button in footer"
+    },
+
+    "okButton": {
+      "value": "OK",
+      "title": "text dispalyed on the modal ok button in footer"
+    },
+
+    "ticketingModalAutoPostSolutionMsg": {
+      "value": "The solution link to your new Help Center Aritcle is in your ticket comments.",
+      "title": "text displayed in the modal body when user tick auto post to help center in ticketing location"
+    },
+
+    "ticketingModalNoAutoPostSolutionMsg": {
+      "value": "The solution link to your new iorad article is in your ticket comments.",
+      "title": "text displayed in the modal body when user tick auto post to help center in ticketing location"
     },
 
     "viewArticleButton": {
