@@ -6,6 +6,8 @@
 
     categoriesList: [],
 
+    lastSectionsList: [],
+
     timeout: 0,
 
     lastCategoryId: 0,
@@ -20,6 +22,8 @@
 
     currentPluginType: '',
 
+    addToKnowledgebase: false,
+
     pluginTypes: {
       SOLUTION: 'zendeskapp_solutions', // this is a nav bar app that creates tutorials.
       TICKETING: 'zendeskapp_ticketing' // this is a ticket sidebar app that creates tutorials for existing and new tickets.
@@ -28,18 +32,19 @@
     TICKET_COMMENT_MARKDOWN_FORMAT: '[%@](https:%@)',
 
     events: {
-      'app.activated'           : 'init',
-      'pane.activated'          : 'runSolutionApp',
-      'fetchCategories.done'    : 'onFetchCategories',
-      'fetchSections.done'      : 'onFetchSections',
-      'createArticle.done'      : 'onCreateArticle',
-      'createArticle.fail'      : 'onCreateArticleFailed',
-      'fetchLocales.done'       : 'onLocaleLoaded',
-      'click .btn-iorad-widget' : 'submitNewTutorial',
-      'change .categoryOptions' : 'updateSectionOptions',
-      'iframe.editor.close'     : 'onIoradClose',
-      'hidden #mySuccessModal'  : 'onModalHidden',
-      'hidden #myErrorModal'    : 'onModalHidden'
+      'app.activated'                   : 'init',
+      'pane.activated'                  : 'runSolutionApp',
+      'fetchCategories.done'            : 'onFetchCategories',
+      'fetchSections.done'              : 'onFetchSections',
+      'createArticle.done'              : 'onCreateArticle',
+      'createArticle.fail'              : 'onCreateArticleFailed',
+      'fetchLocales.done'               : 'onLocaleLoaded',
+      'click .btn-iorad-widget'         : 'submitNewTutorial',
+      'change .categoryOptions'         : 'updateSectionOptions',
+      'iframe.editor.close'             : 'onIoradClose',
+      'hidden #mySuccessModal'          : 'onModalHidden',
+      'hidden #myErrorModal'            : 'onModalHidden',
+      'click #addToKnowledgebaseToggle' : 'onAddToKnowledgebaseToggleClicked'
     },
 
     requests: require('requests.js'),
@@ -81,10 +86,10 @@
     },
 
     onIoradClose: function (data) {
-      if (this.currentPluginType === this.pluginTypes.SOLUTION) {
+      if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToKnowledgebase) {
         this.createArticle(data);
       } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
-        this.addToNewTicketComment(data);
+        this.addIoradPlayerUrlToNewTicketComment(data);
       }
     },
 
@@ -94,19 +99,34 @@
         category.selected = false;
       });
 
-      this.initializeSolutionAppControl();
+      this.categoriesList[0].selected = true;
+
+      if (this.currentPluginType === this.pluginTypes.SOLUTION) {
+        this.initializeSolutionAppControl();
+      } else {
+        this.initializeTicketingAppControl();
+      }
     },
 
     onFetchSections: function (data) {
-      this.switchTo('ioradWidgetControl', { categories: this.categoriesList, sections: data.sections });
+      this.lastSectionsList = data.sections;
+      if (this.currentPluginType === this.pluginTypes.SOLUTION) {
+        this.switchTo('ioradWidgetControl', { categories: this.categoriesList, sections: this.lastSectionsList });
+      } else {
+        this.switchTo('ticketingTemplate', { categories: this.categoriesList, sections: this.lastSectionsList, addToKnowledgebase: this.addToKnowledgebase });
+      }
     },
 
     onCreateArticle: function (data) {
-      this.switchTo('tutorialCreatedModal', { msg: data.article.title, url: data.article.html_url });
-      this.$("#mySuccessModal").modal({
-        backdrop: true,
-        keyboard: false
-      });
+      if (this.addToKnowledgebase && this.currentPluginType === this.pluginTypes.TICKETING) {
+        this.addSolutionUrlToNewTicketComment({ title: data.article.title, url: data.article.html_url });
+      } else {
+        this.switchTo('tutorialCreatedModal', { msg: data.article.title, url: data.article.html_url });
+        this.$("#mySuccessModal").modal({
+          backdrop: true,
+          keyboard: false
+        });
+      }
     },
 
     onCreateArticleFailed: function (data) {
@@ -115,6 +135,16 @@
         backdrop: true,
         keyboard: false
       });
+    },
+
+    onAddToKnowledgebaseToggleClicked: function (event) {
+      this.addToKnowledgebase = event.target.checked;
+      if (this.addToKnowledgebase) {
+        this.$(".loading").removeClass("hide");
+        this.startFetchCategories();
+      } else {
+        this.switchTo('ticketingTemplate');
+      }
     },
 
     submitNewTutorial: function (event) {
@@ -148,6 +178,10 @@
       this.ajax('fetchSections', selectedCategoryId);
     },
 
+    initializeTicketingAppControl: function () {
+      this.ajax('fetchSections', this.categoriesList[0].id);
+    },
+
     createArticle: function (data) {
       var iframeHTML = iorad.getEmbeddedPlayerUrl(
         data.uid,
@@ -173,13 +207,18 @@
       this.ajax('createArticle', this.lastSectionId, articleJson);
     },
 
-    addToNewTicketComment: function (data) {
-      this.switchTo('ticketingTemplate');
+    addIoradPlayerUrlToNewTicketComment: function (data) {
       var url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle),
         comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, data.tutorialTitle, url);
 
       this.comment().text(this.comment().text() + comment);
+      this.switchTo('ticketingTemplate');
+    },
+
+    addSolutionUrlToNewTicketComment: function (article) {
+      var comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, article.title, article.url);
+      this.comment().text(this.comment().text() + comment);
+      this.switchTo('ticketingTemplate', { categories: this.categoriesList, sections: this.lastSectionsList, addToKnowledgebase: this.addToKnowledgebase });
     }
   };
-
 }());

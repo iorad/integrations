@@ -1,12 +1,40 @@
 <div class="main-ticket-sidebar">
   <div class="header-ticket-sidebar">
-    <span class="title"><h2>{{t "widgetControl.ticketingAppTitle"}}</h2></span>
+    <span class="title"><h3>{{t "widgetControl.ticketingAppTitle"}}</h3></span>
     <span class="logo"/>
   </div>
   <div class="body-ticket-sidebar">
-    <div class="input-control">
-      <label for="newTutorial">{{t "widgetControl.ioradTutorialButtonControlLabel"}}</label>
-      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="{{t "widgetControl.ioradTutorialButtonControlLabel"}}">{{t "widgetControl.ioradTutorialButtonControlText"}}</button>
+    <div class="input-control-ticket-sidebar">
+      <input type="checkbox" id="addToKnowledgebaseToggle" {{#if addToKnowledgebase}}checked{{/if}}> {{t "widgetControl.addToKnowledgebaseToggleText"}}
+    </div>
+    <div class="loading hide">{{spinner "dotted"}}</div>
+
+    {{#if addToKnowledgebase}}
+    <div class="input-control-ticket-sidebar">
+      <label for="selectCategory">{{t "widgetControl.categoryComboBoxLabel"}}</label>
+      <select class="categoryOptions" id="selectCategory">
+        {{#each categories}}
+        <option value="{{id}}"
+          {{#if selected}}
+            selected
+          {{/if}}  
+          >{{name}}
+        </option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="input-control-ticket-sidebar">
+      <label for="selectSection">{{t "widgetControl.sectionComboBoxLabel"}}</label>
+      <select class="sectionOptions" id="selectSection">
+        {{#each sections}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    {{/if}}
+
+    <div class="input-control-ticket-sidebar">
+      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="{{t "widgetControl.ioradTutorialButtonControlText"}}">{{t "widgetControl.ioradTutorialButtonControlText"}}</button>
     </div>
   </div>
   <div class="footer">

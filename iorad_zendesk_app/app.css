@@ -12,6 +12,14 @@ div.input-control {
   margin: 32px 24px;
 }
 
+div.input-control-ticket-sidebar {
+  margin: 24px;
+}
+
+div.input-control-ticket-sidebar select {
+  min-width: 172px;
+}
+
 .btn-iorad-widget {
   width: 180px;
 }
@@ -76,10 +84,13 @@ label {
 .header-ticket-sidebar {
   border-style: solid;
   border-color: #EFEFEF;
-  border-bottom-width: 1px;
-  height: 72px;
 }
 
 .main-ticket-sidebar {
   border-width: 1px;
+  text-align: center;
+}
+
+.hide {
+  display: none;
 }

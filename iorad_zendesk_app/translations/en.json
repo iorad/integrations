@@ -59,7 +59,7 @@
     },
 
     "ticketingAppTitle": {
-      "value": "Reply this ticket with an iorad tutorial",
+      "value": "Reply with an iorad Solution",
       "title": "iorad ticketing zendesk app title"
     },
 
@@ -83,19 +83,19 @@
       "title": "text appears on the button control"
     },
 
-    "ioradTutorialButtonControlLabel": {
-      "value": "Open Iorad Editor",
-      "title": "text appears above the ticketing app button"
-    },
-
     "ioradTutorialButtonControlText": {
-      "value": "Open",
+      "value": "Capture Solution",
       "title": "text appears on the ticketing app button"
     },
 
     "footerHelpLinkText": {
       "value": "Learn more about the iorad zendesk app",
       "title": "text appears on the footer help link"
+    },
+
+    "addToKnowledgebaseToggleText": {
+      "value": "Auto-add Solution to Knowledge Base",
+      "title": "text appears next to the checkbox in ticket sidebar"
     }
   },
 
