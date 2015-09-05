@@ -2,12 +2,12 @@
   "name": "iorad for Zendesk",
   "author": {
     "name": "Daniel Sun",
-    "email": "hjdaniel.sun@gmail.com",
+    "email": "zendesk@iorad.com",
     "url": "https://www.iorad.com"
   },
   "defaultLocale": "en",
   "private": false,
   "location": ["nav_bar", "ticket_sidebar", "new_ticket_sidebar"],
-  "version": "2.0",
+  "version": "2.0.1",
   "frameworkVersion": "1.0"
 }
