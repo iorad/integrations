@@ -1,4 +1,4 @@
-# Iorad App for Zendesk
+# iorad for Zendesk
 
 launch the app from nav bar in the zendesk agent view.
 

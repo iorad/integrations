@@ -101,7 +101,7 @@
 
   "modalTemplate": {
     "solutionViewModalTitle": {
-      "value": "New Article Created!",
+      "value": "New Solution Created!",
       "title": "title text displayed in modal header"
     },
 
