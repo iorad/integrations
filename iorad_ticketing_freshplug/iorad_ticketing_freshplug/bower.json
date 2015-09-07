@@ -1,0 +1,10 @@
+{
+  "name": "iorad ticketing Freshplug",
+  "version": "0.0.1",
+  "authors": [
+    "Daniel Sun <freshdesk@iorad.com>"
+  ],
+  "description": "This freshplug injects an iorad button to help agent create iorad screen captures when replying a ticket. The screen capture can also be optionaly autoposted to Knowledge Base as an solution article.",
+  "homepage": "www.iorad.com",
+  "private": true
+}
