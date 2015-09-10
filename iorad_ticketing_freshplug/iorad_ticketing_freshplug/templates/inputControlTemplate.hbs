@@ -1,0 +1,34 @@
+﻿<div class="body-input-control">
+    <div class="input-control">
+        <input type="checkbox" id="addToKnowledgebaseToggle" {{#if addToKnowledgebase}} checked{{/if}}> Auto-add Solution to Knowledge Base
+    </div>
+    <div class="loading hide">loading...</div>
+
+    {{#if addToKnowledgebase}}
+    <div class="input-control">
+        <label for="selectCategory">Categories<span class="required_star">*</span></label>
+        <select class="categoryOptions field" id="categorySelector">
+            {{#each categories}}
+            <option value="{{id}}"{{#if checked}} selected {{/if}}>
+                {{name}}
+            </option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="input-control">
+        <label for="selectSection">Solutions<span class="required_star">*</span></label>
+        <select class="sectionOptions" id="folderSelector">
+            {{#each folders}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="input-control">
+        <input id="markAsPublished" type="checkbox" {{#if markAsPublished}} checked{{/if}}> Automatically mark new tutorial as published.
+    </div>
+    {{/if}}
+
+    <div class="input-control">
+        <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="CAPTURE SOLUTION">CAPTURE SOLUTION</button>
+    </div>
+</div>

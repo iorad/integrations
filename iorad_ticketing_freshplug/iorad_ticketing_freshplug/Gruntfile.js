@@ -44,7 +44,7 @@
           "scripts/templates/compiledTemplates.js",
           "scripts/templates/freshplugTemplates.js",
           "scripts/templates/templateEnding.js",
-          "scripts/main/**/*.js",
+          "scripts/main/*.js",
           "scripts/app.js"
         ],
         dest: "dist/ioradTicketingFreshplug.js"
@@ -71,8 +71,8 @@
           relative: true,
           scripts: {
             init: "scripts/init.js",
-            app: "dist/ioradTicketingFreshplug.min.js"
-            //app: "dist/ioradTicketingFreshplug.js"
+            //app: "dist/ioradTicketingFreshplug.min.js"
+            app: "dist/ioradTicketingFreshplug.js"
           }
           //styles: {
           //  bundle: [

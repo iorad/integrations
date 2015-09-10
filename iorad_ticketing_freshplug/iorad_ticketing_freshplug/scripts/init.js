@@ -3,9 +3,19 @@ CustomWidget.include_js("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/ha
 
 var ioradFreshplug = (function (module, undefined) {
   module = {
-    config: {},
     util: {},
-    templates: {}
+    templates: {},
+    requests: {},
+    insertTypes: {
+      CONTENT: "content", LINK: "link"
+    },
+    addToKnowledgebase: false,
+    markAsPublished: true,
+    categories: [],
+    selectedCategoryId: undefined,
+    selectedFolderId: undefined,
+    foldersDictionary: {},
+    insertType: "content"
   };
 
   return module;
