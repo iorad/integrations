@@ -36,7 +36,6 @@
           categories: ioradFreshplug.categories,
           folders: ioradFreshplug.foldersDictionary[ioradFreshplug.selectedCategoryId],
           addToKnowledgebase: ioradFreshplug.addToKnowledgebase,
-          insertType: ioradFreshplug.insertType,
           markAsPublished: ioradFreshplug.markAsPublished
         }));
 
@@ -45,7 +44,7 @@
       },
 
       onCategorySelectionChanged = function (e) {
-        ioradFreshplug.selectedCategoryId = +$(e.srcElement).value;
+        ioradFreshplug.selectedCategoryId = +e.srcElement.value;
 
         ioradFreshplug.categories.each(function (category) { category.checked = category.id === ioradFreshplug.selectedCategoryId });
 
@@ -87,9 +86,8 @@
 
           var inputControlData = {
             categories: ioradFreshplug.categories,
-            folders: ioradFreshplug.selectedCategoryId !== undefined ? ioradFreshplug.foldersDictionary[ioradFreshplug.selectedCategoryId] : [],
+            folders: ioradFreshplug.selectedCategoryId ? ioradFreshplug.foldersDictionary[ioradFreshplug.selectedCategoryId] : [],
             addToKnowledgebase: ioradFreshplug.addToKnowledgebase,
-            insertType: ioradFreshplug.insertType,
             markAsPublished: ioradFreshplug.markAsPublished
           }
 
@@ -109,10 +107,40 @@
     iorad.on("editor:close", function (tutorialParams) {
       $bodyHTML.removeClass("iorad-open iorad-loading");
       clearTimeout(t);
+
       var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-                                   tutorialParams.tutorialId, tutorialParams.tutorialTitle);
-      var $editorMessageBody = jQuery(".redactor_editor div");
-      $editorMessageBody.append("<p>" + iframeHTML + "</p>");
+                                   tutorialParams.tutorialId, tutorialParams.tutorialTitle),
+        $editorMessageBody = jQuery(".redactor_editor div");
+
+      if (ioradFreshplug.addToKnowledgebase) {
+        var $tutorialIframe = jQuery(iframeHTML),
+          categoryId = ioradFreshplug.selectedCategoryId,
+          folderId = jQuery("#folderSelector").val(),
+          ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}",
+          statusCode = ioradFreshplug.markAsPublished ? 2 : 1,
+          article = {
+            solution_article: {
+              "title": tutorialParams.tutorialTitle,
+              "folder_id": folderId,
+              "description": "<div>" + $tutorialIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>",
+              "status": statusCode
+            }
+          },
+          articleJson = JSON.stringify(article);
+
+        ioradFreshplug.requests.createArticle(categoryId, folderId, articleJson).then(function (data) {
+          var articleUrl = ARTICLE_URL.replace('{categoryId}', categoryId)
+                                      .replace('{folderId}', folderId)
+                                      .replace('{id}', data.article.id);
+
+          $editorMessageBody.append("<p>knowledgebase article: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
+        });
+      } else {
+        $editorMessageBody.append("<p>" + iframeHTML + "</p>");
+      }
+
+      // Hide modal.
+      jQuery("#insert_iorad_solution").modal('hide');
     });
   });
 };

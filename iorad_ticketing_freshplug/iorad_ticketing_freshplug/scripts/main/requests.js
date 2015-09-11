@@ -1,7 +1,7 @@
 ﻿ioradFreshplug.requests = (function (module, $, undefined) {
 
   var SOLUTION_CATEGORIES_API_URL = "/solution/categories.json",
-    ARTICLE_API_URL = "solution/categories/{category_id}/folders{folder_id}/articles.json",
+    ARTICLE_API_URL = "/solution/categories/{category_id}/folders/{folder_id}/articles.json",
     getAjaxOption = function () {
       return {
         dataType: "json",
@@ -25,9 +25,6 @@
     ajaxOptions.data = article;
     return $.ajax(ajaxOptions);
   };
-
-
-
 
   return module;
 })(ioradFreshplug.requests || {}, jQuery);

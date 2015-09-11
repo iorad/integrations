@@ -6,16 +6,11 @@ var ioradFreshplug = (function (module, undefined) {
     util: {},
     templates: {},
     requests: {},
-    insertTypes: {
-      CONTENT: "content", LINK: "link"
-    },
     addToKnowledgebase: false,
     markAsPublished: true,
     categories: [],
     selectedCategoryId: undefined,
-    selectedFolderId: undefined,
-    foldersDictionary: {},
-    insertType: "content"
+    foldersDictionary: {}
   };
 
   return module;

@@ -1,5 +1,15 @@
 this["JST"] = this["JST"] || {};
 
+this["JST"]["templates/hyperLinkTemplate.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<a href=\""
+    + alias3(((helper = (helper = helpers.href || (depth0 != null ? depth0.href : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"href","hash":{},"data":data}) : helper)))
+    + "\">"
+    + alias3(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"content","hash":{},"data":data}) : helper)))
+    + "</a>";
+},"useData":true});
+
 this["JST"]["templates/inputControlTemplate.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
     return " checked";
 },"3":function(depth0,helpers,partials,data) {

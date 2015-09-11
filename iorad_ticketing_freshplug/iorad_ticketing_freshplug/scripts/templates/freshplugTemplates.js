@@ -10,7 +10,6 @@
       categories: inputControlData.categories,
       folders: inputControlData.folders,
       addToKnowledgebase: inputControlData.addToKnowledgebase,
-      insertType: inputControlData.insertType,
       markAsPublished: inputControlData.markAsPublished
     });
   };
@@ -18,6 +17,11 @@
   module.insertSolutionModal = function () {
     var template = win["JST"]["templates/insertSolutionModal.hbs"];
     return template();
+  };
+
+  module.getHyperLink = function (href, content) {
+    var template = win["JST"]["templates/hyperLinkTemplate.hbs"];
+    return template({ href: href, content: content });
   };
 
   return module;
