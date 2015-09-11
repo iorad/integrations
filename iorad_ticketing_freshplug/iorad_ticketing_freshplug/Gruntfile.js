@@ -71,16 +71,12 @@
           relative: true,
           scripts: {
             init: "scripts/init.js",
-            //app: "dist/ioradTicketingFreshplug.min.js"
-            app: "dist/ioradTicketingFreshplug.js"
+            app: "dist/ioradTicketingFreshplug.min.js"
+            //app: "dist/ioradTicketingFreshplug.js"
+          },
+          styles: {
+            freshplugStyle: "assets/css/style.css"
           }
-          //styles: {
-          //  bundle: [
-          //      "<%= fixturesPath %>/css/libs.css",
-          //      "<%= fixturesPath %>/css/dev.css"
-          //  ],
-          //  test: "<%= fixturesPath %>/css/inline.css"
-          //},
         }
       }
     }
