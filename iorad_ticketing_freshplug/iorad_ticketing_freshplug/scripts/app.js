@@ -109,7 +109,7 @@
                                         .replace('{folderId}', folderId)
                                         .replace('{id}', data.article.id);
 
-            $editorMessageBody.append("<p>knowledgebase article: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
+            $editorMessageBody.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
           });
         } else {
           $editorMessageBody.append("<p>" + iframeHTML + "</p>");
