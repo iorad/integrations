@@ -133,15 +133,7 @@
           }
 
           jQuery("#insert_iorad_solution .modal-body").html(ioradFreshplug.templates.inputControlTemplate(inputControlData));
-
-          // register event
-          jQuery('#insert_iorad_solution').on('hidden.bs.modal', function () {
-            // Scroll to bring the editor into view.
-            jQuery('html, body').animate({
-              scrollTop: jQuery(".redactor_editor div").offset().top
-            }, 500);
-          });
-
+          
           registerEvents();
         }
 
