@@ -119,7 +119,9 @@
         jQuery("#insert_iorad_solution").modal('hide');
       },
 
-      displayInsertSolutionModal = function () {
+      displayInsertSolutionModal = function (event) {
+        event.preventDefault();
+
         if (jQuery("body #insert_iorad_solution").length === 0) {
           jQuery("body").append(ioradFreshplug.templates.insertSolutionModal());
 
