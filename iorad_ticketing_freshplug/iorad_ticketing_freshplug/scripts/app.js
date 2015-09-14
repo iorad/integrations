@@ -4,8 +4,6 @@
 
   var $insertButtonsList = jQuery(".redactor_insert_btns ul");
   $insertButtonsList.append(ioradFreshplug.templates.insertIoradButtonTemplate());
-
-  $insertIoradButton = jQuery(".insert_iorad");
   
   iorad.init({ env: "live", pluginType: "freshplug_ticketing" }, function () {
     var t = 0,
