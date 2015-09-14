@@ -24,5 +24,16 @@
     return template({ href: href, content: content });
   };
 
+  module.addToKnowledgebaseButtonTemplate = function () {
+    var template = win["JST"]["templates/insertKnowledgebaseSolutionButtonTemplate.hbs"];
+    return template();
+  };
+
+  // display a modal indicating that article is successfully created in knowledge base.
+  module.articleCreatedModalTemplate = function (article) {
+    var template = win["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"];
+    return template({ articleTitle: article.title, articleHref: article.href });
+  };
+
   return module;
 })(ioradFreshplug.templates || {}, window);

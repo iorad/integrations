@@ -10,7 +10,10 @@ var ioradFreshplug = (function (module, undefined) {
     markAsPublished: true,
     categories: [],
     selectedCategoryId: undefined,
-    foldersDictionary: {}
+    foldersDictionary: {},
+    // stupid request, I hope this gets removed.
+    freshplug_webwidgetmode: false
+    // end stupid.
   };
 
   return module;

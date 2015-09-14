@@ -2,8 +2,11 @@
 
   iorad = window.iorad || {};
 
-  var $insertButtonsList = jQuery(".redactor_insert_btns ul");
-  $insertButtonsList.append(ioradFreshplug.templates.insertIoradButtonTemplate());
+  jQuery(".redactor_insert_btns ul").append(ioradFreshplug.templates.insertIoradButtonTemplate());
+
+  $ticketActionsButtons = jQuery(".ticket-actions ul");
+
+  $ticketActionsButtons.html(ioradFreshplug.templates.addToKnowledgebaseButtonTemplate() + $ticketActionsButtons.html());
   
   iorad.init({ env: "live", pluginType: "freshplug_ticketing" }, function () {
     var t = 0,
@@ -37,6 +40,11 @@
           markAsPublished: ioradFreshplug.markAsPublished
         }));
 
+        // stupid request. I hope I can remove it.
+        if (ioradFreshplug.freshplug_webwidgetmode) {
+          showToggleButton(false);
+        }
+
         // register event
         registerEvents();
       },
@@ -60,17 +68,7 @@
         //load categories.
         if (ioradFreshplug.categories.length === 0) {
           ioradFreshplug.requests.listCategories().then(function (data) {
-            ioradFreshplug.categories = [];
-            ioradFreshplug.foldersDictionary = {};
-
-            data.each(function (obj) {
-              ioradFreshplug.categories.push({ id: obj.category.id, name: obj.category.name, checked: false });
-              ioradFreshplug.foldersDictionary[obj.category.id] = obj.category.folders;
-            });
-
-            ioradFreshplug.categories[0].checked = true;
-            ioradFreshplug.selectedCategoryId = ioradFreshplug.categories[0].id;
-
+            processCategoriesAndFolders(data);
             loadModalBody();
           }, function (err) {});
         } else {
@@ -83,7 +81,7 @@
         clearTimeout(t);
 
         var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-                                     tutorialParams.tutorialId, tutorialParams.tutorialTitle),
+              tutorialParams.tutorialId, tutorialParams.tutorialTitle),
           $editorMessageBody = jQuery(".redactor_editor div");
 
         if (ioradFreshplug.addToKnowledgebase) {
@@ -104,10 +102,20 @@
 
           ioradFreshplug.requests.createArticle(categoryId, folderId, articleJson).then(function (data) {
             var articleUrl = ARTICLE_URL.replace('{categoryId}', categoryId)
-                                        .replace('{folderId}', folderId)
-                                        .replace('{id}', data.article.id);
+              .replace('{folderId}', folderId)
+              .replace('{id}', data.article.id);
+            if ($editorMessageBody.length > 0 && !ioradFreshplug.freshplug_webwidgetmode) {
+              $editorMessageBody.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
+            } else {
+              var $existingModal = jQuery("#successModal");
 
-            $editorMessageBody.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
+              if ($existingModal.length > 0) {
+                $existingModal.remove();
+              }
+
+              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }));
+              jQuery("#successModal").modal({ backdrop: true, show: true });
+            }
           });
         } else {
           $editorMessageBody.append("<p>" + iframeHTML + "</p>");
@@ -117,8 +125,29 @@
         jQuery("#insert_iorad_solution").modal('hide');
       },
 
+      processCategoriesAndFolders = function (data) {
+        ioradFreshplug.categories = [];
+        ioradFreshplug.foldersDictionary = {};
+
+        data.each(function (obj) {
+          ioradFreshplug.categories.push({ id: obj.category.id, name: obj.category.name, checked: false });
+          ioradFreshplug.foldersDictionary[obj.category.id] = obj.category.folders;
+        });
+
+        ioradFreshplug.categories[0].checked = true;
+        ioradFreshplug.selectedCategoryId = ioradFreshplug.categories[0].id;
+      },
+
+      showToggleButton = function (canShow) {
+        var $toggleButton = jQuery("#addToKnowledgebaseToggle");
+
+        canShow ? $toggleButton.removeClass("hide") : $toggleButton.addClass("hide");
+      },
+
       displayInsertSolutionModal = function (event) {
         event.preventDefault();
+        
+        ioradFreshplug.freshplug_webwidgetmode = false;
 
         if (jQuery("body #insert_iorad_solution").length === 0) {
           jQuery("body").append(ioradFreshplug.templates.insertSolutionModal());
@@ -131,16 +160,37 @@
           }
 
           jQuery("#insert_iorad_solution .modal-body").html(ioradFreshplug.templates.inputControlTemplate(inputControlData));
-          
+
           registerEvents();
         }
 
+        showToggleButton(true);
+
         // show modal
         jQuery("#insert_iorad_solution").modal({ backdrop: true, show: true });
+      },
+
+      displayAddToKnowledgebaseModal = function (event) {
+        event.preventDefault();
+
+        ioradFreshplug.addToKnowledgebase = true;
+        ioradFreshplug.freshplug_webwidgetmode = true;
+
+        if (jQuery("body #insert_iorad_solution").length === 0) {
+          jQuery("body").append(ioradFreshplug.templates.insertSolutionModal());
+        }
+
+        ioradFreshplug.requests.listCategories().then(function (data) {
+          processCategoriesAndFolders(data);
+          loadModalBody();
+          
+          jQuery("#insert_iorad_solution").modal({ backdrop: true, show: true });
+        }, function (err) {});
       };
     
     // register events
     jQuery(".insert_iorad").click(displayInsertSolutionModal);
+    jQuery("#insertIoradToKnowledgebaseButton").click(displayAddToKnowledgebaseModal);
     iorad.on("editor:close", onIoradEditorClosed);
 
   });
