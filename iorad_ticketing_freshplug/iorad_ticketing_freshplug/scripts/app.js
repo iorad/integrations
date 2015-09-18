@@ -87,7 +87,7 @@
         if (ioradFreshplug.addToKnowledgebase) {
           var $tutorialIframe = jQuery(iframeHTML),
             categoryId = ioradFreshplug.selectedCategoryId,
-            folderId = jQuery("#folderSelector").val(),
+            folderId = +jQuery("#folderSelector").val(),
             ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}",
             statusCode = ioradFreshplug.markAsPublished ? 2 : 1,
             article = {
