@@ -1,6 +1,6 @@
 {
   "name": "iorad-ticketing-freshplug",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Manage grunt packages.",
   "private": true,
   "devDependencies": {

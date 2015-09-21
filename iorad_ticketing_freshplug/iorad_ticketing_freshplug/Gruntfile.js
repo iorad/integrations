@@ -72,7 +72,6 @@
           scripts: {
             init: "scripts/init.js",
             app: "dist/ioradTicketingFreshplug.min.js"
-            //app: "dist/ioradTicketingFreshplug.js"
           },
           styles: {
             freshplugStyle: "assets/css/style.css"
