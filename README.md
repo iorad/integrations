@@ -37,7 +37,7 @@ After you have successfully followed through the steps above, you will find Iora
 {% endif %}
 ```
 
-## Iorad Web Widget FreshPlug
+## Iorad Ticketing FreshPlug
 
 This is a Freshplug that list all available categories and folders. When clicking on a create tutorial button, the Iorad page shows up. Upon closing the tutorial page, it is automatically added to a new article page in a selected folder.
 
@@ -46,8 +46,15 @@ This is a Freshplug that list all available categories and folders. When clickin
 * Click on **Integrations**
 * Click on the **FreshPlugs** tab
 * Click **New FreshPlug** to create.
-* Enter details such as **Name** and **Description**, copy and paste Iorad FreshPlug source code into Script field.
+* Enter details such as **Name** and **Description**, copy and paste Iorad FreshPlug [source code](https://github.com/iorad/integrations/blob/master/iorad_ticketing_freshplug/iorad_ticketing_freshplug/dist/ioradTicketingFreshplug.txt) into Script field.
 * Check **Show the widget in ticket view page.** option and Click **Create and Enable** to complete the installation.
+ 
+### To Build and play with Iorad Web Widget source code:
+* install NPM - Package manager for Node.js
+* Install Grunt.js ```[sudo] npm install -g grunt-cli```
+* Install Bower ```[sudo] npm install -g bower```
+* Run ``` grunt install-bower-packages```
+* Run ``` grunt build-freshplug```
 
 ## Zendesk Help Center
 
