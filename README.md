@@ -26,12 +26,14 @@ After you have successfully followed through the steps above, you will find Iora
 * Click on the **Layout & pages** tab
 * Go to **Page layout** editor
 * Copy and Paste the source code below at the **end of the Page Layout file**.
+
 ##### For Test:
 ```
 {% if portal.user.is_agent %}
 	<script type="text/javascript" src="https://test.iorad.com/server/assets/bower_components/integrations/IoradWebWidget/dist/IoradWebWidget-{widget name}.min-0.0.1.js"></script>
 {% endif %}
 ```
+
 ##### For Live:
 ```
 {% if portal.user.is_agent %}
