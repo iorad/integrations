@@ -75,11 +75,11 @@
   //run bower for package install
   grunt.registerTask('install-bower-packages', ['bower']);
 
-  //build vendor file src
-  grunt.registerTask('merge-js-files', ['handlebars', 'concat']);
+  //build all web widgets in dev mode.
+  grunt.registerTask('build-dev-js', ['handlebars', 'concat']);
 
-  //build min vendor file from above
-  grunt.registerTask('min-js-file', ['handlebars', 'concat', 'uglify']);
+  //build all web widgets in release mode.
+  grunt.registerTask('build-release-js', ['handlebars', 'concat', 'uglify']);
 
   // build iorad web widget for freshdesk knowledgebase.
   grunt.registerTask('build-freshdeskWebWidget-release', ['handlebars:freshdeskDist', 'concat:freshdeskDist', 'uglify:freshdeskDist']);
