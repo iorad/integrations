@@ -21,7 +21,7 @@
     handlebars: {
       freshdeskDist: {
         files: {
-          "scripts/templates/handlebars/freshdeskHtmlTemplates.js": ["templates/freshdesk/*.hbs"]
+          "scripts/templates/handlebars/freshdeskHtmlTemplates.js": ["templates/freshdesk/*.hbs", "templates/*.hbs"]
         }
       }
     },
