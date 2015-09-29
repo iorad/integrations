@@ -77,6 +77,21 @@
             freshplugStyle: "assets/css/style.css"
           }
         }
+      },
+      dev: {
+        src: "ioradTicketingFreshplug.html",
+        dest: "dist/ioradTicketingFreshplugDev.html",
+        options: {
+          beautify: true,
+          relative: true,
+          scripts: {
+            init: "scripts/init.js",
+            app: "dist/ioradTicketingFreshplug.js"
+          },
+          styles: {
+            freshplugStyle: "assets/css/style.css"
+          }
+        }
       }
     }
   });
