@@ -17,7 +17,7 @@
     }
 </style>
 <script type="text/javascript">
-    /*! iorad-ticketing-freshplug 2015-09-22 */
+    /*! iorad-ticketing-freshplug 2015-09-29 */
     CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js"), CustomWidget.include_js("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js");
     var ioradFreshplug = function(a, b) {
             return a = {
@@ -150,20 +150,41 @@
                 },
                 useData: !0
             }), this.JST["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.template({
+                1: function(a, b, c, d) {
+                    return " and a link has been attached to the ticket"
+                },
+                3: function(a, b, c, d) {
+                    return "Return to ticket"
+                },
+                5: function(a, b, c, d) {
+                    return "Close"
+                },
                 compiler: [6, ">= 2.0.0-beta.1"],
                 main: function(a, b, c, d) {
-                    var e, f = b.helperMissing,
-                        g = "function",
-                        h = this.escapeExpression;
-                    return '<div class="modal fade iorad-widget-modal" role="dialog" id="successModal" aria-hidden="false">\r\n    <div class="modal-header">\r\n        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>\r\n        <h3 class="ellipsis modal-title">Article Created!</h3>\r\n    </div>\r\n    <div class="modal-body">\r\n        The solution <b>' + h((e = null != (e = b.articleTitle || (null != a ? a.articleTitle : a)) ? e : f, typeof e === g ? e.call(a, {
+                    var e, f, g = b.helperMissing,
+                        h = "function",
+                        i = this.escapeExpression;
+                    return '<div class="modal fade iorad-widget-modal" role="dialog" id="successModal" aria-hidden="false">\r\n    <div class="modal-header">\r\n        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>\r\n        <h3 class="ellipsis modal-title">Article Created!</h3>\r\n    </div>\r\n    <div class="modal-body">\r\n        The solution <b>' + i((f = null != (f = b.articleTitle || (null != a ? a.articleTitle : a)) ? f : g, typeof f === h ? f.call(a, {
                         name: "articleTitle",
                         hash: {},
                         data: d
-                    }) : e)) + '</b> has been successfully created.\r\n    </div>\r\n    <div class="modal-footer">\r\n        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\r\n        <a class="btn btn-primary" href="' + h((e = null != (e = b.articleHref || (null != a ? a.articleHref : a)) ? e : f, typeof e === g ? e.call(a, {
+                    }) : f)) + "</b> has been successfully created" + (null != (e = b["if"].call(a, null != a ? a.freshplugTicketingView : a, {
+                        name: "if",
+                        hash: {},
+                        fn: this.program(1, d, 0),
+                        inverse: this.noop,
+                        data: d
+                    })) ? e : "") + '.\r\n    </div>\r\n    <div class="modal-footer">\r\n        <button type="button" class="btn btn-default" data-dismiss="modal">' + (null != (e = b["if"].call(a, null != a ? a.freshplugTicketingView : a, {
+                        name: "if",
+                        hash: {},
+                        fn: this.program(3, d, 0),
+                        inverse: this.program(5, d, 0),
+                        data: d
+                    })) ? e : "") + '</button>\r\n        <a class="btn btn-primary" href="' + i((f = null != (f = b.articleHref || (null != a ? a.articleHref : a)) ? f : g, typeof f === h ? f.call(a, {
                         name: "articleHref",
                         hash: {},
                         data: d
-                    }) : e)) + '">VIEW ARTICLE</a>\r\n    </div>\r\n</div>\r\n'
+                    }) : f)) + '">VIEW ARTICLE</a>\r\n    </div>\r\n</div>\r\n'
                 },
                 useData: !0
             }), ioradFreshplug.templates = function(a, b, c) {
@@ -190,11 +211,12 @@
                 }, a.addToKnowledgebaseButtonTemplate = function() {
                     var a = b.JST["templates/insertKnowledgebaseSolutionButtonTemplate.hbs"];
                     return a()
-                }, a.articleCreatedModalTemplate = function(a) {
-                    var c = b.JST["templates/knowledgebaseArticleCreatedModal.hbs"];
-                    return c({
+                }, a.articleCreatedModalTemplate = function(a, c) {
+                    var d = b.JST["templates/knowledgebaseArticleCreatedModal.hbs"];
+                    return d({
                         articleTitle: a.title,
-                        articleHref: a.href
+                        articleHref: a.href,
+                        freshplugTicketingView: c
                     })
                 }, a
             }(ioradFreshplug.templates || {}, window)
@@ -255,7 +277,7 @@
                         }, function(a) {}) : e()
                     },
                     i = function(c) {
-                        b.removeClass("iorad-open iorad-loading"), clearTimeout(a);
+                        b.removeClass("iorad-open iorad-loading"), clearTimeout(a), jQuery("#insert_iorad_solution").modal("hide");
                         var d = iorad.getEmbeddedPlayerUrl(c.uid, c.tutorialId, c.tutorialTitle),
                             e = jQuery(".redactor_editor div");
                         if (ioradFreshplug.addToKnowledgebase) {
@@ -275,20 +297,28 @@
                                 l = JSON.stringify(k);
                             ioradFreshplug.requests.createArticle(g, h, l).then(function(a) {
                                 var b = i.replace("{categoryId}", g).replace("{folderId}", h).replace("{id}", a.article.id);
-                                if (e.length > 0 && !ioradFreshplug.freshplug_webwidgetmode) e.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(b, c.tutorialTitle) + "</p>");
-                                else {
+                                if (e.length > 0 && !ioradFreshplug.freshplug_webwidgetmode) {
+                                    e.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(b, c.tutorialTitle) + "</p>");
                                     var d = jQuery("#successModal");
                                     d.length > 0 && d.remove(), jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({
                                         title: c.tutorialTitle,
                                         href: b
-                                    })), jQuery("#successModal").modal({
+                                    }, !0)), jQuery("#successModal").modal({
+                                        backdrop: !0,
+                                        show: !0
+                                    })
+                                } else {
+                                    var d = jQuery("#successModal");
+                                    d.length > 0 && d.remove(), jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({
+                                        title: c.tutorialTitle,
+                                        href: b
+                                    }, !1)), jQuery("#successModal").modal({
                                         backdrop: !0,
                                         show: !0
                                     })
                                 }
                             })
-                        } else e.append("<p>" + d + "</p>");
-                        jQuery("#insert_iorad_solution").modal("hide")
+                        } else e.append("<p>" + d + "</p>")
                     },
                     j = function(a) {
                         ioradFreshplug.categories = [], ioradFreshplug.foldersDictionary = {}, a.each(function(a) {

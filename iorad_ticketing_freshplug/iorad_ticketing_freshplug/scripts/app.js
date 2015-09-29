@@ -80,6 +80,9 @@
         $bodyHTML.removeClass("iorad-open iorad-loading");
         clearTimeout(t);
 
+        // Hide modal.
+        jQuery("#insert_iorad_solution").modal('hide');
+
         var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
               tutorialParams.tutorialId, tutorialParams.tutorialTitle),
           $editorMessageBody = jQuery(".redactor_editor div");
@@ -105,7 +108,18 @@
               .replace('{folderId}', folderId)
               .replace('{id}', data.article.id);
             if ($editorMessageBody.length > 0 && !ioradFreshplug.freshplug_webwidgetmode) {
-              $editorMessageBody.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
+              $editorMessageBody.append("<p>This solution article should help you: "
+                                        + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle)
+                                        + "</p>");
+              var $existingModal = jQuery("#successModal");
+
+              if ($existingModal.length > 0) {
+                $existingModal.remove();
+              }
+
+              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }, true));
+              jQuery("#successModal").modal({ backdrop: true, show: true });
+
             } else {
               var $existingModal = jQuery("#successModal");
 
@@ -113,16 +127,13 @@
                 $existingModal.remove();
               }
 
-              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }));
+              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }, false));
               jQuery("#successModal").modal({ backdrop: true, show: true });
             }
           });
         } else {
           $editorMessageBody.append("<p>" + iframeHTML + "</p>");
         }
-
-        // Hide modal.
-        jQuery("#insert_iorad_solution").modal('hide');
       },
 
       processCategoriesAndFolders = function (data) {

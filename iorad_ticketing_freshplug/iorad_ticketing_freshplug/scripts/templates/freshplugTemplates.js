@@ -30,9 +30,9 @@
   };
 
   // display a modal indicating that article is successfully created in knowledge base.
-  module.articleCreatedModalTemplate = function (article) {
+  module.articleCreatedModalTemplate = function (article, isTicketingView) {
     var template = win["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"];
-    return template({ articleTitle: article.title, articleHref: article.href });
+    return template({ articleTitle: article.title, articleHref: article.href, freshplugTicketingView: isTicketingView});
   };
 
   return module;

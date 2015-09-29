@@ -1,4 +1,4 @@
-/*! iorad-ticketing-freshplug - v1.0.0 - 09-22-2015 */CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
+/*! iorad-ticketing-freshplug - v1.0.0 - 09-29-2015 */CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
 CustomWidget.include_js("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js");
 
 var ioradFreshplug = (function (module, undefined) {
@@ -84,12 +84,22 @@ this["JST"]["templates/insertSolutionModal.hbs"] = Handlebars.template({"compile
     return "<div class=\"modal fade in\" role=\"dialog\" aria-hidden=\"false\" id=\"insert_iorad_solution\" style=\"width: 710px; margin-left: -355px;\">\r\n    <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\"></button>\r\n        <h3 class=\"ellipsis modal-title\" title=\"Iorad Screen Capture\">Iorad Screen Capture</h3>\r\n    </div>\r\n    <div class=\"modal-body\">\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
-this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+    return " and a link has been attached to the ticket";
+},"3":function(depth0,helpers,partials,data) {
+    return "Return to ticket";
+},"5":function(depth0,helpers,partials,data) {
+    return "Close";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var stack1, helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "<div class=\"modal fade iorad-widget-modal\" role=\"dialog\" id=\"successModal\" aria-hidden=\"false\">\r\n    <div class=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\"></button>\r\n        <h3 class=\"ellipsis modal-title\">Article Created!</h3>\r\n    </div>\r\n    <div class=\"modal-body\">\r\n        The solution <b>"
     + alias3(((helper = (helper = helpers.articleTitle || (depth0 != null ? depth0.articleTitle : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"articleTitle","hash":{},"data":data}) : helper)))
-    + "</b> has been successfully created.\r\n    </div>\r\n    <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\r\n        <a class=\"btn btn-primary\" href=\""
+    + "</b> has been successfully created"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.freshplugTicketingView : depth0),{"name":"if","hash":{},"fn":this.program(1, data, 0),"inverse":this.noop,"data":data})) != null ? stack1 : "")
+    + ".\r\n    </div>\r\n    <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">"
+    + ((stack1 = helpers['if'].call(depth0,(depth0 != null ? depth0.freshplugTicketingView : depth0),{"name":"if","hash":{},"fn":this.program(3, data, 0),"inverse":this.program(5, data, 0),"data":data})) != null ? stack1 : "")
+    + "</button>\r\n        <a class=\"btn btn-primary\" href=\""
     + alias3(((helper = (helper = helpers.articleHref || (depth0 != null ? depth0.articleHref : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"articleHref","hash":{},"data":data}) : helper)))
     + "\">VIEW ARTICLE</a>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});;ioradFreshplug.templates = (function (module, win, undefined) {
@@ -124,9 +134,9 @@ this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.templ
   };
 
   // display a modal indicating that article is successfully created in knowledge base.
-  module.articleCreatedModalTemplate = function (article) {
+  module.articleCreatedModalTemplate = function (article, isTicketingView) {
     var template = win["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"];
-    return template({ articleTitle: article.title, articleHref: article.href });
+    return template({ articleTitle: article.title, articleHref: article.href, freshplugTicketingView: isTicketingView});
   };
 
   return module;
@@ -243,6 +253,9 @@ this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.templ
         $bodyHTML.removeClass("iorad-open iorad-loading");
         clearTimeout(t);
 
+        // Hide modal.
+        jQuery("#insert_iorad_solution").modal('hide');
+
         var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
               tutorialParams.tutorialId, tutorialParams.tutorialTitle),
           $editorMessageBody = jQuery(".redactor_editor div");
@@ -268,7 +281,18 @@ this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.templ
               .replace('{folderId}', folderId)
               .replace('{id}', data.article.id);
             if ($editorMessageBody.length > 0 && !ioradFreshplug.freshplug_webwidgetmode) {
-              $editorMessageBody.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle) + "</p>");
+              $editorMessageBody.append("<p>This solution article should help you: "
+                                        + ioradFreshplug.templates.getHyperLink(articleUrl, tutorialParams.tutorialTitle)
+                                        + "</p>");
+              var $existingModal = jQuery("#successModal");
+
+              if ($existingModal.length > 0) {
+                $existingModal.remove();
+              }
+
+              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }, true));
+              jQuery("#successModal").modal({ backdrop: true, show: true });
+
             } else {
               var $existingModal = jQuery("#successModal");
 
@@ -276,16 +300,13 @@ this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.templ
                 $existingModal.remove();
               }
 
-              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }));
+              jQuery("body").append(ioradFreshplug.templates.articleCreatedModalTemplate({ title: tutorialParams.tutorialTitle, href: articleUrl }, false));
               jQuery("#successModal").modal({ backdrop: true, show: true });
             }
           });
         } else {
           $editorMessageBody.append("<p>" + iframeHTML + "</p>");
         }
-
-        // Hide modal.
-        jQuery("#insert_iorad_solution").modal('hide');
       },
 
       processCategoriesAndFolders = function (data) {
