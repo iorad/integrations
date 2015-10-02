@@ -191,7 +191,11 @@
 
   function ioradInit(issue_id, isEdit, isNewfromPopup) {
 
-      iorad.init(function() {
+
+
+ 	var options = {};
+    options.pluginType = "jira";
+      iorad.init(options,function() {
 
 
           if (isEdit) {
