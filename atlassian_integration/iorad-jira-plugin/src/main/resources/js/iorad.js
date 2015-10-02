@@ -244,7 +244,8 @@ var Backbone = Backbone || ({
     //default variables
 
     var env = 'live', // cfdev, prod, or live; default: live
-        customBaseUrl = ''; //baseUrl when this variable is set (via init)
+        customBaseUrl = '', //baseUrl when this variable is set (via init)
+        pluginType = ''; //the plugin type every plugins should specifiy
 
 
     function getBaseUrl() {
@@ -267,7 +268,8 @@ var Backbone = Backbone || ({
     }
 
     function newTutorialEditorUrl() {
-        return getBaseUrl() + '/server/?a=app.editor&data=0&src=iframe';
+        var referrer = location.href;
+        return getBaseUrl() + '/server/?a=app.editor&data=0&src=iframe&referrer=' + referrer + '&plugin_type=' + pluginType;
     }
 
 
@@ -364,7 +366,7 @@ var Backbone = Backbone || ({
      * iorad.init(readyCallback); to use default options
      *
      *
-     * @param opt_options pass `env` or `domain` for custom base url.
+     * @param opt_options pass `env` or `domain` for custom base url or `plugin_type`.
      * @param readyCallback
      */
     iorad.init = function(opt_options, readyCallback) {
@@ -373,6 +375,7 @@ var Backbone = Backbone || ({
         readyCallback = _.isFunction(opt_options) ? opt_options : readyCallback;
 
         if (_.isObject(opt_options)) {
+            pluginType = opt_options.pluginType || pluginType;
             env = opt_options.env || env;
             if (opt_options.domain && opt_options.domain !== '') {
                 env = 'custom';

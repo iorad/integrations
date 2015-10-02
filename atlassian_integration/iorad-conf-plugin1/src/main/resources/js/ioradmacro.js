@@ -68,8 +68,9 @@ AJS.bind("init.rte", function() {
 
     function ioradInit(tutorialParam) {
 
-
-        iorad.init(function() {
+        var options = {};
+        options.pluginType = "confluence";
+        iorad.init(options, function() {
 
 
             if (tutorialParam) {
@@ -106,7 +107,7 @@ AJS.bind("init.rte", function() {
                         uid: tutorialParams.uid,
                         tutorId: tutorialParams.tutorialId,
                         tutorTitle: tutorialParams.tutorialTitle,
-                        iframeSrc: getAttrsFromIframe(iframeHTML, "src")+"&plugin_type=confluence",
+                        iframeSrc: getAttrsFromIframe(iframeHTML, "src") + "&plugin_type=confluence",
                         iframeHeight: getAttrsFromIframe(iframeHTML, "height"),
                         iframeWidth: getAttrsFromIframe(iframeHTML, "width"),
                         labelContent: lables
@@ -124,7 +125,7 @@ AJS.bind("init.rte", function() {
                             uid: tutorialParams.uid,
                             tutorId: tutorialParams.tutorialId,
                             tutorTitle: tutorialParams.tutorialTitle,
-                            iframeSrc: getAttrsFromIframe(iframeHTML, "src")+"&plugin_type=confluence",
+                            iframeSrc: getAttrsFromIframe(iframeHTML, "src") + "&plugin_type=confluence",
                             iframeHeight: getAttrsFromIframe(iframeHTML, "height"),
                             iframeWidth: getAttrsFromIframe(iframeHTML, "width"),
                             labelContent: lables
