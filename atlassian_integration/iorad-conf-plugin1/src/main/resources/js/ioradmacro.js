@@ -106,7 +106,7 @@ AJS.bind("init.rte", function() {
                         uid: tutorialParams.uid,
                         tutorId: tutorialParams.tutorialId,
                         tutorTitle: tutorialParams.tutorialTitle,
-                        iframeSrc: getAttrsFromIframe(iframeHTML, "src"),
+                        iframeSrc: getAttrsFromIframe(iframeHTML, "src")+"&plugin_type=confluence",
                         iframeHeight: getAttrsFromIframe(iframeHTML, "height"),
                         iframeWidth: getAttrsFromIframe(iframeHTML, "width"),
                         labelContent: lables
@@ -124,7 +124,7 @@ AJS.bind("init.rte", function() {
                             uid: tutorialParams.uid,
                             tutorId: tutorialParams.tutorialId,
                             tutorTitle: tutorialParams.tutorialTitle,
-                            iframeSrc: getAttrsFromIframe(iframeHTML, "src"),
+                            iframeSrc: getAttrsFromIframe(iframeHTML, "src")+"&plugin_type=confluence",
                             iframeHeight: getAttrsFromIframe(iframeHTML, "height"),
                             iframeWidth: getAttrsFromIframe(iframeHTML, "width"),
                             labelContent: lables

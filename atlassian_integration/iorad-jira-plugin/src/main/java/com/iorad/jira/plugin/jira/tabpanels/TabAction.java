@@ -35,17 +35,21 @@ public class TabAction extends AbstractIssueAction {
 		// TODO Auto-generated method stub
 		PluginSettings setting = pluginSettingsFactory.createGlobalSettings();
 		IframeParams ifparams = new IframeParams();
-		Long issue_id= issue.getId();
-		ifparams.setHeight((String) setting.get(issue_id
-				+ Constants.HEIGHT));
+		Long issue_id = issue.getId();
+		ifparams.setHeight((String) setting.get(issue_id + Constants.HEIGHT));
 		ifparams.setWidth((String) setting.get(issue_id + Constants.WIDTH));
 
-		String iframURL = (String) setting.get(issue_id
-				+ Constants.IFRAME_URL);
-		ifparams.setIframeURL(iframURL);
+		String iframURL = (String) setting.get(issue_id + Constants.IFRAME_URL);
 		if (iframURL == null) {
 			ifparams.setHasURL(false);
+		} else {
+
+			iframURL = iframURL.indexOf("plugin_type=jira") != -1 ? iframURL
+					: iframURL + "&plugin_type=jira";
 		}
+
+		ifparams.setIframeURL(iframURL);
+		
 		params.put("ifparams", ifparams);
 	}
 

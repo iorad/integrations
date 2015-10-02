@@ -69,7 +69,7 @@ public class IframeMacro extends BaseMacro implements Macro,
 		String iframePattern = "<iframe src=\"[srcplaceholder]\" width=\"[widthplaceholder]\" scrolling=\"no\" height=\"[heightplaceholder]\" style=\"border:0px;\" allowfullscreen=\"true\"></iframe>";
 		if (parameters != null) {
 			return iframePattern
-					.replace("[srcplaceholder]", parameters.get("iframeSrc"))
+					.replace("[srcplaceholder]", parameters.get("iframeSrc").indexOf("plugin_type=confluence")!=-1?parameters.get("iframeSrc"):parameters.get("iframeSrc")+"&plugin_type=confluence")
 					.replace("[widthplaceholder]",
 							parameters.get("iframeWidth"))
 					.replace("[heightplaceholder]",

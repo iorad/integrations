@@ -214,7 +214,7 @@
               var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
                   tutorialParams.tutorialId, tutorialParams.tutorialTitle);
 
-              var src = getAttrsFromIframe(iframeHTML, "src");
+              var src = getAttrsFromIframe(iframeHTML, "src")+"&plugin_type=jira";
               var width = getAttrsFromIframe(iframeHTML, "width");
               var height = getAttrsFromIframe(iframeHTML, "height");
 
