@@ -8,7 +8,8 @@
   "homepage": "https://github.com/dan753722",
   "dependencies": {
     "jquery": "~2.1.3",
-    "handlebars": "~3.0.0"
+    "handlebars": "~3.0.0",
+    "oauth-1.0a": "~1.0.0"
   },
   "exportsOverride": {
   },

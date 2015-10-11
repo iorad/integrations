@@ -1,10 +1,5 @@
 ﻿ioradWebWidget.util.common = (function (module, win) {
-
-  /**
-   * this field is used to populate the options field when initializing iorad.js.
-   */
-  module.ioradPluginType = 'freshdeskweb_solutions';
-
+  
   /**
    * wait for iorad.js to load. once loaded, execute callback()
    * @param {} callback the callback function.

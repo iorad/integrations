@@ -43,7 +43,7 @@
 
       listCategories().then(populateTutorialLocation, function (err) {});
 
-      iorad.init({ env: ioradWebWidget.util.common.ioradEnv(), pluginType: ioradWebWidget.util.common.ioradPluginType }, function () {
+      iorad.init({ env: ioradWebWidget.util.common.ioradEnv(), pluginType: ioradWebWidget.util.freshdesk.ioradPluginType }, function () {
         // iorad is ready now.
         var t = 0;
 

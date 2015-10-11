@@ -23,6 +23,11 @@
         files: {
           "scripts/templates/handlebars/freshdeskHtmlTemplates.js": ["templates/freshdesk/*.hbs", "templates/*.hbs"]
         }
+      },
+      uservoiceDist: {
+        files: {
+          "scripts/templates/handlebars/uservoiceHtmlTemplates.js": ["templates/uservoice/*.hbs", "templates/*.hbs"]
+        }
       }
     },
 
@@ -50,7 +55,24 @@
         dest: 'dist/IoradWebWidget-Freshdesk.js'
       },
       uservoiceDist: {
-        // TODO:
+        src: [
+          //'scripts/vendor/jquery/*.js',
+          'scripts/main.js',
+          'scripts/config.js',
+          'scripts/main/uservoice/config/config.js',
+          // third party libraries
+          'scripts/vendor/handlebars/*.js',
+          'scripts/vendor/oauth-1.0a/oauth-1.0a.js',
+
+          'scripts/templates/handlebars/uservoiceHtmlTemplates.js',
+          'scripts/templates/templateShared.js',
+          'scripts/templates/uservoiceTemplates.js',
+          'scripts/utils/utils.js',
+          'scripts/utils/uservoiceUtils.js',
+          'scripts/main/uservoice/*.js',
+          'scripts/app-uservoice.js'
+        ],
+        dest: 'dist/IoradWebWidget-Uservoice.js'
       }
     },
 
@@ -62,6 +84,10 @@
       freshdeskDist: {
         src: 'dist/IoradWebWidget-Freshdesk.js',
         dest: 'dist/IoradWebWidget-Freshdesk.min.js'
+      },
+      uservoiceDist: {
+        src: 'dist/IoradWebWidget-Uservoice.js',
+        dest: 'dist/IoradWebWidget-Uservoice.min.js'
       }
     }
   });
@@ -86,4 +112,10 @@
 
   // build iorad web widget for freshdesk knowledgebase.
   grunt.registerTask('build-freshdeskWebWidget-dev', ['handlebars:freshdeskDist', 'concat:freshdeskDist']);
+
+  // build iorad web widget for uservoice knowledgebase.
+  grunt.registerTask('build-uservoiceWebWidget-release', ['handlebars:uservoiceDist', 'concat:uservoiceDist', 'uglify:uservoiceDist']);
+
+  // build iorad web widget for uservoice knowledgebase.
+  grunt.registerTask('build-uservoiceWebWidget-dev', ['handlebars:uservoiceDist', 'concat:uservoiceDist']);
 };

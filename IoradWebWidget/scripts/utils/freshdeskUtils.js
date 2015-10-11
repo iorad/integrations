@@ -1,5 +1,10 @@
 ﻿ioradWebWidget.util.freshdesk = (function (module) {
-  
+
+  /**
+   * this field is used to populate the options field when initializing iorad.js.
+   */
+  module.ioradPluginType = 'freshdeskweb_solutions';
+
   var SOLUTION_CATEGORIES_API_URL = '/solution/categories.json',
     ARTICLE_API_URL = '/solution/categories/{category_id}/folders/{folder_id}/articles.json',
     initAjaxOption = function () {
