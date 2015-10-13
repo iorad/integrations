@@ -60,8 +60,8 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
     oauthTokenSecret = tokenArray[2];
   };
 
-  var onAuthFrameLoaded = function () {
-    var authorizeReturnText = this.contentWindow.document.body.textContent,
+  var onAuthFrameLoaded = function (e, callback) {
+    var authorizeReturnText = e.originalEvent.target.contentWindow.document.body.textContent,
       options = ajaxOptions();
     options.url = accessTokenUrl;
 
@@ -79,6 +79,9 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
       .complete(function (data) {
         if (data.status === 200) {
           extractToken(data.responseText);
+          if (callback) {
+            callback();
+          }
         }
       });
 
@@ -91,14 +94,16 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
     }
   };
 
-  var promptUserForAuthorize = function (data) {
+  var promptUserForAuthorize = function (data, callback) {
     if (data.status === 200) {
       extractToken(data.responseText);
 
       $("body").append(templates.authorizeModal(window.location.protocol + "//" + window.location.hostname, oauthToken));
       $("#oauthModal").modal('show');
 
-      $("#authFrame").load(onAuthFrameLoaded);
+      $("#authFrame").load(function (e) {
+        onAuthFrameLoaded(e, callback);
+      });
     }
   };
   
@@ -119,7 +124,7 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
         type: options.method,
         headers: oauthClient.toHeader(oauthClient.authorize(options))
       })
-      .complete(promptUserForAuthorize);
+      .complete(function (data) { promptUserForAuthorize(data, callback); });
   };
   
   return module;
