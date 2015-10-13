@@ -1,0 +1,13 @@
+﻿<div class="modal fade iorad-widget-modal" role="dialog" id="successModal" aria-hidden="false">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3 class="ellipsis modal-title">Article Created!</h3>
+    </div>
+    <div class="modal-body">
+        The solution <b>{{articleTitle}}</b> has been successfully created{{#if freshplugTicketingView}} and a link has been attached to the ticket{{/if}}.
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{#if freshplugTicketingView}}Return to ticket{{else}}Close{{/if}}</button>
+        <a class="btn btn-primary" href="{{articleHref}}">VIEW ARTICLE</a>
+    </div>
+</div>
