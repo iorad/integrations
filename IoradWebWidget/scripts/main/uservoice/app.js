@@ -1,7 +1,11 @@
-﻿ioradWebWidget.uservoice = (function (module, utils) {
+﻿ioradWebWidget.uservoice = (function (module, utils, $, win) {
 
   var loadContent = function () {
-    debugger;
+
+    $.ajax(utils.uservoice.listTopics())
+     .complete(function (data) {
+       $(".widget-body").prepend(ioradWebWidget.templates.uservoiceTemplates.widgetBodyTemplate(data.responseJSON.topics));
+      });
   };
 
   var initializeWidget = function () {
@@ -12,7 +16,7 @@
     }
   };
 
-  module.runApp = function ($, win) {
+  module.runApp = function () {
     if ($(".uvModule-knowledgebase").length !== 0) {
       $(ioradWebWidget.templates.uservoiceTemplates.mainLayout()).insertAfter(".uvModule-knowledgebase .uvModuleHeader");
       utils.common.ioradLoaded(initializeWidget);
@@ -20,4 +24,4 @@
   };
 
   return module;
-})(ioradWebWidget.uservoice || {}, ioradWebWidget.util || {});
+})(ioradWebWidget.uservoice || {}, ioradWebWidget.util || {}, jQuery || {}, window || {});

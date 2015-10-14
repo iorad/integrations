@@ -16,6 +16,11 @@
 
     return template();
   };
+
+  module.widgetBodyTemplate = function (topics) {
+    var template = JST["templates/uservoice/widgetBodyTemplate.hbs"];
+    return template({topics : topics});
+  };
   
   return module;
 })(ioradWebWidget.templates.uservoiceTemplates || {}, JST || {});

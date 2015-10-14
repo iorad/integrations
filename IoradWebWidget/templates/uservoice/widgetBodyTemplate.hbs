@@ -1,0 +1,10 @@
+﻿<div class="widget-location-selector">
+    <label class="selector-label" for="topicSelector">
+        <h4>Topics</h4>
+    </label>
+    <select id="topicSelector">
+        {{#each topics}}
+        <option value="{{id}}" {{#if selected}} selected {{/if}}>{{name}}</option>
+        {{/each}}
+    </select>
+</div>
