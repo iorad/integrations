@@ -14,29 +14,6 @@ ioradWebWidget.util.uservoice.oauthClient = (function (module, config) {
 })(ioradWebWidget.util.uservoice.oauthClient || {},
    ioradWebWidget.config.uservoice || {});
 
-ioradWebWidget.util.uservoice = (function (module, config) {
-  /**
-   * this field is used to populate the options field when initializing iorad.js.
-   */
-  module.ioradPluginType = 'uservoiceweb_solutions';
-
-  var ARTICLE_API_URL = '/api/v1/articles.json',
-    List_TOPICS_API_URL = '/api/v1/topics.json',
-    initAjaxOption = function () {
-      return { dataType: 'json', contentType: 'application/json' };
-    };
-
-  module.listTopics = function () {
-    var ajaxOptions = initAjaxOption();
-    ajaxOptions.method = 'GET';
-    ajaxOptions.url = List_TOPICS_API_URL;
-    //ajaxOptions.data = { client: 'PZaLFuj077kDkBQuAQQ' };
-    ajaxOptions.data = { client: config.Key };
-    return ajaxOptions;
-  };
-
-  return module;
-})(ioradWebWidget.util.uservoice || {}, ioradWebWidget.config.uservoice || {});
 
 ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, templates, $) {
 
@@ -111,6 +88,12 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
     return oauthToken && oauthTokenSecret && oauthVerifier;
   };
 
+  module.getOauthHeader = function (ajaxOptions) {
+    var oauthData = oauthClient.authorize(ajaxOptions, { public: oauthToken, secret: oauthTokenSecret });
+    oauthData.oauth_verifier = oauthVerifier;
+    return oauthClient.toHeader(oauthData);
+  };
+
   /**
    * Execute a 3-legged authentication. oauth 1.0a
    * @param {} callback callback function to execute once authorization process is done.
@@ -132,3 +115,26 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
    ioradWebWidget.util.uservoice.oauthClient || {},
    ioradWebWidget.templates.uservoiceTemplates || {},
    jQuery);
+
+ioradWebWidget.util.uservoice = (function (module, config, oauthService) {
+  /**
+   * this field is used to populate the options field when initializing iorad.js.
+   */
+  module.ioradPluginType = 'uservoiceweb_solutions';
+
+  var ARTICLE_API_URL = '/api/v1/articles.json',
+    List_TOPICS_API_URL = '/api/v1/topics.json',
+    initAjaxOption = function () {
+      return { dataType: 'json', contentType: 'application/json' };
+    };
+
+  module.listTopics = function () {
+    var ajaxOptions = initAjaxOption();
+    ajaxOptions.method = 'GET';
+    ajaxOptions.url = List_TOPICS_API_URL;
+    ajaxOptions.headers = oauthService.getOauthHeader(ajaxOptions);
+    return ajaxOptions;
+  };
+
+  return module;
+})(ioradWebWidget.util.uservoice || {}, ioradWebWidget.config.uservoice || {}, ioradWebWidget.util.uservoice.oauthService || {});
