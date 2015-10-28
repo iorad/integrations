@@ -7,50 +7,79 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+
     <script type="text/javascript">
-    var outer_dialog;
-    var outer_confluence;
-    //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
-    AP.require(["confluence", "dialog"], function(confluence, dialog) {
-        //  debugger;
+        var outer_dialog;
+        var outer_confluence;
+        //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
+        AP.require(["confluence", "dialog"], function (confluence, dialog) {
 
-        outer_confluence = confluence;
-        outer_dialog = dialog;
+            outer_confluence = confluence;
+            outer_dialog = dialog;
 
-        //check if tutorial exists, if  yes show edit button 
+            //check if tutorial exists, if  yes show edit button
 
-        // if there is not tutorial start capturing or show start capturing button
+            // if there is not tutorial start capturing or show start capturing button
 
-        confluence.getMacroData(function(data) {
-            debugger;
-            if (data == undefined || data.tutorID == undefined) {
+            confluence.getMacroData(function (data) {
+                if (data == undefined || data.tutorID == undefined) {
+                    $("#create-solution").show();
+                    showSave = false;
+                } else {
+                    tutorID = data.tutorID;
+                    tutorialTitle = data.tutorialTitle;
+                    tutorUID = data.tutorUID;
+                    iframeUrl = data.iframeUrl;
 
-
-                $("#startCapturing").show();
-
-
-            } else {
-                tutorID = data.tutorID;
-                tutorialTitle = data.tutorialTitle;
-                tutorUID = data.tutorUID;
-                iframeUrl = data.iframeUrl;
-                $("#previewContainer").html(iframeUrl);
-                $("#editSolution").show();
-            }
-
+                    $("#edit-solution").show();
+                    $("#previewContainer").html(iframeUrl);
+                    showSave = true;
+                }
+            });
         });
 
-
-    });
     </script>
 </head>
 
 <body>
-    <div style="display:none" id="congratsCaptured">Congratulations you have captured your article, please press insert(save) to embed your tutorial.</div>
-    <div id="previewContainer" style="width:100%; height:600px"></div>
-    <button id="startCapturing" style="display:none" class="aui-button aui-button-primary">Create New Solution</button>
-    <button id="editSolution" style="display:none" class="aui-button aui-button-primary">Edit Solution</button>
-    <button id="cancelCapture" class="aui-button aui-button-primary">Cancel</button>
-    <button id="insertSolution" style="display:none" class="aui-button aui-button-primary">Insert</button>
-    <button id="saveSolution" style="display:none" class="aui-button aui-button-primary">Save</button>
+    <section id="create-solution">
+        <img class="logo" alt="" src="logo.png">
+        <p class="info">Instant step-by-step knowledgebase solutions articles</p>
+
+        <div class="bottom">
+            <a class="help" href="">Need Help?</a>
+            <div class="buttons">
+                <button id="cancelCapture" class="button">Cancel</button>
+                <button id="startCapturing" class="green button">Capture New Solution</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="insert-solution">
+        <div class="preview" id="solutionPreviewContainer"></div>
+
+        <div class="bottom">
+            <button id="editSolution" class="bordered button">Edit Solution</button>
+            <div class="buttons">
+                <button id="cancelSolution" class="button">Cancel</button>
+                <button id="insertSolution" class="green button">Insert</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="edit-solution">
+        <div class="preview" id="previewContainer"></div>
+
+        <div class="bottom">
+            <a class="help" href="">Need Help?</a>
+            <div class="buttons">
+                <button id="cancelEditing" class="button">Cancel</button>
+                <button id="editEditing" class="green button">Edit</button>
+                <button id="saveEditing" class="green button">Save & Close</button>
+            </div>
+        </div>
+    </section>
 </body>
+
+</html>
