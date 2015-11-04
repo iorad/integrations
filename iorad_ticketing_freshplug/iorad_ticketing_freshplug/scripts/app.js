@@ -93,11 +93,17 @@
             folderId = +jQuery("#folderSelector").val(),
             ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}",
             statusCode = ioradFreshplug.markAsPublished ? 2 : 1,
-            article = {
+            articleDescription = "<div>" + $tutorialIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>";
+
+          tutorialParams.steps.each(function (step) {
+            articleDescription += "<div style='display: none;'>" + step.description + "</div>";
+          });
+          
+          var article = {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
-                "description": "<div>" + $tutorialIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>",
+                "description": articleDescription,
                 "status": statusCode
               }
             },
