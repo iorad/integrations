@@ -1,4 +1,4 @@
-/*! iorad-ticketing-freshplug - v1.0.0 - 11-05-2015 */CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
+/*! iorad-ticketing-freshplug - v1.0.1 - 11-05-2015 */CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
 CustomWidget.include_js("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js");
 
 var ioradFreshplug = (function (module, undefined) {

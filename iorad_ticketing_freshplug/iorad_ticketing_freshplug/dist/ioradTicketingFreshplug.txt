@@ -17,7 +17,7 @@
     }
 </style>
 <script type="text/javascript">
-    /*! iorad-ticketing-freshplug 2015-09-29 */
+    /*! iorad-ticketing-freshplug 2015-11-05 */
     CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js"), CustomWidget.include_js("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js");
     var ioradFreshplug = function(a, b) {
             return a = {
@@ -286,16 +286,20 @@
                                 h = +jQuery("#folderSelector").val(),
                                 i = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}",
                                 j = ioradFreshplug.markAsPublished ? 2 : 1,
-                                k = {
+                                k = "<div>" + f.prop("outerHTML").replace(/\"/g, "'") + "</div>";
+                            c.steps.each(function(a) {
+                                k += "<div style='display: none;'>" + a.description + "</div>"
+                            });
+                            var l = {
                                     solution_article: {
                                         title: c.tutorialTitle,
                                         folder_id: h,
-                                        description: "<div>" + f.prop("outerHTML").replace(/\"/g, "'") + "</div>",
+                                        description: k,
                                         status: j
                                     }
                                 },
-                                l = JSON.stringify(k);
-                            ioradFreshplug.requests.createArticle(g, h, l).then(function(a) {
+                                m = JSON.stringify(l);
+                            ioradFreshplug.requests.createArticle(g, h, m).then(function(a) {
                                 var b = i.replace("{categoryId}", g).replace("{folderId}", h).replace("{id}", a.article.id);
                                 if (e.length > 0 && !ioradFreshplug.freshplug_webwidgetmode) {
                                     e.append("<p>This solution article should help you: " + ioradFreshplug.templates.getHyperLink(b, c.tutorialTitle) + "</p>");
