@@ -1,5 +1,5 @@
 ﻿ioradWebWidget.config.uservoice = (function (uv) {
-  uv.consumerPublic = 'PZaLFuj077kDkBQuAQQ';
-  uv.consumerSecret = 'OfDELFvGD27y3ErTvkc7MhkMfzFSyNrv4HwG9P9Ss';
+  uv.consumerPublic = 'UZhRzS1zeDzn06PucuuMrg';
+  uv.consumerSecret = 'EDBZ5cw5TtJy1lmLudPDMgl799NpcsibwrQLf56iPs';
   return uv;
 })(ioradWebWidget.config.uservoice || {});

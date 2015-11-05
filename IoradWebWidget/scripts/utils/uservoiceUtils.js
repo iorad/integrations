@@ -20,8 +20,8 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
   var tokenResponseTextRegex    = /oauth_token=(.*)&oauth_token_secret=(.*)/,
     authorizeResponseTextRegex  = /oauth_token=.*&oauth_verifier=(.*)/;
 
-  var requestTokenUrl = 'https://iorad8.uservoice.com/oauth/request_token.json',
-    accessTokenUrl    = 'https://iorad8.uservoice.com/oauth/access_token.json';
+  var requestTokenUrl = '/oauth/request_token.json',
+    accessTokenUrl = '/oauth/access_token.json';
   
   var oauthToken, oauthTokenSecret, oauthVerifier;
 
@@ -40,7 +40,7 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
   var onAuthFrameLoaded = function (e, callback) {
     var authorizeReturnText = e.originalEvent.target.contentWindow.document.body.textContent,
       options = ajaxOptions();
-    options.url = accessTokenUrl;
+    options.url = window.location.origin + accessTokenUrl;
 
     // user accepted the request.
     if (authorizeReturnText.contains(oauthToken)) {
@@ -75,7 +75,7 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
     if (data.status === 200) {
       extractToken(data.responseText);
 
-      $("body").append(templates.authorizeModal(window.location.protocol + "//" + window.location.hostname, oauthToken));
+      $("body").append(templates.authorizeModal(window.location.origin, oauthToken));
       $("#oauthModal").modal('show');
 
       $("#authFrame").load(function (e) {
@@ -90,7 +90,7 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
 
   module.getOauthHeader = function (ajaxOptions) {
     var oauthData = oauthClient.authorize(ajaxOptions, { public: oauthToken, secret: oauthTokenSecret });
-    oauthData.oauth_verifier = oauthVerifier;
+    //oauthData.oauth_verifier = oauthVerifier;
     return oauthClient.toHeader(oauthData);
   };
 
@@ -101,7 +101,7 @@ ioradWebWidget.util.uservoice.oauthService = (function (module, oauthClient, tem
    */
   module.authorize = function (callback) {
     var options = ajaxOptions();
-    options.url = requestTokenUrl;
+    options.url = window.location.origin + requestTokenUrl;
     $.ajax({
         url: options.url,
         type: options.method,
@@ -125,15 +125,42 @@ ioradWebWidget.util.uservoice = (function (module, config, oauthService) {
   var ARTICLE_API_URL = '/api/v1/articles.json',
     List_TOPICS_API_URL = '/api/v1/topics.json',
     initAjaxOption = function () {
-      return { dataType: 'json', contentType: 'application/json' };
+      return { dataType: 'json', contentType: 'application/x-www-form-urlencoded; charset=UTF-8' };
     };
 
   module.listTopics = function () {
     var ajaxOptions = initAjaxOption();
     ajaxOptions.method = 'GET';
-    ajaxOptions.url = List_TOPICS_API_URL;
+    ajaxOptions.url = window.location.origin + List_TOPICS_API_URL;
     ajaxOptions.headers = oauthService.getOauthHeader(ajaxOptions);
     return ajaxOptions;
+  };
+
+  module.createArticle = function (article) {
+    var ajaxOptions = initAjaxOption();
+    ajaxOptions.method = 'POST';
+    ajaxOptions.url = window.location.origin + ARTICLE_API_URL;
+    ajaxOptions.data = article;
+    ajaxOptions.headers = oauthService.getOauthHeader(ajaxOptions);
+    return ajaxOptions;
+  };
+
+  module.listArticles = function () {
+    var ajaxOptions = initAjaxOption();
+    ajaxOptions.method = 'GET';
+    ajaxOptions.url = window.location.origin + ARTICLE_API_URL;
+    ajaxOptions.headers = oauthService.getOauthHeader(ajaxOptions);
+    return ajaxOptions;
+  };
+
+  // generate article object.
+  module.createArticleObject = function (title, body, isPublished, topicId) {
+    return {
+      'article[question]': title,
+      'article[answer_html]': body,
+      'article[published]': isPublished,
+      'article[topic_id]': topicId
+    };
   };
 
   return module;

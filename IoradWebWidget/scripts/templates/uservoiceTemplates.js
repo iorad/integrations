@@ -21,6 +21,14 @@
     var template = JST["templates/uservoice/widgetBodyTemplate.hbs"];
     return template({topics : topics});
   };
+
+  module.onArticleCreatedSuccessModal = function (article) {
+    var template = JST["templates/uservoice/successModalTemplate.hbs"];
+    return template({
+      articleTitle: article.title,
+      articleUrl: article.url
+    });
+  };
   
   return module;
 })(ioradWebWidget.templates.uservoiceTemplates || {}, JST || {});

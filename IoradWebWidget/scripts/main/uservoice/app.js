@@ -38,8 +38,16 @@
         var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
               tutorialParams.tutorialId, tutorialParams.tutorialTitle),
           $tutorialIframe = $(iframeHTML),
-          topicId = $("#topicSelector").val();
+          topicId = $("#topicSelector").val(),
+          article = utils.uservoice.createArticleObject(tutorialParams.tutorialTitle, ioradWebWidget.templates.articleTemplate($tutorialIframe.attr("src"), tutorialParams.steps).replace(/\"/g, "'"), true, topicId);
 
+        $.ajax(utils.uservoice.createArticle(article))
+          .complete(function (data) {
+            $('body').find('#successModal').remove();
+            $('body').append(ioradWebWidget.templates.uservoiceTemplates.onArticleCreatedSuccessModal(data.responseJSON.article));
+            debugger;
+            $('#successModal').modal('show');
+          });
       });
     });
   };
