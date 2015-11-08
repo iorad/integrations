@@ -86,3 +86,45 @@ $(document).ready(function() {
   // Iorad starts here.
 });
 ```
+
+## Uservoice Webwidget
+
+### To Install:
+* Ask Uservoice support to turn on scripting on your web portal.
+* Create a new integration application @ /admin/settings/api
+* Remember to set the application's trusted setting to no.
+* Remember the key and secret.
+* Go to Web Portal tab
+* Copy and paste the code snippet below into the ```<!-- JAVASCRIPT SNIPPET -->``` textarea.
+```
+<!-- third party libraries -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- sha1 -->
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
+<!-- sha256 -->
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
+
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- user setup required here. -->
+<!-- Create an API key @ /admin/settings/api -->
+<!-- Remember to set the API application to be untrusted. -->
+<script>
+  window.ioradWebWidgetApiKeys = {
+    consumerPublic: 'Key',
+    consumerSecret: 'Secret'
+  };
+</script>
+
+<!-- uservoice webwidget. We should host this ourselves. -->
+
+<script src="https://dl.dropboxusercontent.com/u/23292243/IoradWebWidget-Uservoice.js"></script>
+```
+Now go to your webportal to see the web widget working.
+
