@@ -1,4 +1,4 @@
-/*! iorad-ticketing-freshplug - v1.0.0 - 09-29-2015 */CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
+/*! iorad-ticketing-freshplug - v1.0.1 - 11-05-2015 */CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
 CustomWidget.include_js("//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js");
 
 var ioradFreshplug = (function (module, undefined) {
@@ -266,11 +266,17 @@ this["JST"]["templates/knowledgebaseArticleCreatedModal.hbs"] = Handlebars.templ
             folderId = +jQuery("#folderSelector").val(),
             ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}",
             statusCode = ioradFreshplug.markAsPublished ? 2 : 1,
-            article = {
+            articleDescription = "<div>" + $tutorialIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>";
+
+          tutorialParams.steps.each(function (step) {
+            articleDescription += "<div style='display: none;'>" + step.description + "</div>";
+          });
+          
+          var article = {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
                 "folder_id": folderId,
-                "description": "<div>" + $tutorialIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>",
+                "description": articleDescription,
                 "status": statusCode
               }
             },
