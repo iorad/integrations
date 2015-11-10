@@ -8,37 +8,35 @@
     <script type="text/javascript" src="iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css">
-
     <script type="text/javascript">
-        var outer_dialog;
-        var outer_confluence;
-        //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
-        AP.require(["confluence", "dialog"], function (confluence, dialog) {
+    var outer_dialog;
+    var outer_confluence;
+    //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
+    AP.require(["confluence", "dialog"], function(confluence, dialog) {
 
-            outer_confluence = confluence;
-            outer_dialog = dialog;
+        outer_confluence = confluence;
+        outer_dialog = dialog;
 
-            //check if tutorial exists, if  yes show edit button
+        //check if tutorial exists, if  yes show edit button
 
-            // if there is not tutorial start capturing or show start capturing button
+        // if there is not tutorial start capturing or show start capturing button
 
-            confluence.getMacroData(function (data) {
-                if (data == undefined || data.tutorID == undefined) {
-                    $("#create-solution").show();
-                    showSave = false;
-                } else {
-                    tutorID = data.tutorID;
-                    tutorialTitle = data.tutorialTitle;
-                    tutorUID = data.tutorUID;
-                    iframeUrl = data.iframeUrl;
+        confluence.getMacroData(function(data) {
+            if (data == undefined || data.tutorID == undefined) {
+                $("#create-solution").show();
+                showSave = false;
+            } else {
+                tutorID = data.tutorID;
+                tutorialTitle = data.tutorialTitle;
+                tutorUID = data.tutorUID;
+                iframeUrl = data.iframeUrl;
 
-                    $("#edit-solution").show();
-                    $("#previewContainer").html(iframeUrl);
-                    showSave = true;
-                }
-            });
+                $("#edit-solution").show();
+                $("#previewContainer").html(iframeUrl);
+                showSave = true;
+            }
         });
-
+    });
     </script>
 </head>
 
@@ -46,7 +44,7 @@
     <section id="create-solution">
         <img class="logo" alt="" src="logo.png">
         <p class="info">Instant step-by-step knowledgebase solutions articles</p>
-
+        <img class="logo" alt="" src="steps.png" class="stepsIMG">
         <div class="bottom">
             <a class="help" href="">Need Help?</a>
             <div class="buttons">
@@ -55,10 +53,8 @@
             </div>
         </div>
     </section>
-
     <section id="insert-solution">
         <div class="preview" id="solutionPreviewContainer"></div>
-
         <div class="bottom">
             <button id="editSolution" class="bordered button">Edit Solution</button>
             <div class="buttons">
@@ -67,10 +63,8 @@
             </div>
         </div>
     </section>
-
     <section id="edit-solution">
         <div class="preview" id="previewContainer"></div>
-
         <div class="bottom">
             <a class="help" href="">Need Help?</a>
             <div class="buttons">
