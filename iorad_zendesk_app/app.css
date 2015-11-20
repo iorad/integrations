@@ -12,6 +12,11 @@ div.input-control {
   margin: 32px 24px;
 }
 
+div.input-settings {
+  margin-left: 22px;
+  margin-bottom: 8px;
+}
+
 div.input-control-ticket-sidebar {
   margin: 24px;
 }

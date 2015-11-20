@@ -23,6 +23,8 @@
     currentPluginType: '',
 
     addToHelpCenter: false,
+    
+    addToHelpCenterAsDraft: false,
 
     pluginTypes: {
       SOLUTION: 'zendeskapp_solutions', // this is a nav bar app that creates tutorials.
@@ -32,25 +34,29 @@
     TICKET_COMMENT_MARKDOWN_FORMAT: '[%@](https:%@)',
 
     events: {
-      'app.activated'                   : 'init',
-      'pane.activated'                  : 'runSolutionApp',
-      'fetchCategories.done'            : 'onFetchCategories',
-      'fetchSections.done'              : 'onFetchSections',
-      'createArticle.done'              : 'onCreateArticle',
-      'createArticle.fail'              : 'onCreateArticleFailed',
-      'fetchLocales.done'               : 'onLocaleLoaded',
-      'click .btn-iorad-widget'         : 'submitNewTutorial',
-      'click #addToHelpCenterToggle'    : 'onAddToHelpCenterToggleClicked',
-      'change .categoryOptions'         : 'updateSectionOptions',
-      'iframe.editor.close'             : 'onIoradClose',
-      'hidden #mySuccessModal'          : 'onModalHidden',
-      'hidden #myErrorModal'            : 'onModalHidden',
-      'hidden #mylinkCreatedModal'      : 'onModalHidden'
+      'app.activated'                       : 'init',
+      'pane.activated'                      : 'runSolutionApp',
+      'fetchCategories.done'                : 'onFetchCategories',
+      'fetchSections.done'                  : 'onFetchSections',
+      'createArticle.done'                  : 'onCreateArticle',
+      'createArticle.fail'                  : 'onCreateArticleFailed',
+      'fetchLocales.done'                   : 'onLocaleLoaded',
+      'click .btn-iorad-widget'             : 'submitNewTutorial',
+      'click #addToHelpCenterToggle'        : 'onAddToHelpCenterToggleClicked',
+      'click #addToHelpCenterAsDraftToggle' : 'onAddToHelpCenterAsDraftToggleClicked',
+      'change .categoryOptions'             : 'updateSectionOptions',
+      'iframe.editor.close'                 : 'onIoradClose',
+      'hidden #mySuccessModal'              : 'onModalHidden',
+      'hidden #myErrorModal'                : 'onModalHidden',
+      'hidden #mylinkCreatedModal'          : 'onModalHidden'
     },
 
     requests: require('requests.js'),
 
     init: function () {
+      // apply app settings
+      this.addToHelpCenterAsDraft = this.settings['addToHelpCenterAsDraft'];
+      
       this.ajax('fetchLocales');
       this.runTicketingApp();
     },
@@ -116,7 +122,12 @@
     onFetchSections: function (data) {
       this.lastSectionsList = data.sections;
       if (this.currentPluginType === this.pluginTypes.SOLUTION) {
-        this.switchTo('ioradWidgetControl', { categories: this.categoriesList, sections: this.lastSectionsList });
+        this.switchTo('ioradWidgetControl',
+          {
+            categories: this.categoriesList,
+            sections: this.lastSectionsList,
+            settings: this.settings
+          });
       } else {
         this.showTicketingView();
       }
@@ -151,6 +162,10 @@
         this.showTicketingView();
       }
     },
+    
+    onAddToHelpCenterAsDraftToggleClicked: function (event) {
+      this.addToHelpCenterAsDraft = event.target.checked;
+    },
 
     submitNewTutorial: function (event) {
       event.preventDefault();
@@ -178,7 +193,11 @@
     },
 
     initializeSolutionAppControl: function () {
-      this.switchTo('ioradWidgetControl', { categories: this.categoriesList });
+      this.switchTo('ioradWidgetControl',
+        {
+          categories: this.categoriesList,
+          settings: this.settings
+        });
       var selectedCategoryId = parseInt(this.$('.categoryOptions').val(), 10);
       this.ajax('fetchSections', selectedCategoryId);
     },
@@ -203,7 +222,8 @@
         article: {
           "title": data.tutorialTitle,
           "locale": this.myDefaultLocale,
-          "body": articleBody
+          "body": articleBody,
+          "draft": this.addToHelpCenterAsDraft
         }
       });
 

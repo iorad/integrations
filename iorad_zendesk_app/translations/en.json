@@ -96,6 +96,11 @@
     "addToKnowledgebaseToggleText": {
       "value": "Auto-add Solution to Help Center",
       "title": "text appears next to the checkbox in ticket sidebar"
+    },
+    
+    "addToKnowledgebaseAsDraftToggleText": {
+      "value": "Save as draft",
+      "title": "text appears next to the checkbox in ticket sidebar / nav bar"
     }
   },
 
