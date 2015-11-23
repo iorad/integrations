@@ -3,11 +3,26 @@
 
 <head>
     <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
-    <script src="https://ioradconfluence.atlassian.net/wiki/atlassian-connect/all.js" type="text/javascript"></script>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script>
+    (function() {
+            var getUrlParam = function(param) {
+                var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
+                return decodeURIComponent(codedParam);
+            };
+
+            var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
+            $.getScript(baseUrl + '/atlassian-connect/all.js', function() {
+
+
+
+            	
+            })();
+    </script>
     <script type="text/javascript">
     var outer_dialog;
     var outer_confluence;
@@ -44,7 +59,7 @@
     <section id="create-solution">
         <img class="logo" alt="" src="logo.png">
         <p class="info">Create a step-by-step solutions is simple as 123</p>
-        <img  alt="" src="steps.png" class="stepsIMG">
+        <img alt="" src="steps.png" class="stepsIMG">
         <div class="bottom">
             <a class="help" href="">Need Help?</a>
             <div class="buttons">

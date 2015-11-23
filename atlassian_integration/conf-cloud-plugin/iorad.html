@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
-        <script src="//192.168.50.1:1990/confluence/atlassian-connect/all.js" type="text/javascript"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script type="text/javascript" src="iorad.js"></script>
-        <script type="text/javascript" src="main.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var iframeUrl = getAttrsFromIframe(getUrlParameter("iframeUrl"), "src");
-                if (iframeUrl == "") {
-                    $("#noMacroInfo").show();
-                } else {
-                    location = iframeUrl;
-                }
-            });
+<head>
+    <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    (function() {
+            var getUrlParam = function(param) {
+                var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
+                return decodeURIComponent(codedParam);
+            };
 
-        </script>
-    </head>
+            var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
+            $.getScript(baseUrl + '/atlassian-connect/all.js', function() {
 
-    <body>
-        <div id="noMacroInfo" style="display:none">
-            <h1>please edit the macro to embed the tutorial</h1>
-        </div>
-    </body>
+
+
+
+            })();
+    </script>
+    <script type="text/javascript" src="iorad.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var iframeUrl = getAttrsFromIframe(getUrlParameter("iframeUrl"), "src");
+        if (iframeUrl == "") {
+            $("#noMacroInfo").show();
+        } else {
+            location = iframeUrl;
+        }
+    });
+    </script>
+</head>
+
+<body>
+    <div id="noMacroInfo" style="display:none">
+        <h1>please edit the macro to embed the tutorial</h1>
+    </div>
+</body>
+
 </html>
