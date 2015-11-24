@@ -208,11 +208,14 @@
 
     createArticle: function (data) {
       var iframeHTML = iorad.getEmbeddedPlayerUrl(
-        data.uid,
-        data.tutorialId,
-        data.tutorialTitle
-      ),
-        articleBody = helpers.fmt("<p>%@</p>", iframeHTML);
+          data.uid,
+          data.tutorialId,
+          data.tutorialTitle
+        ),
+        articleBody = helpers.fmt("<p>%@</p>", iframeHTML),
+        saveAsDraft = this.currentPluginType === this.pluginTypes.SOLUTION ?
+                          this.addToHelpCenterAsDraft
+                          : false;
 
       _.each(data.steps, function (step) {
         articleBody += helpers.fmt("<p style='display: none;'>%@</p>", helpers.safeString(step.description).string);
@@ -223,7 +226,7 @@
           "title": data.tutorialTitle,
           "locale": this.myDefaultLocale,
           "body": articleBody,
-          "draft": this.addToHelpCenterAsDraft
+          "draft": saveAsDraft
         }
       });
 
