@@ -9,3 +9,6 @@ Create step-by-step tutorial and post straight to your selected Zendesk Help Cen
 ### Version 2.1.0
 * Added the addToHelpCenterAsDraft App setting.
 Users can now decide whether or not to save the tutorial as a draft in the navbar app view.
+
+### Version 2.1.1
+* Add missing localization string in app setting.
