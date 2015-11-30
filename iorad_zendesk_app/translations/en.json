@@ -12,11 +12,11 @@
     "parameters": {
       "addToHelpCenterAsDraft": {
         "label": {
-          "value": "Add to Help Center as Draft?",
+          "value": "Default article status DRAFT",
           "title": "app setting display label"
         },
         "helpText": {
-          "value": "Choose a default article status (Draft/release) at tutorial creation. This setting can also be overwritten in the navbar app view UI.",
+          "value": "Uncheck this option to autopublish to the Help Center.",
           "title": "short description for this app setting"
         }
       }
