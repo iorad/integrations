@@ -4,8 +4,8 @@
 <head>
     <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script>
-    (function() {
+    <script type="text/javascript">
+    function addScript() {
          debugger;
             var getUrlParam = function(param) {
                 var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
@@ -21,7 +21,9 @@
                 
             });
 
-});
+}
+
+addScript();
     </script>
     <script type="text/javascript" src="iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
