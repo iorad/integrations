@@ -16,7 +16,14 @@
             $.getScript(baseUrl + '/atlassian-connect/all.js', function() {
 
 
-
+    $(document).ready(function() {
+        var iframeUrl = getAttrsFromIframe(getUrlParameter("iframeUrl"), "src");
+        if (iframeUrl == "") {
+            $("#noMacroInfo").show();
+        } else {
+            location = iframeUrl;
+        }
+    });
 
                 
             });
@@ -27,16 +34,7 @@ addScript();
     </script>
     <script type="text/javascript" src="iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        var iframeUrl = getAttrsFromIframe(getUrlParameter("iframeUrl"), "src");
-        if (iframeUrl == "") {
-            $("#noMacroInfo").show();
-        } else {
-            location = iframeUrl;
-        }
-    });
-    </script>
+ 
 </head>
 
 <body>

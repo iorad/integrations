@@ -9,6 +9,8 @@
     <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript">
+    var outer_dialog;
+    var outer_confluence;
     function addScript() {
          debugger;
             var getUrlParam = function(param) {
@@ -21,17 +23,7 @@
 
 
 
-
-                
-            });
-
-}
-
-addScript();
-    </script>
-    <script type="text/javascript">
-    var outer_dialog;
-    var outer_confluence;
+ 
     //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
     AP.require(["confluence", "dialog"], function(confluence, dialog) {
 
@@ -58,7 +50,14 @@ addScript();
             }
         });
     });
+                
+            });
+
+}
+
+addScript();
     </script>
+   
 </head>
 
 <body>
