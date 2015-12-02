@@ -6,6 +6,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
     (function() {
+         debugger;
             var getUrlParam = function(param) {
                 var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
                 return decodeURIComponent(codedParam);
@@ -17,7 +18,10 @@
 
 
 
-            })();
+                
+            });
+
+});
     </script>
     <script type="text/javascript" src="iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
