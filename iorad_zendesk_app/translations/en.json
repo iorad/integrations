@@ -8,6 +8,18 @@
     "name": {
       "value": "Iorad",
       "title": "app name"
+    },
+    "parameters": {
+      "addToHelpCenterAsDraft": {
+        "label": {
+          "value": "Default article status DRAFT",
+          "title": "app setting display label"
+        },
+        "helpText": {
+          "value": "Uncheck this option to autopublish to the Help Center.",
+          "title": "short description for this app setting"
+        }
+      }
     }
   },
 
@@ -96,6 +108,11 @@
     "addToKnowledgebaseToggleText": {
       "value": "Auto-add Solution to Help Center",
       "title": "text appears next to the checkbox in ticket sidebar"
+    },
+    
+    "addToKnowledgebaseAsDraftToggleText": {
+      "value": "Save as draft",
+      "title": "text appears next to the checkbox in ticket sidebar / nav bar"
     }
   },
 

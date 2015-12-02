@@ -2,7 +2,7 @@ var env         = 'live', // cfdev, prod or live; default: live.
   customBaseUrl = ''; //baseUrl when this variable is set
 module.exports = {
   buildIframe: function (playerUrl) {
-    return "<iframe src='" + playerUrl + "' width='100%' scrolling='no' height='500px' style='border:0px;' allowfullscreen='true'></iframe>";
+    return "<iframe src='" + playerUrl + "' width='100%' scrolling='no' height='500px' style='border:2px solid #ebebeb;' allowfullscreen='true'></iframe>";
   },
 
   getBaseUrl: function () {
