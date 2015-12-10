@@ -31,7 +31,7 @@
       TICKETING: 'zendeskapp_ticketing' // this is a ticket sidebar app that creates tutorials for existing and new tickets.
     },
 
-    TICKET_COMMENT_MARKDOWN_FORMAT: '[%@](https:%@)',
+    TICKET_COMMENT_MARKDOWN_FORMAT: '[%@](%@)',
 
     events: {
       'app.activated'                       : 'init',
