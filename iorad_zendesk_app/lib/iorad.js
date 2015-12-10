@@ -13,13 +13,13 @@ module.exports = {
     var baseUrl;
     switch (env) {
     case 'cfdev':
-      baseUrl = '//localhost:8001';
+      baseUrl = 'https://localhost:8001';
       break;
     case 'prod':
-      baseUrl = '//test.iorad.com';
+      baseUrl = 'https://test.iorad.com';
       break;
     default:
-      baseUrl = '//www.iorad.com';
+      baseUrl = 'https://www.iorad.com';
       break;
     }
 
