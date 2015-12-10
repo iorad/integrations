@@ -8,6 +8,6 @@
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">{{t "modalTemplate.closeButton"}}</button>
-    <a class="btn btn-primary" role="button" href="{{url}}">{{t "modalTemplate.viewArticleButton"}}</a>
+    <a class="btn btn-primary" role="button" href="{{url}}" target="_blank">{{t "modalTemplate.viewArticleButton"}}</a>
   </div>
 </div>
