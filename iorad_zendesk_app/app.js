@@ -240,17 +240,17 @@
         comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, data.tutorialTitle, url);
 
       this.comment().text(this.comment().text() + comment);
-      this.showLinkCreatedModal();
+      this.showLinkCreatedModal(url);
     },
 
     addSolutionUrlToNewTicketComment: function (article) {
       var comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, article.title, article.url);
       this.comment().text(this.comment().text() + comment);
-      this.showLinkCreatedModal();
+      this.showLinkCreatedModal(article.url);
     },
 
-    showLinkCreatedModal: function () {
-      this.switchTo('linkCreatedModal', { addToHelpCenter: this.addToHelpCenter });
+    showLinkCreatedModal: function (articleUrl) {
+      this.switchTo('linkCreatedModal', { addToHelpCenter: this.addToHelpCenter, url: articleUrl });
       this.$("#mylinkCreatedModal").modal({
         backdrop: true,
         keyboard: false

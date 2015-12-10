@@ -11,6 +11,7 @@
     {{/if}}
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">{{t "modalTemplate.okButton"}}</button>
+    <button class="btn" data-dismiss="modal" aria-hidden="true">{{t "modalTemplate.closeButton"}}</button>
+    <a class="btn btn-primary" role="button" href="{{url}}" target="_blank">{{t "modalTemplate.viewArticleButton"}}</a>
   </div>
 </div>
