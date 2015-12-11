@@ -12,3 +12,8 @@ Users can now decide whether or not to save the tutorial as a draft in the navba
 
 ### Version 2.1.1
 * Add missing localization string in app setting.
+
+### Version 2.2.0
+* Hotfix:
+  When replying a comment with an iorad solution, there is https prefix in the comment url, this breaks the attached url.
+* Add View Article button in the modal popup window in ticketing app view when an article is succesfully created.
