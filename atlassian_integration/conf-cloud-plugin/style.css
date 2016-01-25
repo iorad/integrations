@@ -167,7 +167,7 @@ section#insert-solution,
 
 .bottom {
     background: rgba(0, 0, 0, 0) url("line.png") no-repeat scroll 0 0 / 100% 2px;
-    bottom: 5%;
+    bottom: 80px;
     position: absolute;
     width: 92%;
     height: 10%;
