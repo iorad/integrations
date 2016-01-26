@@ -347,12 +347,16 @@ var Backbone = Backbone || ({
         //console.log('create a new tutorial now...');
         $('#iorad-editor-wrapper').empty();
         $('#iorad-editor-wrapper').append('<iframe id="iorad-editor" src="'+ newTutorialEditorUrl() +'"></iframe>');
+        var $editor = $('#iorad-editor');
+        $editor.height($editor.height()- 51);
     });
 
     iorad.on('editor:edit', function(tutorialParams) {
         //console.log('edit an existing tutorial now...' + tutorialId);
         $('#iorad-editor-wrapper').empty();
         $('#iorad-editor-wrapper').append('<iframe id="iorad-editor" src="'+ existingTutorialEditorUrl(tutorialParams) +'"></iframe>');
+        var $editor = $('#iorad-editor');
+        $editor.height($editor.height()- 51);
     });
 
 
