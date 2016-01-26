@@ -54,6 +54,8 @@
                     $("#create-solution").hide();
                     $("#insert-solution").show();
                     $("#solutionPreviewContainer").html(iframeUrl);
+                     var $editor = $('#iorad-editor');
+                     $editor.height($editor.height()- 51);
                 });
             });
         });
@@ -88,6 +90,9 @@
                         $("#insert-solution").show();
                         $("#solutionPreviewContainer").html(iframeUrl);
                     }
+                    
+                      var $editor = $('#iorad-editor');
+                     $editor.height($editor.height()- 51);
                 });
             });
         });
