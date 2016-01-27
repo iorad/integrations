@@ -17,3 +17,6 @@ Users can now decide whether or not to save the tutorial as a draft in the navba
 * Hotfix:
   When replying a comment with an iorad solution, there is https prefix in the comment url, this breaks the attached url.
 * Add View Article button in the modal popup window in ticketing app view when an article is succesfully created.
+
+### Version 2.2.1
+* Makes the switch from zendesk agent view to iorad screen capture page smoother.
