@@ -230,3 +230,14 @@ iframe {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.urlContainer {
+  display: inline-block;
+  margin-left: 100px;
+}
+
+.urlInput {
+  height: 30px;
+  width: 300px;
+  font-size: 15px;
+}

@@ -23,7 +23,7 @@
 
 
 
- 
+
     //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
     AP.require(["confluence", "dialog"], function(confluence, dialog) {
 
@@ -50,14 +50,14 @@
             }
         });
     });
-                
+
             });
 
 }
 
 addScript();
     </script>
-   
+
 </head>
 
 <body>
@@ -87,6 +87,11 @@ addScript();
         <div class="preview" id="previewContainer"></div>
         <div class="bottom">
             <a class="help" href="">Need Help?</a>
+            <div class="urlContainer">
+                <label>URL: </label>
+                <input class="urlInput" >
+                <button id="saveUrl" class="green button">Save URL</button>
+            </div>
             <div class="buttons">
                 <button id="cancelEditing" class="button">Cancel</button>
                 <button id="editEditing" class="green button">Edit</button>

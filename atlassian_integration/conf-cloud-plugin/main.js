@@ -10,7 +10,7 @@
         }
     }
 
-    function saveMacro() {
+    function saveMacro(close) {
 
         var macroParams = {
             iframeUrl: iframeUrl,
@@ -20,24 +20,42 @@
         };
 
         outer_confluence.saveMacro(macroParams);
-        outer_confluence.closeMacroEditor();
-        closeDialog(outer_dialog);
+
+        if (close) {
+            outer_confluence.closeMacroEditor();
+            closeDialog(outer_dialog);
+        }
+
         return true;
     }
 
     $(document).ready(function() {
+
+        var url = getFrameUrl();
+        if (url) {
+            $(".urlInput").val(url);
+        }
 
         $("#cancelCapture, #cancelSolution, #cancelEditing").click(function() {
             closeDialog(outer_dialog);
         });
 
         $("#saveEditing").click(function() {
-            saveMacro();
+            saveMacro(true);
         });
 
         $("#insertSolution").click(function() {
-            saveMacro();
+            saveMacro(true);
             showSave = true;
+        });
+
+        $("#saveUrl").click(function() {
+            var url = $(".urlInput").val();
+            var params = getParamsFromUrl(url);
+            if (params) {
+                serializeTutorial(params);
+                saveMacro(false);
+            }
         });
 
         $("#startCapturing").click(function() {
@@ -54,7 +72,6 @@
                     $("#create-solution").hide();
                     $("#insert-solution").show();
                     $("#solutionPreviewContainer").html(iframeUrl);
-                   
                 });
             });
         });
@@ -89,14 +106,41 @@
                         $("#insert-solution").show();
                         $("#solutionPreviewContainer").html(iframeUrl);
                     }
-                    
-                     
                 });
             });
         });
     });
 
+    function getFrameUrl {
+        var url = $("#previewContainer iframe").attr('src');
+        var href = window.location.href
+        var arr = href.split("//");
 
+        var result = arr[0] + url;
+
+        return result;
+    }
+
+    function getParamsFromUrl(frameUrl) {
+        var searchKey = "iorad.com/";
+        var n = frameUrl.indexOf(searchKey);
+        if (n == -1) {
+            return false;
+        }
+        var paramsString = frameUrl.substring(n + searchKey.length);
+        var pathArray = paramsString.split( '/' );
+        if (pathArray.length != 3) {
+            return false;
+        }
+
+        var tutorialParams = {
+            tutorialId: pathArray[1],
+            tutorialTitle: pathArray[2],
+            uid: pathArray[0]
+        };
+
+        return tutorialParams;
+    }
 
     function serializeTutorial(tutorialParams) {
         iframeUrl = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
