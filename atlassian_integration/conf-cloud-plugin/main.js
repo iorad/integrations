@@ -31,11 +31,6 @@
 
     $(document).ready(function() {
 
-        var url = getFrameUrl();
-        if (url) {
-            $(".urlInput").val(url);
-        }
-
         $("#cancelCapture, #cancelSolution, #cancelEditing").click(function() {
             closeDialog(outer_dialog);
         });
@@ -94,6 +89,8 @@
                 iorad.on('editor:close', function(tutorialParams) {
 
                     serializeTutorial(tutorialParams);
+
+                    $(".urlContainer").hide();
 
                     if(showSave) {
                         $("#insert-solution").hide();

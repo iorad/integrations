@@ -47,6 +47,11 @@
                 $("#edit-solution").show();
                 $("#previewContainer").html(iframeUrl);
                 showSave = true;
+
+                var url = getFrameUrl();
+                if (url) {
+                    $(".urlInput").val(url);
+                }
             }
         });
     });
