@@ -50,6 +50,7 @@
             if (params) {
                 serializeTutorial(params);
                 saveMacro(false);
+                $("#previewContainer").html(iframeUrl);
             }
         });
 
