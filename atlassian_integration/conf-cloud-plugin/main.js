@@ -51,7 +51,15 @@
                 serializeTutorial(params);
                 saveMacro(false);
                 $("#previewContainer").html(iframeUrl);
+            } else {
+                $(".urlInput").addClass("borderRed");
+                $(".error").show();
             }
+        });
+
+        $(".urlInput").on('change', function(){
+            $(".urlInput").removeClass("borderRed");
+            $(".error").hide();
         });
 
         $("#startCapturing").click(function() {

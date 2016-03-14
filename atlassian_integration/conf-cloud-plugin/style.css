@@ -241,3 +241,18 @@ iframe {
   width: 300px;
   font-size: 15px;
 }
+
+.borderRed {
+    border: 1px solid red;
+}
+
+.inputContainer {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
