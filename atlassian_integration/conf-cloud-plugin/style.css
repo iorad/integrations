@@ -232,14 +232,15 @@ iframe {
 }
 
 .urlContainer {
-  display: inline-block;
-  margin-left: 100px;
+    display: inline-block;
+    margin-left: 100px;
 }
 
 .urlInput {
-  height: 30px;
-  width: 300px;
-  font-size: 15px;
+    height: 30px;
+    width: 300px;
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
 .borderRed {
