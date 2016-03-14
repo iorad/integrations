@@ -111,7 +111,7 @@
         });
     });
 
-    function getFrameUrl {
+    function getFrameUrl() {
         var url = $("#previewContainer iframe").attr('src');
         var href = window.location.href
         var arr = href.split("//");
