@@ -31,13 +31,13 @@ module.exports = {
    * @param  {string} href location of current app.
    * @return {string}      tutorial editor url.
    */
-  newTutorialEditorUrl: function (href, pluginType) {
-    var referrer = href;
-    return this.getBaseUrl() + '/server/?a=app.editor&data=0&src=iframe&referrer=' + referrer + '&plugin_type=' + pluginType;
+  newTutorialEditorUrl: function (pluginType) {
+    return this.getBaseUrl() + '/node/createNewTutorial?plugin_type=' + pluginType;
+
   },
 
-  existingTutorialEditorUrl: function (tutorialParams) {
-    return this.getBaseUrl() + '/server/?a=app.editor&data=0&module=' + tutorialParams.tutorialId + '&uid=' + tutorialParams.uid;
+  existingTutorialEditorUrl: function (tutorialParams, pluginType) {
+    return this.getBaseUrl() + '/node/editor/?plugin_type=' + pluginType + '&module=' + tutorialParams.tutorialId + '&uid=' + tutorialParams.uid;
   },
 
   /**
@@ -49,7 +49,7 @@ module.exports = {
    * @param {string} tutorialTitle  tutorial title
    */
   getPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    return [this.getBaseUrl(), uid, tutorialId, tutorialTitle].join('/');
+    return [this.getBaseUrl(), 'node', 'player', uid, tutorialId, tutorialTitle].join('/');
   },
 
   /**

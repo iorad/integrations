@@ -175,7 +175,7 @@
       var $ioradEditorIframe = this.$(".iorad-editor-wrapper iframe");
       $ioradEditorIframe.addClass("iorad-editor");
       var zendeskAppsParams = $ioradEditorIframe.attr("src").replace("?", "&");
-      $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(event.view.location.href, this.currentPluginType) + zendeskAppsParams);
+      $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(this.currentPluginType) + zendeskAppsParams);
     },
 
     updateSectionOptions: function (event) {
