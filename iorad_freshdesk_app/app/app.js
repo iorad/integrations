@@ -2,20 +2,15 @@
   return {
     initialize: function () {
       if (page_type === "ticket") {
-        CustomWidget.include_js('iorad.com/server/assets/js/iorad.js');
+        debugger;
+        CustomWidget.include_js('//iorad.com/server/assets/js/iorad.js');
         this.ioradLoaded(this.initApp);
       }
     },
 
     initApp: function () {
-      iorad = window.iorad || {};
-
-      var $insertButtonsList = jQuery(jQuery('.redactor_insert_btns ul')[0]);
-      var ioradButtonTemplate = '<li class="redactor_separator"></li><li><a href="#" class="insert_iorad tooltip" data-editor-id="cnt-reply-body" rel="ticket_iorad" data-original-title="Insert Iorad Screen Capture">Iorad</a></li>';
-      var ioradButtonStyle = '<style>.insert_iorad { background-image: url("//test.iorad.com/server/assets/img/icon_iorad_freshdesk.png") !important; background-size: 100%;}</style>';
-      $insertButtonsList.append(ioradButtonTemplate);
-      $insertButtonsList.append(ioradButtonStyle);
-      $insertIoradButton = jQuery('.insert_iorad');
+      iorad = window.iorad || {};    
+      var $insertIoradButton = jQuery('.btn-iorad-widget');
       
       iorad.init({ env: "live", pluginType: "iorad_freshdesk_app_ticketing" }, function () {
 			var t = 0, $bodyHTML = jQuery("body");
@@ -39,8 +34,7 @@
 				clearTimeout(t);
 				var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
                                      tutorialParams.tutorialId, tutorialParams.tutorialTitle);
-				var $editorMessageBody = jQuery('.redactor_editor div');
-				$editorMessageBody.append("<p>" + iframeHTML + "</p>");
+        domHelper.ticket.openReply("<p>" + iframeHTML + "</p>");
 			});
 		});
     },
