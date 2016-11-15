@@ -19,9 +19,9 @@
     },
 
     handlebars: {
-      all: {
+      freshdeskDist: {
         files: {
-          "scripts/templates/handlebars/templates.js": ["templates/**/*.hbs"]
+          "scripts/templates/handlebars/freshdeskHtmlTemplates.js": ["templates/freshdesk/*.hbs", "templates/*.hbs"]
         }
       }
     },
@@ -34,18 +34,23 @@
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
           '<%= grunt.template.today("mm-dd-yyyy") %> */'
       },
-      devSrc: {
+      freshdeskDist: {
         src: [
           'scripts/vendor/handlebars/*.js',
-          'scripts/templates/handlebars/templates.js',
+          'scripts/templates/handlebars/freshdeskHtmlTemplates.js',
           'scripts/main.js',
           'scripts/config.js',
-          'scripts/utils/*.js',
-          'scripts/templates/*.js',
-          'scripts/main/**/*.js',
-          'scripts/app.js'
+          'scripts/utils/utils.js',
+          'scripts/utils/freshdeskUtils.js',
+          'scripts/templates/templateShared.js',
+          'scripts/templates/freshdeskTemplates.js',
+          'scripts/main/freshdesk/*.js',
+          'scripts/app-freshdesk.js'
         ],
-        dest: 'dist/IoradWebWidget.js'
+        dest: 'dist/IoradWebWidget-Freshdesk.js'
+      },
+      uservoiceDist: {
+        // TODO:
       }
     },
 
@@ -54,9 +59,9 @@
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      build: {
-        src: 'dist/IoradWebWidget.js',
-        dest: 'dist/IoradWebWidget.min.js'
+      freshdeskDist: {
+        src: 'dist/IoradWebWidget-Freshdesk.js',
+        dest: 'dist/IoradWebWidget-Freshdesk.min.js'
       }
     }
   });
@@ -70,9 +75,15 @@
   //run bower for package install
   grunt.registerTask('install-bower-packages', ['bower']);
 
-  //build vendor file src
-  grunt.registerTask('merge-js-files', ['handlebars', 'concat']);
+  //build all web widgets in dev mode.
+  grunt.registerTask('build-dev-js', ['handlebars', 'concat']);
 
-  //build min vendor file from above
-  grunt.registerTask('min-js-file', ['handlebars', 'concat', 'uglify']);
+  //build all web widgets in release mode.
+  grunt.registerTask('build-release-js', ['handlebars', 'concat', 'uglify']);
+
+  // build iorad web widget for freshdesk knowledgebase.
+  grunt.registerTask('build-freshdeskWebWidget-release', ['handlebars:freshdeskDist', 'concat:freshdeskDist', 'uglify:freshdeskDist']);
+
+  // build iorad web widget for freshdesk knowledgebase.
+  grunt.registerTask('build-freshdeskWebWidget-dev', ['handlebars:freshdeskDist', 'concat:freshdeskDist']);
 };
