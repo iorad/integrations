@@ -32,12 +32,12 @@ module.exports = {
    * @return {string}      tutorial editor url.
    */
   newTutorialEditorUrl: function (pluginType) {
-    return this.getBaseUrl() + '/node/createNewTutorial?plugin_type=' + pluginType;
+    return this.getBaseUrl() + '/createNewTutorial?plugin_type=' + pluginType;
 
   },
 
   existingTutorialEditorUrl: function (tutorialParams, pluginType) {
-    return this.getBaseUrl() + '/node/editor/?plugin_type=' + pluginType + '&module=' + tutorialParams.tutorialId + '&uid=' + tutorialParams.uid;
+    return this.getBaseUrl() + '/editor/?plugin_type=' + pluginType + '&module=' + tutorialParams.tutorialId + '&uid=' + tutorialParams.uid;
   },
 
   /**
@@ -49,7 +49,7 @@ module.exports = {
    * @param {string} tutorialTitle  tutorial title
    */
   getPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    return [this.getBaseUrl(), 'node', 'player', uid, tutorialId, tutorialTitle].join('/');
+    return [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle].join('/');
   },
 
   /**
