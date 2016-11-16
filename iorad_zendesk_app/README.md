@@ -20,3 +20,6 @@ Users can now decide whether or not to save the tutorial as a draft in the navba
 
 ### Version 2.2.1
 * Makes the switch from zendesk agent view to iorad screen capture page smoother.
+
+### Version 2.3.2
+* Let's Celebrate the launch of new Iorad :D
