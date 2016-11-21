@@ -29,3 +29,4 @@ atlassian_integration/dev_workspace/vagrat_box/Vagrantfile
 atlassian_integration/iorad-conf-plugin1/.DS_Store
 
 .DS_Store
+/.idea/
