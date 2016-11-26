@@ -11,3 +11,4 @@ obj
 .vs
 iorad_ticketing_freshplug/packages/
 iorad_ticketing_freshplug/iorad_ticketing_freshplug/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+/.idea/
