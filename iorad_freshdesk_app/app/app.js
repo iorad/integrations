@@ -96,9 +96,9 @@
               .replace('{folderId}', folderId)
               .replace('{id}', data.article.id);
 
-            var message = "The solution <b>" + tutorialParams.tutorialTitle + "</b> has been published in <b>" + category.text() + "</b>";
+            var message = "The solution <b>" + tutorialParams.tutorialTitle + "</b> has been published to <b>" + category.text() + "</b>";
             if (isdraft) {
-              message = "The draft solution <b>" + tutorialParams.tutorialTitle + "</b> has been created in <b>" + category.text() + "</b>";
+              message = "The draft solution <b>" + tutorialParams.tutorialTitle + "</b> has been created to <b>" + category.text() + "</b>";
             }
             if (addToTicket) {
               message += " and attached to the ticket.";
