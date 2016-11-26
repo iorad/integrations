@@ -68,7 +68,7 @@
           var category = jQuery($container).find("[name='category'] option:selected");
           var categoryId = category.data('category-id');
           var folderId = category.data('folder-id');
-          var isPublish = jQuery($container).find("[name='draft']").is(':checked');
+          var isdraft = jQuery($container).find("[name='draft']").is(':checked');
           var addToTicket = jQuery($container).find("[name='ticket']").is(':checked');
 
           var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid, tutorialParams.tutorialId, tutorialParams.tutorialTitle);
@@ -84,7 +84,7 @@
               "title": tutorialParams.tutorialTitle,
               "folder_id": folderId,
               "description": "<p>" + iframeHTML + "</p>",
-              "status": isPublish ? 1 : 2,
+              "status": isdraft ? 1 : 2,
               "art_type": 1 // permanent
             }
           };
@@ -96,9 +96,9 @@
               .replace('{folderId}', folderId)
               .replace('{id}', data.article.id);
 
-            var message = "The draft solution <b>" + tutorialParams.tutorialTitle + "</b> has been created in <b>" + category.text() + "</b>";
-            if (isPublish) {
-              message = "The solution <b>" + tutorialParams.tutorialTitle + "</b> has been published in <b>" + category.text() + "</b>";
+            var message = "The solution <b>" + tutorialParams.tutorialTitle + "</b> has been published in <b>" + category.text() + "</b>";
+            if (isdraft) {
+              message = "The draft solution <b>" + tutorialParams.tutorialTitle + "</b> has been created in <b>" + category.text() + "</b>";
             }
             if (addToTicket) {
               message += " and attached to the ticket.";
