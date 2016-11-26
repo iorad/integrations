@@ -190,8 +190,10 @@
                               "title": tutorialParams.tutorialTitle,
                               "folder_id": folderId,
                               "description": "<div>" + $tutorialIframe.prop("outerHTML").replace(/\"/g, "'") + "</div>",
-                              "status": statusCode
-                          }
+                              "status": statusCode,
+                              "art_type": 1 // permanent
+                          },
+                          "tags": {"name": ""}
                       },
                       articleJson = JSON.stringify(article);
 
