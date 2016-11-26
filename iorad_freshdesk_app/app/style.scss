@@ -1,3 +1,7 @@
+.widget {
+  margin-bottom: 30px;
+}
+
 .insert_iorad {
   background-image: url('https://test.iorad.com/server/assets/img/icon_iorad_freshdesk.png') !important;
   background-position: 7px;
@@ -5,3 +9,38 @@
   background-size: 16px;
   padding-left: 30px;
 }
+
+.title {
+  font-size: 1.2em;
+  padding: 30px 0 10px;
+  font-weight: 700;
+}
+
+.form-group {
+  width: 100%;
+  display: inline-block;
+
+  select, .select2 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.btn-primary {
+  background: #64e264;
+  border: 1px solid #64e264;
+  border-radius: 3px;
+  height: 36px;
+  text-shadow: none;
+  font-weight: normal;
+  font-size: 1.1em;
+  color: #fff;
+}
+
+.checkbox {
+  width: auto;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-left: 8px;
+}
+

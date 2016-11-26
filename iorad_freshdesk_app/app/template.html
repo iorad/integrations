@@ -1,8 +1,32 @@
 <div class="widget">
-    <h3>Add iorad solution</h3>
+    <h3>Add iorad Solution</h3>
     <div class="content">
         <div class="app-box">
-            <button class="btn btn-primary insert_iorad">Capture</button>
+            <form method="post" class="iorad-solution">
+                <div class="form-group">
+                    <label>Select Category<span class="required_star">*</span></label>
+                    <select class="form-control categories" name="category"></select>
+                </div>
+                <button type="submit" class="btn btn-primary">Start Capture</button>
+                <div class="checkbox">
+                    <label>
+                        <input name="draft" type="checkbox" value="1"> Draft
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input name="ticket" type="checkbox" value="1"> Add to ticket
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal fade iorad-widget-modal" role="dialog" aria-hidden="false">
+        <div class="modal-header"></div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <a class="btn btn-primary" href="">View Article</a>
         </div>
     </div>
 </div>
