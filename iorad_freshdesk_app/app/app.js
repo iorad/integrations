@@ -96,12 +96,14 @@
               .replace('{folderId}', folderId)
               .replace('{id}', data.article.id);
 
-            var message = "The solution <b>" + tutorialParams.tutorialTitle + "</b> has been published to <b>" + category.text() + "</b>";
+            var message = "<b>" + tutorialParams.tutorialTitle + "</b> ";
             if (isdraft) {
-              message = "The draft solution <b>" + tutorialParams.tutorialTitle + "</b> has been created to <b>" + category.text() + "</b>";
+              message += "(draft) ";
             }
+            message += "published to <b>" + category.text() + "</b> ";
+
             if (addToTicket) {
-              message += " and attached to the ticket.";
+              message += "and attached to the ticket.";
             } else {
               message += ".";
             }
