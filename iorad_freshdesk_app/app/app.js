@@ -77,7 +77,7 @@
           var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid, tutorialParams.tutorialId, tutorialParams.tutorialTitle);
           if (addToTicket) {
             openReplayArea();
-            $pageBody.find(".redactor_editor div").append("<p>" + iframeHTML + "</p>");
+            $pageBody.find(".redactor_editor div").append("<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>");
           }
 
           var ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}";
@@ -86,7 +86,7 @@
             "solution_article": {
               "title": tutorialParams.tutorialTitle,
               "folder_id": folderId,
-              "description": "<p>" + iframeHTML + "</p>",
+              "description": "<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>",
               "status": isdraft ? 1 : 2,
               "art_type": 1 // permanent
             }
@@ -108,17 +108,18 @@
             if (addToTicket) {
               message += "and attached to the ticket.";
             } else {
-              message += ".";
+              message = message.trim() + ".";
             }
 
             modal.find(".modal-footer a").attr("href", articleUrl);
             modal.find(".modal-body").html(message);
             if ($pageBody.children('.iorad-widget-modal').length > 0) {
-              $pageBody.children('.iorad-widget-modal').html(modal.html()).modal({ backdrop: true, show: true });
+              $pageBody.children('.iorad-widget-modal').html(modal.html());
             } else {
               $pageBody.append(modal);
-              $pageBody.children('.iorad-widget-modal').modal({ backdrop: true, show: true });
             }
+            $pageBody.children('.iorad-widget-modal').modal({ backdrop: true, show: true });
+
           });
         });
       });
