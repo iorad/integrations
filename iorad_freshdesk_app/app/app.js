@@ -9,19 +9,22 @@
     listCategories: function () {
       var that = this;
       jQuery.get(CATEGORIES_API_URL, function (data) {
-        var template = '<option>No data available</option>';
+        var template = '';
         data.each(function (obj) {
           var category = obj.category;
           if (category.folders && category.folders.length > 0) {
-            template = '<optgroup label="' + category.name + '">';
+            template += '<optgroup label="' + category.name + '">';
             category.folders.each(function (folder) {
-              template += '<option value="' + folder.id + '" data-category-id="' + category.id + '" data-folder-id="' + folder.id + '">';
-              template += folder.name + '</option>';
+              if (!folder.is_default) {
+                template += '<option value="' + folder.id + '" data-category-id="' + category.id + '" data-folder-id="' + folder.id + '">';
+                template += folder.name + '</option>';
+              }
             });
             template += '</optgroup>';
           }
         });
 
+        template = template? template : '<option>No data available</option>';
         jQuery(that.$container).find('[name="category"]').html(template).addClass('select2');
       });
     },
