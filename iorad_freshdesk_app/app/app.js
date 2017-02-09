@@ -2,7 +2,7 @@
   "use strict";
 
   var CATEGORIES_API_URL = '/solution/categories.json';
-  var ARTICLE_API_URL = '/solution/categories/{category_id}/folders/{folder_id}/articles.json';
+  var ARTICLE_API_URL_V2 = '/api/v2/solutions/folders/{folder_id}/articles';
 
   return {
 
@@ -22,7 +22,7 @@
           }
         });
 
-        template = template? template : '<option>No data available</option>';
+        template = template ? template : '<option>No data available</option>';
         jQuery(that.$container).find('[name="category"]').html(template).addClass('select2');
       });
     },
@@ -40,6 +40,7 @@
     initApp: function () {
       var domHelper = domHelper;
       var $container = this.$container;
+      var $request = this.$request;
       var $pageBody = jQuery($container).closest("body");
       var $solutionForm = jQuery($container).find(".iorad-solution");
       var openReplayArea = function () {
@@ -51,7 +52,7 @@
 
       var iorad = window.iorad || {};
 
-      iorad.init({env: "live", pluginType: "iorad_freshdesk_app_ticketing"}, function () {
+      iorad.init({ env: "live", pluginType: "iorad_freshdesk_app_ticketing" }, function () {
         // register events
         $solutionForm.on('submit', function (e) {
           e.preventDefault();
@@ -79,46 +80,53 @@
           }
 
           var ARTICLE_URL = "/solution/categories/{categoryId}/folders/{folderId}/articles/{id}";
-          var URL = ARTICLE_API_URL.replace('{category_id}', categoryId).replace('{folder_id}', folderId);
+          var URL = ARTICLE_API_URL_V2.replace('{folder_id}', folderId);
           var article = {
             "solution_article": {
               "title": tutorialParams.tutorialTitle,
               "folder_id": folderId,
               "description": "<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>",
               "status": isdraft ? 1 : 2,
-              "art_type": 1 // permanent
+              "type": 1, // permanent
+              "seo_data": {
+                "meta_keywords": [tutorialParams.tutorialTitle]
+              }
             }
           };
 
-          jQuery.post(URL, article, function (data) {
-            $pageBody.removeClass("iorad-open iorad-loading");
+          $request.post(URL, article)
+            .done(function (data) {
+              $pageBody.removeClass("iorad-open iorad-loading");
 
-            var articleUrl = ARTICLE_URL.replace('{categoryId}', categoryId)
-              .replace('{folderId}', folderId)
-              .replace('{id}', data.article.id);
+              var articleUrl = ARTICLE_URL.replace('{categoryId}', categoryId)
+                .replace('{folderId}', folderId)
+                .replace('{id}', data.article.id);
 
-            var message = "<b>" + tutorialParams.tutorialTitle + "</b> ";
-            if (isdraft) {
-              message += "(draft) ";
-            }
-            message += "published to <b>" + category.text() + "</b> ";
+              var message = "<b>" + tutorialParams.tutorialTitle + "</b> ";
+              if (isdraft) {
+                message += "(draft) ";
+              }
+              message += "published to <b>" + category.text() + "</b> ";
 
-            if (addToTicket) {
-              message += "and attached to the ticket.";
-            } else {
-              message = message.trim() + ".";
-            }
+              if (addToTicket) {
+                message += "and attached to the ticket.";
+              } else {
+                message = message.trim() + ".";
+              }
 
-            modal.find(".modal-footer a").attr("href", articleUrl);
-            modal.find(".modal-body").html(message);
-            if ($pageBody.children('.iorad-widget-modal').length > 0) {
-              $pageBody.children('.iorad-widget-modal').html(modal.html());
-            } else {
-              $pageBody.append(modal);
-            }
-            $pageBody.children('.iorad-widget-modal').modal({ backdrop: true, show: true });
+              modal.find(".modal-footer a").attr("href", articleUrl);
+              modal.find(".modal-body").html(message);
+              if ($pageBody.children('.iorad-widget-modal').length > 0) {
+                $pageBody.children('.iorad-widget-modal').html(modal.html());
+              } else {
+                $pageBody.append(modal);
+              }
+              $pageBody.children('.iorad-widget-modal').modal({ backdrop: true, show: true });
 
-          });
+            })
+            .fail(function (data) {
+              console.log(data);
+            });
         });
       });
     },
