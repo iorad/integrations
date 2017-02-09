@@ -29,7 +29,7 @@
 
     initialize: function () {
       if (page_type === "ticket") {
-        CustomWidget.include_js("//iorad.com/server/assets/js/iorad.js");
+        jQuery.getScript("//iorad.com/server/assets/js/iorad.js");
         appPlaceholder.ticket.belowRequestorInfo(jQuery(this.$container));
         this.ioradLoaded();
 
