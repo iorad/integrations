@@ -29,3 +29,9 @@
 #     - US
 #     - UK
 #   default_value: US
+
+freshdesk_apikey:
+  display_name: "Freshdesk API key"
+  description: "Please enter your Freshdesk API key. For more information, please refer to this <a href='https://support.freshdesk.com/support/solutions/articles/215517' target='_blank'>solution</a>."
+  type: "text"
+  required: true
