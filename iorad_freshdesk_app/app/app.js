@@ -41,7 +41,7 @@
         var promises = [];
         data.forEach(function (cat) {
           promises.push(jQuery.getJSON(FOLDERS_API_URL.replace('{category_id}', cat.id), function (folders) {
-            cat.folders = folders? folders : [];
+            cat.folders = folders ? folders : [];
           }));
         });
 
@@ -51,7 +51,7 @@
         });
 
       }).done(function () {
-        Cookies.set('ioradapp_categories', categories, { expires: 7 });
+        Cookies.set('ioradapp_categories', categories, {expires: 7});
         defer.resolve(categories);
       }).fail(function (jqXHR) {
         var retryAfter = jqXHR.getResponseHeader('Retry-After');
@@ -78,7 +78,7 @@
             template += '<optgroup label="' + category.name + '">';
             category.folders.each(function (folder) {
               template += '<option value="' + folder.id + '" data-category-id="' + category.id + '" ' +
-                'data-folder-id="' + folder.id + '">'+ folder.name + '</option>';
+                'data-folder-id="' + folder.id + '">' + folder.name + '</option>';
             });
             template += '</optgroup>';
           }
@@ -96,11 +96,11 @@
         appPlaceholder.ticket.belowRequestorInfo(jQuery(this.$container));
 
         var that = this;
-        var options = { dataType: "script", cache: true };
+        var options = {dataType: "script", cache: true};
         var promises = [
-          jQuery.ajax(jQuery.extend(options, { url: 'https://iorad.com/server/assets/js/iorad.js' })),
-          jQuery.ajax(jQuery.extend(options, { url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js' })),
-          jQuery.ajax(jQuery.extend(options, { url: 'https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js' })),
+          jQuery.ajax(jQuery.extend(options, {url: 'https://iorad.com/server/assets/js/iorad.js'})),
+          jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'})),
+          jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js'})),
         ];
 
         jQuery.when.apply(jQuery, promises).done(function () {
@@ -153,29 +153,27 @@
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            headers: { 'Authorization': 'Basic ' + btoa('{{iparam.freshdesk_apikey}}') },
+            headers: {'Authorization': 'Basic ' + btoa('{{iparam.freshdesk_apikey}}')},
             data: JSON.stringify({
               "title": tutorialParams.tutorialTitle,
               "description": iframeHTML,
               "status": isdraft ? 1 : 2,
               "type": 1 // permanent
             }),
-            error: function(jqXHR) {
+            error: function (jqXHR) {
               var message = jqXHR.status === 401 ?
                 'Please review your API key in freshdesk app param.' : jqXHR.responseJSON.message;
               $pageBody.removeClass("iorad-open iorad-loading");
               bootbox.alert({
                 title: 'Error while creating tutorial',
                 message: message,
-                closeButton: false,
-                buttons: { ok: { label: 'Close' }}
               });
               $pageBody.find('.modal.bootbox').css({
                 width: '30vw',
                 margin: '-15vh 0 0 -15vw'
               });
             },
-            success: function(data) {
+            success: function (data) {
               var message = "<b>" + tutorialParams.tutorialTitle + "</b> ";
               if (isdraft) {
                 message += "(draft) ";
@@ -192,8 +190,6 @@
               bootbox.alert({
                 title: 'Success creating tutorial',
                 message: message,
-                closeButton: false,
-                buttons: { ok: { label: 'Close' }}
               });
               $pageBody.find('.modal.bootbox').css({
                 width: '30vw',
