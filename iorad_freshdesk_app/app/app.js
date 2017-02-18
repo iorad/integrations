@@ -104,13 +104,13 @@
         ];
 
         jQuery.when.apply(jQuery, promises).done(function () {
-          that.ioradLoaded();
+          that.loadIorad();
           that.listCategories();
         });
       }
     },
 
-    initApp: function () {
+    loadIorad: function () {
       var $container = this.$container;
       var $pageBody = jQuery($container).closest("body");
       var $solutionForm = jQuery($container).find(".iorad-solution");
