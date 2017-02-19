@@ -116,7 +116,7 @@
       var $solutionForm = jQuery($container).find(".iorad-solution");
       var openReplyArea = function () {
         if ($pageBody.find(".redactor_editor div").length == 0) {
-          $pageBody.find('#FwdButton').first().click();
+          $pageBody.find('#ReplyButton').first().click();
         }
       };
 
