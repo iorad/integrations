@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.3 - 09-28-2015 *//*!
+/*! IoradWebWidget - v0.0.3 - 02-26-2017 *//*!
 
  handlebars v3.0.3
 
