@@ -3,3 +3,4 @@ pages:
   - ticket
 whitelisted-domains:
   - https://iorad.com
+  - https://www.iorad.com
