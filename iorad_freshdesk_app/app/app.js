@@ -8,6 +8,10 @@
 
   return {
 
+    do_nothing_callback: function() {
+      // Do nothing
+    },
+
     cookie: function (name, defaultval) {
       var cook = Cookies.get(name);
       if (!cook) {
@@ -99,8 +103,7 @@
         var options = {dataType: "script", cache: true};
         var promises = [
           jQuery.ajax(jQuery.extend(options, {url: 'https://iorad.com/server/assets/js/iorad.js'})),
-          jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'})),
-          jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js'})),
+          jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'}))
         ];
 
         jQuery.when.apply(jQuery, promises).done(function () {
@@ -111,21 +114,19 @@
     },
 
     loadIorad: function () {
-      var $container = this.$container;
+      var that = this;
+      var $container = that.$container;
       var $pageBody = jQuery($container).closest("body");
       var $solutionForm = jQuery($container).find(".iorad-solution");
-      var openReplyArea = function () {
-        if ($pageBody.find(".redactor_editor div").length == 0) {
-          $pageBody.find('#ReplyButton').first().click();
-        }
-      };
+      var createEvent = null;
 
       iorad.init({env: "live", pluginType: "iorad_freshdesk_app_ticketing"}, function () {
+
         // register events
         $solutionForm.on('submit', function (e) {
           e.preventDefault();
 
-          bootbox.hideAll();
+          createEvent = e;
           $pageBody.addClass("iorad-loading");
           iorad.createTutorial();
 
@@ -138,14 +139,15 @@
           var category = jQuery($container).find("[name='category'] option:selected");
           var folderId = category.data('folder-id');
           var isdraft = jQuery($container).find("[name='draft']").is(':checked');
-          var addToTicket = jQuery($container).find("[name='ticket']").is(':checked');
+          var addToTicket = jQuery($container).find("[name='add_to_ticket']:checked").val();
 
           var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
           iframeHTML = "<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>";
 
-          if (addToTicket) {
-            openReplyArea();
-            $pageBody.find(".redactor_editor div").append(iframeHTML);
+          if (addToTicket === 'reply') {
+            domHelper.ticket.openReply(iframeHTML);
+          } else if (addToTicket === 'note') {
+            domHelper.ticket.openNote(iframeHTML);
           }
 
           jQuery.ajax({
@@ -155,50 +157,30 @@
             contentType: 'application/json',
             headers: {'Authorization': 'Basic ' + btoa('{{iparam.freshdesk_apikey}}')},
             data: JSON.stringify({
-              "title": tutorialParams.tutorialTitle,
+              "title": tutorialParams.tutorialTitle.replace('-', ' '),
               "description": iframeHTML,
               "status": isdraft ? 1 : 2,
               "type": 1 // permanent
             }),
             error: function (jqXHR) {
-              var message = jqXHR.status === 401 ?
-                'Please review your API key in freshdesk app param.' : jqXHR.responseJSON.message;
               $pageBody.removeClass("iorad-open iorad-loading");
-              bootbox.alert({
-                title: 'Error while creating tutorial',
-                message: message,
-              });
-              $pageBody.find('.modal.bootbox').css({
-                width: '30vw',
-                margin: '-15vh 0 0 -15vw'
-              });
+              var message = jqXHR.status === 401 ? 'Invalid API key in freshdesk app param.' : jqXHR.responseJSON.message;
+              domHelper.showModal(createEvent, "Error while creating tutorial", message, "Ok", that.do_nothing_callback.bind(that));
             },
             success: function (data) {
-              var message = "<b>" + tutorialParams.tutorialTitle + "</b> ";
+              $pageBody.removeClass("iorad-open iorad-loading");
+              var message = "<b>" + tutorialParams.tutorialTitle.replace('-', ' ') + "</b> ";
               if (isdraft) {
                 message += "(draft) ";
               }
               message += "published to <b>" + category.text() + "</b> ";
-
-              if (addToTicket) {
-                message += "and attached to the ticket";
-              }
-
               message = message.trim() + "." + " To view the article, please click " +
                 "<a href='" + ARTICLE_URL.replace('{id}', data.id) + "' target='_blank'>this link</a>.";
-              $pageBody.removeClass("iorad-open iorad-loading");
-              bootbox.alert({
-                title: 'Success creating tutorial',
-                message: message,
-              });
-              $pageBody.find('.modal.bootbox').css({
-                width: '30vw',
-                margin: '-15vh 0 0 -15vw'
-              });
+              domHelper.showModal(createEvent, "Success creating tutorial", message, "Ok", that.do_nothing_callback.bind(that));
             }
           });
         });
       });
-    },
+    }
   };
 })();

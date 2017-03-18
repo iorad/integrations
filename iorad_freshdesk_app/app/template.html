@@ -2,23 +2,25 @@
     <h3>Add iorad Solution</h3>
     <div class="loading-box"></div>
     <div class="content hide">
-        <div class="app-box">
+        <label class="app-box">
             <form method="post" class="iorad-solution">
                 <div class="form-group">
                     <label>Select Category<span class="required_star">*</span></label>
                     <select class="form-control categories" name="category"></select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-iorad-widget">Start Capture</button>
-                <div class="checkbox">
-                    <label>
-                        <input name="draft" type="checkbox" value="1"> Draft
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input name="ticket" type="checkbox" value="1"> Add to ticket
-                    </label>
-                </div>
+                <label class="checkbox">
+                    <input type="checkbox" name="draft" value="1">
+                    Set solution as <strong>Draft</strong>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="add_to_ticket" id="add_to_ticket_reply" value="reply">
+                    <span class="ficon-reply reply-inner"></span> Add to ticket as <strong>Reply</strong>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="add_to_ticket" id="add_to_ticket_forward" value="note">
+                    <span class="ficon-file-edit note-inner"></span> Add to ticket as <strong>Note</strong>
+                </label>
+                <button type="submit" class="btn btn-primary btn-sm btn-iorad-widget">Start Capture</button>
             </form>
         </div>
     </div>
