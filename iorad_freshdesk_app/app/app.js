@@ -8,7 +8,7 @@
 
   return {
 
-    do_nothing_callback: function() {
+    doNothingCallback: function() {
       // Do nothing
     },
 
@@ -144,12 +144,6 @@
           var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
           iframeHTML = "<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>";
 
-          if (addToTicket === 'reply') {
-            domHelper.ticket.openReply(iframeHTML);
-          } else if (addToTicket === 'note') {
-            domHelper.ticket.openNote(iframeHTML);
-          }
-
           jQuery.ajax({
             url: ARTICLE_API_URL.replace('{folder_id}', folderId),
             type: 'POST',
@@ -165,18 +159,31 @@
             error: function (jqXHR) {
               $pageBody.removeClass("iorad-open iorad-loading");
               var message = jqXHR.status === 401 ? 'Invalid API key in freshdesk app param.' : jqXHR.responseJSON.message;
-              domHelper.showModal(createEvent, "Error while creating tutorial", message, "Ok", that.do_nothing_callback.bind(that));
+              domHelper.showModal(createEvent, "Error while creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
             },
             success: function (data) {
-              $pageBody.removeClass("iorad-open iorad-loading");
               var message = "<b>" + tutorialParams.tutorialTitle.replace('-', ' ') + "</b> ";
-              if (isdraft) {
-                message += "(draft) ";
-              }
+              message += isdraft? "(draft) " : "";
               message += "published to <b>" + category.text() + "</b> ";
-              message = message.trim() + "." + " To view the article, please click " +
-                "<a href='" + ARTICLE_URL.replace('{id}', data.id) + "' target='_blank'>this link</a>.";
-              domHelper.showModal(createEvent, "Success creating tutorial", message, "Ok", that.do_nothing_callback.bind(that));
+              message = message.trim() + "." + " To view the article, please click " + "<a href='" + ARTICLE_URL.replace('{id}', data.id) + "' target='_blank'>this link</a>.";
+
+              $pageBody.removeClass("iorad-open iorad-loading");
+              domHelper.showModal(createEvent, "Success creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
+
+              var solution = '<p>Please check our solution: https://' + domHelper.getDomainName() + ARTICLE_URL.replace('{id}', data.id) + '</p><br><br>';
+              if (addToTicket === 'reply') {
+                if ($pageBody.find("#HelpdeskReply .redactor_editor").length == 0) {
+                  domHelper.ticket.openReply(solution);
+                } else {
+                  $pageBody.find("#HelpdeskReply .redactor_editor").append(solution);
+                }
+              } else if (addToTicket === 'note') {
+                if ($pageBody.find("#HelpdeskNotes .redactor_editor").length == 0) {
+                  domHelper.ticket.openNote(solution);
+                } else {
+                  $pageBody.find("#HelpdeskNotes .redactor_editor").append(solution);
+                }
+              }
             }
           });
         });
