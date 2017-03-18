@@ -141,8 +141,7 @@
           var isdraft = jQuery($container).find("[name='draft']").is(':checked');
           var addToTicket = jQuery($container).find("[name='add_to_ticket']:checked").val();
 
-          console.log(tutorialParams);
-          var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid, tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+          var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
           iframeHTML = "<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>";
 
           if (addToTicket === 'reply') {
