@@ -141,9 +141,9 @@
           var isdraft = jQuery($container).find("[name='draft']").is(':checked');
           var addToTicket = jQuery($container).find("[name='add_to_ticket']:checked").val();
 
-          var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
-          iframeHTML = "<p style='border: 2px solid #ebebeb; border-bottom: none;'>" + iframeHTML + "</p>";
-
+          var iframeHTML = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+          // hack to put text place holder before/after iframe
+          iframeHTML = "<p>&nbsp;</p><p>" + iframeHTML + "</p><p>&nbsp;</p>";
           jQuery.ajax({
             url: ARTICLE_API_URL.replace('{folder_id}', folderId),
             type: 'POST',
