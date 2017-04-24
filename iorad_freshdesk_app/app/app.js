@@ -8,6 +8,10 @@
 
   return {
 
+    getFreshdeskApiUrl: function () {
+      return "https://" + domHelper.getDomainName();
+    },
+
     doNothingCallback: function() {
       // Do nothing
     },
@@ -92,6 +96,13 @@
         jQuery(that.$container).find('[name="category"]').html(template).addClass('select2');
         jQuery(that.$container).find('.loading-box').addClass('hide');
         jQuery(that.$container).find('.content').removeClass('hide');
+
+        var correntDomain = domHelper.getDomainName();
+        if (correntDomain !== "{{iparam.freshdesk_domain}}") {
+          var errorMessage = "Error: your domain should be " + correntDomain +
+            ". Please correct it on installation param.";
+          jQuery(that.$container).find('.content').html(errorMessage);
+        }
       });
     },
 
@@ -141,50 +152,51 @@
           var isdraft = jQuery($container).find("[name='draft']").is(':checked');
           var addToTicket = jQuery($container).find("[name='add_to_ticket']:checked").val();
 
+          var tutorialTitle = tutorialParams.tutorialTitle.replace('-', ' ');
           var iframeHTML = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
           // hack to put text place holder before/after iframe
           iframeHTML = "<p>&nbsp;</p><p>" + iframeHTML + "</p><p>&nbsp;</p>";
-          jQuery.ajax({
-            url: ARTICLE_API_URL.replace('{folder_id}', folderId),
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            headers: {'Authorization': 'Basic ' + btoa('{{iparam.freshdesk_apikey}}')},
-            data: JSON.stringify({
-              "title": tutorialParams.tutorialTitle.replace('-', ' '),
+
+          var apiUrl = that.getFreshdeskApiUrl() + ARTICLE_API_URL.replace('{folder_id}', folderId);
+          that.$request.post(apiUrl, {
+            headers: {
+              'Authorization': 'Basic ' + btoa('{{iparam.freshdesk_apikey}}'),
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              "title": tutorialTitle,
               "description": iframeHTML,
               "status": isdraft ? 1 : 2,
               "type": 1 // permanent
-            }),
-            error: function (jqXHR) {
-              $pageBody.removeClass("iorad-open iorad-loading");
-              var message = jqXHR.status === 401 ? 'Invalid API key in freshdesk app param.' : jqXHR.responseJSON.message;
-              domHelper.showModal(createEvent, "Error while creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
-            },
-            success: function (data) {
-              var message = "<b>" + tutorialParams.tutorialTitle.replace('-', ' ') + "</b> ";
-              message += isdraft? "(draft) " : "";
-              message += "published to <b>" + category.text() + "</b> ";
-              message = message.trim() + "." + " To view the article, please click " + "<a href='" + ARTICLE_URL.replace('{id}', data.id) + "' target='_blank'>this link</a>.";
+            })
+          }).done(function(data){
+            var response = JSON.parse(data.response);
+            var message = "<b>" + tutorialTitle + "</b> ";
+            message += isdraft? "(draft) " : "";
+            message += "published to <b>" + category.text() + "</b> ";
+            message = message.trim() + "." + " To view the article, please click " + "<a href='" + ARTICLE_URL.replace('{id}', response.id) + "' target='_blank'>this link</a>.";
 
-              $pageBody.removeClass("iorad-open iorad-loading");
-              domHelper.showModal(createEvent, "Success creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
+            $pageBody.removeClass("iorad-open iorad-loading");
+            domHelper.showModal(createEvent, "Success creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
 
-              var solution = '<p>Please check our solution: https://' + domHelper.getDomainName() + ARTICLE_URL.replace('{id}', data.id) + '</p><br><br>';
-              if (addToTicket === 'reply') {
-                if ($pageBody.find("#HelpdeskReply .redactor_editor").length == 0) {
-                  domHelper.ticket.openReply(solution);
-                } else {
-                  $pageBody.find("#HelpdeskReply .redactor_editor").append(solution);
-                }
-              } else if (addToTicket === 'note') {
-                if ($pageBody.find("#HelpdeskNotes .redactor_editor").length == 0) {
-                  domHelper.ticket.openNote(solution);
-                } else {
-                  $pageBody.find("#HelpdeskNotes .redactor_editor").append(solution);
-                }
+            var solution = '<p>Please check our solution: https://' + domHelper.getDomainName() + ARTICLE_URL.replace('{id}', response.id) + '</p><br><br>';
+            if (addToTicket === 'reply') {
+              if ($pageBody.find("#HelpdeskReply .redactor_editor").length == 0) {
+                domHelper.ticket.openReply(solution);
+              } else {
+                $pageBody.find("#HelpdeskReply .redactor_editor").append(solution);
+              }
+            } else if (addToTicket === 'note') {
+              if ($pageBody.find("#HelpdeskNotes .redactor_editor").length == 0) {
+                domHelper.ticket.openNote(solution);
+              } else {
+                $pageBody.find("#HelpdeskNotes .redactor_editor").append(solution);
               }
             }
+          }).fail(function(err){
+            $pageBody.removeClass("iorad-open iorad-loading");
+            var message = err.status === 401 ? 'Invalid API key in freshdesk app param.' : err.response;
+            domHelper.showModal(createEvent, "Error while creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
           });
         });
       });

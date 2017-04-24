@@ -4,3 +4,4 @@ pages:
 whitelisted-domains:
   - https://iorad.com
   - https://www.iorad.com
+  - https://<%= iparam.freshdesk_domain %>
