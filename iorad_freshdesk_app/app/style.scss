@@ -3,7 +3,7 @@
 }
 
 .insert_iorad {
-  background-image: url('https://test.iorad.com/server/assets/img/icon_iorad_freshdesk.png') !important;
+  background-image: url("{{'icon_iorad_freshdesk.png' | asset_url}}") !important;
   background-position: 7px;
   background-repeat: no-repeat;
   background-size: 16px;
@@ -38,5 +38,5 @@
 }
 
 .loading-box {
-  background: url(/assets/animated/ajax-loader.gif) no-repeat center;
+  background: url("{{'ajax-loader.gif' | asset_url}}") no-repeat center;
 }
