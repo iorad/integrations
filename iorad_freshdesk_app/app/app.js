@@ -45,10 +45,10 @@
 
       var that = this;
       var categories = [];
-      jQuery.when(jQuery.getJSON(CATEGORIES_API_URL)).then(function (data) {
+      jQuery.when(jQuery.getJSON(that.getFreshdeskApiUrl() + CATEGORIES_API_URL)).then(function (data) {
         var promises = [];
         data.forEach(function (cat) {
-          promises.push(jQuery.getJSON(FOLDERS_API_URL.replace('{category_id}', cat.id), function (folders) {
+          promises.push(jQuery.getJSON(that.getFreshdeskApiUrl() + FOLDERS_API_URL.replace('{category_id}', cat.id), function (folders) {
             cat.folders = folders ? folders : [];
           }));
         });
@@ -181,13 +181,13 @@
 
             var solution = '<p>Please check our solution: https://' + domHelper.getDomainName() + ARTICLE_URL.replace('{id}', response.id) + '</p><br><br>';
             if (addToTicket === 'reply') {
-              if ($pageBody.find("#HelpdeskReply .redactor_editor").length == 0) {
+              if ($pageBody.find("#HelpdeskReply .redactor_editor").length === 0) {
                 domHelper.ticket.openReply(solution);
               } else {
                 $pageBody.find("#HelpdeskReply .redactor_editor").append(solution);
               }
             } else if (addToTicket === 'note') {
-              if ($pageBody.find("#HelpdeskNotes .redactor_editor").length == 0) {
+              if ($pageBody.find("#HelpdeskNotes .redactor_editor").length === 0) {
                 domHelper.ticket.openNote(solution);
               } else {
                 $pageBody.find("#HelpdeskNotes .redactor_editor").append(solution);
