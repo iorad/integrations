@@ -17,8 +17,10 @@
     },
 
     cookie: function (name, defaultval) {
-      var cook = Cookies.get(name);
-      if (!cook) {
+      var cook = defaultval;
+      try {
+        cook = Cookies.get(name);
+      } catch (ex) {
         cook = defaultval;
       }
 
@@ -26,8 +28,10 @@
     },
 
     cookieJSON: function (name, defaultval) {
-      var cook = Cookies.getJSON(name);
-      if (!cook) {
+      var cook = defaultval;
+      try {
+        cook = Cookies.getJSON(name);
+      } catch (ex) {
         cook = defaultval;
       }
 
@@ -59,15 +63,24 @@
         });
 
       }).done(function () {
-        Cookies.set('ioradapp_categories', categories, {expires: 7});
+        try {
+          Cookies.set('ioradapp_categories', categories, {expires: 7});
+        } catch (ex) {
+          // do nothing
+        }
+
         defer.resolve(categories);
       }).fail(function (jqXHR) {
         var retryAfter = jqXHR.getResponseHeader('Retry-After');
         if (retryAfter) {
           var now = new Date();
-          Cookies.set('ioradapp_retry', categories, {
-            expires: new Date(retryAfter * 1000 + now.getTime())
-          });
+          try {
+            Cookies.set('ioradapp_retry', categories, {
+              expires: new Date(retryAfter * 1000 + now.getTime())
+            });
+          } catch (ex) {
+            // do nothing
+          }
         }
 
         categories = that.cookieJSON('ioradapp_categories', []);
