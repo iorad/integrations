@@ -116,6 +116,11 @@
             ". Please correct it on installation param.";
           jQuery(that.$container).find('.content').html(errorMessage);
         }
+      }).fail(function () {
+        jQuery(that.$container).find('.loading-box').removeClass('hide');
+        jQuery(that.$container).find('.content-error').addClass('hide');
+        jQuery(that.$container).find('.content-error p').html("Can't get load categories. Please check your category solution.");
+
       });
     },
 
@@ -124,17 +129,38 @@
         appPlaceholder.ticket.belowRequestorInfo(jQuery(this.$container));
 
         var that = this;
-        var options = {dataType: "script", cache: true};
-        var promises = [
-          jQuery.ajax(jQuery.extend(options, {url: 'https://iorad.com/server/assets/js/iorad.js'})),
-          jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'}))
-        ];
-
-        jQuery.when.apply(jQuery, promises).done(function () {
-          that.loadIorad();
-          that.listCategories();
+        that.loadWidget();
+        jQuery(that.$container).on('click', '#retry-reload', function () {
+          that.loadWidget();
+          jQuery(that.$container).find('.loading-box').removeClass('hide');
+          jQuery(that.$container).find('.content-error').addClass('hide');
         });
       }
+    },
+
+    loadWidget: function () {
+      var that = this;
+      var options = {dataType: "script", cache: true};
+      var promises = [
+        jQuery.ajax(jQuery.extend(options, {url: 'https://iorad.com/server/assets/js/iorad.js'})),
+        jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/jss-cookie/2.1.3/js.cookie.min.js'}))
+      ];
+
+      jQuery.when.apply(jQuery, promises).done(function () {
+        that.loadIorad();
+        that.listCategories();
+      });
+
+      window.setTimeout(function () {
+        if (window.iorad) {
+          that.loadIorad();
+          that.listCategories();
+        } else{
+          jQuery(that.$container).find('.loading-box').addClass('hide');
+          jQuery(that.$container).find('.content-error').removeClass('hide');
+          jQuery(that.$container).find('.content-error p').html("Can't get into iorad solution. Please try again later.");
+        }
+      }, 5000);
     },
 
     loadIorad: function () {

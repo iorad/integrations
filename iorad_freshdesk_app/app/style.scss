@@ -39,4 +39,9 @@
 
 .loading-box {
   background: url("{{'ajax-loader.gif' | asset_url}}") no-repeat center;
+  margin-top: 20px;
+}
+
+.content-error {
+  padding: 5px 10px;
 }
