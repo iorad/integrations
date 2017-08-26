@@ -142,7 +142,7 @@
       var that = this;
       var options = {dataType: "script", cache: true};
       var promises = [
-        jQuery.ajax(jQuery.extend(options, {url: 'https://iorad.com/server/assets/js/iorad.js'})),
+        jQuery.ajax(jQuery.extend(options, {url: 'https://www.iorad.com/server/assets/js/iorad.js'})),
         jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'}))
       ];
 
