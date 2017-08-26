@@ -168,7 +168,7 @@
       var $container = that.$container;
       var $pageBody = jQuery($container).closest("body");
       var $solutionForm = jQuery($container).find(".iorad-solution");
-      var createEvent = null;
+      var createEvent = jQuery.Event("loadIorad");
 
       iorad.init({env: "live", pluginType: "iorad_freshdesk_app_ticketing"}, function () {
 
@@ -218,7 +218,11 @@
             $pageBody.removeClass("iorad-open iorad-loading");
             domHelper.showModal(createEvent, "Success creating tutorial", message, "Ok", that.doNothingCallback.bind(that));
 
-            var solution = '<p>Please check our solution: https://' + domHelper.getDomainName() + ARTICLE_URL.replace('{id}', response.id) + '</p><br><br>';
+            var solution = 'Please check our solution: https://' + domHelper.getDomainName() + ARTICLE_URL.replace('{id}', response.id);
+            if ([1,2,3].indexOf(domHelper.ticket.getTicketInfo().helpdesk_ticket.source) > -1) {
+              solution = '<p>' + solution + '</p><br><br>';
+            }
+
             if (addToTicket === 'reply') {
               if ($pageBody.find("#HelpdeskReply .redactor_editor").length === 0) {
                 domHelper.ticket.openReply(solution);
