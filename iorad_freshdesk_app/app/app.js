@@ -129,12 +129,36 @@
         appPlaceholder.ticket.belowRequestorInfo(jQuery(this.$container));
 
         var that = this;
-        that.loadWidget();
         jQuery(that.$container).on('click', '#retry-reload', function () {
           that.loadWidget();
           jQuery(that.$container).find('.loading-box').removeClass('hide');
           jQuery(that.$container).find('.content-error').addClass('hide');
         });
+
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+          jQuery.ajax({
+            url: 'https://www.iorad.com/api/me?callback=?',
+            dataType: "jsonp",
+            timeout : 1000,
+            success: function () {
+              that.loadWidget();
+            },
+            error: function (jqXhr) {
+              if (jqXhr.status === 200) {
+                that.loadWidget();
+              } else {
+                jQuery(that.$container).find('.loading-box').addClass('hide');
+                jQuery(that.$container).find('.content').removeClass('hide');
+
+                jQuery(that.$container).find('.content').html("Please login to " +
+                  "<a href='https://www.iorad.com/login' target='_blank'>www.iorad.com</a>, " +
+                  "and then refresh this page.");
+              }
+            }
+          });
+        } else {
+          that.loadWidget();
+        }
       }
     },
 
