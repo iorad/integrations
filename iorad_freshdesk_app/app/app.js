@@ -50,6 +50,10 @@
       var that = this;
       var categories = [];
       jQuery.when(jQuery.getJSON(that.getFreshdeskApiUrl() + CATEGORIES_API_URL)).then(function (data) {
+        if (!data || data.length === 0) {
+          defer.resolve(categories);
+          return defer;
+        }
         var promises = [];
         data.forEach(function (cat) {
           promises.push(jQuery.getJSON(that.getFreshdeskApiUrl() + FOLDERS_API_URL.replace('{category_id}', cat.id), function (folders) {
@@ -60,6 +64,9 @@
         return jQuery.when.apply(jQuery, promises).done(function () {
           categories = data;
           return jQuery.Deferred().resolve(categories);
+        }).fail(function () {
+          defer.resolve(categories);
+          return defer;
         });
 
       }).done(function () {
@@ -95,7 +102,7 @@
       jQuery.when(this.categories()).then(function (data) {
         var template = '';
         jQuery.each(data, function (index, category) {
-          if (category.folders && category.folders.length > 0) {
+          if (category && category.folders && category.folders.length > 0) {
             template += '<optgroup label="' + category.name + '">';
             category.folders.each(function (folder) {
               template += '<option value="' + folder.id + '" data-category-id="' + category.id + '" ' +
@@ -164,27 +171,35 @@
 
     loadWidget: function () {
       var that = this;
-      var options = {dataType: "script", cache: true};
-      var promises = [
-        jQuery.ajax(jQuery.extend(options, {url: 'https://www.iorad.com/server/assets/js/iorad.js'})),
-        jQuery.ajax(jQuery.extend(options, {url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'}))
-      ];
+      var options = {
+        dataType: "script",
+        cache: true,
+        timeout: 5000,
+        success: function () { },
+        error: function () { }
+      };
 
-      jQuery.when.apply(jQuery, promises).done(function () {
-        that.loadIorad();
-        that.listCategories();
-      });
+      jQuery.ajax(jQuery.extend(options,{
+        url: 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js'
+      }));
 
-      window.setTimeout(function () {
-        if (window.iorad) {
+      jQuery.ajax(jQuery.extend(options,{
+        url: 'https://www.iorad.com/server/assets/js/iorad.js',
+        success: function () {
           that.loadIorad();
           that.listCategories();
-        } else{
-          jQuery(that.$container).find('.loading-box').addClass('hide');
-          jQuery(that.$container).find('.content-error').removeClass('hide');
-          jQuery(that.$container).find('.content-error p').html("Can't get into iorad solution. Please try again later.");
+        },
+        error: function () {
+          if (window.iorad) {
+            that.loadIorad();
+            that.listCategories();
+          } else {
+            jQuery(that.$container).find('.loading-box').addClass('hide');
+            jQuery(that.$container).find('.content-error').removeClass('hide');
+            jQuery(that.$container).find('.content-error p').html("Can't get into iorad solution. Please try again later.");
+          }
         }
-      }, 5000);
+      }));
     },
 
     loadIorad: function () {
