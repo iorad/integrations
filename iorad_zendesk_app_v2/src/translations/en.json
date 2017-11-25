@@ -1,0 +1,171 @@
+{
+  "app": {
+    "package": "app_name",
+    "description": {
+      "value": "builds Help Center articles instantly",
+      "title": "app description"
+    },
+    "name": {
+      "value": "Iorad",
+      "title": "app name"
+    },
+    "parameters": {
+      "addToHelpCenterAsDraft": {
+        "label": {
+          "value": "Default article status DRAFT",
+          "title": "app setting display label"
+        },
+        "helpText": {
+          "value": "Uncheck this option to autopublish to the Help Center.",
+          "title": "short description for this app setting"
+        }
+      }
+    }
+  },
+
+  "loading": {
+    "value": "Welcome to this Sample App",
+    "title": "loading placeholder"
+  },
+
+  "fetch": {
+    "done": {
+      "value": "Good",
+      "title": "fetch success"
+    },
+    "fail": {
+      "value": "failed to fecth information from the server",
+      "title": "fetch failure"
+    }
+  },
+
+  "id": {
+    "value": "ID",
+    "title": "user id"
+  },
+
+  "email": {
+    "value": "Email",
+    "title": "user email"
+  },
+
+  "name": {
+    "value": "Name",
+    "title": "user name"
+  },
+
+  "role": {
+    "value": "Role",
+    "title": "user role"
+  },
+
+  "groups": {
+    "value": "Groups",
+    "title": "user groups"
+  },
+
+  "widgetControl": {
+    "solutionAppTitle": {
+      "value": "Create a step-by-step Help Center article",
+      "title": "iorad solution zendesk app title"
+    },
+
+    "ticketingAppTitle": {
+      "value": "Reply with an iorad Solution",
+      "title": "iorad ticketing zendesk app title"
+    },
+
+    "categoryComboBoxLabel": {
+      "value": "Choose a Category",
+      "title": "label appears on top of the category combobox"
+    },
+
+    "sectionComboBoxLabel": {
+      "value": "Choose a Section",
+      "title": "label appears above the section combobox"
+    },
+
+    "buttonControlLabel": {
+      "value": "Add a Solution",
+      "title": "label appears above the ADD button"
+    },
+
+    "buttonControlText": {
+      "value": "ADD",
+      "title": "text appears on the button control"
+    },
+
+    "ioradTutorialButtonControlText": {
+      "value": "Capture Solution",
+      "title": "text appears on the ticketing app button"
+    },
+
+    "footerHelpLinkText": {
+      "value": "Learn more about the iorad zendesk app",
+      "title": "text appears on the footer help link"
+    },
+
+    "addToKnowledgebaseToggleText": {
+      "value": "Auto-add Solution to Help Center",
+      "title": "text appears next to the checkbox in ticket sidebar"
+    },
+    
+    "addToKnowledgebaseAsDraftToggleText": {
+      "value": "Save as draft",
+      "title": "text appears next to the checkbox in ticket sidebar / nav bar"
+    }
+  },
+
+  "modalTemplate": {
+    "solutionViewModalTitle": {
+      "value": "New Solution Created!",
+      "title": "title text displayed in modal header"
+    },
+
+    "modalBodyP1": {
+      "value": "The solution ",
+      "title": "first section of the paragraph in modal body."
+    },
+
+    "modalBodyP2": {
+      "value": " has been successfully created.",
+      "title": "second section of the paragraph in modal body"
+    },
+
+    "closeButton": {
+      "value": "CLOSE",
+      "title": "text displayed on the modal close button in footer"
+    },
+
+    "okButton": {
+      "value": "OK",
+      "title": "text dispalyed on the modal ok button in footer"
+    },
+
+    "ticketingModalAutoPostSolutionMsg": {
+      "value": "The solution link to your new Help Center Aritcle is in your ticket comments.",
+      "title": "text displayed in the modal body when user tick auto post to help center in ticketing location"
+    },
+
+    "ticketingModalNoAutoPostSolutionMsg": {
+      "value": "The solution link to your new iorad article is in your ticket comments.",
+      "title": "text displayed in the modal body when user tick auto post to help center in ticketing location"
+    },
+
+    "viewArticleButton": {
+      "value": "VIEW ARTICLE",
+      "title": "text displayed on the modal view article button in footer"
+    },
+
+    "modalBodyError": {
+      "value": "Something went wrong when creating new article... Try to logout and log back in to Zendesk again.",
+      "title": "text displayed in error modal body"
+    },
+
+    "modalErrorTitle": {
+      "value": "Error!",
+      "title": "text displayed in modal header when there is an error"
+    }
+  }
+
+}
