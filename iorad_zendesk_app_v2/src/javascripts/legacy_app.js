@@ -8,6 +8,7 @@ window.helpers = helpers;
 window.Base64 = Base64;
 
 const App = {
+    settings: {},
     categoriesList: [],
     lastSectionsList: [],
     timeout: 0,
@@ -24,7 +25,7 @@ const App = {
         // this is a nav bar app that creates tutorials.
         TICKETING: "zendeskapp_ticketing" // this is a ticket sidebar app that creates tutorials for existing and new tickets.
     },
-    TICKET_COMMENT_MARKDOWN_FORMAT: "[%@](%@)",
+    TICKET_COMMENT_FORMAT: '<p><a href="%@" target="_blank">%@</a></p>',
     events: {
         "app.activated": "init",
         "pane.activated": "runSolutionApp",
@@ -45,10 +46,14 @@ const App = {
     requests: require("./lib/requests.js"),
 
     init: function () {
-        // apply app settings
-        this.addToHelpCenterAsDraft = this.settings["addToHelpCenterAsDraft"];
-        this.ajax("fetchLocales");
-        this.runTicketingApp();
+        const that = this;
+        that.zafClient.metadata().then(function (metadata) {
+            that.settings = metadata.settings;
+            that.addToHelpCenterAsDraft = that.settings.addToHelpCenterAsDraft;
+            that.ajax("fetchLocales");
+            that.runTicketingApp();
+            that.runSolutionApp();
+        });
     },
     // conditionally run app based on app current location
     runSolutionApp: function () {
@@ -130,14 +135,16 @@ const App = {
                 msg: data.article.title,
                 url: data.article.html_url
             });
+            // todo fix modal
             this.$("#mySuccessModal").modal({
                 backdrop: true,
                 keyboard: false
             });
         }
     },
-    onCreateArticleFailed: function (data) {
+    onCreateArticleFailed: function () {
         this.switchTo("errorModal");
+            // todo fix modal
         this.$("#myErrorModal").modal({
             backdrop: true,
             keyboard: false
@@ -172,7 +179,7 @@ const App = {
     updateSectionOptions: function (event) {
         event.preventDefault();
 
-        var $selection = this.$(event.originalEvent.srcElement),
+        const $selection = this.$(event.originalEvent.srcElement),
             selectedCategoryId = parseInt($selection.val(), 10),
             selectedCategory = _.find(this.categoriesList, function (category) {
                 return category.id === selectedCategoryId;
@@ -190,32 +197,22 @@ const App = {
             categories: this.categoriesList,
             settings: this.settings
         });
-        var selectedCategoryId = parseInt(this.$(".categoryOptions").val(), 10);
+        const selectedCategoryId = parseInt(this.$(".categoryOptions").val(), 10);
         this.ajax("fetchSections", selectedCategoryId);
     },
     initializeTicketingAppControl: function () {
         this.ajax("fetchSections", this.categoriesList[0].id);
     },
     createArticle: function (data) {
-        var iframeHTML = iorad.getEmbeddedPlayerUrl(
-            data.uid,
-            data.tutorialId,
-            data.tutorialTitle
-            ),
-            articleBody = helpers.fmt("<p>%@</p>", iframeHTML),
-            saveAsDraft =
-                this.currentPluginType === this.pluginTypes.SOLUTION
-                    ? this.addToHelpCenterAsDraft
-                    : false;
+        const iframeHTML = iorad.getEmbeddedPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle);
+        let articleBody = helpers.fmt("<p>%@</p>", iframeHTML);
+        const saveAsDraft = this.currentPluginType === this.pluginTypes.SOLUTION? this.addToHelpCenterAsDraft: false;
 
         _.each(data.steps, function (step) {
-            articleBody += helpers.fmt(
-                "<p style='display: none;'>%@</p>",
-                helpers.safeString(step.description).string
-            );
+            articleBody += helpers.fmt("<p style='display: none;'>%@</p>", helpers.safeString(step.description).string);
         });
 
-        var articleJson = JSON.stringify({
+        const articleJson = JSON.stringify({
             article: {
                 title: data.tutorialTitle,
                 locale: this.myDefaultLocale,
@@ -228,26 +225,14 @@ const App = {
         this.ajax("createArticle", this.lastSectionId, articleJson);
     },
     addIoradPlayerUrlToNewTicketComment: function (data) {
-        var url = iorad.getPlayerUrl(
-            data.uid,
-            data.tutorialId,
-            data.tutorialTitle
-            ),
-            comment = helpers.fmt(
-                this.TICKET_COMMENT_MARKDOWN_FORMAT,
-                data.tutorialTitle,
-                url
-            );
-        this.comment().text(this.comment().text() + comment);
+        const url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle);
+        const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, data.tutorialTitle, url);
+        this.zafClient.invoke('comment.appendHtml', comment);
         this.showLinkCreatedModal(url);
     },
     addSolutionUrlToNewTicketComment: function (article) {
-        var comment = helpers.fmt(
-            this.TICKET_COMMENT_MARKDOWN_FORMAT,
-            article.title,
-            article.url
-        );
-        this.comment().text(this.comment().text() + comment);
+        const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, article.title, article.url);
+        this.zafClient.invoke('comment.appendHtml', comment);
         this.showLinkCreatedModal(article.url);
     },
     showLinkCreatedModal: function (articleUrl) {
@@ -255,6 +240,8 @@ const App = {
             addToHelpCenter: this.addToHelpCenter,
             url: articleUrl
         });
+
+        // todo fix modal
         this.$("#mylinkCreatedModal").modal({
             backdrop: true,
             keyboard: false

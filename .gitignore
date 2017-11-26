@@ -10,6 +10,7 @@ obj
 *sln
 .vs
 dist
+!iorad_zendesk_app_v2/dist
 atlassian_integration/dev_workspace/vagrat_box/.vagrant/machines/default/virtualbox/action_provision
 
 atlassian_integration/dev_workspace/vagrat_box/.vagrant/machines/default/virtualbox/action_set_name
