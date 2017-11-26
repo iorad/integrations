@@ -86,11 +86,17 @@ module.exports = {
   plugins: [
     extractStyles,
     new HtmlWebpackPlugin({
-      warning:
-        "AUTOMATICALLY GENERATED FROM ./lib/templates/layout.hdbs - DO NOT MODIFY THIS FILE DIRECTLY",
-      vendorCss: externalAssets.css,
-      vendorJs: externalAssets.js,
-      template: "!!handlebars-loader!./lib/templates/layout.hdbs"
+        warning: "AUTOMATICALLY GENERATED FROM ./lib/templates/layout.hdbs - DO NOT MODIFY THIS FILE DIRECTLY",
+        vendorCss: externalAssets.css,
+        vendorJs: externalAssets.js,
+        template: "!!handlebars-loader!./lib/templates/layout.hdbs"
+    }),
+    new HtmlWebpackPlugin({
+        warning: "AUTOMATICALLY GENERATED FROM ./lib/templates/layout.hdbs - DO NOT MODIFY THIS FILE DIRECTLY",
+        vendorCss: externalAssets.css,
+        vendorJs: externalAssets.js,
+        template: "!!handlebars-loader!./lib/templates/modal.hdbs",
+        filename: 'modal.html'
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

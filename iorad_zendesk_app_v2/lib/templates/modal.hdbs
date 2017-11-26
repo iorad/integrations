@@ -1,0 +1,29 @@
+<!-- {{htmlWebpackPlugin.options.warning}} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {{#each htmlWebpackPlugin.options.vendorCss}}
+    <link href="{{this}}" rel="stylesheet">
+    {{/each}}
+</head>
+<body>
+<section data-main><div class="spinner dotted"></div></section>
+
+{{#each htmlWebpackPlugin.options.vendorJs}}
+<script type="text/javascript" src="{{this}}"></script>
+{{/each}}
+
+<script>
+    var getQueryString = function ( field, url ) {
+        var href = url ? url : window.location.href;
+        var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+        var string = reg.exec(href);
+        return string ? string[1] : null;
+    };
+
+    var data = getQueryString('data');
+    $('[data-main]').html(atob(data));
+</script>
+</body>
+</html>

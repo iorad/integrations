@@ -38,10 +38,7 @@ const App = {
         "click #addToHelpCenterToggle": "onAddToHelpCenterToggleClicked",
         "click #addToHelpCenterAsDraftToggle": "onAddToHelpCenterAsDraftToggleClicked",
         "change .categoryOptions": "updateSectionOptions",
-        "iframe.editor.close": "onIoradClose",
-        "hidden #mySuccessModal": "onModalHidden",
-        "hidden #myErrorModal": "onModalHidden",
-        "hidden #mylinkCreatedModal": "onModalHidden"
+        "iframe.editor.close": "onIoradClose"
     },
     requests: require("./lib/requests.js"),
 
@@ -51,6 +48,7 @@ const App = {
             that.settings = metadata.settings;
             that.addToHelpCenterAsDraft = that.settings.addToHelpCenterAsDraft;
             that.ajax("fetchLocales");
+
             that.runTicketingApp();
             that.runSolutionApp();
         });
@@ -122,10 +120,7 @@ const App = {
         }
     },
     onCreateArticle: function (data) {
-        if (
-            this.addToHelpCenter &&
-            this.currentPluginType === this.pluginTypes.TICKETING
-        ) {
+        if (this.addToHelpCenter && this.currentPluginType === this.pluginTypes.TICKETING) {
             this.addSolutionUrlToNewTicketComment({
                 title: data.article.title,
                 url: data.article.html_url
@@ -143,11 +138,16 @@ const App = {
         }
     },
     onCreateArticleFailed: function () {
-        this.switchTo("errorModal");
-            // todo fix modal
-        this.$("#myErrorModal").modal({
-            backdrop: true,
-            keyboard: false
+        const that = this;
+        const template = that.renderTemplate('errorModal');
+        that.zafClient.invoke('instances.create', {
+            location: 'modal',
+            url: 'assets/modal.html?data=' + Base64.encode(template),
+        }).then(function(modalContext) {
+            const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
+            modalClient.on('modal.close', function() {
+                that.onModalHidden();
+            });
         });
     },
     onAddToHelpCenterToggleClicked: function (event) {
@@ -165,16 +165,14 @@ const App = {
     },
     submitNewTutorial: function (event) {
         event.preventDefault();
+
         this.lastCategoryId = parseInt(this.$(".categoryOptions").val(), 10);
         this.lastSectionId = parseInt(this.$(".sectionOptions").val(), 10);
         this.switchTo("ioradWidgetTutorialBuilder");
-        var $ioradEditorIframe = this.$(".iorad-editor-wrapper iframe");
-        $ioradEditorIframe.addClass("iorad-editor");
-        var zendeskAppsParams = $ioradEditorIframe.attr("src").replace("?", "&");
-        $ioradEditorIframe.attr(
-            "src",
-            iorad.newTutorialEditorUrl(this.currentPluginType) + zendeskAppsParams
-        );
+        this.$(".iorad-editor-wrapper iframe").addClass("iorad-editor");
+
+        const zendeskAppsParams = $ioradEditorIframe.attr("src").replace("?", "&");
+        $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(this.currentPluginType) + zendeskAppsParams);
     },
     updateSectionOptions: function (event) {
         event.preventDefault();
