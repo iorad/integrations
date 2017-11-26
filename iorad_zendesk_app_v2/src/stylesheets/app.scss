@@ -1,8 +1,10 @@
 * {
 
-  h3 {
-    font-size: 18px;
-    line-height: 27px;
+  section[data-main] {
+    padding-top: 10px;
+  }
+
+  h2 {
     margin: 0;
     padding: 0;
     border: 0;
@@ -11,6 +13,21 @@
     background: transparent;
     font-weight: 600;
     color: #555;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-weight: 600;
+    color: #555;
+    font-size: 18px;
+    line-height: 27px;
   }
 
   h4 {
@@ -20,6 +37,7 @@
     outline: 0;
     vertical-align: baseline;
     background: transparent;
+    font-weight: 600;
     line-height: 18px;
     font-size: 14px;
   }
@@ -46,7 +64,7 @@
 
   div.input-control {
     display: inline-block;
-    margin: 32px 24px;
+    margin: 24px;
   }
 
   div.input-settings {
@@ -69,13 +87,13 @@
   div.main-navbar {
     border: 1px solid #efefef;
     border-radius: 4px;
-    margin-left: 8px;
+    margin-left: 20px;
     margin-top: 16px;
     width: 720px;
   }
 
   div.header-navbar {
-    border: solid #efefef;
+    border: 0 solid #efefef;
     border-bottom-width: 1px;
     height: 60px;
   }
@@ -88,6 +106,7 @@
 
   .main-navbar > .footer {
     height: 40px;
+    margin-left: 24px;
   }
 
   .main-ticket-sidebar > .footer {
@@ -116,13 +135,13 @@
   .main-ticket-sidebar {
     border-width: 1px;
     text-align: center;
-    padding-top: 10px;
   }
 
   .hide {
     display: none;
   }
 
+  #addToHelpCenterAsDraftToggle,
   #addToHelpCenterToggle {
     vertical-align: text-bottom;
   }
