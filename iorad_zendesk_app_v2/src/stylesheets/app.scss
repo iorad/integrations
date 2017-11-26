@@ -1,5 +1,29 @@
 * {
 
+  h3 {
+    font-size: 18px;
+    line-height: 27px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-weight: 600;
+    color: #555;
+  }
+
+  h4 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    line-height: 18px;
+    font-size: 14px;
+  }
+
   .spinner {
     background: url("../images/spinner.gif") no-repeat transparent;
     background-size: 32px;
@@ -57,8 +81,9 @@
   }
 
   div.footer {
-    border: solid #efefef;
+    border: 0 solid #efefef;
     border-top-width: 1px;
+    padding-top: 15px;
   }
 
   .main-navbar > .footer {
@@ -88,21 +113,36 @@
     background: transparent url("../images/logo_app.png") no-repeat;
   }
 
-  .footer > span {
-    float: left;
-    margin: 12px 24px;
-  }
-
-  .header-ticket-sidebar {
-    border: solid #efefef;
-  }
-
   .main-ticket-sidebar {
     border-width: 1px;
     text-align: center;
+    padding-top: 10px;
   }
 
   .hide {
     display: none;
+  }
+
+  #addToHelpCenterToggle {
+    vertical-align: text-bottom;
+  }
+
+  #newTutorial {
+    display: inline-block;
+    padding: 5px 10px 5px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    text-shadow: none !important;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;
+    background: #333 none;
+    border: none;
+    color: #ccc;
+    box-shadow: none;
+    width: 180px;
   }
 }
