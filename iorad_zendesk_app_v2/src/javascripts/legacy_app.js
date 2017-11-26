@@ -126,29 +126,14 @@ const App = {
                 url: data.article.html_url
             });
         } else {
-            this.switchTo("tutorialCreatedModal", {
+            this.showModal(this.renderTemplate("tutorialCreatedModal", {
                 msg: data.article.title,
                 url: data.article.html_url
-            });
-            // todo fix modal
-            this.$("#mySuccessModal").modal({
-                backdrop: true,
-                keyboard: false
-            });
+            }));
         }
     },
     onCreateArticleFailed: function () {
-        const that = this;
-        const template = that.renderTemplate('errorModal');
-        that.zafClient.invoke('instances.create', {
-            location: 'modal',
-            url: 'assets/modal.html?data=' + Base64.encode(template),
-        }).then(function(modalContext) {
-            const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
-            modalClient.on('modal.close', function() {
-                that.onModalHidden();
-            });
-        });
+        this.showModal(this.renderTemplate('errorModal'));
     },
     onAddToHelpCenterToggleClicked: function (event) {
         this.addToHelpCenter = event.target.checked;
@@ -234,16 +219,10 @@ const App = {
         this.showLinkCreatedModal(article.url);
     },
     showLinkCreatedModal: function (articleUrl) {
-        this.switchTo("linkCreatedModal", {
+        this.showModal(this.renderTemplate("linkCreatedModal", {
             addToHelpCenter: this.addToHelpCenter,
             url: articleUrl
-        });
-
-        // todo fix modal
-        this.$("#mylinkCreatedModal").modal({
-            backdrop: true,
-            keyboard: false
-        });
+        }));
     },
     showTicketingView: function () {
         if (this.addToHelpCenter) {
@@ -255,7 +234,19 @@ const App = {
         } else {
             this.switchTo("ticketingTemplate");
         }
-    }
+    },
+    showModal: function (template) {
+        const that = this;
+        that.zafClient.invoke('instances.create', {
+            location: 'modal',
+            url: 'assets/modal.html?data=' + Base64.encode(template),
+        }).then(function(modalContext) {
+            const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
+            modalClient.on('modal.close', function() {
+                that.onModalHidden();
+            });
+        });
+    },
 };
 
 export default BaseApp.extend(App);
