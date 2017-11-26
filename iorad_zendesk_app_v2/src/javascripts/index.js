@@ -6,7 +6,7 @@ import I18n from 'i18n';
 import LegacyApp from './legacy_app';
 
 // Create a new ZAFClient
-var client = ZAFClient.init();
+const client = ZAFClient.init();
 
 // add an event listener to detect once your app is registered with the framework
 client.on('app.registered', function(appData) {
