@@ -1,4 +1,15 @@
 * {
+
+  .spinner {
+    background: url("../images/spinner.gif") no-repeat transparent;
+    background-size: 32px;
+    vertical-align: sub;
+    display: block;
+    width: 32px;
+    height: 11px;
+    margin: 0 auto;
+  }
+
   .iorad-editor {
     position: fixed;
     z-index: 999999;
@@ -32,9 +43,7 @@
   }
 
   div.main-navbar {
-    border-style: solid;
-    border-color: #efefef;
-    border-width: 1px;
+    border: 1px solid #efefef;
     border-radius: 4px;
     margin-left: 8px;
     margin-top: 16px;
@@ -42,15 +51,13 @@
   }
 
   div.header-navbar {
-    border-style: solid;
-    border-color: #efefef;
+    border: solid #efefef;
     border-bottom-width: 1px;
     height: 60px;
   }
 
   div.footer {
-    border-style: solid;
-    border-color: #efefef;
+    border: solid #efefef;
     border-top-width: 1px;
   }
 
@@ -75,12 +82,10 @@
   .header-navbar > .logo {
     float: right;
     margin: 20px 24px;
-    background-image: app-asset-url("logo_app.png");
     height: 21px;
     width: 45px;
     background-size: 45px 21px;
-    background-color: transparent;
-    background-repeat: no-repeat;
+    background: transparent url("../images/logo_app.png") no-repeat;
   }
 
   .footer > span {
@@ -89,8 +94,7 @@
   }
 
   .header-ticket-sidebar {
-    border-style: solid;
-    border-color: #efefef;
+    border: solid #efefef;
   }
 
   .main-ticket-sidebar {
