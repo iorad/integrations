@@ -36,6 +36,10 @@
     </div>
   </div>
   <div class="footer">
-    <span><a href="//www.iorad.com/zenDesk"><h4>{{t "widgetControl.footerHelpLinkText"}}</h4></a></span>
+    <span>
+        <a href="//www.iorad.com/zenDesk" target="_blank">
+            <h4>{{t "widgetControl.footerHelpLinkText"}}</h4>
+        </a>
+    </span>
   </div>
 </div>
