@@ -29,6 +29,7 @@ const App = {
     events: {
         "app.activated": "init",
         "pane.activated": "runSolutionApp",
+        "pane.deactivated": "onModalHidden",
         "fetchCategories.done": "onFetchCategories",
         "fetchSections.done": "onFetchSections",
         "createArticle.done": "onCreateArticle",
@@ -38,7 +39,7 @@ const App = {
         "click #addToHelpCenterToggle": "onAddToHelpCenterToggleClicked",
         "click #addToHelpCenterAsDraftToggle": "onAddToHelpCenterAsDraftToggleClicked",
         "change .categoryOptions": "updateSectionOptions",
-        "iframe.editor.close": "onIoradClose"
+        // "iframe.editor.close": "onIoradClose" todo fix it
     },
     requests: require("./lib/requests.js"),
 
@@ -81,16 +82,16 @@ const App = {
             this.showTicketingView();
         }
     },
-    onIoradClose: function (data) {
-        if (
-            this.currentPluginType === this.pluginTypes.SOLUTION ||
-            this.addToHelpCenter
-        ) {
-            this.createArticle(data);
-        } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
-            this.addIoradPlayerUrlToNewTicketComment(data);
-        }
-    },
+    // onIoradClose: function (data) { todo fix it
+    //     if (
+    //         this.currentPluginType === this.pluginTypes.SOLUTION ||
+    //         this.addToHelpCenter
+    //     ) {
+    //         this.createArticle(data);
+    //     } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
+    //         this.addIoradPlayerUrlToNewTicketComment(data);
+    //     }
+    // },
     onFetchCategories: function (data) {
         this.categoriesList = data.categories;
 
@@ -153,9 +154,16 @@ const App = {
 
         this.lastCategoryId = parseInt(this.$(".categoryOptions").val(), 10);
         this.lastSectionId = parseInt(this.$(".sectionOptions").val(), 10);
-        this.switchTo("ioradWidgetTutorialBuilder");
-        this.$(".iorad-editor-wrapper iframe").addClass("iorad-editor");
 
+        const origin = encodeURIComponent(this.zafClient._origin);
+        const appGuid = this.zafClient._appGuid;
+
+        this.switchTo("ioradWidgetTutorialBuilder", {
+            origin: origin,
+            app_guid: appGuid
+        });
+
+        const $ioradEditorIframe = this.$(".iorad-editor-wrapper iframe");
         const zendeskAppsParams = $ioradEditorIframe.attr("src").replace("?", "&");
         $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(this.currentPluginType) + zendeskAppsParams);
     },
