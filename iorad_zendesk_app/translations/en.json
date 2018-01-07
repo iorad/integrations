@@ -9,6 +9,16 @@
       "value": "Iorad",
       "title": "app name"
     },
+    "long_description": {
+
+      "value": "The fastest tutorial builder on the planet. GPS-like directions, for all the apps that drive your business.",
+      "title": "app long description"
+    },
+    "installation_instructions": {
+
+      "value": "Watch our video at https://youtu.be/Z88zHB50hO8",
+      "title": "app installation instructions"
+    },
     "parameters": {
       "addToHelpCenterAsDraft": {
         "label": {
