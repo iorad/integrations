@@ -83,8 +83,6 @@ const App = {
         }
     },
     onIoradClose: function (data) {
-        console.log("editorClosededitorClosededitorClosededitorC");
-        console.log(data);
         if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToHelpCenter) {
             this.createArticle(data);
         } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
