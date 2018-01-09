@@ -39,6 +39,7 @@ const App = {
         "click #addToHelpCenterToggle": "onAddToHelpCenterToggleClicked",
         "click #addToHelpCenterAsDraftToggle": "onAddToHelpCenterAsDraftToggleClicked",
         "change .categoryOptions": "updateSectionOptions",
+        "editorClosed": "onIoradClose"
     },
     requests: require("./lib/requests.js"),
 
@@ -79,6 +80,15 @@ const App = {
             this.initializeSolutionAppControl();
         } else {
             this.showTicketingView();
+        }
+    },
+    onIoradClose: function (data) {
+        console.log("editorClosededitorClosededitorClosededitorC");
+        console.log(data);
+        if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToHelpCenter) {
+            this.createArticle(data);
+        } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
+            this.addIoradPlayerUrlToNewTicketComment(data);
         }
     },
     onFetchCategories: function (data) {
@@ -139,25 +149,32 @@ const App = {
         this.addToHelpCenterAsDraft = event.target.checked;
     },
 
-    // todo
     submitNewTutorial: function (event) {
         event.preventDefault();
 
         this.lastCategoryId = parseInt(this.$(".categoryOptions").val(), 10);
         this.lastSectionId = parseInt(this.$(".sectionOptions").val(), 10);
 
+        if (this.currentPluginType === this.pluginTypes.SOLUTION
+            && (isNaN(this.lastCategoryId) || isNaN(this.lastSectionId))) {
+            this.showModal("Please select category and section.");
+            return;
+        }
+
         const origin = encodeURIComponent(this.zafClient._origin);
         const appGuid = this.zafClient._appGuid;
+        const iframeSrc = iorad.newTutorialEditorUrl(this.currentPluginType) + "&origin=" + origin + "&app_guid=" + appGuid;
 
-        this.switchTo("ioradWidgetTutorialBuilder", {
-            origin: origin,
-            app_guid: appGuid
+        const that = this;
+        that.zafClient.invoke('instances.create', {
+            location: 'modal',
+            url: iframeSrc,
+        }).then(function(modalContext) {
+            const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
+            modalClient.invoke('resize', { width: '80vw', height: '80vh' });
         });
-
-        const $ioradEditorIframe = this.$(".iorad-editor-wrapper iframe");
-        const zendeskAppsParams = $ioradEditorIframe.attr("src").replace("?", "&");
-        $ioradEditorIframe.attr("src", iorad.newTutorialEditorUrl(this.currentPluginType) + zendeskAppsParams);
     },
+
     updateSectionOptions: function (event) {
         event.preventDefault();
 
@@ -234,19 +251,11 @@ const App = {
             this.switchTo("ticketingTemplate");
         }
     },
-    showModal: function (template, size) {
+    showModal: function (template) {
         const that = this;
         that.zafClient.invoke('instances.create', {
             location: 'modal',
             url: 'assets/modal.html?data=' + Base64.encode(template),
-        }).then(function(modalContext) {
-            const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
-            if (size) {
-                modalClient.invoke('resize', size);
-            }
-            modalClient.on('modal.close', function() {
-                that.onModalHidden();
-            });
         });
     },
 };
