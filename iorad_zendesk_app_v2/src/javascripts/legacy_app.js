@@ -39,7 +39,6 @@ const App = {
         "click #addToHelpCenterToggle": "onAddToHelpCenterToggleClicked",
         "click #addToHelpCenterAsDraftToggle": "onAddToHelpCenterAsDraftToggleClicked",
         "change .categoryOptions": "updateSectionOptions",
-        // "iframe.editor.close": "onIoradClose" todo fix it
     },
     requests: require("./lib/requests.js"),
 
@@ -82,16 +81,6 @@ const App = {
             this.showTicketingView();
         }
     },
-    // onIoradClose: function (data) { todo fix it
-    //     if (
-    //         this.currentPluginType === this.pluginTypes.SOLUTION ||
-    //         this.addToHelpCenter
-    //     ) {
-    //         this.createArticle(data);
-    //     } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
-    //         this.addIoradPlayerUrlToNewTicketComment(data);
-    //     }
-    // },
     onFetchCategories: function (data) {
         this.categoriesList = data.categories;
 
@@ -149,6 +138,8 @@ const App = {
     onAddToHelpCenterAsDraftToggleClicked: function (event) {
         this.addToHelpCenterAsDraft = event.target.checked;
     },
+
+    // todo
     submitNewTutorial: function (event) {
         event.preventDefault();
 
@@ -170,9 +161,9 @@ const App = {
     updateSectionOptions: function (event) {
         event.preventDefault();
 
-        const $selection = this.$(event.originalEvent.srcElement),
-            selectedCategoryId = parseInt($selection.val(), 10),
-            selectedCategory = _.find(this.categoriesList, function (category) {
+        const $selection = this.$(event.target);
+        const selectedCategoryId = parseInt($selection.val(), 10);
+        const selectedCategory = _.find(this.categoriesList, function (category) {
                 return category.id === selectedCategoryId;
             });
 
@@ -243,13 +234,16 @@ const App = {
             this.switchTo("ticketingTemplate");
         }
     },
-    showModal: function (template) {
+    showModal: function (template, size) {
         const that = this;
         that.zafClient.invoke('instances.create', {
             location: 'modal',
             url: 'assets/modal.html?data=' + Base64.encode(template),
         }).then(function(modalContext) {
             const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
+            if (size) {
+                modalClient.invoke('resize', size);
+            }
             modalClient.on('modal.close', function() {
                 that.onModalHidden();
             });

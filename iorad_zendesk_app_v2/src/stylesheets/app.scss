@@ -164,4 +164,8 @@
     box-shadow: none;
     width: 180px;
   }
+
+  .iorad-extension-zendesk-visible .ember-view header.modal-header {
+    padding-right: 20px !important;
+  }
 }

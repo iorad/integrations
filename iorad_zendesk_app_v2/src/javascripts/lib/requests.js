@@ -8,7 +8,7 @@ module.exports = {
     };
   },
   fetchSections: function (categoryId) {
-    var GET_SECTIONS_END_POINT = '/api/v2/help_center/categories/{id}/sections.json';
+    const GET_SECTIONS_END_POINT = '/api/v2/help_center/categories/{id}/sections.json';
     return {
       dataType: 'json',
       contentType: 'application/json',
@@ -24,7 +24,7 @@ module.exports = {
    * @return {object}           a json object representing ajax options.
    */
   createArticle: function (sectionId, article) {
-    var POST_ARTICLE_END_POINT = '/api/v2/help_center/sections/{id}/articles.json';
+    const POST_ARTICLE_END_POINT = '/api/v2/help_center/sections/{id}/articles.json';
     return {
       dataType: 'json',
       contentType: 'application/json',

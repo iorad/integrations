@@ -11,11 +11,11 @@ module.exports = {
       return customBaseUrl;
     }
 
-    var baseUrl;
+    let baseUrl;
 
     switch (env) {
       case 'cfdev':
-        baseUrl = 'https://localhost:8001';
+        baseUrl = 'https://dev.iorad.dev';
         break;
 
       case 'prod':
@@ -30,14 +30,15 @@ module.exports = {
     return baseUrl;
   },
 
-  /**
-   * 
-   * @param  {string} href location of current app.
-   * @return {string}      tutorial editor url.
-   */
+    /**
+     *
+     * @param pluginType
+     * @return {string} tutorial editor url.
+     */
   newTutorialEditorUrl: function (pluginType) {
     return this.getBaseUrl() + '/createNewTutorial?plugin_type=' + pluginType;
   },
+
   existingTutorialEditorUrl: function (tutorialParams, pluginType) {
     return this.getBaseUrl() + '/editor/?plugin_type=' + pluginType + '&module=' + tutorialParams.tutorialId + '&uid=' + tutorialParams.uid;
   },
@@ -51,7 +52,14 @@ module.exports = {
    * @param {string} tutorialTitle  tutorial title
    */
   getPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    return [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle].join('/');
+    const results = [];
+    const parts = [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle];
+      for (let i = 0; i < parts.length; i++) {
+          if (parts[i]) {
+              results.push(parts[i]);
+          }
+      }
+    return results.join('/');
   },
 
   /**
@@ -75,8 +83,9 @@ module.exports = {
    * @return object with base_url, uid, tutorialId, tutorialTitle
    */
   extractTutorialParams: function (playerUrl) {
-    var splits = playerUrl.split('/'),
-        len = splits.length;
+    const splits = playerUrl.split('/');
+    const len = splits.length;
+
     return {
       base_url: splits[len - 4],
       uid: splits[len - 3],
@@ -93,7 +102,7 @@ module.exports = {
    * @return {string}               iframe html
    */
   getEmbeddedPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    var playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle);
+    const playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle);
     return this.buildIframe(playerUrl);
   },
 
@@ -105,7 +114,7 @@ module.exports = {
    * @return {string}               iframe html
    */
   getEmbeddedPlayerWithViewStepsUrl: function (uid, tutorialId, tutorialTitle) {
-    var playerUrl = this.getPlayerUrlWithViewSteps(uid, tutorialId, tutorialTitle);
+    const playerUrl = this.getPlayerUrlWithViewSteps(uid, tutorialId, tutorialTitle);
     return this.buildIframe(playerUrl);
   }
 };
