@@ -157,7 +157,12 @@ const App = {
 
         if (this.currentPluginType === this.pluginTypes.SOLUTION
             && (isNaN(this.lastCategoryId) || isNaN(this.lastSectionId))) {
-            this.showModal("Please select category and section.");
+            this.showModal(this.I18n.t("modalTemplate.validationError"));
+            return;
+        }
+
+        if (this.addToHelpCenter && (isNaN(this.lastCategoryId) || isNaN(this.lastSectionId))) {
+            this.showModal(this.I18n.t("modalTemplate.validationError"));
             return;
         }
 

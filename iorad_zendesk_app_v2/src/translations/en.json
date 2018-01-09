@@ -175,6 +175,11 @@
     "modalErrorTitle": {
       "value": "Error!",
       "title": "text displayed in modal header when there is an error"
+    },
+
+    "validationError": {
+      "value": "Please select category and section.",
+      "title": "text displayed in auto add to solution error"
     }
   }
 
