@@ -1,0 +1,49 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.min.js"></script>
+    <script src="https://www.iorad.com/server/assets/js/iorad.js"></script>
+
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://static.freshdev.io/fdk/2.0/assets/freshdesk.css">
+</head>
+<body>
+<div class="fw-widget-wrapper">
+    <div class="widget">
+        <h3>Add iorad Solution</h3>
+        <div class="loading-box"></div>
+        <div class="content hide">
+            <div class="app-box">
+                <form method="post" class="iorad-solution">
+                    <div class="form-group">
+                        <label for="category">Select Category<span class="required_star">*</span></label>
+                        <select class="form-control categories" name="category" id="category"></select>
+                    </div>
+                    <label class="checkbox">
+                        <input type="checkbox" name="draft" value="1">
+                        Set solution as <strong>Draft</strong>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="add_to_ticket" id="add_to_ticket_reply" value="reply">
+                        <span class="ficon-reply reply-inner"></span> Add to ticket as <strong>Reply</strong>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="add_to_ticket" id="add_to_ticket_forward" value="note">
+                        <span class="ficon-file-edit note-inner"></span> Add to ticket as <strong>Note</strong>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-sm btn-iorad-widget">Start Capture</button>
+                </form>
+            </div>
+        </div>
+        <div class="content-error hide">
+            <div class="">
+                <p>Can't get into iorad solution. Please try again later.</p>
+                <button class="btn btn-xs btn-warning" id='retry-reload'>Retry Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

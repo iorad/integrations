@@ -1,0 +1,15 @@
+{
+  "freshdesk_apikey": {
+    "display_name": "Freshdesk API key",
+    "description": "Please enter your Freshdesk API key. For more information, please refer to this link https://support.freshdesk.com/support/solutions/articles/215517",
+    "type": "text",
+    "required": true
+  },
+
+  "freshdesk_domain": {
+    "display_name": "Freshdesk Domain",
+    "description": "Please enter your Freshdesk domain. Example: subdomain.freshdesk.com",
+    "type": "text",
+    "required": true
+  }
+}

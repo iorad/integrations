@@ -1,0 +1,55 @@
+.logo {
+  background: url('assets/iorad_logo.png') no-repeat;
+  background-size: contain;
+  height: 25px;
+  margin-top: 25px;
+}
+
+.widget {
+  margin-bottom: 30px;
+}
+
+.insert_iorad {
+  background-image: url("assets/iorad_logo.png") !important;
+  background-position: 7px;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-left: 30px;
+}
+
+.title {
+  font-size: 1.2em;
+  padding: 30px 0 10px;
+  font-weight: 700;
+}
+
+.form-group {
+  width: 100%;
+  display: inline-block;
+}
+
+select, .select2 {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+.btn-iorad-widget {
+  background: #64e264;
+  border: 1px solid #64e264;
+  border-radius: 3px;
+  height: 36px;
+  text-shadow: none;
+  font-weight: normal;
+  font-size: 1.1em;
+  color: #fff;
+}
+
+.loading-box {
+  background: url("assets/ajax-loader.gif") no-repeat center;
+  margin-top: 20px;
+}
+
+.content-error {
+  padding: 5px 10px;
+}
