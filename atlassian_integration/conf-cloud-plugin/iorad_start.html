@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="iorad.js"></script>
+    <script type="text/javascript" src="https://www.iorad.com/assets/js/iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript">
@@ -35,7 +35,7 @@
         // if there is not tutorial start capturing or show start capturing button
 
         confluence.getMacroData(function(data) {
-            if (data == undefined || data.tutorID == undefined) {
+            if (!data || !data.tutorID) {
                 $("#create-solution").show();
                 showSave = false;
             } else {
@@ -93,9 +93,9 @@ addScript();
         <div class="bottom">
             <a class="help" href="https://www.iorad.com/contactus" target="_blank">Need Help?</a>
             <div class="urlContainer">
-                <label>URL: </label>
+                <label for="urlInput">URL: </label>
                 <span class="inputContainer">
-                	   <input class="urlInput">
+                	   <input class="urlInput" id="urlInput">
                      <p class="error">Incorrect tutorial URL</p>
   				      </span>
                 <button id="saveUrl" class="green button">Change URL</button>

@@ -18,23 +18,23 @@
 
     $(document).ready(function() {
         var iframeUrl = getAttrsFromIframe(getUrlParameter("iframeUrl"), "src");
-        if (iframeUrl == "") {
+        if (!iframeUrl || iframeUrl === "") {
             $("#noMacroInfo").show();
         } else {
             location = iframeUrl;
         }
     });
 
-                
+
             });
 
 }
 
 addScript();
     </script>
-    <script type="text/javascript" src="iorad.js"></script>
+    <script type="text/javascript" src="https://www.iorad.com/assets/js/iorad.js"></script>
     <script type="text/javascript" src="main.js"></script>
- 
+
 </head>
 
 <body>

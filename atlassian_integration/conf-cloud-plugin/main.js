@@ -1,11 +1,10 @@
     var iframeUrl;
     var tutorID;
     var tutorialTitle;
-    var tutorUID;
     var showSave;
 
     function closeDialog(outer_dialog) {
-        if (outer_dialog != undefined) {
+        if (outer_dialog) {
             outer_dialog.close();
         }
     }
@@ -15,10 +14,8 @@
         var macroParams = {
             iframeUrl: iframeUrl,
             tutorID: tutorID,
-            tutorialTitle: tutorialTitle,
-            tutorUID: tutorUID
+            tutorialTitle: tutorialTitle
         };
-
         outer_confluence.saveMacro(macroParams);
 
         if (close) {
@@ -87,14 +84,7 @@
             options.pluginType = "confluence_cloud";
             iorad.init(options, function() {
 
-                var tutorialParam = {
-                    tutorialId: tutorID,
-                    tutorialTitle: tutorialTitle,
-                    uid: tutorUID
-                };
-
-                iorad.editTutorial(tutorialParam);
-
+                iorad.editTutorial(tutorID);
                 iorad.on('editor:close', function(tutorialParams) {
 
                     serializeTutorial(tutorialParams);
@@ -119,42 +109,35 @@
 
     function getFrameUrl() {
         var url = $("#previewContainer iframe").attr('src');
-        var href = window.location.href
+        var href = window.location.href;
         var arr = href.split("//");
 
-        var result = arr[0] + url;
-
-        return result;
+        return arr[0] + url;
     }
 
     function getParamsFromUrl(frameUrl) {
         var searchKey = "iorad.com/";
         var n = frameUrl.indexOf(searchKey);
-        if (n == -1) {
+        if (n === -1) {
             return false;
         }
         var paramsString = frameUrl.substring(n + searchKey.length);
         var pathArray = paramsString.split( '/' );
-        if (pathArray.length != 3) {
+        if (pathArray.length !== 3) {
             return false;
         }
 
-        var tutorialParams = {
+        return {
             tutorialId: pathArray[1],
-            tutorialTitle: pathArray[2],
-            uid: pathArray[0]
+            tutorialTitle: pathArray[2]
         };
-
-        return tutorialParams;
     }
 
     function serializeTutorial(tutorialParams) {
-        iframeUrl = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-            tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+        iframeUrl = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
 
         tutorID = tutorialParams.tutorialId;
         tutorialTitle = tutorialParams.tutorialTitle;
-        tutorUID = tutorialParams.uid;
     }
 
     function getAttrsFromIframe(iframeStr, strSeek) {
