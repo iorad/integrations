@@ -84,7 +84,7 @@
             options.pluginType = "confluence_cloud";
             iorad.init(options, function() {
 
-                iorad.editTutorial(tutorID);
+                iorad.editTutorial({tutorialId: tutorID});
                 iorad.on('editor:close', function(tutorialParams) {
 
                     serializeTutorial(tutorialParams);
