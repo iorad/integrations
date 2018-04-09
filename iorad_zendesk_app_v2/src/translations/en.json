@@ -153,7 +153,7 @@
     },
 
     "ticketingModalAutoPostSolutionMsg": {
-      "value": "The solution link to your new Help Center Aritcle is in your ticket comments.",
+      "value": "The solution link to your new Help Center Article is in your ticket comments.",
       "title": "text displayed in the modal body when user tick auto post to help center in ticketing location"
     },
 

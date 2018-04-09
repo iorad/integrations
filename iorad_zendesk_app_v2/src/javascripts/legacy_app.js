@@ -229,14 +229,26 @@ const App = {
     addIoradPlayerUrlToNewTicketComment: function (data) {
         const url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle);
         const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, data.tutorialTitle, url);
-        this.zafClient.invoke('comment.appendHtml', comment);
+        this.appendtextToZendeskComment(comment);
         this.showLinkCreatedModal(url);
     },
     addSolutionUrlToNewTicketComment: function (article) {
         const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, article.title, article.url);
-        this.zafClient.invoke('comment.appendHtml', comment);
+        this.appendtextToZendeskComment(comment);
         this.showLinkCreatedModal(article.url);
     },
+
+    appendtextToZendeskComment: function (html) {
+        const that = this;
+        that.zafClient.get('comment.useRichText').then(function (data) {
+            if (data['comment.useRichText'] === true) {
+                that.zafClient.invoke('comment.appendHtml', html);
+            } else {
+                that.zafClient.invoke('comment.appendText', that.$('<div />').html(html).text());
+            }
+        });
+    },
+
     showLinkCreatedModal: function (articleUrl) {
         this.showModal(this.renderTemplate("linkCreatedModal", {
             addToHelpCenter: this.addToHelpCenter,
