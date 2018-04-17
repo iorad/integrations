@@ -2,7 +2,7 @@
 
 This is a plugin for confluence cloud
 
-#!!don't edit the file dirctly except you are on [https://github.com/iorad/integrations/](https://github.com/iorad/integrations/) repo!!
+#!!don't edit the file directly except you are on [https://github.com/iorad/integrations/](https://github.com/iorad/integrations/) repo!!
 
 For development
 ---------------
