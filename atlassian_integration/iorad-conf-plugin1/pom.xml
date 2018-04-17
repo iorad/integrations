@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.iorad.plugin</groupId>
     <artifactId>iorad-conf-plugin</artifactId>
     <version>1.4</version>
-
     <organization>
         <name>iorad inc</name>
         <url>http://www.iorad.com/</url>
     </organization>
-
     <name>iorad-conf-plugin</name>
     <description>This confluance plugin makes instant step-by-step knowledge base articles.</description>
     <packaging>atlassian-plugin</packaging>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -31,9 +25,6 @@
             <version>${confluence.version}</version>
             <scope>provided</scope>
         </dependency>
-        
-        
-
         <!-- WIRED TEST RUNNER DEPENDENCIES -->
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
@@ -53,7 +44,6 @@
             <version>2.2.2-atlassian-1</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -75,12 +65,10 @@
             </plugin>
         </plugins>
     </build>
-
     <properties>
         <confluence.version>5.7.4</confluence.version>
         <confluence.data.version>5.7.4</confluence.data.version>
-        <amps.version>5.0.13</amps.version>
+        <amps.version>6.3.14</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
     </properties>
-
 </project>
