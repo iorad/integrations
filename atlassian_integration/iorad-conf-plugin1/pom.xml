@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.iorad.plugin</groupId>
     <artifactId>iorad-conf-plugin</artifactId>
-    <version>1.4</version>
+    <version>1.8.0</version>
+
     <organization>
         <name>iorad inc</name>
         <url>http://www.iorad.com/</url>
     </organization>
+
     <name>iorad-conf-plugin</name>
     <description>This confluance plugin makes instant step-by-step knowledge base articles.</description>
     <packaging>atlassian-plugin</packaging>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -59,16 +65,23 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.source}</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
     <properties>
-        <confluence.version>5.7.4</confluence.version>
-        <confluence.data.version>5.7.4</confluence.data.version>
+        <confluence.version>6.6.0</confluence.version>
+        <confluence.data.version>6.6.0</confluence.data.version>
         <amps.version>6.3.14</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
+        <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
+        <!-- This key is used to keep the consistency between the key in atlassian-plugin.xml and the key to generate bundle. -->
+        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
 </project>
