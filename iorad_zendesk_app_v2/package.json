@@ -29,7 +29,7 @@
   },
   "bundleDependencies": false,
   "deprecated": false,
-  "description": "Create Zendesk Guide Solution Articles 10X faster",
+  "description": "10X Faster Solution Article Creation",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
