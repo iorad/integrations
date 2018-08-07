@@ -29,7 +29,7 @@
   },
   "bundleDependencies": false,
   "deprecated": false,
-  "description": "A scaffold for developers to build ZAF v2 apps",
+  "description": "Create Zendesk Guide Solution Articles 10X faster",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",

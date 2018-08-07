@@ -12,7 +12,7 @@
           <option value="{{id}}"
             {{#if selected}}
               selected
-            {{/if}}  
+            {{/if}}
             >{{name}}
           </option>
           {{/each}}
@@ -32,12 +32,12 @@
       </div>
     </div>
     <div class="input-settings">
-      <input type="checkbox" id="addToHelpCenterAsDraftToggle" {{#if settings.addToHelpCenterAsDraft}}checked{{/if}}> {{t "widgetControl.addToKnowledgebaseAsDraftToggleText"}} 
+      <input type="checkbox" id="addToHelpCenterAsDraftToggle" {{#if settings.addToHelpCenterAsDraft}}checked{{/if}}> {{t "widgetControl.addToKnowledgebaseAsDraftToggleText"}}
     </div>
   </div>
   <div class="footer">
     <span>
-        <a href="//www.iorad.com/zenDesk" target="_blank">
+        <a href="https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e" target="_blank">
             <h4>{{t "widgetControl.footerHelpLinkText"}}</h4>
         </a>
     </span>

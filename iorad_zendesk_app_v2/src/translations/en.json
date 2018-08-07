@@ -2,7 +2,7 @@
   "app": {
     "package": "app_name",
     "description": {
-      "value": "builds Help Center articles instantly",
+      "value": "Create Zendesk Guide Solution Articles 10X faster",
       "title": "app description"
     },
     "name": {
@@ -11,12 +11,12 @@
     },
     "long_description": {
 
-      "value": "The fastest tutorial builder on the planet. GPS-like directions, for all the apps that drive your business.",
+      "value": "Instantly create step-by-step solution articles for any app and publish it directly to your Zendesk Guide. No uploads. No screenshot editing.\n\nCreating solution articles is extremely painful and time consuming. A 20 step article takes between 30 mins to 1 hour to make. Take a screenshot, edit it, upload to your zendesk guide...rinse and repeat...over and over. Precious time wasted. Worst of all it’s your most valuable employee, a power user, thats tasked with doing this.\n\nWhat if I told you iorad could speed this process -10X. That’s right. That same 30 to 60 minutes creating a solution article could be done in 3 to 6 minutes.\n\nIorad for zendesk works like this:\n\n- Click capture and go through the steps as you normally would.\n- iorad automatically captures screenshots and identifies every action.\n- Click done and iorad automagically generates the solution article and posts it to your zendesk guide.\n\nThat’s it. Give it a try and save precious time.\n\nCheckout what an iorad tutorial looks like and see how it adapts to a [learners learning style](https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e).",
       "title": "app long description"
     },
     "installation_instructions": {
 
-      "value": "Watch our video at https://youtu.be/Z88zHB50hO8",
+      "value": "Follow the prompts to install the app. Once installed, iorad can be accessed from the main sidebar of zendesk support. Just specify the location (category/section) of the solution article and iorad does the rest.\n\nTo connect iorad directly to your zendesk guide (without having to go to your zendesk support site):\n\n- Login to iorad\n- Click Connect from the iorad menu\n- Authorize “Zendesk”\n\nYou will see a zendesk tab on the finish publish screen of every tutorial where you can specify the category/section to post.\n\nFor more information [go here](https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e).",
       "title": "app installation instructions"
     },
     "parameters": {
@@ -119,7 +119,7 @@
       "value": "Auto-add Solution to Help Center",
       "title": "text appears next to the checkbox in ticket sidebar"
     },
-    
+
     "addToKnowledgebaseAsDraftToggleText": {
       "value": "Save as draft",
       "title": "text appears next to the checkbox in ticket sidebar / nav bar"
