@@ -15,7 +15,7 @@ module.exports = {
 
     switch (env) {
       case 'cfdev':
-        baseUrl = 'https://dev.iorad.dev';
+        baseUrl = 'https://dev.iorad.local';
         break;
 
       case 'prod':
@@ -44,9 +44,9 @@ module.exports = {
   },
 
   /**
-   * 
+   *
    * This method returns tutorial player url.
-   * 
+   *
    * @param {string} uid            user id
    * @param {string} tutorialId     tutorial id
    * @param {string} tutorialTitle  tutorial title
@@ -63,10 +63,10 @@ module.exports = {
   },
 
   /**
-   * 
+   *
    * This method returns tutorial player url with viewsteps option turned on.
    * Note: this method is obselete.
-   * 
+   *
    * @param {string} uid            user id
    * @param {string} tutorialId     tutorial id
    * @param {string} tutorialTitle  tutorial title
