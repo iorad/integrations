@@ -1,0 +1,12 @@
+{
+  "name": "iorad for Zendesk",
+  "author": {
+    "name": "Iorad",
+    "email": "zendesk@iorad.com",
+    "url": "https://www.iorad.com"
+  },
+  "defaultLocale": "en",
+  "private": false,
+  "marketingOnly": true,
+  "location": {}
+}
