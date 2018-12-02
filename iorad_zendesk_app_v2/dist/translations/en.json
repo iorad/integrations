@@ -1,0 +1,33 @@
+{
+  "_warning": "AUTOMATICALLY GENERATED FROM src/translations/en.json - DO NOT MODIFY THIS FILE DIRECTLY",
+  "app": {
+    "name": {
+      "value": "Iorad - Solution Article Builder",
+      "title": "app name"
+    },
+    "description": {
+      "value": "10X Faster Solution Article Creation",
+      "title": "app description"
+    },
+    "long_description": {
+      "value": "Instantly create step-by-step solution articles for any app and publish it directly to your Zendesk Guide. No uploads. No screenshot editing.\n\nCreating solution articles is extremely painful and time consuming. A 20 step article takes 1-2 hours to make. Take a screenshot, edit it, upload to your Zendesk guide...rinse and repeat. Precious time wasted. Worst of all it’s your most valuable employee, a power user, thats tasked with doing this.\n\nWhat if I told you iorad could speed this process -10X. That’s right. That same solution article could be done in under 5 minutes.\n\nIorad for Zendesk works like this:\n\n- Click capture and go through the steps as you normally would.\n- iorad automatically captures screenshots and identifies every action.\n- Click done and iorad automagically generates the solution article and posts it to your zendesk guide.\n\nThat’s it. Give it a try and save precious time.\n\nCheckout what an iorad tutorial looks like and see how it adapts to a [learners learning style](https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e).",
+      "title": "app long description"
+    },
+    "installation_instructions": {
+      "value": "This will install iorad in the Zendesk support agent interface.\n\nTo publish articles directly to Zendesk Guide:\n\n- Go to [iorad for Zendesk](https://www.iorad.com/connectIntegrations/direct/zendesk) and click **Connect**\n- **Sign Up** for an iorad account or **Sign In**\n- Enter your **Zendesk domain** and authorize\n\nThe tutorial finish screen now has a Zendesk tab. Capture a solution article, select the location (Zendesk category/section), click Publish and you’re done!\n\nFor more information [go here](https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e).",
+      "title": "app installation instructions"
+    },
+    "parameters": {
+      "addToHelpCenterAsDraft": {
+        "label": {
+          "value": "Default article status DRAFT",
+          "title": "app setting display label"
+        },
+        "helpText": {
+          "value": "Uncheck this option to autopublish to the Help Center.",
+          "title": "short description for this app setting"
+        }
+      }
+    }
+  }
+}

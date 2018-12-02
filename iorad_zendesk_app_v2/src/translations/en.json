@@ -2,7 +2,7 @@
   "app": {
     "package": "app_name",
     "name": {
-      "value": "Iorad",
+      "value": "Iorad - Solution Article Builder",
       "title": "app name"
     },
     "description": {
@@ -14,7 +14,7 @@
       "title": "app long description"
     },
     "installation_instructions": {
-      "value": "Follow the prompts to install the app. Once installed, iorad can be accessed from the main sidebar of zendesk support. Just specify the location (category/section) of the solution article and iorad does the rest.\n\nTo connect iorad directly to your zendesk guide (without having to go to your zendesk support site):\n\n- Login to iorad\n- Click Connect from the iorad menu\n- Authorize “Zendesk”\n\nYou will see a zendesk tab on the finish publish screen of every tutorial where you can specify the category/section to post.\n\nFor more information [go here](https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e).",
+      "value": "This will install iorad in the Zendesk support agent interface.\n\nTo publish articles directly to Zendesk Guide:\n\n- Go to [iorad for Zendesk](https://www.iorad.com/connectIntegrations/direct/zendesk) and click **Connect**\n- **Sign Up** for an iorad account or **Sign In**\n- Enter your **Zendesk domain** and authorize\n\nThe tutorial finish screen now has a Zendesk tab. Capture a solution article, select the location (Zendesk category/section), click Publish and you’re done!\n\nFor more information [go here](https://medium.com/@sunpatel_92981/10-x-faster-solution-article-creation-in-zendesk-23c398b12f8e).",
       "title": "app installation instructions"
     },
     "parameters": {
