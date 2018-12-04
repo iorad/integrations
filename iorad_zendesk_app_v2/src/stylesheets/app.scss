@@ -80,8 +80,10 @@
     min-width: 172px;
   }
 
-  .btn-iorad-widget {
-    width: 180px;
+  .form-iorad-widget {
+    position: relative;
+    width: auto;
+    display: inline;
   }
 
   div.main-navbar {
@@ -148,8 +150,6 @@
 
   #newTutorial {
     display: inline-block;
-    padding: 5px 10px 5px;
-    margin-bottom: 0;
     font-size: 14px;
     line-height: 18px;
     text-align: center;
@@ -158,14 +158,36 @@
     cursor: pointer;
     border-radius: 4px;
     white-space: nowrap;
-    background: #333 none;
+    background: #CC2256 none;
     border: none;
-    color: #ccc;
+    color: #ffffff;
     box-shadow: none;
-    width: 180px;
+    padding: 5px 16px;
+    font-weight: bolder;
+  }
+
+  .iorad-logo-icon {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    background: url("../images/cap.svg") no-repeat 0 0;
+    background-size: contain;
+    color: #ffffff;
+  }
+
+  .form-iorad-widget #newTutorial {
+    margin: 0 24px 24px 24px;
+    width: 490px;
+  }
+
+  .main-ticket-sidebar #newTutorial {
+    padding-right: 25px;
   }
 
   .iorad-extension-zendesk-visible .ember-view header.modal-header {
     padding-right: 20px !important;
   }
+
 }

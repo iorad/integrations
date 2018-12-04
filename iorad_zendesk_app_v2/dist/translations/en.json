@@ -2,7 +2,7 @@
   "_warning": "AUTOMATICALLY GENERATED FROM src/translations/en.json - DO NOT MODIFY THIS FILE DIRECTLY",
   "app": {
     "name": {
-      "value": "Iorad - Solution Article Builder",
+      "value": "iorad - Solution Article Maker",
       "title": "app name"
     },
     "description": {

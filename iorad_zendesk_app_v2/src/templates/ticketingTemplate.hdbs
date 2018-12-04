@@ -34,7 +34,10 @@
     {{/if}}
 
     <div class="input-control-ticket-sidebar">
-      <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="{{t "widgetControl.ioradTutorialButtonControlText"}}">{{t "widgetControl.ioradTutorialButtonControlText"}}</button>
+      <button id="newTutorial" class="btn btn-iorad-widget btn-primary">
+          <i class="iorad-logo-icon"></i>
+          {{t "widgetControl.ioradTutorialButtonControlText"}}
+      </button>
     </div>
   </div>
   <div class="footer">

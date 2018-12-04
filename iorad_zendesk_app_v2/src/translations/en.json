@@ -2,7 +2,7 @@
   "app": {
     "package": "app_name",
     "name": {
-      "value": "Iorad - Solution Article Builder",
+      "value": "iorad - Solution Article Maker",
       "title": "app name"
     },
     "description": {
@@ -74,7 +74,7 @@
 
   "widgetControl": {
     "solutionAppTitle": {
-      "value": "Create a step-by-step Help Center article",
+      "value": "Where do you want to publish your new article?",
       "title": "iorad solution zendesk app title"
     },
 
@@ -84,32 +84,27 @@
     },
 
     "categoryComboBoxLabel": {
-      "value": "Choose a Category",
+      "value": "Category",
       "title": "label appears on top of the category combobox"
     },
 
     "sectionComboBoxLabel": {
-      "value": "Choose a Section",
+      "value": "Section",
       "title": "label appears above the section combobox"
     },
 
-    "buttonControlLabel": {
-      "value": "Add a Solution",
-      "title": "label appears above the ADD button"
-    },
-
     "buttonControlText": {
-      "value": "ADD",
+      "value": "Capture Solution Article",
       "title": "text appears on the button control"
     },
 
     "ioradTutorialButtonControlText": {
-      "value": "Capture Solution",
+      "value": "Capture Solution Article",
       "title": "text appears on the ticketing app button"
     },
 
     "footerHelpLinkText": {
-      "value": "Learn more about the iorad zendesk app",
+      "value": "Learn more about iorad for Zendesk",
       "title": "text appears on the footer help link"
     },
 

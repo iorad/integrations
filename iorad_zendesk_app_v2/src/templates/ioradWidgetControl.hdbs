@@ -4,7 +4,7 @@
     <span class="logo"/>
   </div>
   <div class="body-navbar">
-    <div class="input">
+    <div class="input form-iorad-widget">
       <div class="input-control">
         <label for="selectCategory">{{t "widgetControl.categoryComboBoxLabel"}}</label>
         <select class="categoryOptions" id="selectCategory">
@@ -26,10 +26,10 @@
           {{/each}}
         </select>
       </div>
-      <div class="input-control">
-        <label for="newTutorial">{{t "widgetControl.buttonControlLabel"}}</label>
-        <button id="newTutorial" class="btn btn-iorad-widget btn-primary" title="{{t "widgetControl.buttonControlLabel"}}">{{t "widgetControl.buttonControlText"}}</button>
-      </div>
+        <button id="newTutorial" class="btn btn-iorad-widget btn-primary">
+            <i class="iorad-logo-icon"></i>
+            {{t "widgetControl.buttonControlText"}}
+        </button>
     </div>
     <div class="input-settings">
       <input type="checkbox" id="addToHelpCenterAsDraftToggle" {{#if settings.addToHelpCenterAsDraft}}checked{{/if}}> {{t "widgetControl.addToKnowledgebaseAsDraftToggleText"}}
