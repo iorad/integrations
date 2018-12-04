@@ -181,10 +181,12 @@ const App = {
         }).then(function(modalContext) {
             const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
             modalClient.on('editorReady', function (tutorialParam) {
+                console.log('that.tutorialParam = ', that.tutorialParam);
                 that.tutorialParam = tutorialParam;
             });
 
             modalClient.on('modal.close', function() {
+                console.log('that.tutorialParam = ', that.tutorialParam);
                 if (that.tutorialParam) {
                     that.zafClient.get('instances').then(function (instancesData) {
                         var instances = instancesData.instances;
@@ -196,6 +198,7 @@ const App = {
                     });
                 }
             });
+
             modalClient.invoke('resize', { width: '80vw', height: '80vh' });
         });
     },

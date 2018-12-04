@@ -158,12 +158,16 @@
     cursor: pointer;
     border-radius: 4px;
     white-space: nowrap;
-    background: #CC2256 none;
+    background: #FF2B6B none;
     border: none;
     color: #ffffff;
     box-shadow: none;
     padding: 5px 16px;
     font-weight: bolder;
+
+    &:hover {
+      background: #CC2256 none;
+    }
   }
 
   .iorad-logo-icon {
@@ -190,4 +194,11 @@
     padding-right: 20px !important;
   }
 
+  .btn-primary.btn-pink {
+    background: #FF2B6B none;
+
+    &:hover {
+      background: #CC2256 none;
+    }
+  }
 }

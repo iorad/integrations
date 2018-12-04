@@ -156,7 +156,7 @@
     },
 
     "viewArticleButton": {
-      "value": "VIEW ARTICLE",
+      "value": "View Article",
       "title": "text displayed on the modal view article button in footer"
     },
 

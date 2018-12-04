@@ -5,6 +5,6 @@
   <p>{{t "modalTemplate.ticketingModalNoAutoPostSolutionMsg"}}</p>
   {{/if}}
   <p>
-    <a class="btn btn-primary" role="button" href="{{url}}" target="_blank">{{t "modalTemplate.viewArticleButton"}}</a>
+    <a class="btn btn-primary btn-pink" role="button" href="{{url}}" target="_blank">{{t "modalTemplate.viewArticleButton"}}</a>
   </p>
 </div>
