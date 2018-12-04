@@ -84,13 +84,19 @@ const App = {
     },
     onIoradClose: function (data) {
         if (data.steps && data.steps.length > 0) {
-            if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToHelpCenter) {
-                this.createArticle(data);
-            } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
-                this.addIoradPlayerUrlToNewTicketComment(data);
-            }
+            var that = this;
+            that.ajax("getIoradURL", data.tutorialId).done(function (urls) {
+                if (that.currentPluginType === that.pluginTypes.SOLUTION || that.addToHelpCenter) {
+                    that.createArticle(urls);
+                } else if (that.currentPluginType === that.pluginTypes.TICKETING) {
+                    that.addIoradPlayerUrlToNewTicketComment(urls);
+                }
+            }).fail(function () {
+                that.showModal(that.renderTemplate('errorModal'));
+            });
         }
     },
+
     onFetchCategories: function (data) {
         this.categoriesList = data.categories;
 
@@ -174,6 +180,22 @@ const App = {
             url: iframeSrc,
         }).then(function(modalContext) {
             const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
+            modalClient.on('editorReady', function (tutorialParam) {
+                that.tutorialParam = tutorialParam;
+            });
+
+            modalClient.on('modal.close', function() {
+                if (that.tutorialParam) {
+                    that.zafClient.get('instances').then(function (instancesData) {
+                        var instances = instancesData.instances;
+                        for (var instanceGuid in instances) {
+                            if (['nav_bar', 'ticket_sidebar', 'new_ticket_sidebar'].indexOf(instances[instanceGuid].location) > -1) {
+                                that.zafClient.instance(instanceGuid).trigger('editorClosed', that.tutorialParam);
+                            }
+                        }
+                    });
+                }
+            });
             modalClient.invoke('resize', { width: '80vw', height: '80vh' });
         });
     },
@@ -205,20 +227,13 @@ const App = {
     initializeTicketingAppControl: function () {
         this.ajax("fetchSections", this.categoriesList[0].id);
     },
-    createArticle: function (data) {
-        const iframeHTML = iorad.getEmbeddedPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle);
-        let articleBody = helpers.fmt("<p>%@</p>", iframeHTML);
+    createArticle: function (urls) {
         const saveAsDraft = this.currentPluginType === this.pluginTypes.SOLUTION? this.addToHelpCenterAsDraft: false;
-
-        _.each(data.steps, function (step) {
-            articleBody += helpers.fmt("<p style='display: none;'>%@</p>", helpers.safeString(step.description).string);
-        });
-
         const articleJson = JSON.stringify({
             article: {
-                title: data.tutorialTitle,
+                title: urls.title,
                 locale: this.myDefaultLocale,
-                body: articleBody,
+                body: urls.embedShareStatic ? urls.EMBED_STATIC : urls.EMBED,
                 draft: saveAsDraft
             }
         }); // this could be replaced with a loading marque.
@@ -226,11 +241,10 @@ const App = {
         this.$(".iorad-editor-wrapper").html();
         this.ajax("createArticle", this.lastSectionId, articleJson);
     },
-    addIoradPlayerUrlToNewTicketComment: function (data) {
-        const url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle);
-        const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, data.tutorialTitle, url);
+    addIoradPlayerUrlToNewTicketComment: function (urls) {
+        const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, urls.title, urls.PUBLIC_LINK);
         this.appendtextToZendeskComment(comment);
-        this.showLinkCreatedModal(url);
+        this.showLinkCreatedModal(urls.PUBLIC_LINK);
     },
     addSolutionUrlToNewTicketComment: function (article) {
         const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, article.title, article.url);
@@ -267,8 +281,7 @@ const App = {
         }
     },
     showModal: function (template) {
-        const that = this;
-        that.zafClient.invoke('instances.create', {
+        return this.zafClient.invoke('instances.create', {
             location: 'modal',
             url: 'assets/modal.html?data=' + Base64.encode(template),
         });

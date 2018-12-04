@@ -1,3 +1,5 @@
+import iorad from './iorad';
+
 module.exports = {
   fetchCategories: function () {
     return {
@@ -45,5 +47,14 @@ module.exports = {
       url: '/api/v2/help_center/locales.json',
       type: 'GET'
     };
+  },
+
+  getIoradURL(tutorialId) {
+      return {
+          dataType: 'json',
+          contentType: 'application/json',
+          url: iorad.getBaseUrl() + '/api/tutorial/getPlayerURL?is_share_url=true&tutorial_id=' + tutorialId,
+          type: 'GET'
+      };
   }
 };
