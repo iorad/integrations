@@ -83,10 +83,12 @@ const App = {
         }
     },
     onIoradClose: function (data) {
-        if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToHelpCenter) {
-            this.createArticle(data);
-        } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
-            this.addIoradPlayerUrlToNewTicketComment(data);
+        if (data.steps && data.steps.length > 0) {
+            if (this.currentPluginType === this.pluginTypes.SOLUTION || this.addToHelpCenter) {
+                this.createArticle(data);
+            } else if (this.currentPluginType === this.pluginTypes.TICKETING) {
+                this.addIoradPlayerUrlToNewTicketComment(data);
+            }
         }
     },
     onFetchCategories: function (data) {
