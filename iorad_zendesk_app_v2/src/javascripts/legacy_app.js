@@ -166,9 +166,7 @@ const App = {
             return;
         }
 
-        const origin = encodeURIComponent(this.zafClient._origin);
-        const appGuid = this.zafClient._appGuid;
-        const iframeSrc = iorad.newTutorialEditorUrl(this.currentPluginType) + "&origin=" + origin + "&app_guid=" + appGuid;
+        const iframeSrc = iorad.newTutorialEditorUrl(this.currentPluginType);
 
         const that = this;
         that.zafClient.invoke('instances.create', {
