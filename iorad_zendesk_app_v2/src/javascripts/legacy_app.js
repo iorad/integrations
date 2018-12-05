@@ -83,7 +83,8 @@ const App = {
         }
     },
     onIoradClose: function (data) {
-        if (data.steps && data.steps.length > 0) {
+        console.log('onIoradClose, data = ', data);
+        if (data && data.steps && data.steps.length > 0) {
             var that = this;
             that.ajax("getIoradURL", data.tutorialId).done(function (urls) {
                 if (that.currentPluginType === that.pluginTypes.SOLUTION || that.addToHelpCenter) {
@@ -181,21 +182,12 @@ const App = {
         }).then(function(modalContext) {
             const modalClient = that.zafClient.instance(modalContext['instances.create'][0].instanceGuid);
             modalClient.on('editorReady', function (tutorialParam) {
-                console.log('that.tutorialParam = ', that.tutorialParam);
                 that.tutorialParam = tutorialParam;
             });
 
             modalClient.on('modal.close', function() {
-                console.log('that.tutorialParam = ', that.tutorialParam);
-                if (that.tutorialParam) {
-                    that.zafClient.get('instances').then(function (instancesData) {
-                        var instances = instancesData.instances;
-                        for (var instanceGuid in instances) {
-                            if (['nav_bar', 'ticket_sidebar', 'new_ticket_sidebar'].indexOf(instances[instanceGuid].location) > -1) {
-                                that.zafClient.instance(instanceGuid).trigger('editorClosed', that.tutorialParam);
-                            }
-                        }
-                    });
+                if (that.tutorialParam && modalClient._parent && modalClient._parent._instanceGuid) {
+                    that.zafClient.instance(modalClient._parent._instanceGuid).trigger('editorClosed', that.tutorialParam);
                 }
             });
 
