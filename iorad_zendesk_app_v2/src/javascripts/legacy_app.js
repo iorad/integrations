@@ -25,7 +25,7 @@ const App = {
         // this is a nav bar app that creates tutorials.
         TICKETING: "zendeskapp_ticketing" // this is a ticket sidebar app that creates tutorials for existing and new tickets.
     },
-    TICKET_COMMENT_FORMAT: '<p><a href="%@" target="_blank">%@</a></p>',
+    TICKET_COMMENT_FORMAT: '<p>This solution article should help: <a href="%@" target="_blank">%@</a></p>',
     events: {
         "app.activated": "init",
         "pane.activated": "runSolutionApp",
@@ -253,7 +253,7 @@ const App = {
                 const html = helpers.fmt(that.TICKET_COMMENT_FORMAT, link, text);
                 that.zafClient.invoke('comment.appendHtml', html);
             } else {
-                that.zafClient.invoke('comment.appendText', link);
+                that.zafClient.invoke('comment.appendText', `This solution article should help: ${link}`);
             }
         });
     },
