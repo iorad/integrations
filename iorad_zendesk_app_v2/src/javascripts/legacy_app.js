@@ -187,7 +187,8 @@ const App = {
 
             modalClient.on('modal.close', function() {
                 if (that.tutorialParam && modalClient._parent && modalClient._parent._instanceGuid) {
-                    that.zafClient.instance(modalClient._parent._instanceGuid).trigger('editorClosed', that.tutorialParam);
+                    that.zafClient.instance(modalClient._parent._instanceGuid).trigger('editorClosed', _.clone(that.tutorialParam, true));
+                    that.tutorialParam = null;
                 }
             });
 
@@ -237,23 +238,22 @@ const App = {
         this.ajax("createArticle", this.lastSectionId, articleJson);
     },
     addIoradPlayerUrlToNewTicketComment: function (urls) {
-        const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, urls.title, urls.PUBLIC_LINK);
-        this.appendtextToZendeskComment(comment);
+        this.appendtextToZendeskComment(urls.title, urls.PUBLIC_LINK);
         this.showLinkCreatedModal(urls.PUBLIC_LINK);
     },
     addSolutionUrlToNewTicketComment: function (article) {
-        const comment = helpers.fmt(this.TICKET_COMMENT_FORMAT, article.title, article.url);
-        this.appendtextToZendeskComment(comment);
+        this.appendtextToZendeskComment(article.title, article.url);
         this.showLinkCreatedModal(article.url);
     },
 
-    appendtextToZendeskComment: function (html) {
+    appendtextToZendeskComment: function (text, link) {
         const that = this;
         that.zafClient.get('comment.useRichText').then(function (data) {
             if (data['comment.useRichText'] === true) {
+                const html = helpers.fmt(that.TICKET_COMMENT_FORMAT, link, text);
                 that.zafClient.invoke('comment.appendHtml', html);
             } else {
-                that.zafClient.invoke('comment.appendText', that.$('<div />').html(html).text());
+                that.zafClient.invoke('comment.appendText', link);
             }
         });
     },

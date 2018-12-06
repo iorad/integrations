@@ -2,11 +2,11 @@
   "app": {
     "package": "app_name",
     "name": {
-      "value": "iorad - Solution Article Maker",
+      "value": "iorad",
       "title": "app name"
     },
     "description": {
-      "value": "10X Faster Solution Article Creation",
+      "value": "Make solution articles in minutes",
       "title": "app description"
     },
     "long_description": {

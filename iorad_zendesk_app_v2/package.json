@@ -29,7 +29,7 @@
   },
   "bundleDependencies": false,
   "deprecated": false,
-  "description": "10X Faster Solution Article Creation",
+  "description": "Make solution articles in minutes",
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
@@ -66,7 +66,7 @@
     "framework"
   ],
   "license": "Apache-2.0",
-  "name": "app_scaffold",
+  "name": "iorad",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zendesk/app_scaffold.git"

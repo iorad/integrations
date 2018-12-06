@@ -2,11 +2,11 @@
   "_warning": "AUTOMATICALLY GENERATED FROM src/translations/en.json - DO NOT MODIFY THIS FILE DIRECTLY",
   "app": {
     "name": {
-      "value": "iorad - Solution Article Maker",
+      "value": "iorad",
       "title": "app name"
     },
     "description": {
-      "value": "10X Faster Solution Article Creation",
+      "value": "Make solution articles in minutes",
       "title": "app description"
     },
     "long_description": {
