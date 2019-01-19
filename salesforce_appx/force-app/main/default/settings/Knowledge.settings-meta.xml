@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<KnowledgeSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLanguage>en_US</defaultLanguage>
+    <enableKnowledge>true</enableKnowledge>
+    <enableLightningKnowledge>true</enableLightningKnowledge>
+</KnowledgeSettings>

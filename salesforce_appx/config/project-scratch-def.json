@@ -1,0 +1,13 @@
+{
+  "country": "US",
+  "edition": "Enterprise",
+  "orgPreferences": {
+    "enabled": [],
+    "disabled": []
+  },
+  "orgName": "Iorad Company",
+  "adminEmail": "jokobodo@kalicode.com",
+  "features": [
+    "Knowledge"
+  ]
+}
