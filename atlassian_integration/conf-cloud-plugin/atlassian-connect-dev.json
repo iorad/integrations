@@ -3,7 +3,7 @@
     "description": "Iorad Atlassian Connect add-on",
     "key": "com.iorad.conf-cloud-plugin",
     "baseUrl": "https://niveus.serveo.net/",
-    "version": "1.2",
+    "version": "1.3",
     "vendor": {
         "name": "iorad inc.",
         "url": "http://www.iorad.com"
