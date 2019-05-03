@@ -13,6 +13,10 @@
     },
     "apiVersion": 1,
 
+    "apiMigrations": {
+        "gdpr": true
+    },
+
     "modules": {
         "dynamicContentMacros": [{
             "width": "100%",
