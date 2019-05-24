@@ -54,7 +54,7 @@
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-confluence-plugin</artifactId>
+                <artifactId>confluence-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
@@ -72,9 +72,9 @@
         </plugins>
     </build>
     <properties>
-        <confluence.version>6.7.1</confluence.version>
+        <confluence.version>6.15.4</confluence.version>
         <confluence.data.version>6.7.1</confluence.data.version>
-        <amps.version>6.3.15</amps.version>
+        <amps.version>8.0.1</amps.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
         <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
         <!-- This key is used to keep the consistency between the key in atlassian-plugin.xml and the key to generate bundle. -->
