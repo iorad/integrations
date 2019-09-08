@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://s3.iorad.com/assets/js/iorad.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+    var outer_dialog;
+    var outer_confluence;
+    function addScript() {
+         //debugger;
+            var getUrlParam = function(param) {
+                var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
+                return decodeURIComponent(codedParam);
+            };
+
+            var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
+            $.getScript(baseUrl + '/atlassian-connect/all.js', function() {
+
+
+
+
+    //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
+    AP.require(["confluence", "dialog"], function(confluence, dialog) {
+
+        outer_confluence = confluence;
+        outer_dialog = dialog;
+
+        //check if tutorial exists, if  yes show edit button
+
+        // if there is not tutorial start capturing or show start capturing button
+
+        confluence.getMacroData(function(data) {
+            if (!data || !data.tutorID) {
+                $("#create-solution").show();
+                showSave = false;
+            } else {
+                tutorID = data.tutorID;
+                tutorialTitle = data.tutorialTitle;
+                tutorUID = data.tutorUID;
+                iframeUrl = data.iframeUrl;
+
+                $("#edit-solution").show();
+                $("#previewContainer").html(iframeUrl);
+                showSave = true;
+
+                var url = getFrameUrl();
+                if (url) {
+                    $(".urlInput").val(url);
+                }
+            }
+        });
+    });
+
+            });
+
+}
+
+addScript();
+    </script>
+
+</head>
+
+<body>
+    <section id="create-solution">
+        <img class="logo" alt="" src="logo.png">
+        <p class="info">Create a step-by-step solutions is simple as 123</p>
+        <img alt="" src="steps.png" class="stepsIMG">
+        <div class="bottom">
+            <a class="help" href="https://www.iorad.com/contactus" target="_blank">Need Help?</a>
+            <div class="buttons">
+                <button id="cancelCapture" class="button">Cancel</button>
+                <button id="startCapturing" class="green button">Capture New Solution</button>
+            </div>
+        </div>
+    </section>
+    <section id="insert-solution">
+        <div class="preview" id="solutionPreviewContainer"></div>
+        <div class="bottom">
+            <button id="editSolution" class="bordered button">Edit Solution</button>
+            <div class="buttons">
+                <button id="cancelSolution" class="button">Cancel</button>
+                <button id="insertSolution" class="green button">Insert</button>
+            </div>
+        </div>
+    </section>
+    <section id="edit-solution">
+        <div class="preview" id="previewContainer"></div>
+        <div class="bottom">
+            <a class="help" href="https://www.iorad.com/contactus" target="_blank">Need Help?</a>
+            <div class="urlContainer">
+                <label for="urlInput">URL: </label>
+                <span class="inputContainer">
+                	   <input class="urlInput" id="urlInput">
+                     <p class="error">Incorrect tutorial URL</p>
+  				      </span>
+                <button id="saveUrl" class="green button">Change URL</button>
+            </div>
+            <div class="buttons">
+                <button id="cancelEditing" class="button">Cancel</button>
+                <button id="editEditing" class="green button">Edit</button>
+                <button id="saveEditing" class="green button">Save & Close</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
