@@ -9,6 +9,7 @@ var $errorLink = $(".error-link");
 var $previewContainer = $("#preview-container");
 var $previewContainerContent = $("#preview-container-content");
 var $formContainer = $("#form-container");
+var $submitButton = $("#submit-button");
 
 function closeDialog(outer_dialog) {
     if (outer_dialog) {
@@ -54,6 +55,7 @@ function getAndPutIoradLinkUrl() {
     var url = getFrameUrl();
     if (url) {
         $ioradTutorialLink.val(url);
+        $submitButton.addClass('btn-black');
     }
 }
 
@@ -97,9 +99,15 @@ function getUrlParameter(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-$ioradTutorialLink.on('change', function () {
+$ioradTutorialLink.on('change, keyup', function () {
     $ioradTutorialLink.removeClass("border-red");
     $errorLink.hide();
+
+    if ($ioradTutorialLink.val().trim() === '') {
+        $submitButton.removeClass('btn-black');
+    } else {
+        $submitButton.addClass('btn-black');
+    }
 });
 
 $("#cancel-button").on('click', function () {

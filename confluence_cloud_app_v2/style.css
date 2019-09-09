@@ -1,5 +1,7 @@
 body {
+    font-family: 'Roboto', sans-serif;
     display: table;
+    box-sizing: border-box;
 }
 
 .hidden {
@@ -22,12 +24,20 @@ body {
     margin-top: 0;
 }
 
-.logo {
-    width: 100px;
+.header {
+    width: 100%;
+    font-size: 2.2em;
+    display: block;
+    text-align: center;
     margin-top: 40px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    vertical-align: middle;
+    line-height: 32px;
+}
+
+.logo {
+    margin-right: 10px;
+    vertical-align: sub;
+    height: 45px;
 }
 
 .info {
@@ -43,16 +53,86 @@ body {
     margin: 30px 0 30px 0;
 }
 
+#iorad-link-text-box {
+    font-family: "Roboto", sans-serif;
+    display: block;
+    text-align: left;
+    padding: 12px 20px 8px;
+    font-weight: 300;
+    font-size: 16px;
+    width: 100%;
+    min-width: 130px;
+    height: 64px;
+    color: #000000;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+    outline: none;
+    margin-bottom: 24px;
+}
+
+#iorad-link-text-box:focus {
+    padding-bottom: 7px;
+    border: none;
+    border-bottom: 2px solid #000000;
+    outline: none;
+}
+
+#submit-button {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 24px;
+    transition: opacity 0.2s ease-in-out;
+    border-radius: 40px;
+    height: 40px;
+    opacity: 1;
+    background: #ccc !important;
+    user-select: none;
+    color: #fff;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    min-width: 130px;
+    line-height: 40px;
+    border: none;
+}
+
+#submit-button.btn-black {
+    background: #000000 !important;
+}
+
+#preview-button, #cancel-button {
+    text-align: center;
+    display: block;
+
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #0047FF;
+    cursor: pointer;
+}
+
+#preview-button:hover, #cancel-button:hover {
+    text-decoration: underline;
+    color: #FF291C;
+}
+
 form.aui .border-red {
     border: 1px solid red;
 }
 
 form.aui .error-link {
-    color: red;
-    font-size: 12px;
-    display: none;
-    float: right;
-    margin-top: 8px;
+    color: #FF00D6;
+    font-size: 16px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    line-height: 20px;
+    margin-top: -14px;
+    margin-bottom: 24px;
 }
 
 .aui-dialog2-content {
@@ -71,198 +151,3 @@ form.aui .error-link {
     border-right: 1px solid #A5ADBA;
     border-bottom: 1px solid #A5ADBA;
 }
-
-/*html,*/
-/*body,*/
-/*div,*/
-/*span,*/
-/*applet,*/
-/*object,*/
-/*iframe,*/
-/*h1,*/
-/*h2,*/
-/*h3,*/
-/*h4,*/
-/*h5,*/
-/*h6,*/
-/*p,*/
-/*blockquote,*/
-/*pre,*/
-/*a,*/
-/*abbr,*/
-/*acronym,*/
-/*address,*/
-/*big,*/
-/*cite,*/
-/*code,*/
-/*del,*/
-/*dfn,*/
-/*em,*/
-/*img,*/
-/*ins,*/
-/*kbd,*/
-/*q,*/
-/*s,*/
-/*samp,*/
-/*small,*/
-/*strike,*/
-/*strong,*/
-/*sub,*/
-/*sup,*/
-/*tt,*/
-/*var,*/
-/*b,*/
-/*u,*/
-/*i,*/
-/*center,*/
-/*dl,*/
-/*dt,*/
-/*dd,*/
-/*ol,*/
-/*ul,*/
-/*li,*/
-/*fieldset,*/
-/*form,*/
-/*label,*/
-/*legend,*/
-/*table,*/
-/*caption,*/
-/*tbody,*/
-/*tfoot,*/
-/*thead,*/
-/*tr,*/
-/*th,*/
-/*td,*/
-/*article,*/
-/*aside,*/
-/*canvas,*/
-/*details,*/
-/*embed,*/
-/*figure,*/
-/*figcaption,*/
-/*footer,*/
-/*header,*/
-/*hgroup,*/
-/*menu,*/
-/*nav,*/
-/*output,*/
-/*ruby,*/
-/*section,*/
-/*summary,*/
-/*time,*/
-/*mark,*/
-/*audio,*/
-/*video {*/
-/*    margin: 0;*/
-/*    padding: 0;*/
-/*    border: 0;*/
-/*    font-size: 100%;*/
-/*    font: inherit;*/
-/*    vertical-align: baseline;*/
-/*}*/
-
-
-/*!* HTML5 display-role reset for older browsers *!*/
-
-/*article,*/
-/*aside,*/
-/*details,*/
-/*figcaption,*/
-/*figure,*/
-/*footer,*/
-/*header,*/
-/*hgroup,*/
-/*menu,*/
-/*nav,*/
-/*section {*/
-/*    display: block;*/
-/*}*/
-
-/*body {*/
-/*    line-height: 1;*/
-/*}*/
-
-/*ol,*/
-/*ul {*/
-/*    list-style: none;*/
-/*}*/
-
-/*blockquote,*/
-/*q {*/
-/*    quotes: none;*/
-/*}*/
-
-/*blockquote:before,*/
-/*blockquote:after,*/
-/*q:before,*/
-/*q:after {*/
-/*    content: '';*/
-/*    content: none;*/
-/*}*/
-
-/*.help {*/
-/*    display: inline-block;*/
-/*    font-size: 13px;*/
-/*    margin-top: 30px;*/
-/*    text-decoration: underline;*/
-/*}*/
-
-/*.buttons {*/
-/*    float: right;*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*.button {*/
-/*    background-color: #acacac;*/
-/*    border: medium none;*/
-/*    border-radius: 3px;*/
-/*    color: #fff;*/
-/*    padding: 8px 30px;*/
-/*    margin-left: 2px;*/
-/*    cursor: pointer;*/
-/*    min-width: 140px;*/
-/*    font-size: 15px;*/
-/*}*/
-
-/*.button.green {*/
-/*    background-color: #17AD63;*/
-/*}*/
-
-/*.preview {*/
-/*    height: calc(100% - 90px);*/
-/*    width: 100%;*/
-/*}*/
-
-/*.button.bordered {*/
-/*    margin-top: 20px;*/
-/*    background: #F7F7F7;*/
-/*    border: 1px solid #E1E1E1;*/
-/*    color: #000;*/
-/*}*/
-
-/*iframe {*/
-/*    height: 100%;*/
-/*}*/
-
-/*#saveEditing {*/
-/*    display: none;*/
-/*}*/
-
-/*.urlContainer {*/
-/*    display: inline-block;*/
-/*    margin-left: 100px;*/
-/*}*/
-
-/*.urlInput {*/
-/*    height: 30px;*/
-/*    width: 300px;*/
-/*    font-size: 15px;*/
-/*    margin-bottom: 5px;*/
-/*}*/
-
-/*.inputContainer {*/
-/*    display: inline-block;*/
-/*    vertical-align: top;*/
-/*}*/
-
-

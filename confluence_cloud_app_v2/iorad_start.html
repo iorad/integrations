@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
-    <link rel="stylesheet" href="https://aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css" media="all">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css" media="all">
     <link rel="stylesheet" href="style.css">
 </head>
 <div id="aui-message-bar"></div>
@@ -13,27 +14,21 @@
             <div class="aui-page-panel">
                 <div class="aui-page-panel-inner">
                     <section class="aui-page-panel-content">
-                        <img class="logo" alt="" src="logo.png">
-                        <p class="info">Fastest tutorial builder on the planet</p>
+                        <div class="header">
+                            <img class="logo" alt="" src="logo.png"> Embed iorad link
+                        </div>
 
                         <form id="iorad-form" class="aui top-label">
                             <div class="field-group top-label">
-                                <label for="iorad-link-text-box">
-                                    Iorad Link
-                                    <span class="aui-icon icon-required">(required)</span>
-                                </label>
                                 <input class="text long-field" type="text"
                                        id="iorad-link-text-box" name="iorad-link-text-box"
-                                       placeholder="Your iorad tutorial link" required>
+                                       placeholder="Paste the direct iorad tutorial link here" required>
                                 <div class="error-link">Incorrect tutorial URL</div>
-                                <div class="description">Paste your iorad tutorial link</div>
                             </div>
-                            <div class="buttons-container">
-                                <div class="buttons">
-                                    <button class="aui-button aui-button-primary submit" type="submit">Save</button>
-                                    <button class="aui-button" id="preview-button" type="button">Preview</button>
-                                    <button class="aui-button" id="cancel-button" type="button">Cancel</button>
-                                </div>
+                            <div class="buttons">
+                                <button id="submit-button" type="submit">Save</button>
+                                <a id="preview-button" type="button">Preview</a>
+                                <a id="cancel-button" type="button">Cancel</a>
                             </div>
                         </form>
                     </section>
