@@ -1,156 +1,140 @@
-    var iframeUrl;
-    var tutorID;
-    var tutorialTitle;
-    var showSave;
+var iframeUrl;
+var tutorID;
+var tutorialTitle;
+var outer_confluence;
+var outer_dialog;
 
-    function closeDialog(outer_dialog) {
-        if (outer_dialog) {
-            outer_dialog.close();
-        }
+var $ioradTutorialLink = $("#iorad-link-text-box");
+var $errorLink = $(".error-link");
+var $previewContainer = $("#preview-container");
+var $previewContainerContent = $("#preview-container-content");
+var $formContainer = $("#form-container");
+
+function closeDialog(outer_dialog) {
+    if (outer_dialog) {
+        outer_dialog.close();
+    }
+}
+
+function saveMacro(close) {
+    var macroParams = {
+        iframeUrl: iframeUrl,
+        tutorID: tutorID,
+        tutorialTitle: tutorialTitle
+    };
+    outer_confluence.saveMacro(macroParams);
+
+    if (close) {
+        outer_confluence.closeMacroEditor();
+        closeDialog(outer_dialog);
     }
 
-    function saveMacro(close) {
+    return true;
+}
 
-        var macroParams = {
-            iframeUrl: iframeUrl,
-            tutorID: tutorID,
-            tutorialTitle: tutorialTitle
-        };
-        outer_confluence.saveMacro(macroParams);
-
-        if (close) {
-            outer_confluence.closeMacroEditor();
-            closeDialog(outer_dialog);
-        }
-
-        return true;
-    }
-
-    $(document).ready(function() {
-
-        $("#cancelCapture, #cancelSolution, #cancelEditing").click(function() {
-            closeDialog(outer_dialog);
-        });
-
-        $("#saveEditing").click(function() {
-            saveMacro(true);
-        });
-
-        $("#insertSolution").click(function() {
-            saveMacro(true);
-            showSave = true;
-        });
-
-        $("#saveUrl").click(function() {
-            var url = $(".urlInput").val();
-            var params = getParamsFromUrl(url);
-            if (params) {
-                serializeTutorial(params);
-                saveMacro(false);
-                $("#previewContainer").html(iframeUrl);
-            } else {
-                $(".urlInput").addClass("borderRed");
-                $(".error").show();
-            }
-        });
-
-        $(".urlInput").on('change', function(){
-            $(".urlInput").removeClass("borderRed");
-            $(".error").hide();
-        });
-
-        $("#startCapturing").click(function() {
-
-            var options = {};
-            options.pluginType = "confluence_cloud";
-            iorad.init(options, function() {
-
-                iorad.createTutorial();
-
-                iorad.on('editor:close', function(tutorialParams) {
-
-                    serializeTutorial(tutorialParams);
-                    $("#create-solution").hide();
-                    $("#insert-solution").show();
-                    $("#solutionPreviewContainer").html(iframeUrl);
-                });
-            });
-        });
-
-
-        $("#editSolution, #editEditing").click(function() {
-
-            var options = {};
-            options.pluginType = "confluence_cloud";
-            iorad.init(options, function() {
-
-                iorad.editTutorial({tutorialId: tutorID});
-                iorad.on('editor:close', function(tutorialParams) {
-
-                    serializeTutorial(tutorialParams);
-
-                    $(".urlContainer").hide();
-
-                    if(showSave) {
-                        $("#insert-solution").hide();
-                        $("#edit-solution").show();
-                        $("#previewContainer").html(iframeUrl);
-                        $("#saveEditing").show();
-                        $("#cancelEditing").hide();
-                    } else {
-                        $("#edit-solution").hide();
-                        $("#insert-solution").show();
-                        $("#solutionPreviewContainer").html(iframeUrl);
-                    }
-                });
-            });
-        });
-    });
-
-    function getFrameUrl() {
-        var url = $("#previewContainer iframe").attr('src');
+function getFrameUrl() {
+    if (iframeUrl) {
         var href = window.location.href;
         var arr = href.split("//");
 
-        return arr[0] + url;
-    }
-
-    function getParamsFromUrl(frameUrl) {
-        var searchKey = "iorad.com/";
-        var n = frameUrl.indexOf(searchKey);
-        if (n === -1) {
-            return false;
+        $previewContainerContent.html(iframeUrl);
+        var url = $previewContainerContent.find("iframe").attr('src');
+        console.log(url,  (url && (url.indexOf('https://') > -1 || url.indexOf('http://') > -1)));
+        if (url && (url.indexOf('https://') > -1 || url.indexOf('http://') > -1)) {
+            return arr[0] + "//" + url.split("//")[1];
+        } else {
+            return arr[0] + url;
         }
-        var paramsString = frameUrl.substring(n + searchKey.length);
-        var pathArray = paramsString.split( '/' );
-        if (pathArray.length !== 3) {
-            return false;
-        }
-
-        return {
-            tutorialId: pathArray[1],
-            tutorialTitle: pathArray[2]
-        };
     }
 
-    function serializeTutorial(tutorialParams) {
-        iframeUrl = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+    return false;
+}
 
-        tutorID = tutorialParams.tutorialId;
-        tutorialTitle = tutorialParams.tutorialTitle;
+function getAndPutIoradLinkUrl() {
+    var url = getFrameUrl();
+    if (url) {
+        $ioradTutorialLink.val(url);
+    }
+}
+
+function getParamsFromUrl(frameUrl) {
+    var searchKey = "iorad.com/";
+    var n = frameUrl.indexOf(searchKey);
+    if (n === -1) {
+        return false;
     }
 
-    function getAttrsFromIframe(iframeStr, strSeek) {
-        pattern = strSeek + "=\"";
-        indexOfSeek = iframeStr.indexOf(pattern);
-        iframeStr = iframeStr.substring(indexOfSeek + pattern.length);
-        indexOfStolb = iframeStr.indexOf("\"");
-        return iframeStr.substring(0, indexOfStolb);
+    var paramsString = frameUrl.substring(n + searchKey.length);
+    var pathArray = paramsString.split('/');
+    if (pathArray.length !== 3) {
+        return false;
     }
 
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    return {
+        tutorialId: pathArray[1],
+        tutorialTitle: pathArray[2]
+    };
+}
+
+function serializeTutorial(tutorialParams) {
+    iframeUrl = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+    tutorID = tutorialParams.tutorialId;
+    tutorialTitle = tutorialParams.tutorialTitle;
+}
+
+function getAttrsFromIframe(iframeStr, strSeek) {
+    var pattern = strSeek + "=\"";
+    var indexOfSeek = iframeStr.indexOf(pattern);
+    iframeStr = iframeStr.substring(indexOfSeek + pattern.length);
+    var indexOfStolb = iframeStr.indexOf("\"");
+    return iframeStr.substring(0, indexOfStolb);
+}
+
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$ioradTutorialLink.on('change', function () {
+    $ioradTutorialLink.removeClass("border-red");
+    $errorLink.hide();
+});
+
+$("#cancel-button").on('click', function () {
+    closeDialog(outer_dialog);
+});
+
+$("#preview-button").on('click', function () {
+    var params = getParamsFromUrl($ioradTutorialLink.val());
+    if (params) {
+        serializeTutorial(params);
+
+        $previewContainerContent.html(iframeUrl);
+        $previewContainer.removeClass('hidden');
+        $formContainer.addClass('hidden');
+    } else {
+        $ioradTutorialLink.addClass("border-red");
+        $errorLink.show();
     }
+});
+
+$(".dialog-close-button").on('click', function(e) {
+    e.preventDefault();
+    $previewContainer.addClass('hidden');
+    $formContainer.removeClass('hidden');
+});
+
+$('#iorad-form').on('submit', function (e) {
+    e.preventDefault();
+
+    var params = getParamsFromUrl($ioradTutorialLink.val());
+    if (params) {
+        serializeTutorial(params);
+        saveMacro(true);
+    } else {
+        $ioradTutorialLink.addClass("border-red");
+        $errorLink.show();
+    }
+});

@@ -1,115 +1,115 @@
 {
-    "name": "Iorad Confluence Cloud Plugin",
-    "description": "Iorad Atlassian Connect add-on",
-    "key": "com.iorad.conf-cloud-plugin",
-    "baseUrl": "https://niveus.serveo.net/",
-    "version": "1.3",
-    "vendor": {
-        "name": "iorad inc.",
-        "url": "http://www.iorad.com"
-    },
-    "authentication": {
-        "type": "none"
-    },
-    "apiVersion": 1,
+  "name": "Iorad Confluence Cloud Plugin",
+  "description": "Iorad Atlassian Connect add-on",
+  "key": "com.iorad.conf-cloud-plugin",
+  "baseUrl": "https://iorad.tero.kalicode.com/",
+  "version": "2.0",
+  "vendor": {
+    "name": "iorad inc.",
+    "url": "https://www.iorad.com"
+  },
+  "authentication": {
+    "type": "none"
+  },
+  "apiVersion": 1,
 
-    "apiMigrations": {
-        "gdpr": true
-    },
+  "apiMigrations": {
+    "gdpr": true
+  },
 
-    "modules": {
-        "dynamicContentMacros": [{
-            "width": "100%",
-            "height": "700px",
+  "modules": {
+    "dynamicContentMacros": [{
+      "width": "100%",
+      "height": "700px",
 
-            "url": "/iorad.html?pageTitle={page.title}&iframeUrl={iframeUrl}&width={width}&height={height}&macroId={macro.id}",
-            "description": {
-                "value": "Capture Solution for your articles."
-            },
-            "icon": {
-                "width": 64,
-                "height": 64,
-                "url": "https://niveus.serveo.net/icon.png"
-            },
-            "imagePlaceholder": {
-                "width": 392,
-                "height": 110,
-                "url": "https://niveus.serveo.net/tutorial_embedded.png",
-                "applyChrome": true
-            },
-            "documentation": {
-                "url": "http://www.iorad.com"
-            },
-            "categories": [
-                "visuals"
-            ],
-            "outputType": "block",
-            "bodyType": "none",
-            "aliases": [
-                "map"
-            ],
-            "featured": true,
+      "url": "/iorad.html?pageTitle={page.title}&iframeUrl={iframeUrl}&width={width}&height={height}&macroId={macro.id}",
+      "description": {
+        "value": "Capture Solution for your articles."
+      },
+      "icon": {
+        "width": 64,
+        "height": 64,
+        "url": "https://iorad.tero.kalicode.com/icon.png"
+      },
+      "imagePlaceholder": {
+        "width": 392,
+        "height": 110,
+        "url": "https://iorad.tero.kalicode.com/tutorial_embedded.png",
+        "applyChrome": true
+      },
+      "documentation": {
+        "url": "https://www.iorad.com"
+      },
+      "categories": [
+        "visuals"
+      ],
+      "outputType": "block",
+      "bodyType": "none",
+      "aliases": [
+        "map"
+      ],
+      "featured": true,
 
-            "parameters": [{
-                "identifier": "iframeUrl",
-                "name": {
-                    "value": "Embed Url"
-                },
-                "description": {
-                    "value": "This is embed url of the solution."
-                },
-                "type": "string",
-                "required": false,
-                "multiple": false,
-                "defaultValue": ""
-            }, {
-                "identifier": "width",
-                "name": {
-                    "value": "Embed frame width"
-                },
-                "description": {
-                    "value": "This is embed width of the frame in the article"
-                },
-                "type": "string",
-                "required": false,
-                "multiple": false,
-                "defaultValue": ""
-            }, {
-                "identifier": "height",
-                "name": {
-                    "value": "Embed frame height Url"
-                },
-                "description": {
-                    "value": "This is embed height of the frame in the article"
-                },
-                "type": "string",
-                "required": false,
-                "multiple": false,
-                "defaultValue": ""
-            }],
+      "parameters": [{
+        "identifier": "iframeUrl",
+        "name": {
+          "value": "Embed Url"
+        },
+        "description": {
+          "value": "This is embed url of the solution."
+        },
+        "type": "string",
+        "required": false,
+        "multiple": false,
+        "defaultValue": ""
+      }, {
+        "identifier": "width",
+        "name": {
+          "value": "Embed frame width"
+        },
+        "description": {
+          "value": "This is embed width of the frame in the article"
+        },
+        "type": "string",
+        "required": false,
+        "multiple": false,
+        "defaultValue": ""
+      }, {
+        "identifier": "height",
+        "name": {
+          "value": "Embed frame height Url"
+        },
+        "description": {
+          "value": "This is embed height of the frame in the article"
+        },
+        "type": "string",
+        "required": false,
+        "multiple": false,
+        "defaultValue": ""
+      }],
 
-            "key": "iorad-conf-plugin",
-            "name": {
-                "value": "Capture Solution"
-            },
+      "key": "iorad-conf-plugin",
+      "name": {
+        "value": "Capture Solution"
+      },
 
 
-            "editor": {
-                "url": "/iorad_start.html",
-                "editTitle": {
-                    "value": "Edit Solution",
-                    "i18n": "macro.md.edit"
-                },
-                "insertTitle": {
-                    "value": "Capture Solution",
-                    "i18n": "macro.md.insert"
-                },
-                "width": "100%",
-                "height": "100%"
-            }
+      "editor": {
+        "url": "/iorad_start.html",
+        "editTitle": {
+          "value": "Edit Solution",
+          "i18n": "macro.md.edit"
+        },
+        "insertTitle": {
+          "value": "Capture Solution",
+          "i18n": "macro.md.insert"
+        },
+        "width": "100%",
+        "height": "100%"
+      }
 
-        }]
+    }]
 
-    }
+  }
 
 }

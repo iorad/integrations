@@ -1,112 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.4.3/css/aui.css" media="all">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://s3.iorad.com/assets/js/iorad.min.js"></script>
-    <script type="text/javascript" src="main.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+    <link rel="stylesheet" href="https://aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css" media="all">
     <link rel="stylesheet" href="style.css">
+</head>
+<div id="aui-message-bar"></div>
+<body class="aui-page-focused aui-page-size-large">
+    <div id="form-container">
+        <section id="content" role="main">
+            <div class="aui-page-panel">
+                <div class="aui-page-panel-inner">
+                    <section class="aui-page-panel-content">
+                        <img class="logo" alt="" src="logo.png">
+                        <p class="info">Fastest tutorial builder on the planet</p>
+
+                        <form id="iorad-form" class="aui top-label">
+                            <div class="field-group top-label">
+                                <label for="iorad-link-text-box">
+                                    Iorad Link
+                                    <span class="aui-icon icon-required">(required)</span>
+                                </label>
+                                <input class="text long-field" type="text"
+                                       id="iorad-link-text-box" name="iorad-link-text-box"
+                                       placeholder="Your iorad tutorial link" required>
+                                <div class="error-link">Incorrect tutorial URL</div>
+                                <div class="description">Paste your iorad tutorial link</div>
+                            </div>
+                            <div class="buttons-container">
+                                <div class="buttons">
+                                    <button class="aui-button aui-button-primary submit" type="submit">Save</button>
+                                    <button class="aui-button" id="preview-button" type="button">Preview</button>
+                                    <button class="aui-button" id="cancel-button" type="button">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="preview-container" class="aui-layer aui-dialog2 aui-dialog2-xlarge hidden">
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">Tutorial Preview</h2>
+            <a class="aui-dialog2-header-close dialog-close-button">
+                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+            </a>
+        </header>
+
+        <div class="aui-dialog2-content" id="preview-container-content">
+        </div>
+
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <button class="dialog-close-button aui-button aui-button-link">Close</button>
+            </div>
+        </footer>
+    </section>
+
+    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
+    <script type="text/javascript" src="https://s3.iorad.com/assets/js/iorad.min.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
-    var outer_dialog;
-    var outer_confluence;
-    function addScript() {
-         //debugger;
-            var getUrlParam = function(param) {
-                var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
-                return decodeURIComponent(codedParam);
+
+        function addScript() {
+            //debugger;
+            var getUrlParam = function (param) {
+                var searchParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search);
+                return (searchParam && searchParam.length > 1) ? decodeURIComponent(searchParam[1]) : '';
             };
 
             var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
-            $.getScript(baseUrl + '/atlassian-connect/all.js', function() {
+            $.getScript(baseUrl + '/atlassian-connect/all.js', function () {
+                outer_confluence = AP.confluence;
+                outer_dialog = AP.dialog;
 
+                // check if tutorial exists, if  yes show edit button
+                // if there is not tutorial start capturing or show start capturing button
+                AP.confluence.getMacroData(function (data) {
+                    if (data && data.tutorID) {
+                        tutorID = data.tutorID;
+                        tutorialTitle = data.tutorialTitle;
+                        tutorUID = data.tutorUID;
+                        iframeUrl = data.iframeUrl;
 
-
-
-    //  window.location ="http://www.iorad.com/server/?a=app.editor&amp;data=0&amp;src=iframe";
-    AP.require(["confluence", "dialog"], function(confluence, dialog) {
-
-        outer_confluence = confluence;
-        outer_dialog = dialog;
-
-        //check if tutorial exists, if  yes show edit button
-
-        // if there is not tutorial start capturing or show start capturing button
-
-        confluence.getMacroData(function(data) {
-            if (!data || !data.tutorID) {
-                $("#create-solution").show();
-                showSave = false;
-            } else {
-                tutorID = data.tutorID;
-                tutorialTitle = data.tutorialTitle;
-                tutorUID = data.tutorUID;
-                iframeUrl = data.iframeUrl;
-
-                $("#edit-solution").show();
-                $("#previewContainer").html(iframeUrl);
-                showSave = true;
-
-                var url = getFrameUrl();
-                if (url) {
-                    $(".urlInput").val(url);
-                }
-            }
-        });
-    });
-
+                        getAndPutIoradLinkUrl();
+                    }
+                });
             });
+        }
 
-}
-
-addScript();
+        addScript();
     </script>
-
-</head>
-
-<body>
-    <section id="create-solution">
-        <img class="logo" alt="" src="logo.png">
-        <p class="info">Create a step-by-step solutions is simple as 123</p>
-        <img alt="" src="steps.png" class="stepsIMG">
-        <div class="bottom">
-            <a class="help" href="https://www.iorad.com/contactus" target="_blank">Need Help?</a>
-            <div class="buttons">
-                <button id="cancelCapture" class="button">Cancel</button>
-                <button id="startCapturing" class="green button">Capture New Solution</button>
-            </div>
-        </div>
-    </section>
-    <section id="insert-solution">
-        <div class="preview" id="solutionPreviewContainer"></div>
-        <div class="bottom">
-            <button id="editSolution" class="bordered button">Edit Solution</button>
-            <div class="buttons">
-                <button id="cancelSolution" class="button">Cancel</button>
-                <button id="insertSolution" class="green button">Insert</button>
-            </div>
-        </div>
-    </section>
-    <section id="edit-solution">
-        <div class="preview" id="previewContainer"></div>
-        <div class="bottom">
-            <a class="help" href="https://www.iorad.com/contactus" target="_blank">Need Help?</a>
-            <div class="urlContainer">
-                <label for="urlInput">URL: </label>
-                <span class="inputContainer">
-                	   <input class="urlInput" id="urlInput">
-                     <p class="error">Incorrect tutorial URL</p>
-  				      </span>
-                <button id="saveUrl" class="green button">Change URL</button>
-            </div>
-            <div class="buttons">
-                <button id="cancelEditing" class="button">Cancel</button>
-                <button id="editEditing" class="green button">Edit</button>
-                <button id="saveEditing" class="green button">Save & Close</button>
-            </div>
-        </div>
-    </section>
 </body>
-
 </html>

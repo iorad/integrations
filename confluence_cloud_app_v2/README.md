@@ -8,7 +8,7 @@ For development
 ---------------
 
 - Use https://www.npmjs.com/package/http-server for serve all static files. You may use other http server.
-- Use http://serveo.net/ to expose your local development
+- Use http://serveo.net/, https://localtunnel.me/, or similar service to expose your local development
 
 For Production
 ---------------
