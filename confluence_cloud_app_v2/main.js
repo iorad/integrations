@@ -5,11 +5,13 @@ var outer_confluence;
 var outer_dialog;
 
 var $ioradTutorialLink = $("#iorad-link-text-box");
+var $ioradTutorialEmbedCode = $("#iorad-embed-code-textarea");
 var $errorLink = $(".error-link");
 var $previewContainer = $("#preview-container");
 var $previewContainerContent = $("#preview-container-content");
 var $formContainer = $("#form-container");
 var $submitButton = $("#submit-button");
+var $switchButton = $('#switch-button');
 
 function closeDialog(outer_dialog) {
     if (outer_dialog) {
@@ -17,19 +19,25 @@ function closeDialog(outer_dialog) {
     }
 }
 
-function saveMacro(close) {
-    var macroParams = {
+function saveMacro() {
+    outer_confluence.saveMacro({
         iframeUrl: iframeUrl,
         tutorID: tutorID,
         tutorialTitle: tutorialTitle
-    };
-    outer_confluence.saveMacro(macroParams);
+    });
 
-    if (close) {
-        outer_confluence.closeMacroEditor();
-        closeDialog(outer_dialog);
-    }
+    outer_confluence.closeMacroEditor();
+    closeDialog(outer_dialog);
+    return true;
+}
 
+function saveEmbedToMacro(embedCode) {
+    outer_confluence.saveMacro({
+        embedCode: LZString.compressToEncodedURIComponent(embedCode)
+    });
+
+    outer_confluence.closeMacroEditor();
+    closeDialog(outer_dialog);
     return true;
 }
 
@@ -40,7 +48,6 @@ function getFrameUrl() {
 
         $previewContainerContent.html(iframeUrl);
         var url = $previewContainerContent.find("iframe").attr('src');
-        console.log(url,  (url && (url.indexOf('https://') > -1 || url.indexOf('http://') > -1)));
         if (url && (url.indexOf('https://') > -1 || url.indexOf('http://') > -1)) {
             return arr[0] + "//" + url.split("//")[1];
         } else {
@@ -55,8 +62,14 @@ function getAndPutIoradLinkUrl() {
     var url = getFrameUrl();
     if (url) {
         $ioradTutorialLink.val(url);
-        $submitButton.addClass('btn-black');
+        clearForm();
     }
+}
+
+function getAndPutIoradEmbedCode(embedCode) {
+    $switchButton.trigger('click');
+    $ioradTutorialEmbedCode.val(LZString.decompressFromEncodedURIComponent(embedCode));
+    clearForm();
 }
 
 function getParamsFromUrl(frameUrl) {
@@ -99,15 +112,27 @@ function getUrlParameter(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-$ioradTutorialLink.on('change, keyup', function () {
-    $ioradTutorialLink.removeClass("border-red");
-    $errorLink.hide();
+function showError() {
+    $ioradTutorialLink.addClass("border-red");
+    $errorLink.removeClass('hidden');
+}
 
-    if ($ioradTutorialLink.val().trim() === '') {
+function hideError() {
+    $ioradTutorialLink.removeClass("border-red");
+    $errorLink.addClass('hidden');
+}
+
+function clearForm() {
+    hideError();
+    if ($ioradTutorialLink.val().trim() === '' && $ioradTutorialEmbedCode.val().trim() === '') {
         $submitButton.removeClass('btn-black');
     } else {
         $submitButton.addClass('btn-black');
     }
+}
+
+$formContainer.on('change, keyup', '#' + $ioradTutorialLink.attr('id') + ', #' + $ioradTutorialEmbedCode.attr('id'), function () {
+    clearForm();
 });
 
 $("#cancel-button").on('click', function () {
@@ -123,8 +148,7 @@ $("#preview-button").on('click', function () {
         $previewContainer.removeClass('hidden');
         $formContainer.addClass('hidden');
     } else {
-        $ioradTutorialLink.addClass("border-red");
-        $errorLink.show();
+        showError();
     }
 });
 
@@ -140,9 +164,39 @@ $('#iorad-form').on('submit', function (e) {
     var params = getParamsFromUrl($ioradTutorialLink.val());
     if (params) {
         serializeTutorial(params);
-        saveMacro(true);
+        saveMacro();
+    } else if ($ioradTutorialEmbedCode.val() !== '') {
+        var embedCode = $('<div />').html($ioradTutorialEmbedCode.val()).html();
+        if (embedCode.indexOf('iorad.com/player/') > -1) {
+            var minify = require('html-minifier').minify;
+            embedCode = minify(embedCode, {
+                removeComments: true,
+                collapseWhitespace: true
+            });
+
+            saveEmbedToMacro(embedCode);
+        } else {
+            showError();
+        }
     } else {
-        $ioradTutorialLink.addClass("border-red");
-        $errorLink.show();
+        showError();
+    }
+});
+
+$switchButton.on('click', function (e) {
+    e.preventDefault();
+
+    $ioradTutorialLink.val('');
+    $ioradTutorialEmbedCode.val('');
+    clearForm();
+
+    if ($ioradTutorialLink.closest('.field-group').hasClass('hidden')) {
+        $ioradTutorialLink.closest('.field-group').removeClass('hidden');
+        $ioradTutorialEmbedCode.closest('.field-group').addClass('hidden');
+        $switchButton.text('Switch to step list');
+    } else {
+        $ioradTutorialLink.closest('.field-group').addClass('hidden');
+        $ioradTutorialEmbedCode.closest('.field-group').removeClass('hidden');
+        $switchButton.text('Switch to player only');
     }
 });

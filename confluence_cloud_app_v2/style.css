@@ -79,6 +79,27 @@ body {
     outline: none;
 }
 
+#iorad-embed-code-textarea {
+    resize: none;
+    font-family: "Roboto", sans-serif;
+    display: block;
+    text-align: left;
+    padding: 12px 20px 8px;
+    font-weight: 300;
+    font-size: 16px;
+    color: #000000;
+    border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+    outline: none;
+    margin-bottom: 24px;
+}
+
+#iorad-embed-code-textarea:focus {
+    padding-bottom: 7px;
+    border: 2px solid #000000;
+}
+
 #submit-button {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
@@ -101,9 +122,10 @@ body {
 
 #submit-button.btn-black {
     background: #000000 !important;
+    cursor: pointer;
 }
 
-#preview-button, #cancel-button {
+#preview-button, #cancel-button, #switch-button {
     text-align: center;
     display: block;
 

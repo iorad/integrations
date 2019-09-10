@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css" media="all">
     <link rel="stylesheet" href="style.css">
 </head>
-<div id="aui-message-bar"></div>
 <body class="aui-page-focused aui-page-size-large">
     <div id="form-container">
         <section id="content" role="main">
@@ -15,20 +14,28 @@
                 <div class="aui-page-panel-inner">
                     <section class="aui-page-panel-content">
                         <div class="header">
-                            <img class="logo" alt="" src="logo.png"> Embed iorad link
+                            <img class="logo" alt="" src="logo.png"> Embed iorad
                         </div>
 
                         <form id="iorad-form" class="aui top-label">
                             <div class="field-group top-label">
                                 <input class="text long-field" type="text"
                                        id="iorad-link-text-box" name="iorad-link-text-box"
-                                       placeholder="Paste the direct iorad tutorial link here" required>
-                                <div class="error-link">Incorrect tutorial URL</div>
+                                       placeholder="Paste iorad direct player link here">
+                                <div class="error-link hidden">Incorrect tutorial URL</div>
+                            </div>
+
+                            <div class="field-group top-label hidden">
+                                <textarea class="textarea long-field" id="iorad-embed-code-textarea" rows="7"
+                                          name="iorad-embed-code-textarea"
+                                          placeholder="Paste iorad embed code here"></textarea>
+                                <div class="error-link hidden">Incorrect code</div>
                             </div>
                             <div class="buttons">
+                                <a id="switch-button">Switch to step list</a>
                                 <button id="submit-button" type="submit">Save</button>
-                                <a id="preview-button" type="button">Preview</a>
                                 <a id="cancel-button" type="button">Cancel</a>
+                                <!-- <a id="preview-button" type="button">Preview</a> -->
                             </div>
                         </form>
                     </section>
@@ -55,10 +62,12 @@
         </footer>
     </section>
 
-    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
     <script type="text/javascript" src="https://s3.iorad.com/assets/js/iorad.min.js"></script>
 
+    <script type="text/javascript" src="htmlminifier.min.js"></script>
+    <script type="text/javascript" src="lz-string.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
 
@@ -84,6 +93,8 @@
                         iframeUrl = data.iframeUrl;
 
                         getAndPutIoradLinkUrl();
+                    } else if (data && data.embedCode) {
+                        getAndPutIoradEmbedCode(data.embedCode);
                     }
                 });
             });
