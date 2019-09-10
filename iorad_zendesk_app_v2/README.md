@@ -4,6 +4,27 @@ launch the app from nav bar in the zendesk agent view.
 
 Create step-by-step tutorial and post straight to your selected Zendesk Help Center section.
 
+## Build instruction
+
+**Requirements**
+
+```
+node version v10.16.3
+npm version 6.11.2
+yarn version 1.17.3
+zat version 3.2.4
+
+```
+
+**buid script**
+
+```
+$ yarn install
+$ yarn run build
+$ cd dist
+$ zat package
+```
+
 ## Release Note
 
 ### Version 2.1.0
