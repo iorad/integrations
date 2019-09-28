@@ -1,6 +1,7 @@
-var macroName = 'CaptureSolution';
-
 AJS.bind("init.rte", function() {
+
+
+    // var macroName = 'CaptureSolution';
 
     // 1. create dialog to add macro
     //var dialog = new AJS.Dialog(400, 320);

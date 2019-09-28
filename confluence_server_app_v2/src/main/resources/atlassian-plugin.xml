@@ -1,74 +1,118 @@
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="Embed iorad" plugins-version="2">
-    <plugin-info>
-        <description>${project.description}</description>
-        <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
-        <param name="plugin-icon">images/icon_16x16.png</param>
-        <param name="plugin-logo">images/icon_64x64.png</param>
-    </plugin-info>
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+	name="Capture Solution" plugins-version="2">
+	<plugin-info>
+		<description>${project.description}</description>
+		<version>${project.version}</version>
+		<vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="plugin-icon">images/icon_16x16.png</param>
+		<param name="plugin-logo">images/icon_64x64.png</param>
+	</plugin-info>
 
-    <resource type="download" name="images/" location="images">
-        <description>Image resource</description>
-        <param name="content-type" value="image/png"/>
-    </resource>
 
-    <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="iorad-conf-plugin"/>
+	<resource type="download" name="images/" location="images">
+		<description>Image resource</description>
+		<param name="content-type" value="image/png" />
+	</resource>
 
-    <!-- add our web resources -->
-    <!-- <web-resource key="iorad-conf-plugin-resources" name="iorad-conf-plugin
-        Web Resources"> <dependency>com.atlassian.auiplugin:ajs</dependency> <resource
-        type="download" name="iorad-conf-plugin.css" location="/css/iorad-conf-plugin.css"/>
-        <resource type="download" name="iorad-conf-plugin.js" location="/js/iorad-conf-plugin.js"/>
-        <resource type="download" name="images/" location="/images"/> <context>iorad-conf-plugin</context>
-        </web-resource> -->
+	<!-- add our i18n resource -->
+	<resource type="i18n" name="i18n" location="iorad-conf-plugin" />
 
-    <!-- import from the product container -->
-    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+	<!-- add our web resources -->
+	<!-- <web-resource key="iorad-conf-plugin-resources" name="iorad-conf-plugin 
+		Web Resources"> <dependency>com.atlassian.auiplugin:ajs</dependency> <resource 
+		type="download" name="iorad-conf-plugin.css" location="/css/iorad-conf-plugin.css"/> 
+		<resource type="download" name="iorad-conf-plugin.js" location="/js/iorad-conf-plugin.js"/> 
+		<resource type="download" name="images/" location="/images"/> <context>iorad-conf-plugin</context> 
+		</web-resource> -->
 
-    <xhtml-macro name="CaptureSolution" class="com.iorad.plugin.IframeMacro"
-                 icon="/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/logo.png"
-                 key="IoradMacro-xhtml">
-        <description>This confluance plugin makes instant step-by-step knowledge base articles.</description>
-        <category name="confluence-content"/>
-        <parameters>
-            <parameter name="uid" type="string"></parameter>
-            <parameter name="tutorId" type="string"></parameter>
-            <parameter name="tutorTitle" type="string"></parameter>
-            <parameter name="iframeWidth" type="string"></parameter>
-            <parameter name="iframeHeight" type="string"></parameter>
-            <parameter name="iframeSrc" type="string"></parameter>
-            <parameter name="labelContent" type="string"></parameter>
-            <parameter name="embedCode" type="string"></parameter>
-        </parameters>
-        <property-panel>
-            <button id="properties" label="Properties"/>
-        </property-panel>
-    </xhtml-macro>
+	<!-- import from the product container -->
+	<component-import key="applicationProperties"
+		interface="com.atlassian.sal.api.ApplicationProperties" />
 
-    <macro name="CaptureSolution" class="com.iorad.plugin.IframeMacro" key="IoradMacro">
-        <description>Iorad tutorial macro</description>
-        <category name="visuals"/>
-        <parameters/>
-    </macro>
 
-    <web-item key="editor-macrolinkkey" name="iorad macro" section="system.editor.featured.macros.default" weight="11">
-        <label key="Embed iorad">Iorad Builder</label>
-        <link linkId="CaptureSolution"/>
-    </web-item>
+	<xhtml-macro name="CaptureSolution" class="com.iorad.plugin.IframeMacro"
+		icon="/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/logo.png"
+		key="IoradMacro-xhtml">
+		<description>This confluance plugin makes instant step-by-step
+			knowledge base articles.</description>
+		<category name="confluence-content" />
+		<parameters>
 
-    <web-resource name="Resources - handle macros with JS" key="macroeditor-resources">
-        <description>Macro related JS resources</description>
-        <context>editor</context>
-        <resource type="download" name="ioradmacro.js" location="js/ioradmacro.js"/>
-        <resource type="download" name="iorad.js" location="js/iorad.js"/>
-        <resource type="download" name="propPanel.js" location="js/propPanel.js"/>
-        <resource type="download" name="iorad-conf-plugin.css" location="css/iorad-conf-plugin.css"/>
-        <dependency>com.atlassian.confluence.tinymceplugin:editor-resources</dependency>
-    </web-resource>
+			<parameter name="uid" type="string">
+			</parameter>
 
-    <extractor name="Page Metadata Extractor" key="pageMetadataExtractor"
-			   class="com.iorad.plugin.IndexExtractor" priority="1000">
-        <description>Extracts certain keys from a page's metadata and adds them to the search index.</description>
-    </extractor>
+			<parameter name="tutorId" type="string">
+			</parameter>
+
+			<parameter name="tutorTitle" type="string">
+			</parameter>
+
+			<parameter name="iframeWidth" type="string">
+			</parameter>
+
+			<parameter name="iframeHeight" type="string">
+			</parameter>
+
+			<parameter name="iframeSrc" type="string">
+			</parameter>
+
+			<parameter name="labelContent" type="string">
+			</parameter>
+
+
+		</parameters>
+
+		<property-panel>
+			<button id="properties" label="Properties" />
+		</property-panel>
+
+
+
+
+
+	</xhtml-macro>
+
+	<macro name="CaptureSolution" class="com.iorad.plugin.IframeMacro"
+		key="IoradMacro">
+		<description>Iorad tutorial macro
+		</description>
+		<category name="visuals" />
+		<parameters />
+	</macro>
+
+
+
+	<web-item key="editor-macrolinkkey" name="iorad macro"
+		section="system.editor.featured.macros.default" weight="11">
+		<label key="Capture Solution">Iorad Builder</label>
+		<link linkId="CaptureSolution" />
+	</web-item>
+
+
+
+	<web-resource name="Resources - handle macros with JS"
+		key="macroeditor-resources">
+		<description>Macro related JS resources</description>
+		<context>editor</context>
+
+		<resource type="download" name="main_config.js" location="js/main_config.js" />
+		<resource type="download" name="ioradmacro.js" location="js/ioradmacro.js" />
+		<resource type="download" name="iorad.js" location="js/iorad.js" />
+		<resource type="download" name="propPanel.js" location="js/propPanel.js" />
+		<resource type="download" name="iorad-conf-plugin.css"
+			location="css/iorad-conf-plugin.css" />
+
+		<dependency>com.atlassian.confluence.tinymceplugin:editor-resources
+		</dependency>
+	</web-resource>
+
+
+
+	<extractor name="Page Metadata Extractor" key="pageMetadataExtractor"
+		class="com.iorad.plugin.IndexExtractor" priority="1000">
+		<description>Extracts certain keys from a page's metadata and adds
+			them to the search index.</description>
+	</extractor>
+
+
 </atlassian-plugin>

@@ -34,7 +34,7 @@ public class IframeMacro extends BaseMacro implements Macro,
 	private final XhtmlContent xhtmlUtils;
 	private LabelManager labelManager;
 	private PageManager pageManager;
-	private static final String IMAGE_PATH = "/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/tutorial_embedded.png";
+	private static final String IMAGE_PATH = "/download/resources/com.iorad.plugin.iorad-conf-plugin:macroeditor-resources/images/placeholdergraphic.jpg";
 	SpaceManager spaceManager;
 	private ContentPropertyManager contentPropertyManager;
 
