@@ -17,7 +17,7 @@
     <packaging>atlassian-plugin</packaging>
 
     <scm>
-        <connection>scm:svn:https://github.com/iorad/integrations/tree/master/confluence_server_app_v2/tags/iorad_for_confluence_server-2.0.0</connection>
+        <connection>scm:git:https://github.com/iorad/integrations/tree/master/confluence_server_app_v2/</connection>
     </scm>
 
     <dependencies>
