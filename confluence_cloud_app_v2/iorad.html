@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
 </head>
 <body>
+<div id="iorad-embed-render"></div>
+
 <div id="no-macro-info" style="display: none;">
     <div id="form-container">
         <section id="content" role="main">
@@ -22,9 +24,8 @@
     </div>
 </div>
 
-<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
-<script type="text/javascript" src="https://s3.iorad.com/assets/js/iorad.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
 
 <script type="text/javascript" src="htmlminifier.min.js"></script>
 <script type="text/javascript" src="lz-string.min.js"></script>
@@ -48,20 +49,32 @@
 
         var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
         $.getScript(baseUrl + '/atlassian-connect/all.js', function () {
-            var $body = $('body');
+            var $ioradRenderContainer = $('#iorad-embed-render');
+            var iframeElem = getUrlParameter("iframeUrl"); // keep for backward compatible
             var embedCode = getUrlParameter("embedCode");
-            var iframeUrl = getAttrsFromIframe(getUrlParameter("iframeUrl"), "src");
-            if (iframeUrl && iframeUrl.trim() !== "") {
-                location = iframeUrl;
+            var playerUrl = getUrlParameter("playerUrl");
+            if (iframeElem && iframeElem.trim() !== "") {
+                $ioradRenderContainer.html(iframeElem);
+            } else if (playerUrl && playerUrl.trim() !== '') {
+                var iframeElemTag = '<iframe src="' + playerUrl + '" width="100%" scrolling="no" height="600px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                $ioradRenderContainer.html(iframeElemTag);
             } else if (embedCode && embedCode.trim() !== '') {
-                $body.html(LZString.decompressFromEncodedURIComponent(embedCode));
+                $ioradRenderContainer.html(LZString.decompressFromEncodedURIComponent(embedCode));
             } else {
+                var $body = $('body');
                 var headTag = document.getElementsByTagName('HEAD')[0];
                 headTag.appendChild(generateCssLink('https://fonts.googleapis.com/css?family=Roboto'));
                 headTag.appendChild(generateCssLink('https://aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css'));
                 headTag.appendChild(generateCssLink('style.css'));
 
-                $body.addClass('aui-page-focused aui-page-size-large');
+                $body.addClass('aui-page-focused aui-page-size-medium');
+                $('#content').css({
+                    top: "50%",
+                    left: "50%",
+                    transform: "translateX(-50%) translateY(-50%)",
+                    position: "absolute"
+                });
+
                 $('#no-macro-info').show();
             }
         });

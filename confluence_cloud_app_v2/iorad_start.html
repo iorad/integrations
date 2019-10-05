@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="aui-page-focused aui-page-size-large">
-    <div id="form-container">
+    <div id="iorad-form-container">
         <section id="content" role="main">
             <div class="aui-page-panel">
                 <div class="aui-page-panel-inner">
@@ -44,27 +44,8 @@
         </section>
     </div>
 
-    <section id="preview-container" class="aui-layer aui-dialog2 aui-dialog2-xlarge hidden">
-        <header class="aui-dialog2-header">
-            <h2 class="aui-dialog2-header-main">Tutorial Preview</h2>
-            <a class="aui-dialog2-header-close dialog-close-button">
-                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
-            </a>
-        </header>
-
-        <div class="aui-dialog2-content" id="preview-container-content">
-        </div>
-
-        <footer class="aui-dialog2-footer">
-            <div class="aui-dialog2-footer-actions">
-                <button class="dialog-close-button aui-button aui-button-link">Close</button>
-            </div>
-        </footer>
-    </section>
-
     <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
-    <script type="text/javascript" src="https://s3.iorad.com/assets/js/iorad.min.js"></script>
 
     <script type="text/javascript" src="htmlminifier.min.js"></script>
     <script type="text/javascript" src="lz-string.min.js"></script>
@@ -86,13 +67,11 @@
                 // check if tutorial exists, if  yes show edit button
                 // if there is not tutorial start capturing or show start capturing button
                 AP.confluence.getMacroData(function (data) {
-                    if (data && data.tutorID) {
-                        tutorID = data.tutorID;
-                        tutorialTitle = data.tutorialTitle;
-                        tutorUID = data.tutorUID;
-                        iframeUrl = data.iframeUrl;
-
-                        getAndPutIoradLinkUrl();
+                    if (data && data.iframeUrl) {
+                        var iframeUrl = getAttrsFromIframe(data.iframeUrl, "src"); // keep for backward compatible
+                        getAndPutIoradLinkUrl(iframeUrl);
+                    } else if (data && data.playerUrl) {
+                        getAndPutIoradLinkUrl(data.playerUrl);
                     } else if (data && data.embedCode) {
                         getAndPutIoradEmbedCode(data.embedCode);
                     }

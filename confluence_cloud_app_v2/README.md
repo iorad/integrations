@@ -1,4 +1,4 @@
-## Iorad Confluence Cloud Plugin
+## iorad for Confluence Cloud
 
 This is a plugin for confluence cloud
 
