@@ -16,13 +16,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Scanned
 public class IoradIframeComponent implements Macro, EditorImagePlaceholder {
 
     private static final Logger logger = LoggerFactory.getLogger(IoradIframeComponent.class);
-    private static final String IMAGE_PATH = "/download/resources/com.iorad.confluence.iorad_for_confluence_server:main-web-resources/images/tutorial_embedded.png";
+    private static final String IMAGE_PATH = "/download/resources/com.iorad.plugin.iorad-conf-plugin:main-web-resources/images/tutorial_embedded.png";
 
     @ComponentImport
     private final XhtmlContent xhtmlContent;
@@ -47,8 +50,12 @@ public class IoradIframeComponent implements Macro, EditorImagePlaceholder {
             Map context = MacroUtils.defaultVelocityContext();
 
             if (ioradTutorialUrl != null && !ioradTutorialUrl.trim().equals("")) {
-                context.put("iframeSrc", ioradTutorialUrl);
-                return VelocityUtils.getRenderedTemplate("templates/iorad-iframe.vm", context);
+                try {
+                    context.put("iframeSrc", URLDecoder.decode(ioradTutorialUrl, StandardCharsets.UTF_8.toString()));
+                    return VelocityUtils.getRenderedTemplate("templates/iorad-iframe.vm", context);
+                } catch (UnsupportedEncodingException e) {
+                    logger.error(e.getMessage());
+                }
 
             } else if (ioradTutorialEmbed != null && !ioradTutorialEmbed.trim().equals("")) {
                 context.put("embedCode", ioradTutorialEmbed);

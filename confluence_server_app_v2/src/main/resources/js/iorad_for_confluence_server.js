@@ -1,7 +1,7 @@
 AJS.toInit(function(){
     var $body = AJS.$('body');
     var resourceURL = AJS.Data.get('editor-plugin-resource-prefix');
-    var pluginKey = "com.iorad.confluence.iorad_for_confluence_server";
+    var pluginKey = "com.iorad.plugin.iorad-conf-plugin";
     var webResourceKey = "main-web-resources";
     var templateURL = resourceURL + '/download/resources/' + pluginKey + ':' + webResourceKey + '/templates/iorad_for_confluence_server.html';
     var iconURL = resourceURL + '/download/resources/' + pluginKey + ':' + webResourceKey + '/images/icon.png';
@@ -38,7 +38,7 @@ AJS.toInit(function(){
                         if (node && node.nodeValue !== "") {
                             var macroParams = node.nodeValue;
 
-                            var tutorialLink = getValueFromString(macroParams, "iframeSrc");
+                            var tutorialLink = decodeURIComponent(getValueFromString(macroParams, "iframeSrc"));
                             var embedCode = getValueFromString(macroParams, "embedCode");
 
                             if (tutorialLink && tutorialLink.trim() !== '') {
@@ -78,14 +78,18 @@ AJS.toInit(function(){
                     queries['plugin_type'] = 'confluence';
                     queries['oembed'] = '1';
 
-                    parser.search = '?' + queries.join('&');
+                    var queryString = "?";
+                    for (var key in queries) {
+                        queryString += key + "=" + queries[key] + "&";
+                    }
+                    parser.search = queryString;
 
                     var macroRenderRequest = {
                         contentId: Confluence.Editor.getContentId(),
                         macro: {
                             name: macroname,
                             params: {
-                                iframeSrc: parser.href,
+                                iframeSrc: encodeURIComponent(parser.href),
                                 embedCode: ''
                             }
                         }

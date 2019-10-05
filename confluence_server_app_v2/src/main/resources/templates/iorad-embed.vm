@@ -2,4 +2,4 @@
 
 </div>
 
-$webResourceManager.requireResource("com.iorad.confluence.iorad_for_confluence_server:iorad-render-resources")
+$webResourceManager.requireResource("com.iorad.plugin.iorad-conf-plugin:iorad-render-resources")
