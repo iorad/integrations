@@ -18,8 +18,8 @@
 
     <scm>
         <url>https://github.com/iorad/integrations/tree/master/confluence_server_app_v2/</url>
-        <connection>scm:git:ssh://git@github.com:iorad/integrations.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:iorad/integrations.git</developerConnection>
+        <connection>scm:git:ssh://git@github.com/iorad/integrations.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/iorad/integrations.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
