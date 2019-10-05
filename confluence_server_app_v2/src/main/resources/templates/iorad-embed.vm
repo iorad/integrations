@@ -1,0 +1,5 @@
+<div id="iorad-embed-container" data-embed-code="$embedCode">
+
+</div>
+
+$webResourceManager.requireResource("com.iorad.confluence.iorad_for_confluence_server:iorad-render-resources")
