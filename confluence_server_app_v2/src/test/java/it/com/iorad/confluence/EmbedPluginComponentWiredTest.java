@@ -23,6 +23,6 @@ public class EmbedPluginComponentWiredTest
     @Test
     public void testMyName()
     {
-        assertEquals("names do not match!", "myComponent:" + applicationProperties.getDisplayName(), embedPlugin.getName());
+        assertEquals("names do not match!", "EmbedPluginComponent:" + applicationProperties.getDisplayName(), embedPlugin.getName());
     }
 }

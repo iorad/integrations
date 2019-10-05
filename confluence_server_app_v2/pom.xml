@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.iorad.confluence</groupId>
@@ -17,6 +15,10 @@
     <name>iorad for Confluence Server</name>
     <description>This confluance plugin makes instant step-by-step knowledge base articles.</description>
     <packaging>atlassian-plugin</packaging>
+
+    <scm>
+        <connection>scm:svn:https://github.com/iorad/integrations/tree/master/confluence_server_app_v2/tags/iorad_for_confluence_server-2.0.0</connection>
+    </scm>
 
     <dependencies>
         <dependency>
