@@ -22,7 +22,7 @@
         "url": "/iorad.html?pageTitle={page.title}&iframeUrl={iframeUrl}&embedCode={embedCode}&playerUrl={playerUrl}&macroId={macro.id}",
         "renderModes": {
           "default": {
-            "url": "/iorad.html?pageTitle={page.title}&iframeUrl={iframeUrl}&embedCode={embedCode}&playerUrl={playerUrl}&macroId={macro.id}",
+            "url": "/iorad.html?pageTitle={page.title}&iframeUrl={iframeUrl}&embedCode={embedCode}&playerUrl={playerUrl}&macroId={macro.id}"
           }
         },
         "description": {
