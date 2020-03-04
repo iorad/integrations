@@ -50,33 +50,35 @@
         var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
         $.getScript(baseUrl + '/atlassian-connect/all.js', function () {
             var $ioradRenderContainer = $('#iorad-embed-render');
-            var iframeElem = getUrlParameter("iframeUrl"); // keep for backward compatible
-            var embedCode = getUrlParameter("embedCode");
-            var playerUrl = getUrlParameter("playerUrl");
-            if (iframeElem && iframeElem.trim() !== "") {
-                $ioradRenderContainer.html(iframeElem);
-            } else if (playerUrl && playerUrl.trim() !== '') {
-                var iframeElemTag = '<iframe src="' + playerUrl + '" width="100%" scrolling="no" height="600px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
-                $ioradRenderContainer.html(iframeElemTag);
-            } else if (embedCode && embedCode.trim() !== '') {
-                $ioradRenderContainer.html(LZString.decompressFromEncodedURIComponent(embedCode));
-            } else {
-                var $body = $('body');
-                var headTag = document.getElementsByTagName('HEAD')[0];
-                headTag.appendChild(generateCssLink('https://fonts.googleapis.com/css?family=Roboto'));
-                headTag.appendChild(generateCssLink('https://aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css'));
-                headTag.appendChild(generateCssLink('style.css'));
+            AP.confluence.getMacroData(function (data) {
+                if (data && data.iframeUrl && data.iframeUrl.trim() !== '') { // keep for backward compatible
+                    var iframeElem = data.iframeUrl.trim();
+                    $ioradRenderContainer.html(iframeElem);
+                } else if (data && data.playerUrl && data.playerUrl.trim() !== '') {
+                    var playerUrl = data.playerUrl.trim();
+                    var iframeElemTag = '<iframe src="' + playerUrl + '" width="100%" scrolling="no" height="600px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                    $ioradRenderContainer.html(iframeElemTag);
+                } else if (data && data.embedCode && data.embedCode.trim() !== '') {
+                    var embedCode = data.embedCode.trim();
+                    $ioradRenderContainer.html(LZString.decompressFromEncodedURIComponent(embedCode));
+                } else {
+                    var $body = $('body');
+                    var headTag = document.getElementsByTagName('HEAD')[0];
+                    headTag.appendChild(generateCssLink('https://fonts.googleapis.com/css?family=Roboto'));
+                    headTag.appendChild(generateCssLink('https://aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css'));
+                    headTag.appendChild(generateCssLink('style.css'));
 
-                $body.addClass('aui-page-focused aui-page-size-medium');
-                $('#content').css({
-                    top: "50%",
-                    left: "50%",
-                    transform: "translateX(-50%) translateY(-50%)",
-                    position: "absolute"
-                });
+                    $body.addClass('aui-page-focused aui-page-size-medium');
+                    $('#content').css({
+                        top: "50%",
+                        left: "50%",
+                        transform: "translateX(-50%) translateY(-50%)",
+                        position: "absolute"
+                    });
 
-                $('#no-macro-info').show();
-            }
+                    $('#no-macro-info').show();
+                }
+            });
         });
     }
 
