@@ -1,0 +1,130 @@
+{
+  "name": "iorad for Confluence Cloud",
+  "description": "Iorad Atlassian Connect add-on",
+  "key": "com.iorad.conf-cloud-plugin",
+  "baseUrl": "https://test.iorad.com/",
+  "vendor": {
+    "name": "iorad inc.",
+    "url": "https://www.iorad.com"
+  },
+  "authentication": {
+    "type": "none"
+  },
+  "apiVersion": 1,
+  "apiMigrations": {
+    "gdpr": true
+  },
+  "modules": {
+    "dynamicContentMacros": [
+      {
+        "width": "100%",
+        "height": "600px",
+        "url": "/iorad.html?pageTitle={page.title}&macroId={macro.id}",
+        "renderModes": {
+          "default": {
+            "url": "/iorad.html?pageTitle={page.title}&macroId={macro.id}"
+          }
+        },
+        "description": {
+          "value": "Capture Solution for your articles."
+        },
+        "icon": {
+          "width": 64,
+          "height": 64,
+          "url": "https://test.iorad.com/icon.png"
+        },
+        "imagePlaceholder": {
+          "width": 392,
+          "height": 110,
+          "url": "https://test.iorad.com/tutorial_embedded.png",
+          "applyChrome": true
+        },
+        "documentation": {
+          "url": "https://www.iorad.com"
+        },
+        "categories": [
+          "confluence-content"
+        ],
+        "outputType": "block",
+        "bodyType": "none",
+        "featured": true,
+        "parameters": [
+          {
+            "identifier": "iframeUrl",
+            "name": {
+              "value": "Embed Url"
+            },
+            "description": {
+              "value": "This is embed url of the solution."
+            },
+            "type": "string",
+            "required": false,
+            "multiple": false,
+            "defaultValue": ""
+          },
+          {
+            "identifier": "embedCode",
+            "name": {
+              "value": "Embed Code"
+            },
+            "description": {
+              "value": "This is embed code of the solution."
+            },
+            "type": "string",
+            "required": false,
+            "multiple": false,
+            "defaultValue": ""
+          },
+          {
+            "identifier": "playerUrl",
+            "name": {
+              "value": "Player Url"
+            },
+            "description": {
+              "value": "This is player url of the solution."
+            },
+            "type": "string",
+            "required": false,
+            "multiple": false,
+            "defaultValue": ""
+          }
+        ],
+        "key": "iorad-conf-plugin",
+        "name": {
+          "value": "Embed iorad"
+        },
+        "editor": {
+          "url": "/iorad_start.html",
+          "editTitle": {
+            "value": "Edit Solution"
+          },
+          "insertTitle": {
+            "value": "Capture Solution"
+          },
+          "width": "100%",
+          "height": "100%"
+        },
+        "autoconvert": {
+          "urlParameter": "playerUrl",
+          "matchers": [
+            {
+              "pattern": "https://www.iorad.com/player/{}/{}"
+            },
+            {
+              "pattern": "https://test.iorad.com/player/{}/{}"
+            },
+            {
+              "pattern": "https://www.ior.ad/{}"
+            },
+            {
+              "pattern": "https://ior.ad/{}"
+            },
+            {
+              "pattern": "http://ior.ad/{}"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
