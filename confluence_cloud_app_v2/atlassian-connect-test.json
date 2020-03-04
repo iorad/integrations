@@ -2,7 +2,7 @@
   "name": "iorad for Confluence Cloud",
   "description": "Iorad Atlassian Connect add-on",
   "key": "com.iorad.conf-cloud-plugin",
-  "baseUrl": "https://test.iorad.com/",
+  "baseUrl": "https://test.iorad.com/assets/confluence/",
   "vendor": {
     "name": "iorad inc.",
     "url": "https://www.iorad.com"
@@ -31,12 +31,12 @@
         "icon": {
           "width": 64,
           "height": 64,
-          "url": "https://test.iorad.com/icon.png"
+          "url": "https://test.iorad.com/assets/confluence/icon.png"
         },
         "imagePlaceholder": {
           "width": 392,
           "height": 110,
-          "url": "https://test.iorad.com/tutorial_embedded.png",
+          "url": "https://test.iorad.com/assets/confluence/tutorial_embedded.png",
           "applyChrome": true
         },
         "documentation": {
