@@ -1,0 +1,3 @@
+<div class="iorad-editor-wrapper">
+  <iframe frameborder="0" class="iorad-editor" src="{{iframeSrc}}"></iframe>
+</div>

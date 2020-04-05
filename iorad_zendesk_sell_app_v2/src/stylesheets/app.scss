@@ -1,0 +1,203 @@
+* {
+
+  section[data-main] {
+    padding-top: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-weight: 600;
+    color: #555;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-weight: 600;
+    color: #555;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  h4 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-weight: 600;
+    line-height: 18px;
+    font-size: 14px;
+  }
+
+  .spinner {
+    background: url("../images/spinner.gif") no-repeat transparent;
+    background-size: 32px;
+    vertical-align: sub;
+    display: block;
+    width: 32px;
+    height: 11px;
+    margin: 0 auto;
+  }
+
+  .iorad-editor {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+  }
+
+  div.input-control {
+    display: inline-block;
+    margin: 24px;
+  }
+
+  div.input-settings {
+    margin-left: 22px;
+    margin-bottom: 8px;
+  }
+
+  div.input-control-ticket-sidebar {
+    margin: 24px;
+  }
+
+  div.input-control-ticket-sidebar select {
+    min-width: 172px;
+  }
+
+  .form-iorad-widget {
+    position: relative;
+    width: auto;
+    display: inline;
+  }
+
+  div.main-navbar {
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    margin-left: 20px;
+    margin-top: 16px;
+    width: 720px;
+  }
+
+  div.header-navbar {
+    border: 0 solid #efefef;
+    border-bottom-width: 1px;
+    height: 60px;
+  }
+
+  div.footer {
+    border: 0 solid #efefef;
+    border-top-width: 1px;
+    padding-top: 15px;
+  }
+
+  .main-navbar > .footer {
+    height: 40px;
+    margin-left: 24px;
+  }
+
+  .main-ticket-sidebar > .footer {
+    height: 52px;
+  }
+
+  label {
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+
+  .header-navbar > .title {
+    margin: 12px 24px;
+    float: left;
+  }
+
+  .header-navbar > .logo {
+    float: right;
+    margin: 20px 24px;
+    height: 27px;
+    width: 45px;
+    background-size: 45px 27px;
+  }
+
+  .main-ticket-sidebar {
+    border-width: 1px;
+    text-align: center;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  #addToHelpCenterAsDraftToggle,
+  #addToHelpCenterToggle {
+    vertical-align: text-bottom;
+  }
+
+  #newTutorial {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    text-shadow: none !important;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;
+    background: #FF2B6B none;
+    border: none;
+    color: #ffffff;
+    box-shadow: none;
+    padding: 5px 16px;
+    font-weight: bolder;
+
+    &:hover {
+      background: #CC2256 none;
+    }
+  }
+
+  .iorad-logo-icon {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    background: url("../images/cap.svg") no-repeat 0 0;
+    background-size: contain;
+    color: #ffffff;
+  }
+
+  .form-iorad-widget #newTutorial {
+    margin: 0 24px 24px 24px;
+    width: 490px;
+  }
+
+  .main-ticket-sidebar #newTutorial {
+    padding-right: 25px;
+  }
+
+  .iorad-extension-zendesk-visible .ember-view header.modal-header {
+    padding-right: 20px !important;
+  }
+
+  .btn-primary.btn-pink {
+    background: #FF2B6B none;
+
+    &:hover {
+      background: #CC2256 none;
+    }
+  }
+}

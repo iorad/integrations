@@ -1,0 +1,6 @@
+<div>
+  <p>{{t "modalTemplate.modalBodyP1"}}<b>{{msg}}</b>{{t "modalTemplate.modalBodyP2"}}</p>
+  <p>
+    <a class="btn btn-primary btn-pink" role="button" href="{{url}}" target="_blank">{{t "modalTemplate.viewArticleButton"}}</a>
+  </p>
+</div>
