@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+    <title>iorad</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/6.0.6/css/aui.css" media="all">
     <link rel="stylesheet" href="style.css">
@@ -49,33 +50,25 @@
 
     <script type="text/javascript" src="htmlminifier.min.js"></script>
     <script type="text/javascript" src="lz-string.min.js"></script>
+    <script type="text/javascript" src="https://connect-cdn.atl-paas.net/all.js"></script>
     <script type="text/javascript" src="main.js"></script>
+
     <script type="text/javascript">
-
         function addScript() {
-            //debugger;
-            var getUrlParam = function (param) {
-                var searchParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search);
-                return (searchParam && searchParam.length > 1) ? decodeURIComponent(searchParam[1]) : '';
-            };
+            outer_confluence = AP.confluence;
+            outer_dialog = AP.dialog;
 
-            var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
-            $.getScript(baseUrl + '/atlassian-connect/all.js', function () {
-                outer_confluence = AP.confluence;
-                outer_dialog = AP.dialog;
-
-                // check if tutorial exists, if  yes show edit button
-                // if there is not tutorial start capturing or show start capturing button
-                AP.confluence.getMacroData(function (data) {
-                    if (data && data.iframeUrl) {
-                        var iframeUrl = getAttrsFromIframe(data.iframeUrl, "src"); // keep for backward compatible
-                        getAndPutIoradLinkUrl(iframeUrl);
-                    } else if (data && data.playerUrl) {
-                        getAndPutIoradLinkUrl(data.playerUrl);
-                    } else if (data && data.embedCode) {
-                        getAndPutIoradEmbedCode(data.embedCode);
-                    }
-                });
+            // check if tutorial exists, if  yes show edit button
+            // if there is not tutorial start capturing or show start capturing button
+            AP.confluence.getMacroData(function (data) {
+                if (data && data.iframeUrl) {
+                    var iframeUrl = getAttrsFromIframe(data.iframeUrl, "src"); // keep for backward compatible
+                    getAndPutIoradLinkUrl(iframeUrl);
+                } else if (data && data.playerUrl) {
+                    getAndPutIoradLinkUrl(data.playerUrl);
+                } else if (data && data.embedCode) {
+                    getAndPutIoradEmbedCode(data.embedCode);
+                }
             });
         }
 

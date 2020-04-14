@@ -1,54 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+    <title>iorad</title>
 </head>
 <body>
-<div id="iorad-embed-render"></div>
+    <div id="iorad-embed-render"></div>
 
-<div id="no-macro-info" style="display: none;">
-    <div id="form-container">
-        <section id="content" role="main">
-            <div class="aui-page-panel">
-                <div class="aui-page-panel-inner">
-                    <section class="aui-page-panel-content">
-                        <div class="header">
-                            <img class="logo" alt="" src="logo.png"> Embed iorad not found
-                        </div>
-                        <div class="header">&nbsp;</div>
-                    </section>
+    <div id="no-macro-info" style="display: none;">
+        <div id="form-container">
+            <section id="content" role="main">
+                <div class="aui-page-panel">
+                    <div class="aui-page-panel-inner">
+                        <section class="aui-page-panel-content">
+                            <div class="header">
+                                <img class="logo" alt="" src="logo.png"> Embed iorad not found
+                            </div>
+                            <div class="header">&nbsp;</div>
+                        </section>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
-</div>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-3.1.0.min.js"></script>
 
-<script type="text/javascript" src="htmlminifier.min.js"></script>
-<script type="text/javascript" src="lz-string.min.js"></script>
-<script type="text/javascript" src="main.js"></script>
-<script type="text/javascript">
-    function addScript() {
-        var generateCssLink= function(source) {
-            var link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = source;
+    <script type="text/javascript" src="htmlminifier.min.js"></script>
+    <script type="text/javascript" src="lz-string.min.js"></script>
+    <script type="text/javascript" src="https://connect-cdn.atl-paas.net/all.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 
-            return link;
-        };
+    <script type="text/javascript">
+        function addScript() {
+            var generateCssLink = function (source) {
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = source;
 
-        //debugger;
-        var getUrlParam = function (param) {
-            var codedParam = (new RegExp(param + '=([^&]+)')).exec(window.location.search)[1];
-            return decodeURIComponent(codedParam);
-        };
+                return link;
+            };
 
-        var baseUrl = getUrlParam('xdm_e') + getUrlParam('cp');
-        $.getScript(baseUrl + '/atlassian-connect/all.js', function () {
             var $ioradRenderContainer = $('#iorad-embed-render');
             AP.confluence.getMacroData(function (data) {
                 if (data && data.iframeUrl && data.iframeUrl.trim() !== '') { // keep for backward compatible
@@ -79,11 +74,9 @@
                     $('#no-macro-info').show();
                 }
             });
-        });
-    }
+        }
 
-    addScript();
-</script>
+        addScript();
+    </script>
 </body>
-
 </html>
