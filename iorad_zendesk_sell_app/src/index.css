@@ -1,0 +1,32 @@
+html {
+  overflow: auto;
+}
+
+.loader {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+}
+
+.c-txt__input {
+  border-left: 0 none;
+  border-top: 0 none;
+  border-right: 0 none;
+}
+
+.iorad-table {
+  font-size: 13px;
+}
+
+.table-col-width-auto {
+  width: 120px;
+  white-space: nowrap;
+  padding-left: 0;
+}
+
+.iorad-table .c-tag {
+  font-weight: normal;
+  cursor: pointer;
+}

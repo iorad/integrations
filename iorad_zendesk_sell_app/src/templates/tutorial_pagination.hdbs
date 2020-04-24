@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-8">
+        {{#if prev}}
+            <button class="c-btn c-btn--sm c-btn--muted" id="prev-page" data-start="{{prev}}">previous</button>
+        {{else}}
+            <button class="c-btn c-btn--sm c-btn--muted is-disabled">previous</button>
+        {{/if}}
+        {{#if next}}
+            <button class="c-btn c-btn--sm c-btn--muted" id="next-page" data-start="{{next}}">next</button>
+        {{else}}
+            <button class="c-btn c-btn--sm c-btn--muted is-disabled">next</button>
+        {{/if}}
+    </div>
+    <div class="col-4">
+        <a class="c-btn c-btn--sm c-btn--muted u-float-right iorad-create" href="https://www.iorad.com/createNewTutorial" target="_blank">
+            <i class=""></i> {{t 'main.capture_tutorial'}}
+        </a>
+    </div>
+</div>

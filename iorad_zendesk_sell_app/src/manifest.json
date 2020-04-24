@@ -1,0 +1,42 @@
+{
+  "name": "iorad",
+  "author": {
+    "name": "Habibillah Busri",
+    "email": "habibillah@iorad.com",
+    "url": "https://www.iorad.com"
+  },
+  "defaultLocale": "en",
+  "location": {
+    "sell": {
+      "lead_card": "assets/iframe.html",
+      "company_card": "assets/iframe.html",
+      "person_card": "assets/iframe.html",
+      "deal_card": "assets/iframe.html"
+    }
+  },
+  "version": "1.0",
+  "frameworkVersion": "2.0",
+  "private": false,
+  "domainWhitelist": [
+    "iorad.com",
+    "www.iorad.com",
+    "test.iorad.com",
+    "dev.iorad.local"
+  ],
+  "parameters": [
+    {
+      "name": "iorad_token",
+      "type": "text",
+      "required": true,
+      "secure": true,
+      "default": ""
+    },
+    {
+      "name": "iorad_secret",
+      "type": "text",
+      "required": true,
+      "secure": false,
+      "default": ""
+    }
+  ]
+}

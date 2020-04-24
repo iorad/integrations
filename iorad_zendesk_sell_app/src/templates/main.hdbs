@@ -1,0 +1,11 @@
+<div class="u-display-block">
+    <div class="c-txt">
+        <label for="search-iorad" class="u-visibility-screenreader">{{t "main.search_tutorial"}}</label>
+        <input class="c-txt__input u-br-0 u-mb-xs" id="search-iorad" placeholder="Search iorad..." value="{{text}}" type="text">
+    </div>
+
+    <div id="tutorial_table_container">
+        <img class="loader" src="spinner.gif" alt="Loading..."/>
+    </div>
+    <div id="tutorial_pagination_container" class="u-p-sm"></div>
+</div>

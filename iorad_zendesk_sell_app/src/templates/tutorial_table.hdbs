@@ -1,0 +1,19 @@
+<table class="iorad-table c-table u-font-family-system u-fs-sm">
+    {{#if tutorials}}
+        {{#each tutorials}}
+            <tr class="c-table__row">
+                <td class="c-table__row__cell u-fs-sm u-fg-grey-700">
+                    {{title}}
+                </td>
+                <td class="c-table__row__cell table-col-width-auto u-ta-right">
+                    <button class="copy c-tag u-mr-xxs" data-clipboard-text="[{{title}}]({{url}})">copy</button>
+                    <a href="{{url}}" class="c-tag" target="_blank">open</a>
+                </td>
+            </tr>
+        {{/each}}
+    {{else}}
+        <tr class="c-table__row">
+            <td class="c-table__row__cell u-ta-center u-fs-sm u-fg-grey-500">{{t "main.no_tutorial"}}</td>
+        </tr>
+    {{/if}}
+</table>

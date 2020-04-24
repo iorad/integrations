@@ -1,0 +1,19 @@
+.iorad-create {
+  padding-left: 45px;
+  position: relative;
+  color: inherit !important;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    left: 32px;
+    width: 2px;
+    height: 13px;
+    top: 50%;
+    transform: translate(0, -50%);
+    background-color: #000;
+    transition: background-color 0.1s linear;
+  }
+  &:after {
+    transform: translate(0, -50%) rotate(90deg);
+  }
+}
