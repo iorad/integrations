@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.iorad.plugin</groupId>
     <artifactId>iorad-conf-plugin</artifactId>
@@ -36,21 +35,18 @@
             <version>${confluence.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-runtime</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
@@ -141,8 +137,8 @@
     </build>
 
     <properties>
-        <confluence.version>7.0.1</confluence.version>
-        <confluence.data.version>7.0.1</confluence.data.version>
+        <confluence.version>7.4.0</confluence.version>
+        <confluence.data.version>7.4.0</confluence.data.version>
         <amps.version>8.0.2</amps.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
         <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
