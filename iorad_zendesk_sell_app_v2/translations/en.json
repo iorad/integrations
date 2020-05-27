@@ -1,20 +1,8 @@
 {
   "app": {
-    "name": {
-      "value": "iorad for Sell",
-      "title": "app name"
-    },
-    "description": {
-      "value": "Instantly browse and add step-by-step solution articles to your Zendesk Sell replies",
-      "title": "app description"
-    },
-    "long_description": {
-      "value": "About iorad\n-----------------------\n\nInstantly add step-by-step solution articles to your Zendesk Sell replies. No uploads. No screenshot editing. Assist your customers in real time.\n\nCreating solution articles is extremely painful and time consuming. A 20 step article takes 1-2 hours to make. Take a screenshot, edit it, upload to your Zendesk Guide...rinse and repeat. Precious time wasted. Worst of all it’s your most valuable employee, a power user, thats tasked with doing this.\n\nWhat if I told you iorad could speed this process -10X. That’s right. That same solution article could be done in minutes.\n\niorad for Sell\n-----------------------\nInstead of opening https://www.iorad.com to access your step-by-step tutorials, you may browse your tutorials directly in Sell Leads, Contacs, and Deals pages. The iorad panel located in Sell right side.",
-      "title": "app long description"
-    },
-    "installation_instructions": {
-      "value": "1. Sign up at https://www.iorad.com\n2. Start creating your tutorial\n3. Install *iorad for Sell*\n4. Go to your Zendesk Sell, and browse your iorad tutorials from Leads, Contacts, or Deals page",
-      "title": "app installation instructions"
-    }
+    "name": "iorad for Sell",
+    "short_description": "Instantly browse iorad tutorials in Zendesk Sell",
+    "long_description": "About iorad\n-----------------------\n\nInstantly add step-by-step solution articles to your Zendesk Sell replies. No uploads. No screenshot editing. Assist your customers in real time.\n\nCreating solution articles is extremely painful and time consuming. A 20 step article takes 1-2 hours to make. Take a screenshot, edit it, upload to your Zendesk Guide...rinse and repeat. Precious time wasted. Worst of all it’s your most valuable employee, a power user, thats tasked with doing this.\n\nWhat if I told you iorad could speed this process -10X. That’s right. That same solution article could be done in minutes.\n\niorad for Sell\n-----------------------\nInstead of opening https://www.iorad.com to access your step-by-step tutorials, you may browse your tutorials directly in Sell Leads, Contacs, and Deals pages. The iorad panel located in Sell right side.",
+    "installation_instructions": "To install and setup *iorad for Sell*, please follow this steps:\n\n1. Sign up at https://www.iorad.com\n2. Start creating your tutorial\n3. Install *iorad for Sell*\n4. Go to your Zendesk Sell, and browse your iorad tutorials from Leads, Contacts, or Deals page"
   }
 }
