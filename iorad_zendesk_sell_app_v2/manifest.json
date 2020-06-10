@@ -10,10 +10,10 @@
   "signedUrls": true,
   "location": {
     "sell": {
-      "lead_card": "https://test.iorad.com/iframes/zendesk_sell",
-      "company_card": "https://test.iorad.com/iframes/zendesk_sell",
-      "person_card": "https://test.iorad.com/iframes/zendesk_sell",
-      "deal_card": "https://test.iorad.com/iframes/zendesk_sell"
+      "lead_card": "https://www.iorad.com/iframes/zendesk_sell",
+      "company_card": "https://www.iorad.com/iframes/zendesk_sell",
+      "person_card": "https://www.iorad.com/iframes/zendesk_sell",
+      "deal_card": "https://www.iorad.com/iframes/zendesk_sell"
     }
   },
   "version": "1.0",
