@@ -118,9 +118,6 @@
             },
             {
               "pattern": "https://ior.ad/{}"
-            },
-            {
-              "pattern": "http://ior.ad/{}"
             }
           ]
         }
