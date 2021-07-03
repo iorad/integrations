@@ -51,7 +51,7 @@
                     $ioradRenderContainer.html(iframeElem);
                 } else if (data && data.playerUrl && data.playerUrl.trim() !== '') {
                     var playerUrl = data.playerUrl.trim();
-                    var iframeElemTag = '<iframe src="' + playerUrl + '" width="100%" scrolling="no" height="600px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                    var iframeElemTag = '<iframe src="' + playerUrl + '" width="100%" scrolling="no" height="600px" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" webkitallowfullscreen mozallowfullscreen allowfullscreen allow="camera; microphone"></iframe>';
                     $ioradRenderContainer.html(iframeElemTag);
                 } else if (data && data.embedCode && data.embedCode.trim() !== '') {
                     var embedCode = data.embedCode.trim();
@@ -80,3 +80,4 @@
     </script>
 </body>
 </html>
+
