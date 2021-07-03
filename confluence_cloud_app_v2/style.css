@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
     display: table;
     box-sizing: border-box;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 #iorad-link-text-box {
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     display: block;
     text-align: left;
     padding: 12px 20px 8px;
@@ -81,7 +81,7 @@ body {
 
 #iorad-embed-code-textarea {
     resize: none;
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     display: block;
     text-align: left;
     padding: 12px 20px 8px;
@@ -101,7 +101,7 @@ body {
 }
 
 #submit-button {
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-size: 16px;
     font-weight: 300;
     margin-bottom: 24px;
@@ -129,7 +129,7 @@ body {
     text-align: center;
     display: block;
 
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-weight: 300;
     font-size: 16px;
     margin-bottom: 20px;
@@ -150,7 +150,7 @@ form.aui .error-link {
     color: #FF00D6;
     font-size: 16px;
     text-align: center;
-    font-family: "Roboto", sans-serif;
+    font-family: "Libre Franklin", sans-serif;
     font-weight: 300;
     line-height: 20px;
     margin-top: -14px;

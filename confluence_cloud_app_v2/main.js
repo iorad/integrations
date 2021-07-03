@@ -15,12 +15,12 @@ function closeDialog(outer_dialog) {
 }
 
 function parseQueryString(queryString) {
-    var queryArr = queryString.replace('?','').split('&');
+    var queryArr = queryString.replace('?', '').split('&');
     var params = [];
 
     for (var i = 0; i < queryArr.length; i++) {
         var keyVal = queryArr[i].split('=');
-        if (keyVal.length === 2){
+        if (keyVal.length === 2) {
             params[keyVal[0]] = keyVal[1];
         }
     }
@@ -32,7 +32,14 @@ function saveMacro(iframeUrl) {
     var parser = document.createElement('a');
     parser.href = iframeUrl.replace('&plugin_type\\=confluence', '');
 
-    if (['www.iorad.com', 'iorad.com', 'test.iorad.com', 'ior.ad'].indexOf(parser.hostname) === -1) {
+    if (
+        [
+            'www.iorad.com',
+            'iorad.com',
+            'test.iorad.com',
+            'ior.ad'
+        ].indexOf(parser.hostname) === -1
+    ) {
         return;
     }
 
