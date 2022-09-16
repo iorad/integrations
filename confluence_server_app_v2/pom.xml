@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.iorad.plugin</groupId>
     <artifactId>iorad-conf-plugin</artifactId>
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -70,7 +70,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.2.2-atlassian-1</version>
+            <version>2.9.1</version>
         </dependency>
     </dependencies>
 
@@ -86,6 +86,7 @@
                     <productVersion>${confluence.version}</productVersion>
                     <productDataVersion>${confluence.data.version}</productDataVersion>
                     <enableQuickReload>true</enableQuickReload>
+                    <extractDependencies>false</extractDependencies>
 
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
@@ -133,8 +134,64 @@
                     <verbose>false</verbose>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>sign</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <keystore>~/.keystore</keystore>
+                    <alias>iorad</alias>
+                    <storepass>Kamufisaku1</storepass>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+            <id>atlassian-public</id>
+            <url>https://maven.atlassian.com/repository/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+            <id>atlassian-public</id>
+            <url>https://maven.atlassian.com/repository/public</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <properties>
         <confluence.version>7.19.1</confluence.version>
