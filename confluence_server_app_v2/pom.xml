@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.atlassian.confluence</groupId>
             <artifactId>confluence</artifactId>
-            <version>${confluence.version}</version>
+            <version>8.0.0-m012</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -132,32 +132,6 @@
                         </dependency>
                     </scannedDependencies>
                     <verbose>false</verbose>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jarsigner-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>sign</id>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>verify</id>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <keystore>~/.keystore</keystore>
-                    <alias>iorad</alias>
-                    <storepass>Kamufisaku1</storepass>
-                    <verbose>true</verbose>
                 </configuration>
             </plugin>
         </plugins>
