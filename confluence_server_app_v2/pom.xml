@@ -167,6 +167,13 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <distributionManagement>
+        <repository>
+            <id>iorad-integration</id>
+            <url>https://github.com/iorad/integrations/releases</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <confluence.version>8.6.2</confluence.version>
         <confluence.data.version>8.6.2</confluence.data.version>
