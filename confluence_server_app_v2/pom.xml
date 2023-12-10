@@ -153,6 +153,7 @@
             <url>https://maven.atlassian.com/repository/public</url>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <releases>
@@ -167,6 +168,14 @@
             <url>https://maven.atlassian.com/repository/public</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github Packages</name>
+            <url>https://github.com/iorad/integrations/tree/master/confluence_server_app_v2/</url>
+        </repository>
+    </distributionManagement>
 
     <properties>
         <confluence.version>8.6.2</confluence.version>
