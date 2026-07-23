@@ -83,8 +83,12 @@ AJS.bind("init.rte", function() {
 
             iorad.on('editor:close', function(tutorialParams) {
 
-                var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-                    tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+                var iframeHTML = iorad.getEmbeddedPlayerUrl(
+                    tutorialParams.uid,
+                    tutorialParams.tutorialId,
+                    tutorialParams.tutorialTitle,
+                    tutorialParams.tutorialIdKey
+                );
 
 
                 // get current selection in editor

@@ -122,19 +122,23 @@
             return false;
         }
         var paramsString = frameUrl.substring(n + searchKey.length);
-        var pathArray = paramsString.split( '/' );
+        var pathArray = paramsString.split('?')[0].split('/');
         if (pathArray.length !== 3) {
             return false;
         }
+        var tutorialIdKey = decodeURIComponent(
+            ((frameUrl.split('?')[1] || '').split('#')[0].match(/(^|&)tutorialIdKey=(.+?)($|&)/) || [])[2] || ''
+        );
 
         return {
             tutorialId: pathArray[1],
-            tutorialTitle: pathArray[2]
+            tutorialTitle: pathArray[2],
+            tutorialIdKey: tutorialIdKey
         };
     }
 
     function serializeTutorial(tutorialParams) {
-        iframeUrl = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+        iframeUrl = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle, tutorialParams.tutorialIdKey);
 
         tutorID = tutorialParams.tutorialId;
         tutorialTitle = tutorialParams.tutorialTitle;

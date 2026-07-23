@@ -7,7 +7,7 @@
   $ticketActionsButtons = jQuery(".ticket-actions ul");
 
   $ticketActionsButtons.html(ioradFreshplug.templates.addToKnowledgebaseButtonTemplate() + $ticketActionsButtons.html());
-  
+
   iorad.init({ env: "live", pluginType: "freshplug_ticketing" }, function () {
     var t = 0,
       $bodyHTML = jQuery("body"),
@@ -83,8 +83,12 @@
         // Hide modal.
         jQuery("#insert_iorad_solution").modal('hide');
 
-        var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-              tutorialParams.tutorialId, tutorialParams.tutorialTitle),
+        var iframeHTML = iorad.getEmbeddedPlayerUrl(
+          tutorialParams.uid,
+          tutorialParams.tutorialId,
+          tutorialParams.tutorialTitle,
+          tutorialParams.tutorialIdKey
+        ),
           $editorMessageBody = jQuery(".redactor_editor div");
 
         if (ioradFreshplug.addToKnowledgebase) {
@@ -98,7 +102,7 @@
           tutorialParams.steps.each(function (step) {
             articleDescription += "<div style='display: none;'>" + step.description + "</div>";
           });
-          
+
           var article = {
               solution_article: {
                 "title": tutorialParams.tutorialTitle,
@@ -163,7 +167,7 @@
 
       displayInsertSolutionModal = function (event) {
         event.preventDefault();
-        
+
         ioradFreshplug.freshplug_webwidgetmode = false;
 
         if (jQuery("body #insert_iorad_solution").length === 0) {
@@ -200,11 +204,11 @@
         ioradFreshplug.requests.listCategories().then(function (data) {
           processCategoriesAndFolders(data);
           loadModalBody();
-          
+
           jQuery("#insert_iorad_solution").modal({ backdrop: true, show: true });
         }, function (err) {});
       };
-    
+
     // register events
     jQuery(".insert_iorad").click(displayInsertSolutionModal);
     jQuery("#insertIoradToKnowledgebaseButton").click(displayAddToKnowledgebaseModal);

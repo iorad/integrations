@@ -16,7 +16,7 @@ function ioradWidget() {
         contentType: 'application/json',
       };
     };
-    
+
     var listCategories = function () {
       var ajaxOptions = zendeskAjaxOptions();
       ajaxOptions.url = CATEGORIES_API_URL;
@@ -65,7 +65,7 @@ function ioradWidget() {
     var populateTutorialLocation = function (data) {
       var options = '';
       var sectionsSelectors = '';
-      
+
       data.categories.forEach(function (categoryObj) {
         options += '<option value="' + categoryObj.id + '">' + categoryObj.name + '</option>';
         sectionsSelectors += '<select id="' + categoryObj.id + '"class="invisible-options"></select>';
@@ -78,15 +78,15 @@ function ioradWidget() {
       data.categories.forEach(function(categoryObj) {
         listSections(categoryObj.id).then(populateTutorialSections, function (err) { });
       });
-      
+
       $("#" + $categorySelector.val()).removeClass("invisible-options");
       $categorySelector.click(categoryChangedHandler);
     };
 
     listCategories().then(populateTutorialLocation, function (err) { });
-    
+
     $ioradWidget.show();
-    
+
     iorad.init({ env: 'prod' }, function () {
       // iorad is ready now.
       var t = 0;
@@ -110,7 +110,8 @@ function ioradWidget() {
         var iframeHTML               = iorad.getEmbeddedPlayerUrl(
                                          tutorialParams.uid,
                                          tutorialParams.tutorialId,
-                                         tutorialParams.tutorialTitle
+                                         tutorialParams.tutorialTitle,
+                                         tutorialParams.tutorialIdKey
                                        ),
             $tutorialViewStepsIframe = $(iframeHTML),
             categoryId               = $("#categorySelector").val(),
@@ -118,7 +119,7 @@ function ioradWidget() {
             SUCCESS_MSG_TEMPLATE     = "<div>The solution <b>{msg}</b> has been successfully created.</div><div><a class=\"btn btn-view-article\" role=\"button\" href=\"{url}\">VIEW ARTICLE</a></div>";
 
         $tutorialViewStepsIframe.attr("src", $tutorialViewStepsIframe.attr("src") + "#viewsteps");
-        
+
         var articleJson = JSON.stringify({
           article: {
             "title": tutorialParams.tutorialTitle,

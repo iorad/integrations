@@ -181,7 +181,7 @@
       });
 
   }
-  //old signature function openPropertyPanelWithParams(iframURL, width, height, tutor_uid, tutorialId, tutorialTitle) 
+  //old signature function openPropertyPanelWithParams(iframURL, width, height, tutor_uid, tutorialId, tutorialTitle)
   function openPropertyPanelWithParams() {
 
       issueStatusCheck(false);
@@ -215,8 +215,12 @@
 
 
 
-              var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-                  tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+              var iframeHTML = iorad.getEmbeddedPlayerUrl(
+                tutorialParams.uid,
+                tutorialParams.tutorialId,
+                tutorialParams.tutorialTitle,
+                tutorialParams.tutorialIdKey
+              );
 
               var src = getAttrsFromIframe(iframeHTML, "src")+"&plugin_type=jira";
               var width = getAttrsFromIframe(iframeHTML, "width");

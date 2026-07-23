@@ -27,7 +27,7 @@ module.exports = {
   },
 
   /**
-   * 
+   *
    * @param  {string} href location of current app.
    * @return {string}      tutorial editor url.
    */
@@ -41,28 +41,30 @@ module.exports = {
   },
 
   /**
-   * 
+   *
    * This method returns tutorial player url.
-   * 
+   *
    * @param {string} uid            user id
    * @param {string} tutorialId     tutorial id
    * @param {string} tutorialTitle  tutorial title
+   * @param {string} tutorialIdKey  tutorial id key
    */
-  getPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    return [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle].join('/');
+  getPlayerUrl: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
+    return [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle].join('/') + '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey || '');
   },
 
   /**
-   * 
+   *
    * This method returns tutorial player url with viewsteps option turned on.
    * Note: this method is obselete.
-   * 
+   *
    * @param {string} uid            user id
    * @param {string} tutorialId     tutorial id
    * @param {string} tutorialTitle  tutorial title
+   * @param {string} tutorialIdKey  tutorial id key
    */
-  getPlayerUrlWithViewSteps: function (uid, tutorialId, tutorialTitle) {
-    return this.getPlayerUrl(uid, tutorialId, tutorialTitle) + "#viewsteps";
+  getPlayerUrlWithViewSteps: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
+    return this.getPlayerUrl(uid, tutorialId, tutorialTitle, tutorialIdKey) + "#viewsteps";
   },
 
   /**
@@ -73,14 +75,18 @@ module.exports = {
    * @return object with base_url, uid, tutorialId, tutorialTitle
    */
   extractTutorialParams: function (playerUrl) {
-    var splits = playerUrl.split('/'),
+    var splits = playerUrl.split('?')[0].split('/'),
       len = splits.length;
+    var tutorialIdKey = decodeURIComponent(
+      ((playerUrl.split('?')[1] || '').split('#')[0].match(/(^|&)tutorialIdKey=(.+?)($|&)/) || [])[2] || ''
+    );
 
     return {
       base_url: splits[len - 4],
       uid: splits[len - 3],
       tutorialId: splits[len - 2],
-      tutorialTitle: splits[len - 1]
+      tutorialTitle: splits[len - 1],
+      tutorialIdKey: tutorialIdKey
     };
   },
 
@@ -89,10 +95,11 @@ module.exports = {
    * @param  {string} uid           user id
    * @param  {string} tutorialId    tutorial id
    * @param  {string} tutorialTitle tutorial title
+   * @param  {string} tutorialIdKey tutorial id key
    * @return {string}               iframe html
    */
-  getEmbeddedPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    var playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle);
+  getEmbeddedPlayerUrl: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
+    var playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle, tutorialIdKey);
     return this.buildIframe(playerUrl);
   },
 
@@ -101,10 +108,11 @@ module.exports = {
    * @param  {string} uid           user id
    * @param  {string} tutorialId    tutorial id
    * @param  {string} tutorialTitle tutorial title
+   * @param  {string} tutorialIdKey tutorial id key
    * @return {string}               iframe html
    */
-  getEmbeddedPlayerWithViewStepsUrl: function (uid, tutorialId, tutorialTitle) {
-    var playerUrl = this.getPlayerUrlWithViewSteps(uid, tutorialId, tutorialTitle);
+  getEmbeddedPlayerWithViewStepsUrl: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
+    var playerUrl = this.getPlayerUrlWithViewSteps(uid, tutorialId, tutorialTitle, tutorialIdKey);
     return this.buildIframe(playerUrl);
   }
 };

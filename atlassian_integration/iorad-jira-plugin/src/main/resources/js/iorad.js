@@ -42,9 +42,9 @@
  *
  * iorad.createTutorial(): to create a new tutorial
  * iorad.editTutorial(tutorialId): to edit an existing tutorial by its id
- * iorad.getPlayerUrl(uid, tutorialId, tutorialTitle): to get player url
+ * iorad.getPlayerUrl(uid, tutorialId, tutorialTitle, tutorialIdKey): to get player url
  * iorad.extractTutorialInfo(playerUrl): to extract tutorialParams from provided player url
- * iorad.getEmbeddedPlayerUrl(uid, tutorialId, tutorialTitle): to get iframe embedded player url
+ * iorad.getEmbeddedPlayerUrl(uid, tutorialId, tutorialTitle, tutorialIdKey): to get iframe embedded player url
  *
  * Events:
  *
@@ -299,10 +299,11 @@ var Backbone = Backbone || ({
          * @param uid
          * @param tutorialId
          * @param tutorialTitle
+         * @param tutorialIdKey
          * @returns {string}
          */
-        getPlayerUrl: function(uid, tutorialId, tutorialTitle) {
-            return [getBaseUrl(), uid, tutorialId, tutorialTitle].join('/')
+        getPlayerUrl: function(uid, tutorialId, tutorialTitle, tutorialIdKey) {
+            return [getBaseUrl(), uid, tutorialId, tutorialTitle].join('/') + '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey || '');
         },
         /**
          * Extracts tutorial params from provided player url.
@@ -312,14 +313,18 @@ var Backbone = Backbone || ({
          * @return object with base_url, uid, tutorialId, tutorialTitle
          */
         extractTutorialParams: function(playerUrl) {
-            var splits = playerUrl.split('/'),
+            var splits = playerUrl.split('?')[0].split('/'),
                 len = splits.length;
+            var tutorialIdKey = decodeURIComponent(
+                ((playerUrl.split('?')[1] || '').split('#')[0].match(/(^|&)tutorialIdKey=(.+?)($|&)/) || [])[2] || ''
+            );
 
             return {
                 base_url: splits[len-4],
                 uid: splits[len-3],
                 tutorialId: splits[len-2],
-                tutorialTitle: splits[len-1]
+                tutorialTitle: splits[len-1],
+                tutorialIdKey: tutorialIdKey
             }
         },
         /**
@@ -328,10 +333,11 @@ var Backbone = Backbone || ({
          * @param uid
          * @param tutorialId
          * @param tutorialTitle
+         * @param tutorialIdKey
          * @returns {string}
          */
-        getEmbeddedPlayerUrl: function(uid, tutorialId, tutorialTitle) {
-            var playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle);
+        getEmbeddedPlayerUrl: function(uid, tutorialId, tutorialTitle, tutorialIdKey) {
+            var playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle, tutorialIdKey);
             return '<iframe src="' + playerUrl + '" width="100%" scrolling="no" height="500px" style="border:0px;" allowfullscreen="true"></iframe>';
         }
     });

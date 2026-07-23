@@ -231,7 +231,7 @@
           var addToTicket = jQuery($container).find("[name='add_to_ticket']:checked").val();
 
           var tutorialTitle = tutorialParams.tutorialTitle.replace('-', ' ');
-          var iframeHTML = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+          var iframeHTML = iorad.getOembedIframe(tutorialParams.tutorialId, tutorialParams.tutorialTitle, tutorialParams.tutorialIdKey);
           // hack to put text place holder before/after iframe
           iframeHTML = "<p>&nbsp;</p><p>" + iframeHTML + "</p><p>&nbsp;</p>";
 

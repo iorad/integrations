@@ -23,7 +23,7 @@
     currentPluginType: '',
 
     addToHelpCenter: false,
-    
+
     addToHelpCenterAsDraft: false,
 
     pluginTypes: {
@@ -56,7 +56,7 @@
     init: function () {
       // apply app settings
       this.addToHelpCenterAsDraft = this.settings['addToHelpCenterAsDraft'];
-      
+
       this.ajax('fetchLocales');
       this.runTicketingApp();
     },
@@ -162,7 +162,7 @@
         this.showTicketingView();
       }
     },
-    
+
     onAddToHelpCenterAsDraftToggleClicked: function (event) {
       this.addToHelpCenterAsDraft = event.target.checked;
     },
@@ -210,7 +210,8 @@
       var iframeHTML = iorad.getEmbeddedPlayerUrl(
           data.uid,
           data.tutorialId,
-          data.tutorialTitle
+          data.tutorialTitle,
+          data.tutorialIdKey
         ),
         articleBody = helpers.fmt("<p>%@</p>", iframeHTML),
         saveAsDraft = this.currentPluginType === this.pluginTypes.SOLUTION ?
@@ -236,7 +237,7 @@
     },
 
     addIoradPlayerUrlToNewTicketComment: function (data) {
-      var url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle),
+      var url = iorad.getPlayerUrl(data.uid, data.tutorialId, data.tutorialTitle, data.tutorialIdKey),
         comment = helpers.fmt(this.TICKET_COMMENT_MARKDOWN_FORMAT, data.tutorialTitle, url);
 
       this.comment().text(this.comment().text() + comment);

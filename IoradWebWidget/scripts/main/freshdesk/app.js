@@ -63,8 +63,12 @@
         iorad.on('editor:close', function (tutorialParams) {
           $('body').removeClass('iorad-open iorad-loading');
           clearTimeout(t);
-          var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-            tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+          var iframeHTML = iorad.getEmbeddedPlayerUrl(
+            tutorialParams.uid,
+            tutorialParams.tutorialId,
+            tutorialParams.tutorialTitle,
+            tutorialParams.tutorialIdKey
+          );
 
           var $tutorialIframe = $(iframeHTML),
             categoryId = $("#categorySelector").val(),

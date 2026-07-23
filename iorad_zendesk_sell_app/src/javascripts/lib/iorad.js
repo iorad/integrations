@@ -50,8 +50,9 @@ module.exports = {
      * @param {string} uid            user id
      * @param {string} tutorialId     tutorial id
      * @param {string} tutorialTitle  tutorial title
+     * @param {string} tutorialIdKey  tutorial id key
      */
-  getPlayerUrl: function (uid, tutorialId, tutorialTitle) {
+  getPlayerUrl: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
     const results = []
     const parts = [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle]
     for (let i = 0; i < parts.length; i++) {
@@ -59,7 +60,7 @@ module.exports = {
         results.push(parts[i])
       }
     }
-    return results.join('/')
+    return results.join('/') + '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey || '');
   },
 
   /**
@@ -70,14 +71,18 @@ module.exports = {
      * @return object with base_url, uid, tutorialId, tutorialTitle
      */
   extractTutorialParams: function (playerUrl) {
-    const splits = playerUrl.split('/')
-    const len = splits.length
+    const splits = playerUrl.split('?')[0].split('/');
+    const len = splits.length;
+    const tutorialIdKey = decodeURIComponent(
+      ((playerUrl.split('?')[1] || '').split('#')[0].match(/(^|&)tutorialIdKey=(.+?)($|&)/) || [])[2] || ''
+    );
 
     return {
       base_url: splits[len - 4],
       uid: splits[len - 3],
       tutorialId: splits[len - 2],
-      tutorialTitle: splits[len - 1]
+      tutorialTitle: splits[len - 1],
+      tutorialIdKey: tutorialIdKey
     }
   },
 
@@ -86,10 +91,11 @@ module.exports = {
      * @param  {string} uid           user id
      * @param  {string} tutorialId    tutorial id
      * @param  {string} tutorialTitle tutorial title
+     * @param  {string} tutorialIdKey tutorial id key
      * @return {string}               iframe html
      */
-  getEmbeddedPlayerUrl: function (uid, tutorialId, tutorialTitle) {
-    const playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle)
+  getEmbeddedPlayerUrl: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
+    const playerUrl = this.getPlayerUrl(uid, tutorialId, tutorialTitle, tutorialIdKey)
     return this.buildIframe(playerUrl)
   }
 }
