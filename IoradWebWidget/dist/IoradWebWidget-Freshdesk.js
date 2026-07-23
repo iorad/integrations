@@ -1,4 +1,4 @@
-/*! IoradWebWidget - v0.0.3 - 02-26-2017 *//*!
+/*! IoradWebWidget - v0.0.3 - 07-23-2026 *//*!
 
  handlebars v3.0.3
 
@@ -4371,8 +4371,12 @@ ioradWebWidget.templates.articleTemplate = function (tutorialIframe, steps) {
         iorad.on('editor:close', function (tutorialParams) {
           $('body').removeClass('iorad-open iorad-loading');
           clearTimeout(t);
-          var iframeHTML = iorad.getEmbeddedPlayerUrl(tutorialParams.uid,
-            tutorialParams.tutorialId, tutorialParams.tutorialTitle);
+          var iframeHTML = iorad.getEmbeddedPlayerUrl(
+            tutorialParams.uid,
+            tutorialParams.tutorialId,
+            tutorialParams.tutorialTitle,
+            tutorialParams.tutorialIdKey
+          );
 
           var $tutorialIframe = $(iframeHTML),
             categoryId = $("#categorySelector").val(),

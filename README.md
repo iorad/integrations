@@ -9,14 +9,30 @@ Currently, Iorad Web Widget only supports Fresh desk.
 In the future, we will replace the Zendesk Help Center Widget with Iorad Web Widget. We will also be looking at possibilities with desk.com.
 
 ### To Build and play with Iorad Web Widget source code:
-* install NPM - Package manager for Node.js
-* Install Grunt.js ```[sudo] npm install -g grunt-cli```
-* Install Bower ```[sudo] npm install -g bower```
-* Run ``` grunt install-bower-packages```
-* Run ``` grunt build-dev-js```
-* Run ``` grunt build-release-js``` Only run this if you really wants to read a uglified javascript file :) So don't...
+* Install Node.js version: 10.24.1
+* Run ```cd IoradWebWidget```
+* Run ```npm install --no-package-lock```
+* Run ```./node_modules/.bin/grunt install-bower-packages```
+* Run ```./node_modules/.bin/grunt build-freshdeskWebWidget-release```
 
 After you have successfully followed through the steps above, you will find IoradWebWidget-*.js in scripts/vendor/dist.
+
+### To Build and play with iorad_ticketing_freshplug:
+* Install Node.js version: 10.24.1
+* Run ```cd iorad_ticketing_freshplug/iorad_ticketing_freshplug```
+* Run ```npm install --no-package-lock```
+* Run ```./node_modules/.bin/grunt install-bower-packages```
+* Run ```./node_modules/.bin/grunt build-freshplug```
+* Run ```cp dist/ioradTicketingFreshplug.html dist/ioradTicketingFreshplug.txt```
+* Run ```cp dist/ioradTicketingFreshplugDev.html dist/ioradTicketingFreshplugDev.txt```
+
+After you have successfully followed through the steps above, you will find ioradTicketingFreshplug* in the dist directory.
+
+## To build and play with iorad_zendesk_app:
+* Run ```cd iorad_zendesk_app``
+* Run ```./build.sh```
+
+After you have successfully followed through the steps above, you will find app.zip in the dist directory.
 
 ### To Install:
 
@@ -55,13 +71,6 @@ This is a Freshplug that list all available categories and folders. When clickin
 * Click **New FreshPlug** to create.
 * Enter details such as **Name** and **Description**, copy and paste Iorad FreshPlug [source code](https://github.com/iorad/integrations/blob/master/iorad_ticketing_freshplug/iorad_ticketing_freshplug/dist/ioradTicketingFreshplug.txt) into Script field.
 * Check **Show the widget in ticket view page.** option and Click **Create and Enable** to complete the installation.
- 
-### To Build and play with Iorad Web Widget source code:
-* install NPM - Package manager for Node.js
-* Install Grunt.js ```[sudo] npm install -g grunt-cli```
-* Install Bower ```[sudo] npm install -g bower```
-* Run ``` grunt install-bower-packages```
-* Run ``` grunt build-freshplug```
 
 ## Zendesk Help Center
 
@@ -71,7 +80,7 @@ To Install: (Assume Help Center is enabled.)
 * Click on **Edit Theme** to go to Help Center's Theme Editor.
 * Click on the dropdown button and edit the Home page.
 * Copy and Paste code from widgetLayout.html into the editor as shown below
-  ``` 
+  ```
   <div class="knowledge-base clearfix">
      <!-- Copy Iorad code here...  -->
      {{category_tree}}
@@ -82,7 +91,7 @@ To Install: (Assume Help Center is enabled.)
 ``` Javascript
 $(document).ready(function() {
   ... some existing code
-  
+
   // Iorad starts here.
 });
 ```

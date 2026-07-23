@@ -10,7 +10,8 @@
           targetDir: "./scripts/vendor",
           layout: "byComponent",
           install: true,
-          verbos: true,
+          copy: true,
+          verbose: true,
           cleanTargetDir: false,
           cleanBowerDir: false,
           bowerOptions: {}
