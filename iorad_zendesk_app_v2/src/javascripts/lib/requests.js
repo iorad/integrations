@@ -49,11 +49,11 @@ module.exports = {
     };
   },
 
-  getIoradURL(tutorialId) {
+  getIoradURL(tutorialId, tutorialIdKey) {
       return {
           dataType: 'json',
           contentType: 'application/json',
-          url: iorad.getBaseUrl() + '/api/tutorial/getPlayerURL?is_share_url=true&tutorial_id=' + tutorialId,
+          url: iorad.getBaseUrl() + '/api/tutorial/getPlayerURL?is_share_url=true&tutorial_id=' + tutorialId + '&tutorialIdKey=' + encodeURIComponent(tutorialIdKey || ''),
           type: 'GET'
       };
   }

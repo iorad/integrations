@@ -86,7 +86,7 @@ const App = {
         console.log('onIoradClose, data = ', data);
         if (data && data.steps && data.steps.length > 0) {
             var that = this;
-            that.ajax("getIoradURL", data.tutorialId).done(function (urls) {
+            that.ajax("getIoradURL", data.tutorialId, data.tutorialIdKey).done(function (urls) {
                 if (that.currentPluginType === that.pluginTypes.SOLUTION || that.addToHelpCenter) {
                     that.createArticle(urls);
                 } else if (that.currentPluginType === that.pluginTypes.TICKETING) {
