@@ -50,7 +50,8 @@ module.exports = {
    * @param {string} tutorialIdKey  tutorial id key
    */
   getPlayerUrl: function (uid, tutorialId, tutorialTitle, tutorialIdKey) {
-    return [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle].join('/') + '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey || '');
+    return [this.getBaseUrl(), 'player', uid, tutorialId, tutorialTitle].join('/') +
+      (tutorialIdKey ? '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey) : '');
   },
 
   /**

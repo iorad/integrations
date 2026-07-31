@@ -60,7 +60,8 @@ module.exports = {
         results.push(parts[i])
       }
     }
-    return results.join('/') + '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey || '');
+    return results.join('/') +
+      (tutorialIdKey ? '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey) : '');
   },
 
   /**

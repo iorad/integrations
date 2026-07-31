@@ -303,7 +303,8 @@ var Backbone = Backbone || ({
          * @returns {string}
          */
         getPlayerUrl: function(uid, tutorialId, tutorialTitle, tutorialIdKey) {
-            return [getBaseUrl(), uid, tutorialId, tutorialTitle].join('/') + '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey || '');
+            return [getBaseUrl(), uid, tutorialId, tutorialTitle].join('/') +
+                (tutorialIdKey ? '?tutorialIdKey=' + encodeURIComponent(tutorialIdKey) : '');
         },
         /**
          * Extracts tutorial params from provided player url.
