@@ -37,7 +37,8 @@ function saveMacro(iframeUrl) {
             'www.iorad.com',
             'iorad.com',
             'test.iorad.com',
-            'ior.ad'
+            'ior.ad',
+            'test.ior.ad'
         ].indexOf(parser.hostname) === -1
     ) {
         return;

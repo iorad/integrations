@@ -70,7 +70,7 @@ AJS.toInit(function(){
                     var parser = document.createElement('a');
                     parser.href = link.replace('&plugin_type\\=confluence', '');
 
-                    if (['www.iorad.com', 'iorad.com', 'test.iorad.com', 'ior.ad'].indexOf(parser.hostname) === -1) {
+                    if (['www.iorad.com', 'iorad.com', 'test.iorad.com', 'ior.ad', 'test.ior.ad'].indexOf(parser.hostname) === -1) {
                         return;
                     }
 
